@@ -13,7 +13,6 @@ const Home: React.FC = () => {
   return(
   <>
   <Head>
-    <link rel="stylesheet" href="./Home.css" />
   </Head>
     <Navigation />
     <Slide />
