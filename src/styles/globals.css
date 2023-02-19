@@ -3,3 +3,11 @@
 @tailwind utilities;
 
 
+:root{
+    --font-size: medium;
+    --font-color: white;
+}
+
+body{
+    color: var(--font-color);
+}
