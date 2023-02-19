@@ -1,0 +1,25 @@
+@keyframes scroll_1 {
+    0%{
+        transform: translateX(0);
+    } 
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+.animation_1{
+    animation: scroll_1 10s linear infinite;
+}
+
+@keyframes scroll_2 {
+    0%{
+        transform: translateX(0);
+    } 
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+.animation_2{
+    animation: scroll_2 10s linear infinite;
+}

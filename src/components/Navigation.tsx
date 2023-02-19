@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import dynamic from "next/dynamic";
+
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -19,17 +21,17 @@ function Header() {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto w-[80%] flex justify-evenly">
-            <Link href="/" className='text-[1.5rem] text-white decoration-transparent hover:opacity-[0.7]'><Nav.Link>Home</Nav.Link></Link>
-            <Link href="/" className='text-[1.5rem] text-white decoration-transparent hover:opacity-[0.7]'> <Nav.Link>Store</Nav.Link></Link>
-              <Link href="/" className='text-[1.5rem] text-white decoration-transparent hover:opacity-[0.7]'><Nav.Link>Diet</Nav.Link></Link>
-              <Link href="/" className='text-[1.5rem] text-white decoration-transparent hover:opacity-[0.7]'><Nav.Link>Tools</Nav.Link></Link>
-              <Link href="/" className='text-[1.5rem] text-white decoration-transparent hover:opacity-[0.7]'><Nav.Link>Blogs</Nav.Link></Link>
-              <Link href="/" className='text-[1.5rem] text-white decoration-transparent hover:opacity-[0.7]'><Nav.Link>Donate</Nav.Link></Link>
+              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7]'><Nav.Link className='text-white'>Home</Nav.Link></Link>
+              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7]'><Nav.Link className='text-white'>Store</Nav.Link></Link>
+              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7]'><Nav.Link className='text-white'>Diet</Nav.Link></Link>
+              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7]'><Nav.Link className='text-white'>Tools</Nav.Link></Link>
+              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7]'><Nav.Link className='text-white'>Blogs</Nav.Link></Link>
+              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7]'><Nav.Link className='text-white'>Donate</Nav.Link></Link>
             </Nav>
             <div className='d-flex'>
-            <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
-            <Image src={profile} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
-          </div>
+              <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
+              <Image src={profile} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -37,4 +39,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default dynamic(() => Promise.resolve(Header), { ssr: false })
