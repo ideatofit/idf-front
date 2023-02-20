@@ -27,6 +27,7 @@ import Testimonial from '@/components/Testimonial';
 import Tools from '@/components/Tools';
 import { Poppins, Open_Sans, Inter } from '@next/font/google'
 import Stories from '@/components/Stories';
+import storyStyle from '../styles/Stories.module.css'
 
 const poppins = Poppins({ subsets: ['latin'], weight: '700' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '700' })
@@ -175,12 +176,14 @@ const Home: React.FC = () => {
         <div>
           <h1 className='font-[700]'>IDEATOFIT Stories</h1>
         </div>
-        <div className='py-4 flex flex-row overflow-hidden gap-4'>
-        <Stories/>
-        <Stories/>
-        <Stories/>
-        <Stories/>
-        <Stories/>
+        <div className={` py-4 overflow-hidden `}>
+          <div className={`${storyStyle.stories} h-fit flex flex-row gap-4`}>
+            <Stories />
+            <Stories />
+            <Stories />
+            <Stories />
+            <Stories />
+          </div>
         </div>
       </div>
     </>
