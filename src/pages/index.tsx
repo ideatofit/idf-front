@@ -86,7 +86,7 @@ const Home: React.FC = () => {
           <div className={`${opensans.className} flex-[50%] flex flex-col justify-evenly pr-[8%]`}>
             <section className='w-full flex flex-row items-center'>
               <Image src={check} alt='check png'/>
-              <div className='p-2 text-left text-[1.3rem]'>Whether you’re a beginner or a pro, our expert coaches can help you achieve your fitness goals</div>
+              <div className='p-2 text-left text-[1.3rem]'>Whether you&apos;re a beginner or a pro, our expert coaches can help you achieve your fitness goals</div>
             </section>
             <section className='w-full flex flex-row items-center'>
               <Image src={check} alt='check png'/>
