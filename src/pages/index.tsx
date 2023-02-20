@@ -15,14 +15,20 @@ import rectangle7 from '../../public/rectangle7.png'
 import rectangle8 from '../../public/rectangle8.png'
 import yellowshade from '../../public/yellowshade.png'
 import groupofpeople from '../../public/groupofpeople.png'
+import wellnesshub1 from '../../public/wellnesshub1.png'
+import wellnesshub2 from '../../public/wellnesshub2.png'
+import wellnesshub3 from '../../public/wellnesshub3.png'
+import wellnesshub4 from '../../public/wellnesshub4.png'
+import wellnesshub5 from '../../public/wellnesshub5.png'
 import macro from '../../public/macro.png'
 import check from '../../public/check.svg'
 import Testimonial from '@/components/Testimonial';
-import { Poppins, Open_Sans } from '@next/font/google'
 import Tools from '@/components/Tools';
+import { Poppins, Open_Sans, Inter } from '@next/font/google'
 
 const poppins = Poppins({ subsets: ['latin'], weight:'700' })
 const opensans = Open_Sans({ subsets:['latin'], weight:'500' })
+const inter = Inter({ subsets: ['latin'] })
 
 
 const Home: React.FC = () => {
@@ -114,9 +120,37 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className='bg-backgroundColor w-full flex flex-col items-center gap-4'>
-        <div style={{background:'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)'}} className='h-[80vh] w-[80%] rounded-xl border-2 border-borderColor'>
-
+      <div className={` text-white text-[1.3rem] bg-backgroundColor w-full flex flex-col items-center gap-4`}>
+        <div style={{background:'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)'}} className='h-[65vh] w-[80%] flex items-center justify-center rounded-xl border-2 border-borderColor'>
+          <div className='h-[70%] w-[90%] rounded-xl flex flex-row'>
+            <div className='flex-[45%] flex flex-col'>
+              <div className='relative h-[40%] text-left'>
+                <h1 className={`${poppins.className} text-[3rem]`}>Wellness Hub</h1>
+                <p className={`${inter.className} font-[500]`}>One place for all your<br/>well-being needs</p>
+              </div>
+              <div className='relative h-[60%] flex flex-col justify-end gap-2'>
+                <div className='w-[50%] h-[25%] rounded-full bg-white flex items-center justify-around p-3 cursor-pointer'>
+                  <div className='text-black text-[1.3rem]'>WORKOUT GEAR</div>
+                  <div className='text-black'>&#62;</div>
+                </div>
+                <p className='mx-3'>LABS</p>
+                <p className='mx-3'>THERAPY</p>
+              </div>
+            </div>
+            <div className='flex-[55%] flex flex-row justify-evenly gap-3'>
+              <div className='flex-[33%] relative h-full gap-3'>
+                <Image src={wellnesshub1} alt='wellness hub 1' className='h-[100%] w-[100%]'/>
+              </div>
+              <div className='flex-[33%] relative h-full flex flex-col items-center gap-3'>
+                  <Image src={wellnesshub2} alt='wellness hub 2' className='h-[55%] w-[100%]'/>
+                  <Image src={wellnesshub3} alt='wellness hub 3' className='h-[45%] w-[100%]'/>
+              </div>
+              <div className='flex-[33%] relative h-full flex flex-col gap-3'>
+              <Image src={wellnesshub4} alt='wellness hub 1' className='h-[33%] w-[100%]'/>
+              <Image src={wellnesshub5} alt='wellness hub 1' className='h-[67%] w-[100%]'/>
+              </div>
+            </div>
+          </div>
         </div>
         <div style={{background:'#232631'}} className='h-[80vh] w-[80%] rounded-xl border-2 border-borderColor'>
 
