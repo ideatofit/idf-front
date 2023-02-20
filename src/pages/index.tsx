@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Slide from '@/components/Slider';
+import Slide from '@/components/Slide';
 import Navigation from '@/components/Navigation';
 import arrow1 from '../../public/arrow1.svg'
 import arrow2 from '../../public/arrow2.svg'
