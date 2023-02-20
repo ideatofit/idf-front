@@ -77,7 +77,7 @@ const Home: React.FC = () => {
       <div className='bg-backgroundColor text-themeColor flex flex-col text-center'>
         <div>
         <h1>Meet our expert fitness coaches</h1>
-        <p>Whether you're a beginner or an advanced fitness enthusiast, we have<br/>the right coaches for all your fitness needs.</p>
+        <p>Whether you&apos;re a beginner or an advanced fitness enthusiast, we have<br/>the right coaches for all your fitness needs.</p>
         </div>
         <div className='flex flex-row gap-4'>
           <div className='flex-[50%] flex justify-end'>
