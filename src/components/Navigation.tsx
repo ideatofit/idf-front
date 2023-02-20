@@ -12,7 +12,7 @@ import profile from '../../public/profile.svg'
 function Header() {
   return (
     <>
-      <Navbar bg="transparent" className='fixed-top' expand="lg">
+      <Navbar style={{background:"linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)"}} className='fixed-top' expand="lg">
         <Container>
           <Navbar.Brand>
             <Image src={logo}
