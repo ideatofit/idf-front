@@ -6,7 +6,7 @@ import style from '../styles/Testimonial.module.css'
 
 function Testimonial() {
   return (
-    <div className='bg-slate-900 min-h-[28rem] w-full py-4 flex flex-col overflow-hidden gap-3'>
+    <div className='bg-backgroundColor min-h-[28rem] w-full py-4 flex flex-col overflow-hidden gap-3'>
       <div className='text-center'>
         <h1 className='text-white text-[3.4rem]'>300,000+ lives transformed</h1>
         <p className='text-white text-[1.4rem]'>Real people, real stories - that&apos;s what <b>IDEATOFIT</b> is all about!</p>

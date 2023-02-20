@@ -7,6 +7,7 @@ module.exports = {
     './src/components/Navigation.tsx',
     './src/components/Testimonial.tsx',
     './src/components/Tools.tsx',
+    './src/components/Stories.tsx',
   ],
   theme: {
     extend: {
