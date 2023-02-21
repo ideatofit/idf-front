@@ -10,7 +10,7 @@ function Stories() {
           <Image src={quote} alt="quote svg"/>
         </div>
         <div className='flex-[33%] text-left px-16 py-4'>
-        I was never able to lose weight before. Thanks to Fooducate, I've lost 20 lbs in 6 months. An incredible, life changing app.
+        I was never able to lose weight before. Thanks to Fooducate, I&apos;ve lost 20 lbs in 6 months. An incredible, life changing app.
         </div>
         <div className='flex-[33%] text-left pl-16'>
           Janice
