@@ -7,11 +7,16 @@
 
 :root{
     --font-family: 'Poppins', sans-serif;
-    --font-size: medium;
+    --font-size: 45px;
     --font-color: white;
+}
+
+html{
+    font-size: 18px;
 }
 
 body{
     color: var(--font-color);
     font-family: var(--font-family);
+    font-size: 45px;
 }

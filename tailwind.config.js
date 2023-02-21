@@ -8,6 +8,8 @@ module.exports = {
     './src/components/Testimonial.tsx',
     './src/components/Tools.tsx',
     './src/components/Stories.tsx',
+    './src/components/Footer.tsx',
+    './src/components/Button.tsx',
   ],
   theme: {
     extend: {
