@@ -39,63 +39,72 @@ const inter = Inter({ subsets: ['latin'] })
 const Home: React.FC = () => {
 
   return (
-    <>
+    <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Navigation />
       <Slide />
       <Testimonial />
-      <div className={`${poppins.className} bg-backgroundColor w-full h-fit bg-sladte-900 flex flex-col`}>
+      {/* why to choose us */}
+      <div className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
         <div className='text-center text-themeColor'>
           <h1 className='font-bold'>The IDEATOFIT way</h1>
         </div>
-        <div className='text-themeColor flex flex-row justify-evenly'>
-          <div className='flex flex-col text-center'>
-            <span className='text-[11rem] font-bold antialiased'>1</span>
-            <p>Science-backed workout &<br />diet plans made for your <br /> body</p>
-            <Image src={arrow1} alt={'arrow1'} className='relative left-[70%]' />
+        <div className='flex justify-evenly max-sm:p-4 max-sm:flex-col max-xl:flex-row xl:flex-row text-themeColor'>
+          <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
+            <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>1</span>
+            <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
+            <Image src={arrow1} alt={'arrow1'} className='relative left-[60%] max-sm:hidden' />
           </div>
-          <div className='flex flex-col text-center'>
-            <span className='text-[11rem] font-bold antialiased'>2</span>
-            <p>Science-backed workout &<br />diet plans made for your <br /> body</p>
-            <Image src={arrow2} alt={'arrow2'} />
+          <div className='flex xl:items-center max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
+            <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>2</span>
+            <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
+            <Image src={arrow2} alt="arrow2" className="relative top-[-10%] md:transform md:translate-x-1/4 md:translate-y-1/2 xl:right-[2rem] max-sm:hidden" />
           </div>
-          <div className='flex flex-col text-center'>
-            <span className='text-[11rem] font-bold antialiased'>3</span>
-            <p>Science-backed workout &<br />diet plans made for your <br /> body</p>
-            <Image src={arrow3} alt={'arrow3'} className='relative right-[70%]' />
+          <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
+            <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>3</span>
+            <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
+            <Image src={arrow3} alt={'arrow3'} className='relative lg:md:right-[50%] xl:right-0 max-sm:hidden' />
           </div>
         </div>
-        <div className='text-center   my-4 text-themeColor'>
-          <p>The result: You achieve a fitter body...and a happier life!</p>
-          <Button/>
+        <div className='max-xl:my-4 md:mt-14 text-center text-themeColor xl:my-4'>
+          <p className='px-4'>The result: You achieve a fitter body...and a happier life!</p>
+          <Button />
         </div>
       </div>
-      <div className='h-fit py-4 flex flex-col gap-4 bg-backgroundColor'>
-        <div className='absolute'>
-          <Image src={yellowshade} alt='yellowshade.png' />
+      {/*  */}
+      <div className='min-w-[100vw] h-fit py-4 flex flex-col gap-4 bg-backgroundColor'>
+        <div className='absolute w-full h-[36%] flex flex-col justify-center'>
+          <div className=''>
+            <Image src={yellowshade} alt='yellowshade.png' />
+          </div>
+        </div>
+        <div className='absolute xl:h-[90%] max-sm:h-[36%] sm:h-[36%] w-full flex items-center justify-center'>
+          <h1 className={` ${inter.className} font-[700] text-[4.3rem] max-sm:text-[2.4rem] text-center text-white md:px-48 lg:px-48 xl:px-48`}>
+            Fun, trainer led group classes
+          </h1>
+        </div>
+        <div className='w-full flex flex-row max-xl:gap-4 xl:gap-4 justify-center'>
+          <Image src={rectangle5} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <Image src={rectangle6} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <Image src={rectangle7} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <Image src={rectangle8} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
         </div>
         <div className='w-full flex flex-row gap-4 justify-center'>
-          <Image src={rectangle1} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle2} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle3} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle4} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
-        </div>
-        <div className='w-full flex flex-row gap-4 justify-center'>
-          <Image src={rectangle5} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle6} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle7} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle8} alt='fitness image' className='max-h-[20%] max-w-[20%]' />
+          <Image src={rectangle1} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <Image src={rectangle2} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <Image src={rectangle3} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <Image src={rectangle4} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
         </div>
       </div>
-      <div className='bg-backgroundColor text-themeColor flex flex-col text-center'>
+      <div className='min-w-[100vw] bg-backgroundColor text-themeColor flex flex-col text-center'>
         <div>
           <h1>Meet our expert fitness coaches</h1>
           <p>Whether you&apos;re a beginner or an advanced fitness enthusiast, we have<br />the right coaches for all your fitness needs.</p>
         </div>
-        <div className='flex flex-row gap-4'>
+        <div className='flex max-xl:flex-row xl:flex-row max-sm:flex-col max-sm:p-4 gap-4 md:p-4'>
           <div className='flex-[50%] flex justify-end'>
             <Image src={groupofpeople} alt='group of fit people' />
           </div>
-          <div className={`${opensans.className} font-thin flex-[50%] flex flex-col justify-evenly pr-[8%]`}>
+          <div className={`${opensans.className} font-thin flex-[50%] flex flex-col justify-evenly max-xl:pr-[8%] xl:pr-[8% ] md:pr-[0]`}>
             <section className='w-full flex flex-row items-center'>
               <Image src={check} alt='check png' />
               <div className='p-2 text-left text-[1rem]'>Whether you&apos;re a beginner or a pro, our expert coaches can help you achieve your fitness goals</div>
@@ -119,31 +128,31 @@ const Home: React.FC = () => {
             <h1 className='font-bold'>Track your fitness progress</h1>
             <p className='font-thin'>Use our free fitness tools & trackers to take your journey<br /> to the next level!</p>
           </div>
-          <div className='flex flex-row justify-center gap-2 font-thin'>
+          <div className='flex max-xl:flex-row xl:flex-row max-xl:justify-center xl:justify-center gap-2 font-thin max-sm:flex-col max-sm:items-center'>
             <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
             <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
             <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
           </div>
         </div>
       </div>
-      <div className={` text-white text-[1rem] bg-backgroundColor w-full flex flex-col items-center gap-4`}>
-        <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='h-[65vh] w-[80%] flex items-center justify-center rounded-xl border-2 border-borderColor'>
-          <div className='h-[70%] w-[90%] rounded-xl flex flex-row'>
+      <div className={`min-w-[100vw] text-white text-[1rem] bg-backgroundColor w-full flex flex-col items-center gap-4`}>
+      <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
+          <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
             <div className='flex-[45%] flex flex-col'>
               <div className='relative h-[40%] text-left'>
                 <h1 className={`${poppins.className} text-[2.2rem]`}>Wellness Hub</h1>
                 <p className={`${inter.className} font-[500]`}>One place for all your<br />well-being needs</p>
               </div>
-              <div className='relative h-[60%] flex flex-col justify-end gap-2'>
+              <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
                 <div className='w-[50%] h-[25%] rounded-full bg-white flex items-center justify-around p-2 cursor-pointer'>
-                  <div className='text-black text-[1rem]'>WORKOUT GEAR</div>
+                  <div className='text-black text-[1rem] md:text-[0.8rem]'>WORKOUT GEAR</div>
                   <div className='text-black'>&#62;</div>
                 </div>
-                <p className='mx-3'>LABS</p>
-                <p className='mx-3'>THERAPY</p>
+                <p className='mx-3 md:text-[0.8rem]'>LABS</p>
+                <p className='mx-3 md:text-[0.8rem]'>THERAPY</p>
               </div>
             </div>
-            <div className='flex-[55%] flex flex-row justify-evenly gap-3'>
+            <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-3'>
               <div className='flex-[33%] relative h-full gap-3'>
                 <Image src={wellnesshub1} alt='wellness hub 1' className='h-[100%] w-[100%]' />
               </div>
@@ -158,10 +167,10 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-        <div style={{ background: '#232631' }} className='h-[65vh] w-[80%] flex flex-row rounded-xl border-2 border-borderColor'>
-          <div className='flex-[40%]'>
-            <div style={{ borderRadius: '0px 243.54px 389.67px 0px' }} className='relative h-full w-[80%] left-0 top-0 bg-[#454958]'>
-              <Image src={femaledoctor} alt='woman doctor' height={450} className='absolute bottom-0 left-[25%]' />
+        <div style={{ background: '#232631' }} className='max-xl:h-[65vh] xl:h-[65vh] max-sm:h-fit max-sm:py-8 max-xl:w-[80%] xl:w-[80%] max-sm:w-[90%] flex max-xl:flex-row xl:flex-row max-sm:flex-col rounded-xl border-2 border-borderColor overflow-hidden'>
+          <div className='h-full flex-[40%]'>
+            <div style={{ borderRadius: '0px 243.54px 389.67px 0px' }} className='relative h-full w-[80%] left-0 bg-[#454958]'>
+              <Image src={femaledoctor} alt='woman doctor' height={450} className='max-sm:relative absolute bottom-0 max-sm:left-0 left-[25%]' />
             </div>
           </div>
           <div className='flex-[60%] h-full'>
@@ -175,7 +184,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className={`${poppins.className} bg-backgroundColor text-themeColor flex flex-col text-center py-4`}>
+      <div className={`${poppins.className} min-w-[100vw] h-[100%] bg-backgroundColor text-themeColor flex flex-col text-center py-4`}>
         <div>
           <h1 className='font-[700]'>IDEATOFIT Stories</h1>
         </div>
@@ -193,8 +202,8 @@ const Home: React.FC = () => {
         <h1 className='font-bold'>Got a question?</h1>
         <p>We’re happy to help!</p>
       </div>
-      <Footer/>
-    </>
+      <Footer />
+    </div>
   )
 };
 

@@ -7,7 +7,7 @@ import gym from '../../public/sample2.jpg'
 
 function Slide() {
   return (
-    <Carousel pause={false} className='max-h-screen'>
+    <Carousel pause={false} className='max-h-screen bg-backgroundColor'>
       <Carousel.Item>
         <Image
           className="d-block w-100"
