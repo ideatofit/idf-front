@@ -33,8 +33,7 @@ body{
     }
 }
 
-.carousel-indicators {
-      display: none;
- }
-  
+.carousel-indicators-display{
+    display: none;
+}
   

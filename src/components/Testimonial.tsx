@@ -8,8 +8,8 @@ function Testimonial() {
   return (
     <div className='bg-backgroundColor min-h-fit w-full py-4 flex flex-col overflow-hidden gap-3'>
       <div className='text-center'>
-        <h1 className='text-white text-[3.4rem] max-sm:text-[2.4rem]'>300,000+ lives transformed</h1>
-        <p className='text-white text-[1.4rem] max-sm:text-[1.2rem]'>Real people, real stories - that&apos;s what <b>IDEATOFIT</b> is all about!</p>
+        <h1 className='text-white text-[3.4rem] max-sm:text-[2rem]'>300,000+ lives transformed</h1>
+        <p className='text-white text-[1.4rem] max-sm:text-[1.2rem] max-sm:px-[1rem]'>Real people, real stories - that&apos;s what <b>IDEATOFIT</b> is all about!</p>
       </div>
       <div className={`${style.animation_1} relative h-full flex flex-row gap-3`}>
         <Image src={img1} alt={'img1'} height={800} className='max-sm:h-48' />

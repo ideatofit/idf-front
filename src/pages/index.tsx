@@ -37,7 +37,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 
 const Home: React.FC = () => {
-
   return (
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Navigation />
@@ -72,10 +71,8 @@ const Home: React.FC = () => {
       </div>
       {/*  */}
       <div className='min-w-[100vw] h-fit py-4 flex flex-col gap-4 bg-backgroundColor'>
-        <div className='absolute w-full h-[36%] flex flex-col justify-center'>
-          <div className=''>
+        <div className='absolute w-full max-sm:h-[36%] max-md:h-[26%] md:h-[36%] flex flex-col justify-center'>
             <Image src={yellowshade} alt='yellowshade.png' />
-          </div>
         </div>
         <div className='absolute xl:h-[90%] max-sm:h-[36%] sm:h-[36%] w-full flex items-center justify-center'>
           <h1 className={` ${inter.className} font-[700] text-[4.3rem] max-sm:text-[2.4rem] text-center text-white md:px-48 lg:px-48 xl:px-48`}>
@@ -104,7 +101,7 @@ const Home: React.FC = () => {
           <div className='flex-[50%] flex justify-end'>
             <Image src={groupofpeople} alt='group of fit people' />
           </div>
-          <div className={`${opensans.className} font-thin flex-[50%] flex flex-col justify-evenly max-xl:pr-[8%] xl:pr-[8% ] md:pr-[0]`}>
+          <div className={`${opensans.className} font-thin flex-[50%] flex flex-col justify-evenly max-xl:pr-[8%] xl:pr-[8%] md:pr-[0]`}>
             <section className='w-full flex flex-row items-center'>
               <Image src={check} alt='check png' />
               <div className='p-2 text-left text-[1rem]'>Whether you&apos;re a beginner or a pro, our expert coaches can help you achieve your fitness goals</div>
