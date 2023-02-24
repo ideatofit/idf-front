@@ -7,12 +7,13 @@ import gym from '../../public/sample2.jpg'
 
 function Slide() {
   return (
-    <Carousel pause={false} className='max-h-screen bg-backgroundColor'>
+    <Carousel pause={false} style={{maxHeight:"100vh", overflow:'hidden'}} className='max-h-screen bg-backgroundColor'>
       <Carousel.Item>
         <Image
-          className="d-block w-100"
+          className="max-h-full"
           src={fitnessmanbody}
           alt="First slide"
+          style={{maxHeight:'100vh'}}
         />
         <Carousel.Caption>
           <h1>India’s no.1<br/>fitness website</h1>
@@ -21,9 +22,10 @@ function Slide() {
       </Carousel.Item>
       <Carousel.Item>
       <Image
-          className="d-block w-100"
+          className="d-block w-100 max-h-screen"
           src={fitnessmanbody}
           alt="First slide"
+          style={{maxHeight:'100vh'}}
           />
         <Carousel.Caption>
           <h1>Second slide label</h1>
@@ -32,9 +34,10 @@ function Slide() {
       </Carousel.Item>
       <Carousel.Item>
       <Image
-          className="d-block w-100"
+          className="d-block w-100 max-h-screen"
           src={fitnessmanbody}
           alt="First slide"
+          style={{maxHeight:'100vh'}}
           />
         <Carousel.Caption>
           <h1>Third slide label</h1>
