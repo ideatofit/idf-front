@@ -48,7 +48,7 @@ const Home: React.FC = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
 
-        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_1920,w_1080/v1677151867/fitman.png" />
+        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
 
