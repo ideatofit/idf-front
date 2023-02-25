@@ -42,10 +42,11 @@ const Home: React.FC = () => {
   return (
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Head>
-        <title>Page Title Here</title>
-        <meta property="og:title" content="Page Title Here" />
-        <meta property="og:description" content="Page Description Here" />
-        <meta property="og:type" content="website" />
+        <title>IDEATOFIT</title>
+        <meta name="description" content="IdeatoFit - India's no.1 health and wellness website. Discover expert advice and information on fitness, nutrition, and holistic wellness. We prioritize purity and quality in all our content and products." />
+        <meta property="og:title" content="IDEATOFIT" />
+        <meta property="og:description" content="IdeatoFit - India's no.1 health and wellness website. Discover expert advice and information on fitness, nutrition, and holistic wellness. We prioritize purity and quality in all our content and products." />
+        <meta property="og:type" content="Landing page" />
         <meta property="og:url" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
 
         <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
@@ -53,9 +54,9 @@ const Home: React.FC = () => {
         <meta property="og:image:height" content="630" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@example" />
-        <meta name="twitter:title" content="Page Title Here" />
-        <meta name="twitter:description" content="Page Description Here" />
+        <meta name="twitter:site" content="Landing page" />
+        <meta name="twitter:title" content="IDEATOFIT" />
+        <meta name="twitter:description" content="IdeatoFit - India's no.1 health and wellness website. Discover expert advice and information on fitness, nutrition, and holistic wellness. We prioritize purity and quality in all our content and products." />
         <meta name="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
 
         <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_1080,w_1080/v1677151867/fitman.png" />
