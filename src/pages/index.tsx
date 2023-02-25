@@ -43,23 +43,29 @@ const Home: React.FC = () => {
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Head>
         <title>Page Title Here</title>
-        <meta name="description" content="Page Description Here" />
-        <meta name="keywords" content="Page Keywords Here" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.example.com" />
-
         <meta property="og:title" content="Page Title Here" />
         <meta property="og:description" content="Page Description Here" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.example.com" />
-        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
-        <meta property="og:image:alt" content="Image Alt Text" />
+        <meta property="og:url" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
+
+        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_1920,w_1080/v1677151867/fitman.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@example" />
         <meta name="twitter:title" content="Page Title Here" />
         <meta name="twitter:description" content="Page Description Here" />
         <meta name="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
+
+        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_1080,w_1080/v1677151867/fitman.png" />
+        <meta property="og:image:width" content="1080" />
+        <meta property="og:image:height" content="1080" />
+        <meta property="og:video" content="https://www.example.com/instagram-video.mp4" />
+
+        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_800,w_800/v1677151867/fitman.png" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="800" />
       </Head>
       <Navigation />
       <Slide />
