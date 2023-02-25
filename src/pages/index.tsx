@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Slide from '@/components/Slide';
 import Navigation from '@/components/Navigation';
@@ -37,6 +37,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 
 const Home: React.FC = () => {
+  const [tab, setTab] = useState('tab1')
   return (
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Navigation />
@@ -72,7 +73,7 @@ const Home: React.FC = () => {
       {/*  */}
       <div className='min-w-[100vw] h-fit py-4 flex flex-col gap-4 bg-backgroundColor'>
         <div className='absolute w-full max-sm:h-[36%] max-md:h-[26%] md:h-[36%] flex flex-col justify-center'>
-            <Image src={yellowshade} alt='yellowshade.png' />
+          <Image src={yellowshade} alt='yellowshade.png' />
         </div>
         <div className='absolute xl:h-[90%] max-sm:h-[36%] sm:h-[36%] w-full flex items-center justify-center'>
           <h1 className={` ${inter.className} font-[700] text-[4.3rem] max-sm:text-[2.4rem] text-center text-white md:px-48 lg:px-48 xl:px-48`}>
@@ -133,7 +134,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       <div className={`min-w-[100vw] text-white text-[1rem] bg-backgroundColor w-full flex flex-col items-center gap-4`}>
-      <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
+        <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
           <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
             <div className='flex-[45%] flex flex-col'>
               <div className='relative h-[40%] text-left'>
@@ -141,26 +142,54 @@ const Home: React.FC = () => {
                 <p className={`${inter.className} font-[500]`}>One place for all your<br />well-being needs</p>
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
-                <div className='w-[50%] h-[25%] rounded-full bg-white flex items-center justify-around p-2 cursor-pointer'>
-                  <div className='text-black text-[1rem] md:text-[0.8rem]'>WORKOUT GEAR</div>
-                  <div className='text-black'>&#62;</div>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
+                    setTab('tab1')
+                  }}>
+                  <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>WORKOUT GEAR</div>
+                  <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>
-                <p className='mx-3 md:text-[0.8rem]'>LABS</p>
-                <p className='mx-3 md:text-[0.8rem]'>THERAPY</p>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
+                    setTab('tab2')
+                  }}>
+                  <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
+                  <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
+                </div>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
+                    setTab('tab3')
+                  }}>
+                  <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
+                  <div className={`${tab !== 'tab3' && 'opacity-0'} text-black`}>&#62;</div>
+                </div>
               </div>
             </div>
             <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-3'>
-              <div className='flex-[33%] relative h-full gap-3'>
-                <Image src={wellnesshub1} alt='wellness hub 1' className='h-[100%] w-[100%]' />
-              </div>
-              <div className='flex-[33%] relative h-full flex flex-col items-center gap-3'>
-                <Image src={wellnesshub2} alt='wellness hub 2' className='h-[55%] w-[100%]' />
-                <Image src={wellnesshub3} alt='wellness hub 3' className='h-[45%] w-[100%]' />
-              </div>
-              <div className='flex-[33%] relative h-full flex flex-col gap-3'>
-                <Image src={wellnesshub4} alt='wellness hub 1' className='h-[33%] w-[100%]' />
-                <Image src={wellnesshub5} alt='wellness hub 1' className='h-[67%] w-[100%]' />
-              </div>
+              {tab === 'tab1' &&
+                <>
+                  <div className='flex-[33%] relative h-full gap-3'>
+                    <Image src={wellnesshub1} alt='wellness hub 1' className='h-[100%] w-[100%]' />
+                  </div>
+                  <div className='flex-[33%] relative h-full flex flex-col items-center gap-3'>
+                    <Image src={wellnesshub2} alt='wellness hub 2' className='h-[55%] w-[100%]' />
+                    <Image src={wellnesshub3} alt='wellness hub 3' className='h-[45%] w-[100%]' />
+                  </div>
+                  <div className='flex-[33%] relative h-full flex flex-col gap-3'>
+                    <Image src={wellnesshub4} alt='wellness hub 1' className='h-[33%] w-[100%]' />
+                    <Image src={wellnesshub5} alt='wellness hub 1' className='h-[67%] w-[100%]' />
+                  </div>
+                </>
+              }
+              {
+                tab === 'tab2' &&
+                <div className='min-h-[25vh] flex items-center text-center'>
+                  <h1>tab2</h1>
+                </div>
+              }
+              {
+                tab === 'tab3' &&
+                <div className='min-h-[25vh] flex items-center text-center'>
+                  <h1>tab3</h1>
+                </div>
+              }
             </div>
           </div>
         </div>

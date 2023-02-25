@@ -8,23 +8,11 @@ import { useEffect } from 'react';
 import style from '../styles/slide.module.css'
 
 function Slide() {
-  useEffect(()=>{
-    const interval =  setInterval(()=>{
-     let el = document.getElementsByClassName('carousel-indicators')
-      if(window.innerWidth < 700){
-        el[0]?.setAttribute('class', 'carousal-indicators-display')
-      return
-      }
-    }, 1000)
-    return(()=>{
-      clearInterval(interval)
-    })
-  },[])
   return (
-    <Carousel pause={false} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
+    <Carousel pause={false} keyboard={true} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
       <Carousel.Item>
         <Image
-          className="d-block w-100 h6"
+          className="d-block w-100"
           src={fitnessmanbody}
           alt="First slide"
           style={{ maxHeight: '100vh', objectFit:"cover" }}
@@ -36,7 +24,7 @@ function Slide() {
       </Carousel.Item>
       <Carousel.Item>
         <Image
-          className="d-block w-100 h6"
+          className="d-block w-100"
           src={fitnessmanbody}
           alt="First slide"
           style={{ maxHeight: '100vh', objectFit:"cover" }}
@@ -48,7 +36,7 @@ function Slide() {
       </Carousel.Item>
       <Carousel.Item>
         <Image
-          className="d-block w-100 h6"
+          className="d-block w-100"
           src={fitnessmanbody}
           alt="First slide"
           style={{ maxHeight: '100vh', objectFit:"cover" }}
