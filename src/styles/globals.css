@@ -42,3 +42,34 @@ body{
     display: none;
 }
   
+/* Webkit-based browsers */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+    background-color: #171A26;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #171A26; /* Color of the scrollbar track */
+    border: 2px solid #505050; /* Border color of the scrollbar track */
+    border-radius: 10px;
+}
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;  
+}
+  
+  /* Mozilla Firefox */
+  /* Note: Firefox doesn't support changing the border color of the scrollbar track */
+  ::-moz-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+  }
+  
+  ::-moz-scrollbar-track {
+    background-color: #171A26; /* Color of the scrollbar track */
+  }
+  
+  ::-moz-scrollbar-thumb {
+    background-color: #505050; /* Color of the scrollbar thumb */
+  }
+  

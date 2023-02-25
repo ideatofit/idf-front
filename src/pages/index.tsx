@@ -30,6 +30,7 @@ import Stories from '@/components/Stories';
 import storyStyle from '../styles/Stories.module.css'
 import Footer from '@/components/Footer';
 import Button from '@/components/Button';
+import Head from 'next/head';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
@@ -40,6 +41,26 @@ const Home: React.FC = () => {
   const [tab, setTab] = useState('tab1')
   return (
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
+      <Head>
+        <title>Page Title Here</title>
+        <meta name="description" content="Page Description Here" />
+        <meta name="keywords" content="Page Keywords Here" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.example.com" />
+
+        <meta property="og:title" content="Page Title Here" />
+        <meta property="og:description" content="Page Description Here" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.example.com" />
+        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
+        <meta property="og:image:alt" content="Image Alt Text" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@example" />
+        <meta name="twitter:title" content="Page Title Here" />
+        <meta name="twitter:description" content="Page Description Here" />
+        <meta name="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
+      </Head>
       <Navigation />
       <Slide />
       <Testimonial />
@@ -65,9 +86,9 @@ const Home: React.FC = () => {
             <Image src={arrow3} alt={'arrow3'} className='relative lg:md:right-[50%] xl:right-0 max-sm:hidden' />
           </div>
         </div>
-        <div className='max-xl:my-4 md:mt-14 text-center text-themeColor xl:my-4'>
+        <div className='max-xl:my-4 md:mt-14 text-center text-themeColor xl:my-4 flex flex-col items-center'>
           <p className='px-4'>The result: You achieve a fitter body...and a happier life!</p>
-          <Button />
+          <Button text={'GET A PERSONALIZED FITNESS PLAN'} />
         </div>
       </div>
       {/*  */}
@@ -142,21 +163,21 @@ const Home: React.FC = () => {
                 <p className={`${inter.className} font-[500]`}>One place for all your<br />well-being needs</p>
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
-                    setTab('tab1')
-                  }}>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                  setTab('tab1')
+                }}>
                   <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>WORKOUT GEAR</div>
                   <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
-                    setTab('tab2')
-                  }}>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                  setTab('tab2')
+                }}>
                   <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
                   <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
-                    setTab('tab3')
-                  }}>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                  setTab('tab3')
+                }}>
                   <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
                   <div className={`${tab !== 'tab3' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>

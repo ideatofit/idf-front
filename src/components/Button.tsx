@@ -1,9 +1,12 @@
 import React from 'react'
+import style from '../styles/button.module.css'
 
-function Button() {
+function Button(props:{
+  text: string
+}) {
   return (
-    <button style={{ background: 'linear-gradient(272.12deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0.01%, rgba(255, 255, 255, 0) 100%), linear-gradient(87.88deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%)' }} className='h-12 w-48 text-themeColor rounded-xl'>
-      hello
+    <button className={`${style.btn} text-[0.7rem]`}>
+      {props.text}
     </button>
   )
 }

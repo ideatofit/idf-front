@@ -9,7 +9,7 @@ import style from '../styles/slide.module.css'
 
 function Slide() {
   return (
-    <Carousel pause={false} keyboard={true} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
+    <Carousel keyboard={true} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
       <Carousel.Item>
         <Image
           className="d-block w-100"
@@ -18,8 +18,11 @@ function Slide() {
           style={{ maxHeight: '100vh', objectFit:"cover" }}
         />
         <Carousel.Caption>
+          <div className='flex flex-col items-center '>
           <h1 className={`${style.slideh1FontSize}`}>India’s no.1 fitness website</h1>
           <p className={`${style.slidepFontSize}`}>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <Button text='START YOUR IDEATOFIT JOURNEY'/>
+          </div>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
