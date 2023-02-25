@@ -57,7 +57,7 @@ const Home: React.FC = () => {
         <meta name="twitter:site" content="Landing page" />
         <meta name="twitter:title" content="IDEATOFIT" />
         <meta name="twitter:description" content="IdeatoFit - India's no.1 health and wellness website. Discover expert advice and information on fitness, nutrition, and holistic wellness. We prioritize purity and quality in all our content and products." />
-        <meta name="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_630,w_1200/v1677151867/fitman.png" />
+        <meta name="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_400,w_800/v1677151867/fitman.png" />
 
         <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_fit,h_1080,w_1080/v1677151867/fitman.png" />
         <meta property="og:image:width" content="1080" />
