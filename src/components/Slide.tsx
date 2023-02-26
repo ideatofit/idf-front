@@ -1,8 +1,8 @@
 import Carousel from 'react-bootstrap/Carousel';
-import Image from 'next/image';
+;
 import Button from './Button';
-import fitnessmanbody from '../../public/fitnessmanbodyslide2-1@2x.png'
-import womanfitness from '../../public/sample1.jpg'
+// import fitnessmanbody from '../../public/fitnessmanbodyslide2-1@2x.png'
+// import womanfitness from '../../public/sample1.jpg'
 import gym from '../../public/sample2.jpg'
 import { useEffect } from 'react';
 import style from '../styles/slide.module.css'
@@ -11,9 +11,9 @@ function Slide() {
   return (
     <Carousel keyboard={true} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
       <Carousel.Item>
-        <Image
+       <img
           className="d-block w-100"
-          src={fitnessmanbody}
+          src={'../../public/fitnessmanbodyslide2-1@2x.png'}
           alt="First slide"
           style={{ maxHeight: '100vh', objectFit:"cover" }}
         />
@@ -26,9 +26,9 @@ function Slide() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <Image
+       <img
           className="d-block w-100"
-          src={fitnessmanbody}
+          src={'../../public/fitnessmanbodyslide2-1@2x.png'}
           alt="First slide"
           style={{ maxHeight: '100vh', objectFit:"cover" }}
         />
@@ -38,9 +38,9 @@ function Slide() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <Image
+       <img
           className="d-block w-100"
-          src={fitnessmanbody}
+          src={'../../public/fitnessmanbodyslide2-1@2x.png'}
           alt="First slide"
           style={{ maxHeight: '100vh', objectFit:"cover" }}
         />

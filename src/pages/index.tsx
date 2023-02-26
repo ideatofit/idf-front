@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Slide from '@/components/Slide';
 import Navigation from '@/components/Navigation';
 import arrow1 from '../../public/arrow1.svg'
@@ -80,17 +79,17 @@ const Home: React.FC = () => {
           <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
             <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>1</span>
             <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
-            <Image src={arrow1} alt={'arrow1'} className='relative left-[60%] max-sm:hidden' />
+            <img src={'../../public/arrow1.svg'} alt={'arrow1'} className='relative left-[60%] max-sm:hidden' />
           </div>
           <div className='flex xl:items-center max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
             <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>2</span>
             <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
-            <Image src={arrow2} alt="arrow2" className="relative top-[-10%] md:transform md:translate-x-1/4 md:translate-y-1/2 xl:right-[2rem] max-sm:hidden" />
+            <img src={'../../public/arrow2.svg'} alt="arrow2" className="relative top-[-10%] md:transform md:translate-x-1/4 md:translate-y-1/2 xl:right-[2rem] max-sm:hidden" />
           </div>
           <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
             <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>3</span>
             <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
-            <Image src={arrow3} alt={'arrow3'} className='relative lg:md:right-[50%] xl:right-0 max-sm:hidden' />
+            <img src={'../../public/arrow3.svg'} alt={'arrow3'} className='relative lg:md:right-[50%] xl:right-0 max-sm:hidden' />
           </div>
         </div>
         <div className='max-xl:my-4 md:mt-14 text-center text-themeColor xl:my-4 flex flex-col items-center'>
@@ -101,7 +100,7 @@ const Home: React.FC = () => {
       {/*  */}
       <div className='min-w-[100vw] h-fit py-4 flex flex-col gap-4 bg-backgroundColor'>
         <div className='absolute w-full max-sm:h-[36%] max-md:h-[26%] md:h-[36%] flex flex-col justify-center'>
-          <Image src={yellowshade} alt='yellowshade.png' />
+          <img src={'../../public/yellowshade.png'} alt='yellowshade.png' />
         </div>
         <div className='absolute xl:h-[90%] max-sm:h-[36%] sm:h-[36%] w-full flex items-center justify-center'>
           <h1 className={` ${inter.className} font-[700] text-[4.3rem] max-sm:text-[2.4rem] text-center text-white md:px-48 lg:px-48 xl:px-48`}>
@@ -109,16 +108,16 @@ const Home: React.FC = () => {
           </h1>
         </div>
         <div className='w-full flex flex-row max-xl:gap-4 xl:gap-4 justify-center'>
-          <Image src={rectangle5} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle6} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle7} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle8} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
+          <img src={'../../public/rectangle5.png'} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <img src={'../../public/rectangle6.png'} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <img src={'../../public/rectangle7.png'} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <img src={'../../public/rectangle8.png'} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
         </div>
         <div className='w-full flex flex-row gap-4 justify-center'>
-          <Image src={rectangle1} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle2} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle3} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle4} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
+          <img src={'../../public/rectangle1.png'} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <img src={'../../public/rectangle2.png'} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <img src={'../../public/rectangle3.png'} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
+          <img src={'../../public/rectangle4.png'} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
         </div>
       </div>
       <div className='min-w-[100vw] bg-backgroundColor text-themeColor flex flex-col text-center'>
@@ -128,23 +127,23 @@ const Home: React.FC = () => {
         </div>
         <div className='flex max-xl:flex-row xl:flex-row max-sm:flex-col max-sm:p-4 gap-4 md:p-4'>
           <div className='flex-[50%] flex justify-end'>
-            <Image src={groupofpeople} alt='group of fit people' />
+            <img src={'../../public/groupofpeople.png'} alt='group of fit people' />
           </div>
           <div className={`${opensans.className} font-thin flex-[50%] flex flex-col justify-evenly max-xl:pr-[8%] xl:pr-[8%] md:pr-[0]`}>
             <section className='w-full flex flex-row items-center'>
-              <Image src={check} alt='check png' />
+              <img src={'../../public/check.svg'} alt='check png' />
               <div className='p-2 text-left text-[1rem]'>Whether you&apos;re a beginner or a pro, our expert coaches can help you achieve your fitness goals</div>
             </section>
             <section className='w-full flex flex-row items-center'>
-              <Image src={check} alt='check png' />
+              <img src={'../../public/check.svg'} alt='check png' />
               <div className='p-2 text-left text-[1rem]'>Get a customised diet & workout plan made for your body and lifestyle</div>
             </section>
             <section className='w-full flex flex-row items-center'>
-              <Image src={check} alt='check png' />
+              <img src={'../../public/check.svg'} alt='check png' />
               <div className='p-2 text-left text-[1rem]'>One-on-one guidance to help you create the right long-term habits</div>
             </section>
             <section className='w-full flex flex-row items-center'>
-              <Image src={check} alt='check png' />
+              <img src={'../../public/check.svg'} alt='check png' />
               <div className='p-2 text-left text-[1rem]'>Love the gym or prefer home workouts? Get a plan tailored to your needs!</div>
             </section>
           </div>
@@ -155,9 +154,9 @@ const Home: React.FC = () => {
             <p className='font-thin'>Use our free fitness tools & trackers to take your journey<br /> to the next level!</p>
           </div>
           <div className='flex max-xl:flex-row xl:flex-row max-xl:justify-center xl:justify-center gap-2 font-thin max-sm:flex-col max-sm:items-center'>
-            <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
-            <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
-            <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
+            <Tools img={'../../public/macro.png'} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
+            <Tools img={'../../public/macro.png'} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
+            <Tools img={'../../public/macro.png'} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
           </div>
         </div>
       </div>
@@ -194,15 +193,15 @@ const Home: React.FC = () => {
               {tab === 'tab1' &&
                 <>
                   <div className='flex-[33%] relative h-full gap-3'>
-                    <Image src={wellnesshub1} alt='wellness hub 1' className='h-[100%] w-[100%]' />
+                    <img src={'../../public/wellnesshub1.png'} alt='wellness hub 1' className='h-[100%] w-[100%]' />
                   </div>
                   <div className='flex-[33%] relative h-full flex flex-col items-center gap-3'>
-                    <Image src={wellnesshub2} alt='wellness hub 2' className='h-[55%] w-[100%]' />
-                    <Image src={wellnesshub3} alt='wellness hub 3' className='h-[45%] w-[100%]' />
+                    <img src={'../../public/wellnesshub2.png'} alt='wellness hub 2' className='h-[55%] w-[100%]' />
+                    <img src={'../../public/wellnesshub3.png'} alt='wellness hub 3' className='h-[45%] w-[100%]' />
                   </div>
                   <div className='flex-[33%] relative h-full flex flex-col gap-3'>
-                    <Image src={wellnesshub4} alt='wellness hub 1' className='h-[33%] w-[100%]' />
-                    <Image src={wellnesshub5} alt='wellness hub 1' className='h-[67%] w-[100%]' />
+                    <img src={'../../public/wellnesshub4.png'} alt='wellness hub 1' className='h-[33%] w-[100%]' />
+                    <img src={'../../public/wellnesshub5.png'} alt='wellness hub 1' className='h-[67%] w-[100%]' />
                   </div>
                 </>
               }
@@ -224,7 +223,7 @@ const Home: React.FC = () => {
         <div style={{ background: '#232631' }} className='max-xl:h-[65vh] xl:h-[65vh] max-sm:h-fit max-sm:py-8 max-xl:w-[80%] xl:w-[80%] max-sm:w-[90%] flex max-xl:flex-row xl:flex-row max-sm:flex-col rounded-xl border-2 border-borderColor overflow-hidden'>
           <div className='h-full flex-[40%]'>
             <div style={{ borderRadius: '0px 243.54px 389.67px 0px' }} className='relative h-full w-[80%] left-0 bg-[#454958]'>
-              <Image src={femaledoctor} alt='woman doctor' height={450} className='max-sm:relative absolute bottom-0 max-sm:left-0 left-[25%]' />
+              <img src={'../../public/femaledoctor.png'} alt='woman doctor' height={450} className='max-sm:relative absolute bottom-0 max-sm:left-0 left-[25%]' />
             </div>
           </div>
           <div className='flex-[60%] h-full'>

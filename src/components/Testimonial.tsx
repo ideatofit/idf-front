@@ -1,7 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
-import img1 from '../../public/transformation-individual-03.png'
-import img2 from '../../public/transformation-individual-04.png'
+
+// import img1 from '../../public/transformation-individual-03.png'
+// import img2 from '../../public/transformation-individual-04.png'
 import style from '../styles/Testimonial.module.css'
 
 function Testimonial() {
@@ -12,41 +12,41 @@ function Testimonial() {
         <p className='text-white text-[1.4rem] max-sm:text-[1.2rem] max-sm:px-[1rem]'>Real people, real stories - that&apos;s what <b>IDEATOFIT</b> is all about!</p>
       </div>
       <div className={`${style.animation_1} relative h-full flex flex-row gap-3`}>
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img2} alt={'img2'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-04.png'} alt={'img2'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[16rem]' />
       </div>
       <div className={`${style.animation_2} relative h-full flex flex-row left-[-100%] gap-3`}>
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
-        <Image src={img1} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
+        <img src={'../../public/transformation-individual-03.png'} alt={'img1'} className='w-[17rem] max-sm:min-w-[18rem]' />
       </div>
     </div>
   )
