@@ -1,12 +1,13 @@
 import Link from 'next/link';
+import dynamic from "next/dynamic";
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Image from 'next/image';
 import logo from '../../public/logo.svg'
 import cart from '../../public/cart.svg'
 import profile from '../../public/profile.svg'
-import dynamic from 'next/dynamic';
 
 function Header() {
   return (
@@ -14,7 +15,7 @@ function Header() {
       <Navbar style={{background:"linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)"}} className='fixed-top' expand="lg">
         <Container>
           <Navbar.Brand>
-            <img src={'../../public/logo.svg'}
+            <Image src={logo}
               alt="logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -28,8 +29,8 @@ function Header() {
               <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7]'><Nav.Link className='text-white antialiased'>Donate</Nav.Link></Link>
             </Nav>
             <div className='d-flex'>
-              <img src={"../../public/cart.svg"} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
-              <img src={'../../public/profile.svg'} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
+              <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
+              <Image src={profile} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
             </div>
           </Navbar.Collapse>
         </Container>

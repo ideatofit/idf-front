@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 const Tools = (props: {
- img: string,
+ img: StaticImageData,
   alt: string,
   title: string,
   description: string
@@ -12,7 +12,7 @@ const Tools = (props: {
     <div className='w-[27%] max-sm:w-[90%] border-2 border-borderColor rounded-xl overflow-hidden'>
       <Card style={{ width: '100%', border: 'none' }}>
         <div className='relative w-full'>
-          <img src={props.img} alt={props.alt} />
+          <Image src={props.img} alt={props.alt} />
         </div>
         <Card.Body className='text-center text-themeColor bg-backgroundColor'>
           <Card.Title>{props.title}</Card.Title>
