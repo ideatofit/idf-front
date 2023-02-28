@@ -4,12 +4,14 @@ module.exports = {
     './src/pages/index.tsx',
     //components
     './src/componensts/Slide.tsx',
-    './src/components/Navigation.tsx',
     './src/components/Testimonial.tsx',
     './src/components/Tools.tsx',
     './src/components/Stories.tsx',
-    './src/components/Footer.tsx',
     './src/components/Button.tsx',
+    //layouts
+    './src/layouts/Navigation.tsx',
+    './src/layouts/Footer.tsx',
+
   ],
   theme: {
     extend: {

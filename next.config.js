@@ -9,7 +9,8 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         port:''
       }
-    ]
+    ],
+    unoptimized: true
   }
 }
 

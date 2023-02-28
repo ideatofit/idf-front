@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Slide from '@/components/Slide';
-import Navigation from '@/components/Navigation';
 import arrow1 from '../../public/arrow1.svg'
 import arrow2 from '../../public/arrow2.svg'
 import arrow3 from '../../public/arrow3.svg'
@@ -23,25 +21,36 @@ import wellnesshub5 from '../../public/wellnesshub5.png'
 import macro from '../../public/macro.png'
 import check from '../../public/check.svg'
 import femaledoctor from '../../public/femaledoctor.png'
+import Navigation from '@/layouts/Navigation';
+import Slide from '@/components/Slide';
 import Testimonial from '@/components/Testimonial';
 import Tools from '@/components/Tools';
 import { Poppins, Open_Sans, Inter } from '@next/font/google'
 import Stories from '@/components/Stories';
-import storyStyle from '../styles/Stories.module.css'
-import Footer from '@/components/Footer';
+import Footer from '@/layouts/Footer';
 import Button from '@/components/Button';
+import storyStyle from '../styles/Stories.module.css'
+import { getSlideData } from '@/lib/slide';
+import { getStoriesData } from '@/lib/stories';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
 const inter = Inter({ subsets: ['latin'] })
 
 
-const Home: React.FC = () => {
+const Home = (props:{
+  slide: {
+    slide: []
+  },
+  stories: {
+    stories: []
+  }
+}) => {
   const [tab, setTab] = useState('tab1')
   return (
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Navigation />
-      <Slide />
+      <Slide slide={props.slide} />
       <Testimonial />
       {/* why to choose us */}
       <div className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
@@ -216,11 +225,7 @@ const Home: React.FC = () => {
         </div>
         <div className={` py-4 overflow-hidden `}>
           <div className={`${storyStyle.stories} h-fit flex flex-row gap-4`}>
-            <Stories />
-            <Stories />
-            <Stories />
-            <Stories />
-            <Stories />
+            <Stories stories={props.stories} />
           </div>
         </div>
       </div>
@@ -232,5 +237,14 @@ const Home: React.FC = () => {
     </div>
   )
 };
+
+export async function getStaticProps() {
+  const slide: object = await getSlideData()
+  const stories: object = await getStoriesData()
+  return {
+    props: { slide, stories },
+    revalidate: 60
+  }
+}
 
 export default Home

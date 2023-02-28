@@ -7,47 +7,31 @@ import gym from '../../public/sample2.jpg'
 import { useEffect } from 'react';
 import style from '../styles/slide.module.css'
 
-function Slide() {
+function Slide(props:{
+  slide:{
+    slide:[]
+  }
+}) {
   return (
     <Carousel pause={false} keyboard={true} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
-      <Carousel.Item>
-        <Image
-          className="d-block w-100"
-          src={fitnessmanbody}
-          alt="First slide"
-          style={{ maxHeight: '100vh', objectFit:"cover" }}
-        />
-        <Carousel.Caption>
-          <h1 className={`${style.slideh1FontSize}`}>India’s no.1 fitness website</h1>
-          <p className={`${style.slidepFontSize}`}>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <Image
-          className="d-block w-100"
-          src={fitnessmanbody}
-          alt="First slide"
-          style={{ maxHeight: '100vh', objectFit:"cover" }}
-        />
-        <Carousel.Caption>
-          <h1 className={`${style.slideh1FontSize}`}>Second slide label</h1>
-          <p className={`${style.slidepFontSize}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <Image
-          className="d-block w-100"
-          src={fitnessmanbody}
-          alt="First slide"
-          style={{ maxHeight: '100vh', objectFit:"cover" }}
-        />
-        <Carousel.Caption>
-          <h1 className={`${style.slideh1FontSize}`}>Third slide label</h1>
-          <p className={`${style.slidepFontSize}`}>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
+      {
+        props.slide['slide'].map((data, i)=>{
+          return(
+            <Carousel.Item key={i}>
+            <img
+              className="d-block w-100"
+              src={data['img']}
+              alt="First slide"
+              style={{ maxHeight: '100vh', objectFit:"cover" }}
+            />
+     <Carousel.Caption className={`${style.caption}`}>
+               <h1 className={`${style.slideh1FontSize}`}>{data['title']}</h1>
+              <p className={`${style.slidepFontSize}`}>{data['description']}</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          )
+        })
+      }
     </Carousel>
   );
 }
