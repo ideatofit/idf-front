@@ -225,7 +225,11 @@ const Home = (props:{
         </div>
         <div className={` py-4 overflow-hidden `}>
           <div className={`${storyStyle.stories} h-fit flex flex-row gap-4`}>
-            <Stories stories={props.stories} />
+            {
+              props['stories']['stories'].map((data)=>{
+                return <Stories text={data['text']} name={data['name']}/>
+              })
+            }
           </div>
         </div>
       </div>
