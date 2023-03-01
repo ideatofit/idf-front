@@ -225,9 +225,9 @@ const Home = (props:{
         </div>
         <div className={` py-4 overflow-hidden `}>
           <div className={`${storyStyle.stories} h-fit flex flex-row gap-4`}>
-            {
-              props['stories']['stories'].map((data)=>{
-                return <Stories text={data['text']} name={data['name']}/>
+            { 
+              props['stories']['stories'].map(( data: any, i: number )=>{
+                return <Stories key={i} text={data['text']} name={data['name']}/>
               })
             }
           </div>
