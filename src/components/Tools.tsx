@@ -9,6 +9,7 @@ const Tools = (props: {
   description: string
 }) => {
   return (
+    
     <div className='w-[27%] max-sm:w-[90%] border-2 border-borderColor rounded-xl overflow-hidden'>
       <Card style={{ width: '100%', border: 'none' }}>
         <div className='relative w-full'>

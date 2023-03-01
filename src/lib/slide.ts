@@ -10,7 +10,7 @@ export async function getSlideData(){
     const filteredSlideData = await {
         slide: parsedSlideData['data'].map((data: any)=>{
             return {
-                img: data['attributes']['img']['data'][0]['attributes']['url'],
+                img: `https://server.ideatofit.com${data['attributes']['img']['data'][0]['attributes']['url']}`,
                 title: data['attributes']['title'],
                 description: data['attributes']['description']
             }
