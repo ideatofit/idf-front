@@ -2,12 +2,15 @@
 module.exports = {
   content: [
     './src/pages/index.tsx',
+    './src/pages/store.tsx',
     //components
     './src/componensts/Slide.tsx',
     './src/components/Testimonial.tsx',
     './src/components/Tools.tsx',
     './src/components/Stories.tsx',
     './src/components/Button.tsx',
+    './src/components/CategoryCard.tsx',
+    './src/components/ProductsCard.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

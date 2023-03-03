@@ -32,20 +32,22 @@ import Button from '@/components/Button';
 import storyStyle from '../styles/Stories.module.css'
 import { getSlideData } from '@/lib/slide';
 import { getStoriesData } from '@/lib/stories';
+import getTestimonialData from '@/lib/testimonials';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
 const inter = Inter({ subsets: ['latin'] })
 
-
-const Home = (props:{
+type Props = {
   slide: {
     slide: []
   },
   stories: {
     stories: []
   }
-}) => {
+}
+
+const Home = (props: Props) => {
   const [tab, setTab] = useState('tab1')
   return (
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
@@ -151,21 +153,21 @@ const Home = (props:{
                 <p className={`${inter.className} font-[500]`}>One place for all your<br />well-being needs</p>
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
-                    setTab('tab1')
-                  }}>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                  setTab('tab1')
+                }}>
                   <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>WORKOUT GEAR</div>
                   <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
-                    setTab('tab2')
-                  }}>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                  setTab('tab2')
+                }}>
                   <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
                   <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white': 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
-                    setTab('tab3')
-                  }}>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                  setTab('tab3')
+                }}>
                   <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
                   <div className={`${tab !== 'tab3' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>
@@ -225,9 +227,9 @@ const Home = (props:{
         </div>
         <div className={` py-4 overflow-hidden `}>
           <div className={`${storyStyle.stories} h-fit flex flex-row gap-4`}>
-            { 
-              props['stories']['stories'].map(( data: any, i: number )=>{
-                return <Stories key={i} text={data['text']} name={data['name']}/>
+            {
+              props['stories']['stories'].map((data: any, i: number) => {
+                return <Stories key={i} text={data['text']} name={data['name']} />
               })
             }
           </div>
@@ -243,11 +245,12 @@ const Home = (props:{
 };
 
 export async function getStaticProps() {
-  const slide: object = await getSlideData()
-  const stories: object = await getStoriesData()
+  const slide: object | undefined = await getSlideData()
+  const stories: object | undefined = await getStoriesData()
+  // const testimonial: object = await getTestimonialData()
   return {
     props: { slide, stories },
-    revalidate: 60
+    revalidate: 120
   }
 }
 

@@ -1,20 +1,40 @@
-import qs from 'qs'
+import qs from "qs";
 
-export async function getSlideData(){
-    let query = await qs.stringify({
-        populate: 'img'
-    })
-    const url = `https://server.ideatofit.com/api/slides?${query}`
-    const slideData = await fetch(url)
-    const parsedSlideData = await slideData.json()
-    const filteredSlideData = await {
-        slide: parsedSlideData['data'].map((data: any)=>{
-            return {
-                img: `https://server.ideatofit.com${data['attributes']['img']['data'][0]['attributes']['url']}`,
-                title: data['attributes']['title'],
-                description: data['attributes']['description']
-            }
-        })
-    }
-    return filteredSlideData
+type FilteredSlideData = {
+  slide: [img: string, title: string, description: string];
+};
+
+type Data = {
+  attributes: {
+    title: string;
+    description: string;
+    img: {
+      data: [
+        {
+          attributes: {
+            url: string;
+          };
+        }
+      ];
+    };
+  };
+};
+
+export async function getSlideData() {
+  let query: string = await qs.stringify({
+    populate: "img",
+  });
+  const url = await `${process.env.PUBLIC_URL}/slides?${query}`;
+  const slideData = await fetch(url);
+  const parsedSlideData = await slideData.json();
+  const filteredSlideData: FilteredSlideData = await {
+    slide: parsedSlideData["data"].map((data: Data) => {
+      return {
+        img: `https://server.ideatofit.com${data["attributes"]["img"]["data"][0]["attributes"]["url"]}`,
+        title: data["attributes"]["title"],
+        description: data["attributes"]["description"],
+      };
+    }),
+  };
+  return filteredSlideData;
 }
