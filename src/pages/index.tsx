@@ -250,7 +250,7 @@ export async function getStaticProps() {
   // const testimonial: object = await getTestimonialData()
   return {
     props: { slide, stories },
-    revalidate: 120
+    revalidate: 60
   }
 }
 

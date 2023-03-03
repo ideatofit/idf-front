@@ -77,7 +77,7 @@ export async function getStaticProps() {
   const products = await getProducts()
   return {
     props: { products },
-    revalidate: 120
+    revalidate: 60
   }
 }
 
