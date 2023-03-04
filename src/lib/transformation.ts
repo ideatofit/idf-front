@@ -7,7 +7,7 @@ export type TransformationProps = {
   },
   lowerImage:{
     img: string[],
-    number: number
+    speed: number
   }
 }
 
@@ -28,7 +28,7 @@ export type TransformationData = {
 
 export default async function getTransformationData() {
   const query = qs.stringify({
-    populate: "*",
+    populate: "*",  
   });
   try {
     let url = await `${process.env.PUBLIC_URL}/api/transformations?${query}`;
@@ -36,8 +36,16 @@ export default async function getTransformationData() {
     let parsedTransformationData: {data: TransformationData} = await fetchedTransformationData.json();
     const filteredTransformationData: TransformationProps = {
       upperImage: {
-        img: parsedTransformationData['data'][0]['attributes']['img']['data'][0]['attributes']['url'],
+        img: parsedTransformationData['data'][0]['attributes']['img']['data'].map((data)=>{
+          return data['attributes']['url']
+        }),
         speed: parsedTransformationData['data'][0]['attributes']['speed']
+      },
+      lowerImage: {
+        img: parsedTransformationData['data'][1]['attributes']['img']['data'].map((data)=>{
+          return data['attributes']['url']
+        }),
+        speed: parsedTransformationData['data'][1]['attributes']['speed']
       }
     }
     return filteredTransformationData;
