@@ -33,19 +33,18 @@ import storyStyle from '../styles/Stories.module.css'
 import { getSlideData } from '@/lib/slide';
 import { getStoriesData } from '@/lib/stories';
 import getTransformationData  from '@/lib/transformation';
+import { SlideProps } from '@/lib/slide';
+import { StoriesProps } from '@/lib/stories';
+import { TransformationProps } from '@/lib/transformation';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
 const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
-  slide: {
-    slide: []
-  },
-  stories: {
-    stories: []
-  },
-  transformation: {}
+  slide: SlideProps
+  stories: StoriesProps
+  transformation: TransformationProps
 }
 
 const Home = (props: Props) => {
@@ -248,7 +247,7 @@ const Home = (props: Props) => {
 export async function getStaticProps() {
   const slide: object | undefined = await getSlideData()
   const stories: object | undefined = await getStoriesData()
-  const transformation: object = await getTransformationData()
+  const transformation: object | undefined = await getTransformationData()
   return {
     props: { slide, stories, transformation },
     revalidate: 60

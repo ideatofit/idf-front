@@ -1,11 +1,10 @@
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'next/image';
 import style from '../styles/slide.module.css'
+import { SlideProps } from '@/lib/slide';
 
 function Slide(props: {
-  slide: {
-    slide: []
-  }
+  slide: SlideProps
 }) {
   return (
     <Carousel pause={false} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>

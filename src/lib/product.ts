@@ -34,10 +34,10 @@ type Data = {
 };
 
 export type ProductsProps = {
-  categories: [
+  categories: 
     {
       title: string;
-      products: [
+      products:
         {
           title: string;
           slug: string;
@@ -45,11 +45,10 @@ export type ProductsProps = {
           price: number;
           img: string;
           affiliates: {};
-        }
-      ];
-    }
-  ];
+        }[]
+    }[]
 };
+
 
 export default async function getProducts() {
   const query: string = qs.stringify({
@@ -63,7 +62,7 @@ export default async function getProducts() {
   let url = await `${process.env.PUBLIC_URL}/api/categories?${query}`;
   let fetchedProducts = await fetch(url);
   let parsedProductsData: { data: [] } = await fetchedProducts.json();
-  const filteredProductsData = await {
+  const filteredProductsData: ProductsProps = await {
     categories: parsedProductsData["data"].map((data: Data) => {
       return {
         title: data["attributes"]["category"],

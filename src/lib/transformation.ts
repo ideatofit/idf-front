@@ -1,22 +1,46 @@
 import qs from "qs";
 
-type FilteredTestimonialData = {
-  img: string
+export type TransformationProps = {
+  upperImage:{
+    img: string[],
+    speed: number
+  },
+  lowerImage:{
+    img: string[],
+    number: number
+  }
 }
 
 export type TransformationData = {
-
-}
+  attributes: {
+    speed: number;
+    img: {
+      data: [
+        {
+          attributes: {
+            url: string;
+          };
+        }
+      ];
+    };
+  };
+}[];
 
 export default async function getTransformationData() {
   const query = qs.stringify({
-    populate: '*'
-  })
+    populate: "*",
+  });
   try {
     let url = await `${process.env.PUBLIC_URL}/api/transformations?${query}`;
-    let fetchedTestimonialData = await fetch(url);
-    let parsedTestimonialData = await fetchedTestimonialData.json();
-    return parsedTestimonialData;
+    let fetchedTransformationData = await fetch(url);
+    let parsedTransformationData: {data: TransformationData} = await fetchedTransformationData.json();
+    const filteredTransformationData: TransformationProps = {
+      upperImage: {
+        img: parsedTransformationData['data'][0]['attributes']['img']['data'][0]['attributes']['url'],
+        speed: parsedTransformationData['data'][0]['attributes']['speed']
+      }
+    }
+    return filteredTransformationData;
   } catch (err) {
     console.error(err);
   }

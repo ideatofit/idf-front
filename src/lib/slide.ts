@@ -1,7 +1,11 @@
 import qs from "qs";
 
-type FilteredSlideData = {
-  slide: [img: string, title: string, description: string];
+export type SlideProps = {
+  slide: {
+    img: string;
+    title: string;
+    description: string;
+  }[];
 };
 
 type Data = {
@@ -27,7 +31,7 @@ export async function getSlideData() {
   const url = await `${process.env.PUBLIC_URL}/api/slides?${query}`;
   const slideData = await fetch(url);
   const parsedSlideData = await slideData.json();
-  const filteredSlideData: FilteredSlideData = await {
+  const filteredSlideData: SlideProps = await {
     slide: parsedSlideData["data"].map((data: Data) => {
       return {
         img: data["attributes"]["img"]["data"][0]["attributes"]["url"],

@@ -1,8 +1,8 @@
-type FilteredStoriesData = {
-  stories: [
+export type StoriesProps = {
+  stories: {
     text: string,
     name: string
-  ]
+  }[]
 }
 
 type Data = {
@@ -17,7 +17,7 @@ export async function getStoriesData() {
     const url = await `${process.env.PUBLIC_URL}/api/stories`;
     const storiesData = await fetch(url);
     const parsedStoriesData = await storiesData.json();
-    const filteredStoriesData: FilteredStoriesData = await {
+    const filteredStoriesData: StoriesProps = await {
       stories: parsedStoriesData["data"].map((data: Data) => {
         return {
           text: data["attributes"]["text"],

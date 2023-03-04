@@ -5,9 +5,10 @@ import img2 from '../../public/transformation-individual-04.png'
 import img3 from '../../public/groupofpeople.png'
 import style from '../styles/Testimonial.module.css'
 import { motion } from 'framer-motion'
+import { TransformationProps } from '@/lib/transformation'
 
-function Transformation(props:{
-  img: {}
+function Transformation(props: {
+  transformation: TransformationProps
 }) {
   const [container1width, setContainer1width] = useState(0)
   const [container2width, setContainer2width] = useState(0)
@@ -18,7 +19,7 @@ function Transformation(props:{
     let width1 = 0
     let width2 = 0
     if (containerRef1.current) {
-      for(let i = 0; i < 22; i++){
+      for (let i = 0; i < 22; i++) {
         width1 += containerRef1.current.children[i].getBoundingClientRect().width
       }
       width1 += 22 * 18
@@ -26,13 +27,13 @@ function Transformation(props:{
     }
 
     if (containerRef2.current) {
-      for(let i = 0; i < 22; i++){
+      for (let i = 0; i < 22; i++) {
         width2 += containerRef2.current.children[i].getBoundingClientRect().width
       }
       width2 += 22 * 18
       setContainer2width(width2)
     }
-    console.log(props.img)
+    console.log(props.transformation)
   }, []);
   return (
     <div className='bg-backgroundColor min-h-fit w-full py-4 flex flex-col overflow-hidden gap-3'>
@@ -41,50 +42,28 @@ function Transformation(props:{
         <p className='text-white text-[1.4rem] max-sm:text-[1.2rem] max-sm:px-[1rem]'>Real people, real stories - that&apos;s what <b>IDEATOFIT</b> is all about!</p>
       </div>
       <motion.div initial={'initial'} animate={'animate'} variants={{
-        initial:{
+        initial: {
           x: 0
         },
-        animate:{
+        animate: {
           x: container1width * -1
         }
       }} transition={{
         ease: 'linear',
-        duration: 20,
+        duration: props['transformation']['speed'],
         repeat: Infinity
       }} className={` w-fit h-full flex flex-row gap-3`} ref={containerRef1}>
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img1} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
-        <Image src={img2} alt={'img1'} className='max-sm:h-48' />
+        {
+          props['transformation']['img'].map((data) => {
+            return <Image src={data} alt={'img1'} className='max-sm:h-48' />
+          })
+        }
       </motion.div>
       <motion.div initial={'initial'} animate={'animate'} variants={{
-        initial:{
+        initial: {
           x: 0
         },
-        animate:{
+        animate: {
           x: container2width
         }
       }} transition={{
@@ -92,10 +71,10 @@ function Transformation(props:{
         duration: 40,
         repeat: Infinity
       }}
-      style={{
-        left: `-${container2width}px`
-      }}
-       className={`relative h-full flex flex-row gap-3`} ref={containerRef2}>
+        style={{
+          left: `-${container2width}px`
+        }}
+        className={`relative h-full flex flex-row gap-3`} ref={containerRef2}>
         <Image src={img1} alt={'img1'} className='max-sm:h-48' />
         <Image src={img1} alt={'img1'} className='max-sm:h-48' />
         <Image src={img1} alt={'img1'} className='max-sm:h-48' />

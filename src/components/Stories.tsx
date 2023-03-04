@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import quote from '../../public/quote.svg'
+import { StoriesProps } from '@/lib/stories'
 
 function Stories(props:{
   text: string,
