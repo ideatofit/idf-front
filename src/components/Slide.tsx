@@ -18,7 +18,7 @@ function Slide(props: {
                 alt="First slide"
                 width={2880}
                 height={1620}
-                style={{ maxHeight: '100vh', objectFit: "cover" }}
+                style={{ maxHeight: '100vh', objectFit: "cover", aspectRatio: "16 / 9" }}
               />
               <Carousel.Caption className={`${style.caption}`}>
                 <h1 className={`${style.slideh1FontSize}`}>{data['title']}</h1>
