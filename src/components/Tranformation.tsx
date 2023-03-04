@@ -6,7 +6,9 @@ import img3 from '../../public/groupofpeople.png'
 import style from '../styles/Testimonial.module.css'
 import { motion } from 'framer-motion'
 
-function Testimonial() {
+function Transformation(props:{
+  img: {}
+}) {
   const [container1width, setContainer1width] = useState(0)
   const [container2width, setContainer2width] = useState(0)
   const containerRef1 = useRef<HTMLDivElement>(null);
@@ -30,6 +32,7 @@ function Testimonial() {
       width2 += 22 * 18
       setContainer2width(width2)
     }
+    console.log(props.img)
   }, []);
   return (
     <div className='bg-backgroundColor min-h-fit w-full py-4 flex flex-col overflow-hidden gap-3'>
@@ -46,7 +49,7 @@ function Testimonial() {
         }
       }} transition={{
         ease: 'linear',
-        duration: 40,
+        duration: 20,
         repeat: Infinity
       }} className={` w-fit h-full flex flex-row gap-3`} ref={containerRef1}>
         <Image src={img1} alt={'img1'} className='max-sm:h-48' />
@@ -125,4 +128,4 @@ function Testimonial() {
   )
 }
 
-export default Testimonial
+export default Transformation

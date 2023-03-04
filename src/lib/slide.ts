@@ -24,13 +24,13 @@ export async function getSlideData() {
   let query: string = await qs.stringify({
     populate: "img",
   });
-  const url = await `${process.env.PUBLIC_URL}/slides?${query}`;
+  const url = await `${process.env.PUBLIC_URL}/api/slides?${query}`;
   const slideData = await fetch(url);
   const parsedSlideData = await slideData.json();
   const filteredSlideData: FilteredSlideData = await {
     slide: parsedSlideData["data"].map((data: Data) => {
       return {
-        img: `https://server.ideatofit.com${data["attributes"]["img"]["data"][0]["attributes"]["url"]}`,
+        img: data["attributes"]["img"]["data"][0]["attributes"]["url"],
         title: data["attributes"]["title"],
         description: data["attributes"]["description"],
       };

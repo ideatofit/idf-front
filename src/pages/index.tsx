@@ -23,7 +23,7 @@ import check from '../../public/check.svg'
 import femaledoctor from '../../public/femaledoctor.png'
 import Navigation from '@/layouts/Navigation';
 import Slide from '@/components/Slide';
-import Testimonial from '@/components/Testimonial';
+import Transformation from '@/components/Tranformation';
 import Tools from '@/components/Tools';
 import { Poppins, Open_Sans, Inter } from '@next/font/google'
 import Stories from '@/components/Stories';
@@ -32,7 +32,7 @@ import Button from '@/components/Button';
 import storyStyle from '../styles/Stories.module.css'
 import { getSlideData } from '@/lib/slide';
 import { getStoriesData } from '@/lib/stories';
-import getTestimonialData from '@/lib/testimonials';
+import getTransformationData  from '@/lib/transformation';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
@@ -44,7 +44,8 @@ type Props = {
   },
   stories: {
     stories: []
-  }
+  },
+  transformation: {}
 }
 
 const Home = (props: Props) => {
@@ -53,7 +54,7 @@ const Home = (props: Props) => {
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Navigation />
       <Slide slide={props.slide} />
-      <Testimonial />
+      <Transformation img={props.transformation} />
       {/* why to choose us */}
       <div className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
         <div className='text-center text-themeColor'>
@@ -247,9 +248,9 @@ const Home = (props: Props) => {
 export async function getStaticProps() {
   const slide: object | undefined = await getSlideData()
   const stories: object | undefined = await getStoriesData()
-  // const testimonial: object = await getTestimonialData()
+  const transformation: object = await getTransformationData()
   return {
-    props: { slide, stories },
+    props: { slide, stories, transformation },
     revalidate: 60
   }
 }

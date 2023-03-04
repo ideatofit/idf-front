@@ -60,7 +60,7 @@ export default async function getProducts() {
       img: true,
     },
   });
-  let url = await `https://server.ideatofit.com/api/categories?${query}`;
+  let url = await `${process.env.PUBLIC_URL}/api/categories?${query}`;
   let fetchedProducts = await fetch(url);
   let parsedProductsData: { data: [] } = await fetchedProducts.json();
   const filteredProductsData = await {
@@ -73,7 +73,7 @@ export default async function getProducts() {
             slug: products["attributes"]["slug"],
             stars: products["attributes"]["stars"],
             price: products["attributes"]["price"],
-            img: `https://server.ideatofit.com${products["attributes"]["img"]["data"]["attributes"]["url"]}`,
+            img: products["attributes"]["img"]["data"]["attributes"]["url"],
             affiliates: products["attributes"]["affiliates"],
           };
         }),

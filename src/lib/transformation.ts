@@ -4,12 +4,16 @@ type FilteredTestimonialData = {
   img: string
 }
 
-export default async function getTestimonialData() {
+export type TransformationData = {
+
+}
+
+export default async function getTransformationData() {
   const query = qs.stringify({
-    populate:['img']
+    populate: '*'
   })
   try {
-    let url = await `${process.env.PUBLIC_URL}/testimonials?${query}`;
+    let url = await `${process.env.PUBLIC_URL}/api/transformations?${query}`;
     let fetchedTestimonialData = await fetch(url);
     let parsedTestimonialData = await fetchedTestimonialData.json();
     return parsedTestimonialData;

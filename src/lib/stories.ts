@@ -14,7 +14,7 @@ type Data = {
 
 export async function getStoriesData() {
   try {
-    const url = await `${process.env.PUBLIC_URL}/stories`;
+    const url = await `${process.env.PUBLIC_URL}/api/stories`;
     const storiesData = await fetch(url);
     const parsedStoriesData = await storiesData.json();
     const filteredStoriesData: FilteredStoriesData = await {
