@@ -33,7 +33,6 @@ function Transformation(props: {
       width2 += containerRef2.current.children.length * 18
       setContainer2width(width2)
     }
-    console.log(props.transformation)
   }, []);
   return (
     <div className='bg-backgroundColor min-h-fit w-full py-4 flex flex-col overflow-hidden gap-3'>
@@ -54,8 +53,8 @@ function Transformation(props: {
          repeat: Infinity
        }} className={` w-fit h-full flex flex-row gap-3`} ref={containerRef1}>
          {
-           props['transformation']['upperImage']['img'].map((data) => {
-             return <Image src={data} alt={'img1'} width={164} height={263} className='max-sm:h-48' />
+           props['transformation']['upperImage']['img'].map((data, i) => {
+             return <Image key={i + Math.random() * 100} src={data} alt={'img1'} width={164} height={263} className='max-sm:h-48' />
            })
          }
        </motion.div>
@@ -76,8 +75,8 @@ function Transformation(props: {
          }}
          className={`relative h-full flex flex-row gap-3`} ref={containerRef2}>
          {
-           props['transformation']['lowerImage']['img'].map((data) => {
-             return <Image src={data} alt={'img1'} width={164} height={263} className='max-sm:h-48' />
+           props['transformation']['lowerImage']['img'].map((data, i) => {
+             return <Image key={i + Math.random() * 10} src={data} alt={'img1'} width={164} height={263} className='max-sm:h-48' />
            })
          }
        </motion.div>
