@@ -5,7 +5,7 @@ function Button(props:{
   text: string
 }) {
   return (
-    <button className={`${style.btn} text-[0.7rem]`}>
+    <button className={`${style.btn} text-[1.2rem]`}>
       {props.text}
     </button>
   )

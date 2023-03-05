@@ -5,6 +5,9 @@ export type SlideProps = {
     img: string;
     title: string;
     description: string;
+    button: boolean
+    link: string
+    textonbutton: string
   }[];
 };
 
@@ -12,6 +15,9 @@ type Data = {
   attributes: {
     title: string;
     description: string;
+    button: boolean | null
+    link: string | null
+    textonbutton: string | null
     img: {
       data: [
         {
@@ -37,6 +43,9 @@ export async function getSlideData() {
         img: data["attributes"]["img"]["data"][0]["attributes"]["url"],
         title: data["attributes"]["title"],
         description: data["attributes"]["description"],
+        button: data['attributes']['button'] ?? false,
+        link: data['attributes']['link'] ?? "",
+        textonbutton: data['attributes']['textonbutton'] ?? ""
       };
     }),
   };
