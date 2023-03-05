@@ -36,6 +36,9 @@ import getTransformationData  from '@/lib/transformation';
 import { SlideProps } from '@/lib/slide';
 import { StoriesProps } from '@/lib/stories';
 import { TransformationProps } from '@/lib/transformation';
+import getWellnesshubData from '@/lib/wellnesshub';
+import { wellnesshubProps } from '@/lib/wellnesshub';
+import Link from 'next/link';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
@@ -44,7 +47,8 @@ const inter = Inter({ subsets: ['latin'] })
 type Props = {
   slide: SlideProps
   stories: StoriesProps
-  transformation: TransformationProps
+  transformation: TransformationProps,
+  wellnesshub: wellnesshubProps
 }
 
 const Home = (props: Props) => {
@@ -149,43 +153,43 @@ const Home = (props: Props) => {
           <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
             <div className='flex-[45%] flex flex-col'>
               <div className='relative h-[40%] text-left'>
-                <h1 className={`${poppins.className} text-[2.2rem]`}>Wellness Hub</h1>
-                <p className={`${inter.className} font-[500]`}>One place for all your<br />well-being needs</p>
+                <h1 className={`${poppins.className} text-[2.2rem]`}>{props['wellnesshub']['tab1']['title']}</h1>
+                <p className={`${inter.className} font-[500] pr-32`}>{props['wellnesshub']['tab1']['description']}</p>
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                <Link href={tab === 'tab1' ? props['wellnesshub']['tab1']['link'] : ''} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab1')
                 }}>
-                  <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>WORKOUT GEAR</div>
+                  <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>{props['wellnesshub']['tab1']['textonbutton']}</div>
                   <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
-                </div>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                </Link>
+                <Link href={tab === 'tab2' ? props['wellnesshub']['tab1']['link'] : ''} className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab2')
                 }}>
                   <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
                   <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
-                </div>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                </Link>
+                <Link href={tab === 'tab3' ? props['wellnesshub']['tab1']['link'] : ''} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
                   setTab('tab3')
                 }}>
                   <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
                   <div className={`${tab !== 'tab3' && 'opacity-0'} text-black`}>&#62;</div>
-                </div>
+                </Link>
               </div>
             </div>
             <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-3'>
               {tab === 'tab1' &&
                 <>
                   <div className='flex-[33%] relative h-full gap-3'>
-                    <Image src={wellnesshub1} alt='wellness hub 1' className='h-[100%] w-[100%]' />
+                    <Image src={props['wellnesshub']['tab1']['img1']} alt='wellness hub 1' height={710} width={350} className='h-[105%] w-[100%]' />
                   </div>
                   <div className='flex-[33%] relative h-full flex flex-col items-center gap-3'>
-                    <Image src={wellnesshub2} alt='wellness hub 2' className='h-[55%] w-[100%]' />
-                    <Image src={wellnesshub3} alt='wellness hub 3' className='h-[45%] w-[100%]' />
+                    <Image src={props['wellnesshub']['tab1']['img2']} alt='wellness hub 2' height={370} width={350} className='h-[55%] w-[100%]' />
+                    <Image src={props['wellnesshub']['tab1']['img3']} alt='wellness hub 3' height={320} width={350} className='h-[45%] w-[100%]' />
                   </div>
                   <div className='flex-[33%] relative h-full flex flex-col gap-3'>
-                    <Image src={wellnesshub4} alt='wellness hub 1' className='h-[33%] w-[100%]' />
-                    <Image src={wellnesshub5} alt='wellness hub 1' className='h-[67%] w-[100%]' />
+                    <Image src={props['wellnesshub']['tab1']['img4']} alt='wellness hub 1' height={220} width={350} className='h-[33%] w-[100%]' />
+                    <Image src={props['wellnesshub']['tab1']['img5']} alt='wellness hub 1' height={470} width={350} className='h-[67%] w-[100%]' />
                   </div>
                 </>
               }
@@ -248,8 +252,9 @@ export async function getStaticProps() {
   const slide: object | undefined = await getSlideData()
   const stories: object | undefined = await getStoriesData()
   const transformation: object | undefined = await getTransformationData()
+  const wellnesshub: object | undefined = await getWellnesshubData()
   return {
-    props: { slide, stories, transformation },
+    props: { slide, stories, transformation, wellnesshub },
     revalidate: 60
   }
 }

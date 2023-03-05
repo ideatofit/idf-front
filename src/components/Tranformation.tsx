@@ -23,6 +23,7 @@ function Transformation(props: {
         width1 += containerRef1.current.children[i].getBoundingClientRect().width
       }
       width1 += containerRef1.current.children.length * 18
+      width1 -= window.innerWidth
       setContainer1width(width1)
     }
 
@@ -31,6 +32,7 @@ function Transformation(props: {
         width2 += containerRef2.current.children[i].getBoundingClientRect().width
       }
       width2 += containerRef2.current.children.length * 18
+      width2 -= window.innerWidth
       setContainer2width(width2)
     }
   }, []);

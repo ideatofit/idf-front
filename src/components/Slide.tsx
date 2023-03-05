@@ -9,9 +9,6 @@ import { useEffect } from 'react';
 function Slide(props: {
   slide: SlideProps
 }) {
-  useEffect(()=>{
-    console.log(props['slide'])
-  }, [])
   return (
     <Carousel pause={false} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
       {
