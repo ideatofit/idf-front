@@ -72,7 +72,7 @@ export default async function getWellnesshubData() {
       tab3: true,
     },
   });
-  const url = await `http://localhost:1337/api/wellnesshub?${query}`;
+  const url = await `${process.env.PUBLIC_URL}/api/wellnesshub?${query}`;
   const fetchedData = await fetch(url);
   const parsedData:{data: wellnesshubData} = await fetchedData.json();
 //   return parsedData
