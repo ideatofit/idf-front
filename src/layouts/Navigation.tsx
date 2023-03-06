@@ -23,9 +23,9 @@ function Header() {
             <Nav className="me-auto w-[80%] flex justify-evenly">
               <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Home</Link>
               <Link href="/store" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Store</Link>
-              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Diet</Link>
-              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Tools</Link>
-              <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Blogs</Link>
+              <Link href="/diets" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Diet</Link>
+              <Link href="/tools" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Tools</Link>
+              <Link href="/blogs" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Blogs</Link>
               <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Donate</Link>
             </Nav>
             <div className='d-flex'>

@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import img1 from '../../public/transformation-individual-03.png'
-import img2 from '../../public/transformation-individual-04.png'
-import img3 from '../../public/groupofpeople.png'
-import style from '../styles/Testimonial.module.css'
 import { motion } from 'framer-motion'
 import { TransformationProps } from '@/lib/transformation'
 

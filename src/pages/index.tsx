@@ -39,6 +39,8 @@ import { TransformationProps } from '@/lib/transformation';
 import getWellnesshubData from '@/lib/wellnesshub';
 import { wellnesshubProps } from '@/lib/wellnesshub';
 import Link from 'next/link';
+import Gotaquestion from '@/components/Gotaquestion';
+import getFooterData from '@/lib/footer';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
@@ -49,6 +51,7 @@ type Props = {
   stories: StoriesProps
   transformation: TransformationProps,
   wellnesshub: wellnesshubProps
+  footer: any
 }
 
 const Home = (props: Props) => {
@@ -163,13 +166,13 @@ const Home = (props: Props) => {
                   <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>{props['wellnesshub']['tab1']['textonbutton']}</div>
                   <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
                 </Link>
-                <Link href={tab === 'tab2' ? props['wellnesshub']['tab1']['link'] : ''} className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                <Link href={tab === 'tab2' ? props['wellnesshub']['tab2']['link'] : ''} className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab2')
                 }}>
                   <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
                   <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
                 </Link>
-                <Link href={tab === 'tab3' ? props['wellnesshub']['tab1']['link'] : ''} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
+                <Link href={tab === 'tab3' ? (props['wellnesshub']['tab3']['link']) : ''} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
                   setTab('tab3')
                 }}>
                   <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
@@ -177,17 +180,17 @@ const Home = (props: Props) => {
                 </Link>
               </div>
             </div>
-            <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-3'>
+            <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-2'>
               {tab === 'tab1' &&
                 <>
-                  <div className='flex-[33%] relative h-full gap-3'>
-                    <Image src={props['wellnesshub']['tab1']['img1']} alt='wellness hub 1' height={710} width={350} className='h-[105%] w-[100%]' />
+                  <div className='flex-[33%] relative h-full gap-2'>
+                    <Image src={props['wellnesshub']['tab1']['img1']} alt='wellness hub 1' height={710} width={350} className='h-[103%] w-[100%]' />
                   </div>
-                  <div className='flex-[33%] relative h-full flex flex-col items-center gap-3'>
+                  <div className='flex-[33%] relative h-full flex flex-col items-center gap-2'>
                     <Image src={props['wellnesshub']['tab1']['img2']} alt='wellness hub 2' height={370} width={350} className='h-[55%] w-[100%]' />
                     <Image src={props['wellnesshub']['tab1']['img3']} alt='wellness hub 3' height={320} width={350} className='h-[45%] w-[100%]' />
                   </div>
-                  <div className='flex-[33%] relative h-full flex flex-col gap-3'>
+                  <div className='flex-[33%] relative h-full flex flex-col gap-2'>
                     <Image src={props['wellnesshub']['tab1']['img4']} alt='wellness hub 1' height={220} width={350} className='h-[33%] w-[100%]' />
                     <Image src={props['wellnesshub']['tab1']['img5']} alt='wellness hub 1' height={470} width={350} className='h-[67%] w-[100%]' />
                   </div>
@@ -239,11 +242,8 @@ const Home = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className={`${poppins.className} bg-backgroundColor text-themeColor w-full h-fit py-4 text-center`}>
-        <h1 className='font-bold'>Got a question?</h1>
-        <p>We’re happy to help!</p>
-      </div>
-      <Footer />
+      <Gotaquestion/>
+      <Footer footer={props.footer}/>
     </div>
   )
 };
@@ -253,8 +253,9 @@ export async function getStaticProps() {
   const stories: object | undefined = await getStoriesData()
   const transformation: object | undefined = await getTransformationData()
   const wellnesshub: object | undefined = await getWellnesshubData()
+  const footer: any = await getFooterData()
   return {
-    props: { slide, stories, transformation, wellnesshub },
+    props: { slide, stories, transformation, wellnesshub, footer },
     revalidate: 60
   }
 }

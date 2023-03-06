@@ -2,7 +2,10 @@
 module.exports = {
   content: [
     './src/pages/index.tsx',
-    './src/pages/store.tsx',
+    './src/pages/store/index.tsx',
+    './src/pages/diets/index.tsx',
+    './src/pages/blogs/index.tsx',
+    './src/pages/tools/index.tsx',
     //components
     './src/componensts/Slide.tsx',
     './src/components/Testimonial.tsx',
