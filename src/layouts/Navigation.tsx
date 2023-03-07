@@ -9,7 +9,10 @@ import logo from '../../public/logo.svg'
 import cart from '../../public/cart.svg'
 import profile from '../../public/profile.svg'
 
+import { useSession, signIn, signOut } from 'next-auth/react';
+
 function Header() {
+  const {data: session, status} = useSession()
   return (
     <>
       <Navbar style={{background:"linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)"}} className='fixed-top' expand="lg">
@@ -29,8 +32,10 @@ function Header() {
               <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Donate</Link>
             </Nav>
             <div className='d-flex'>
-              <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
-              <Image src={profile} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' />
+              {/* <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' /> */}
+              <Image src={session ? `${session?.user?.image}` : profile} alt="cart" width={35} height={35} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full' onClick={()=>{
+                signIn()
+              }}/>
             </div>
           </Navbar.Collapse>
         </Container>

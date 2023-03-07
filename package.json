@@ -21,10 +21,13 @@
     "eslint-config-next": "13.1.6",
     "framer-motion": "^10.0.1",
     "next": "13.1.6",
+    "next-auth": "^4.20.1",
+    "pg": "^8.10.0",
     "qs": "^6.11.0",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
+    "strapi-sdk-javascript": "^0.3.3",
     "typescript": "4.9.5"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@ import { motion } from 'framer-motion'
 import Footer from '@/layouts/Footer'
 import Gotaquestion from '@/components/Gotaquestion'
 import getFooterData, { FooterProps } from '@/lib/footer'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const opensans = Open_Sans({ subsets: ['latin'], weight: "400" })
 const poppins = Poppins({ subsets: ['latin'], weight: "700" })

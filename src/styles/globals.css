@@ -21,6 +21,10 @@ body{
     font-size: 45px;
 }
 
+a:hover{
+  color: inherit !important;
+}
+
 @media only screen and (max-width: 767px) {
     html{
         font-size: 12px;
