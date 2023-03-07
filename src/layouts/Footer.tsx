@@ -35,7 +35,7 @@ function Footer(props: {
                     <div className='flex flex-row w-full gap-2'>
                         {
                             props['footer']['contact']['socialmedia'].map((data) => {
-                                return <Link href={data['url']}><Image src={data['logo']} alt={data['name']} width={31} height={30} className='hover:cursor-pointer' /></Link>
+                                return <Link key={Math.random() * 1.33} href={data['url']}><Image src={data['logo']} alt={data['name']} width={31} height={30} className='hover:cursor-pointer' /></Link>
                             })
                         }
                     </div>
@@ -43,11 +43,11 @@ function Footer(props: {
                 {
                     props['footer']['footercontent'].map((data)=>{
                         return(
-                            <div className='flex-[20%] flex flex-col justify-start max-xl:items-start max-sm:items-center gap-2 p-8'>
+                            <div key={Math.random() * 1.25} className='flex-[20%] flex flex-col justify-start max-xl:items-start max-sm:items-center gap-2 p-8'>
                             <h6 className={`${roboto.className}`}>{data['title']}</h6>
                             {
                                 data['content'].map((data)=>{
-                                    return <Link href={data['url']} className={`${opensans.className} font-[100] text-[0.8rem] text-[#AAAAAA] text-decoration-none`}>{data['text']}</Link>
+                                    return <Link key={Math.random() * 1.24} href={data['url']} className={`${opensans.className} font-[100] text-[0.8rem] text-[#AAAAAA] text-decoration-none`}>{data['text']}</Link>
                                 })
                             }
                         </div>

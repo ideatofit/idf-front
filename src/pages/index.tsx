@@ -13,11 +13,6 @@ import rectangle7 from '../../public/rectangle7.png'
 import rectangle8 from '../../public/rectangle8.png'
 import yellowshade from '../../public/yellowshade.png'
 import groupofpeople from '../../public/groupofpeople.png'
-import wellnesshub1 from '../../public/wellnesshub1.png'
-import wellnesshub2 from '../../public/wellnesshub2.png'
-import wellnesshub3 from '../../public/wellnesshub3.png'
-import wellnesshub4 from '../../public/wellnesshub4.png'
-import wellnesshub5 from '../../public/wellnesshub5.png'
 import macro from '../../public/macro.png'
 import check from '../../public/check.svg'
 import femaledoctor from '../../public/femaledoctor.png'
@@ -160,19 +155,19 @@ const Home = (props: Props) => {
                 <p className={`${inter.className} font-[500] pr-32`}>{props['wellnesshub']['tab1']['description']}</p>
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
-                <Link href={tab === 'tab1' ? props['wellnesshub']['tab1']['link'] : ''} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                <Link href={`${tab === 'tab2' ? (props['wellnesshub']['tab1']['link']) ?? '#' : '#'}`} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab1')
                 }}>
                   <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>{props['wellnesshub']['tab1']['textonbutton']}</div>
                   <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
                 </Link>
-                <Link href={tab === 'tab2' ? props['wellnesshub']['tab2']['link'] : ''} className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                <Link href={`${tab === 'tab2' ? (props['wellnesshub']['tab2']['link']) ?? '#' : '#'}`} className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab2')
                 }}>
                   <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
                   <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
                 </Link>
-                <Link href={tab === 'tab3' ? (props['wellnesshub']['tab3']['link']) : ''} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
+                <Link href={`${tab === 'tab2' ? (props['wellnesshub']['tab2']['link']) ?? '#' : '#'}`} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
                   setTab('tab3')
                 }}>
                   <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>

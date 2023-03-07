@@ -1,15 +1,26 @@
+import Footer from '@/layouts/Footer'
 import Navigation from '@/layouts/Navigation'
+import getFooterData, { FooterProps } from '@/lib/footer'
 import React from 'react'
 
-function index() {
+function index(props: {
+  footer: FooterProps
+}) {
   return (
     <div className='h-screen w-full bg-backgroundColor text-themeColor'>
-        <Navigation/>
-        <div className='h-screen w-full grid place-items-center'>
-            <span className='text-[10rem]'>Diet</span>
-        </div>
+      <Navigation />
+      <Footer footer={props['footer']} />
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const footer = await getFooterData()
+  return {
+    props: {
+      footer
+    }
+  }
 }
 
 export default index
