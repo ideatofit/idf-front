@@ -8,7 +8,7 @@ function Button(props:{
   text: string
 }) {
   return (
-    <button className={`${style.btn} ${poppins.className} text-[1.2rem]`}>
+    <button className={`${style.btn} ${poppins.className} text-[1.1rem]`}>
       {props.text}
     </button>
   )

@@ -12,8 +12,16 @@ export type wellnesshubProps = {
     img4: string;
     img5: string;
   };
-  tab2: {};
-  tab3: {};
+  tab2: {
+    title: string
+    link: string
+    description: string
+  };
+  tab3: {
+    title: string
+    link: string
+    description: string
+  };
 };
 
 type wellnesshubData = {
@@ -90,27 +98,15 @@ export default async function getWellnesshubData() {
           img4: parsedData['data']['attributes']['tab1']['img4']['data']['attributes']['url'],
           img5: parsedData['data']['attributes']['tab1']['img5']['data']['attributes']['url'],
       },
-      tab2: parsedData['data']['attributes']['tab2'] ?? {
+      tab2: {
         title: '',
         description: '',
-        textonbutton: '',
-        link: '',
-        img1: '',
-        img2: '',
-        img3: '',
-        img4: '',
-        img5: '',
+        link: ''
       },
-      tab3: parsedData['data']['attributes']['tab2'] ?? {
+      tab3:  {
         title: '',
         description: '',
-        textonbutton: '',
-        link: '',
-        img1: '',
-        img2: '',
-        img3: '',
-        img4: '',
-        img5: '',
+        link: ''
       },
   };
   return filteredData
