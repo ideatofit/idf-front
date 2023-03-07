@@ -4,7 +4,7 @@ import getFooterData, { FooterProps } from '@/lib/footer'
 import { useSession, signIn, signOut } from "next-auth/react"
 
 
-function index(props: {
+function Index(props: {
   footer: FooterProps
 }) {
   const { data: session } = useSession()
@@ -39,4 +39,4 @@ export async function getStaticProps() {
   }
 }
 
-export default index
+export default Index

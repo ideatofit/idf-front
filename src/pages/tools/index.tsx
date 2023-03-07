@@ -1,7 +1,7 @@
 import Navigation from '@/layouts/Navigation'
 import React from 'react'
 
-function index() {
+function Index() {
     return (
         <div className='h-screen w-full bg-backgroundColor text-themeColor grid place-items-center'>
             <Navigation/>
@@ -10,4 +10,4 @@ function index() {
     )
 }
 
-export default index
+export default Index

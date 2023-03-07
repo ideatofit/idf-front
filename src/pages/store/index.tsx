@@ -17,7 +17,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 const opensans = Open_Sans({ subsets: ['latin'], weight: "400" })
 const poppins = Poppins({ subsets: ['latin'], weight: "700" })
 
-function store(props: {
+function Store(props: {
   products: ProductsProps,
   footer: FooterProps
 }) {
@@ -25,7 +25,7 @@ function store(props: {
   return (
     <>
       <Head>
-        <title>store</title>
+        <title>Store</title>
       </Head>
       <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden'>
         <Header />
@@ -91,4 +91,4 @@ export async function getStaticProps() {
   }
 }
 
-export default store
+export default Store

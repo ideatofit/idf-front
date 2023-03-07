@@ -2,7 +2,7 @@ import Navigation from '@/layouts/Navigation'
 import Link from 'next/link'
 import React from 'react'
 
-function index() {
+function Index() {
   return (
     <div className='h-screen w-full bg-backgroundColor grid place-items-center text-themeColor'>
         <Navigation/>
@@ -12,4 +12,4 @@ function index() {
   )
 }
 
-export default index
+export default Index
