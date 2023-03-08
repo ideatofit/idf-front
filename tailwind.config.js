@@ -24,6 +24,7 @@ module.exports = {
       colors:{
         'themeColor': 'rgba(255, 255, 255, 0.9);',
         'backgroundColor': ' #171A26',
+        'MidnightOcean' : '#232631',
         'borderColor': '#505050'
       }
     },

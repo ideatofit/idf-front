@@ -10,7 +10,9 @@ function Index(props: {
     <div className='h-screen w-full bg-backgroundColor text-themeColor'>
       <Navigation />
       <div className='h-screen w-full bg-inherit grid place-items-center'>
-        Diets
+        <div className='h-1/5 w-1/6 bg-MidnightOcean border-2 border-borderColor'>
+
+        </div>
       </div>
       <Footer footer={props['footer']} />
     </div>
