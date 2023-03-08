@@ -14,6 +14,7 @@ module.exports = {
     './src/components/Button.tsx',
     './src/components/CategoryCard.tsx',
     './src/components/ProductsCard.tsx',
+    './src/components/Checkbox.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',
@@ -22,10 +23,12 @@ module.exports = {
   theme: {
     extend: {
       colors:{
+        'borderColor': '#505050',
+        'lightBorderColor': '1px solid rgba(145, 158, 171, 0.24)',
         'themeColor': 'rgba(255, 255, 255, 0.9);',
         'backgroundColor': ' #171A26',
         'MidnightOcean' : '#232631',
-        'borderColor': '#505050'
+        'Midnight': '#252525'
       }
     },
   },

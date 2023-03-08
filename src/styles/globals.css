@@ -21,6 +21,11 @@ body{
     font-size: 45px;
 }
 
+input{
+  background-color: inherit !important;
+  /* border: 3px solid white; */
+}
+
 a:hover{
   color: inherit !important;
 }
