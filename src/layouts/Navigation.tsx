@@ -21,8 +21,8 @@ function Header() {
             <Image src={logo}
               alt="logo" />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
+          <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "rgba(255, 255, 255, 0.9)"}}/>
+          <Navbar.Collapse id="navbarScroll" className='flex flex-col p-4 gap-4 bg-backgroundColor rounded-xl'>
             <Nav className="me-auto w-[80%] flex justify-evenly">
               <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Home</Link>
               <Link href="/store" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Store</Link>
