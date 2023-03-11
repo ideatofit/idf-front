@@ -15,6 +15,8 @@ module.exports = {
     './src/components/CategoryCard.tsx',
     './src/components/ProductsCard.tsx',
     './src/components/Checkbox.tsx',
+    './src/components/UserInfoForm.tsx',
+    './src/components/Recipecard.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

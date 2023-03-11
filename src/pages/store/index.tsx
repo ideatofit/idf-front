@@ -13,9 +13,10 @@ import Footer from '@/layouts/Footer'
 import Gotaquestion from '@/components/Gotaquestion'
 import getFooterData, { FooterProps } from '@/lib/footer'
 import { useSession, signIn, signOut } from "next-auth/react"
+import Button from '@/components/Button'
 
 const opensans = Open_Sans({ subsets: ['latin'], weight: "400" })
-const poppins = Poppins({ subsets: ['latin'], weight: "700" })
+const poppins = Poppins({ subsets: ['latin'], weight: "500" })
 
 function Store(props: {
   products: ProductsProps,
@@ -27,7 +28,7 @@ function Store(props: {
       <Head>
         <title>Store</title>
       </Head>
-      <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden'>
+      <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden z-10'>
         <Header />
         <motion.div initial={'initial'} animate={'animate'} variants={{
           initial: {
@@ -43,11 +44,13 @@ function Store(props: {
             type: 'spring',
             damping: 14
           }
-        }} className='max-w-[100vw]'>
+        }} className='relative h-fit max-w-[100vw]'>
           <Image className='relative max-w-[100vw] w-full' style={{ maxWidth: "100vw", aspectRatio: "16 / 9" }} src={shoelace} alt={'shoelace typing women'} />
         </motion.div>
-        <div className={`absolute h-full w-full max-w-full flex items-center justify-start ${opensans.className} pl-[5rem]`}>
-          <h1 className='text-[4rem]'>shivam</h1>
+        <div className={`absolute z-50 max-sm:h-[35%] max-sm:w-full h-full w-full max-w-full flex flex-col items-start justify-center ${opensans.className} max-sm:pl-8 max-xl:pl-[5rem] xl:pl-[5rem]`}>
+          <h1 className={`max-xl:text-[4rem] xl:text-[4rem] max-sm:text-[1.3rem] ${poppins.className}`}>STAY HEALTHY AND WEIGHTLESS</h1>
+          <p className='pr-24 max-sm:text-[0.8rem]'>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature.</p>
+          <Button text={'VIEW ALL PRODUCTS'}/>
         </div>
         <div className='h-fit min-w-full text-center'>
           <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>Shop by Categories</h1>

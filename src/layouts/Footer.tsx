@@ -2,11 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import phone from '../../public/Phone.svg'
 import email from '../../public/email.svg'
-import facebook from '../../public/Facebook.svg'
-import linkedin from '../../public/LinkedIn.svg'
-import youtube from '../../public/Youtube.svg'
-import instagram from '../../public/Instagram.svg'
-import twitter from '../../public/Twitter.svg'
 import { Roboto, Open_Sans } from '@next/font/google'
 import { FooterProps } from '@/lib/footer'
 import Link from 'next/link'
@@ -19,7 +14,7 @@ function Footer(props: {
 }) {
     return (
         <>
-            <div className='w-full h-[40vh] max-sm:h-fit max-xl:flex xl:flex max-xl:flex-row xl:flex-row max-sm:grid max-sm:grid-cols-2 bg-[#232631] text-themeColor'>
+            <div className='w-full min-h-[40vh] max-h-fit max-sm:h-fit max-xl:flex xl:flex max-xl:flex-row xl:flex-row max-sm:grid max-sm:grid-cols-2 bg-[#232631] text-themeColor'>
                 <div className='flex-[20%] flex flex-col justify-start items-start gap-2 p-8'>
                     <h6 className={`${roboto.className}`}>Contact us</h6>
                     <div className='flex flex-row items-start gap-2'>
@@ -41,16 +36,16 @@ function Footer(props: {
                     </div>
                 </div>
                 {
-                    props['footer']['footercontent'].map((data)=>{
-                        return(
+                    props['footer']['footercontent'].map((data) => {
+                        return (
                             <div key={Math.random() * 1.25} className='flex-[20%] flex flex-col justify-start max-xl:items-start max-sm:items-center gap-2 p-8'>
-                            <h6 className={`${roboto.className}`}>{data['title']}</h6>
-                            {
-                                data['content'].map((data)=>{
-                                    return <Link key={Math.random() * 1.24} href={data['url']} className={`${opensans.className} font-[100] text-[0.8rem] text-[#AAAAAA] text-decoration-none`}>{data['text']}</Link>
-                                })
-                            }
-                        </div>
+                                <h6 className={`${roboto.className}`}>{data['title']}</h6>
+                                {
+                                    data['content'].map((data) => {
+                                        return <Link key={Math.random() * 1.24} href={data['url']} className={`${opensans.className} font-[100] text-[0.8rem] text-[#AAAAAA] text-decoration-none`}>{data['text']}</Link>
+                                    })
+                                }
+                            </div>
                         )
                     })
                 }
@@ -59,14 +54,14 @@ function Footer(props: {
                 <div className={` ${roboto.className} text-[0.7rem] flex-[60%] flex flex-col h-full text-center justify-center`}>
                     <div>Copyright © 2015 - 2022 All Rights Reserved.</div>
                 </div>
-                <div className={` ${roboto.className} text-[0.7rem] flex-[40%] flex h-full text-center justify-center p-3`}>
+                <div className={`${roboto.className} text-[0.7rem] flex-[40%] flex h-full text-center justify-center p-3`}>
                     <div className='border-r-2 h-full w-full border-borderColor text-right flex items-center justify-center'>
                         Privacy Policy
                     </div>
                     <div className='border-r-2 h-full w-full border-borderColor  flex items-center justify-center'>
                         Terms & Conditions
                     </div>
-                    <div className='h-full w-full  flex items-center justify-center'>
+                    <div className='h-full w-full flex items-center justify-center'>
                         Sitemap
                     </div>
                 </div>
