@@ -13,7 +13,9 @@ import rectangle7 from '../../public/rectangle7.png'
 import rectangle8 from '../../public/rectangle8.png'
 import yellowshade from '../../public/yellowshade.png'
 import groupofpeople from '../../public/groupofpeople.png'
-import macro from '../../public/macro.png'
+import rep from '../../public/1rep.png'
+import bmr from '../../public/bmr.png'
+import bodyFat from '../../public/bodyFat.png'
 import check from '../../public/check.svg'
 import femaledoctor from '../../public/femaledoctor.png'
 import Navigation from '@/layouts/Navigation';
@@ -140,9 +142,9 @@ const Home = (props: Props) => {
             <p className='font-thin'>Use our free fitness tools & trackers to take your journey<br /> to the next level!</p>
           </div>
           <div className='flex max-xl:flex-row xl:flex-row max-xl:justify-center xl:justify-center gap-2 font-thin max-sm:flex-col max-sm:items-center'>
-            <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
-            <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
-            <Tools img={macro} alt={'macro'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
+            <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} />
+            <Tools img={bodyFat} alt={'macro'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} />
+            <Tools img={rep} alt={'1rep'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} />
           </div>
         </div>
       </div>

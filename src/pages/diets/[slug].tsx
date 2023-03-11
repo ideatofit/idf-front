@@ -1,15 +1,17 @@
-import {  Router, useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import { getDietData, getDietDataById } from '@/lib/diet'
-import { useEffect } from 'react'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
+import Head from 'next/head'
 
-function Diets(props:{
-  slugData: any
-}) {
-  const router = useRouter()
-  const {slug} = router.query
+function Diets() {
+  const { slug } = useRouter().query
   return (
+    <>
+    <Head>
+      <title>hello</title>
+    </Head>
     <div>{slug}</div>
+    </>
   )
 }
 
@@ -29,11 +31,11 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps(context: Params){
-  const {slug} = await context.params
+export async function getStaticProps(context: Params) {
+  const { slug } = await context.params
   const slugData = await getDietDataById(slug)
-  return{
-    props:{
+  return {
+    props: {
       slugData
     },
     revalidate: 60

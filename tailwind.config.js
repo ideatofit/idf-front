@@ -6,6 +6,7 @@ module.exports = {
     './src/pages/diets/index.tsx',
     './src/pages/blogs/index.tsx',
     './src/pages/tools/index.tsx',
+    './src/pages/donate/index.tsx',
     //components
     './src/componensts/Slide.tsx',
     './src/components/Testimonial.tsx',

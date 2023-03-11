@@ -10,7 +10,7 @@ function Gotaquestion() {
     <h1 className={`${poppins.className} font-bold`}>Got a question?</h1>
     <p>We’re happy to help!</p>
     <div className='w-full flex justify-center'>
-    <Button text={'Contact us'}/>
+    <Button text={'Talk to a ideatofit Expert'}/>
     </div>
   </div>
   )

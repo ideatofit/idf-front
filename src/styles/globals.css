@@ -26,9 +26,10 @@ input{
   /* border: 3px solid white; */
 }
 
-a:hover{
+a:hover {
   color: inherit !important;
 }
+
 
 @media only screen and (max-width: 767px) {
     html{

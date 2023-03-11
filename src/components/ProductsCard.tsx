@@ -36,9 +36,9 @@ function ProductsCard(props: {
                 <h6>{props.title}</h6>
             </div>
             <div className='h-fit w-full flex flex-row px-2'>
-                <span className='max-xl:flex-[40%] xl:flex-[40%] max-lg:flex-[40%] flex justify-self-start'>{`₹${props['price']}`}</span>
-                <div className='max-xl:flex-[60%] max-w-full min-h-full'>
-                    <div className='flex flex-row items-center'>
+                <span className='max-xl:flex-[40%] xl:flex-[70%] max-lg:flex-[40%] flex justify-self-start'>{`₹${props['price']}`}</span>
+                <div className='max-xl:flex-[60%] xl:flex-[30%] max-w-full min-h-full flex justify-start'>
+                    <div className='flex flex-row w-full items-start justify-start'>
                         {
                             Array.from({ length: props['stars'] }).map((_, index) => {
                                 return (
