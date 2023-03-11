@@ -38,7 +38,8 @@ export async function getStaticProps() {
   return {
     props: {
       footer, recipes
-    }
+    },
+    revalidate: 60
   }
 }
 

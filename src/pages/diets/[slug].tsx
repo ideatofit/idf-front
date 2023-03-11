@@ -35,7 +35,8 @@ export async function getStaticProps(context: Params){
   return{
     props:{
       slugData
-    }
+    },
+    revalidate: 60
   }
 }
 
