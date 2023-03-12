@@ -86,7 +86,7 @@ export default async function getFooterData() {
           content: data["content"].map((data) => {
             return {
               text: data["text"],
-              url: data["url"],
+              url: data["url"] ?? '',
             };
           }),
         };

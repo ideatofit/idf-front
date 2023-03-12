@@ -13,7 +13,7 @@ function Index(props: {
     <>
     <div className='max-h-fit min-h-screen w-full bg-backgroundColor grid place-items-center text-themeColor'>
       <Navigation />
-      <div className='h-fit w-full grid grid-cols-3 p-24'>
+      <div className='h-fit w-full grid max-xl:grid-cols-3 xl:grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1  p-24'>
         {
           props['posts']['posts'].map((data, i)=>{
             return(

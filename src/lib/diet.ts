@@ -6,8 +6,8 @@ export type RecipesProps = {
     description: string;
     img: string;
     vegeterian: boolean;
-    slug: string
-  }[]
+    slug: string;
+  }[];
 };
 
 type RecipesData = {
@@ -26,41 +26,51 @@ type RecipesData = {
   };
 }[];
 
-
 // find many
 export async function getDietData() {
-  const query = await qs.stringify({
+  const query = qs.stringify({
     populate: "*",
   });
-  const url = await `${process.env.PUBLIC_URL}/api/recipes?${query}`;
+  const url = `${process.env.PUBLIC_URL}/api/recipes?${query}`;
   const fetchData = await fetch(url);
   const parsedData: { data: RecipesData } = await fetchData.json();
-  const filteredData: RecipesProps  = {
+  const filteredData: RecipesProps = {
     recipes: parsedData["data"].map((data) => {
       return {
         title: data["attributes"]["title"],
         description: data["attributes"]["description"],
         img: data["attributes"]["img"]["data"]["attributes"]["url"],
         vegeterian: data["attributes"]["vegeterian"],
-        slug: data['attributes']['slug']
+        slug: data["attributes"]["slug"],
       };
     }),
   };
   return filteredData;
 }
 
+type DietBySlug = {
+  data: {
+    attributes: {
+      title: string;
+      content: string;
+      publishedAt: string;
+    };
+  }[];
+};
+
 // find one
-export async function getDietDataById(slug: string){
-  const query = await qs.stringify({
-    filters: {
+export async function getDietDataBySlug(slug: string) {
+  const query = qs.stringify({
+    filters:{
       slug:{
         $eq: slug
       }
-    }
+    },
+    populate:"*"
   });
-  const url = await `${process.env.PUBLIC_URL}/api/recipes?${query}`;
+
+  const url = `${process.env.PUBLIC_URL}/api/recipes?${query}`;
   const fetchData = await fetch(url);
   const parsedData = await fetchData.json();
-  return parsedData
+  return parsedData;
 }
-

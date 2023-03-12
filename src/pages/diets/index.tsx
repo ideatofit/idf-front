@@ -17,8 +17,9 @@ function Index(props: {
   return (
     <div className='h-screen max-w-[100vw] bg-backgroundColor text-themeColor '>
       <Navigation />
-      <span>Recipes</span>
-      <div className='min-h-screen max-h-fit w-[100vw] bg-inherit grid grid-cols-3 place-items-center p-24'>
+      <div className='h-fit bg-inherit flex flex-col items-start'>
+      <span className='mt-24 ml-12 text-[1.7rem]'>Recipes</span>
+      <div className='min-h-screen max-h-fit w-[100vw] bg-inherit grid max-xl:grid-cols-3 max-sm:grid-cols-1 gap-6 xl:grid-cols-3 place-items-center max-xl:p-24 xl:p-24 max-sm:p-12'>
         {
           props['recipes']['recipes'].map((data, index) => {
             return (
@@ -26,6 +27,7 @@ function Index(props: {
             )
           })
         }
+      </div>
       </div>
       <Footer footer={props['footer']} />
     </div>

@@ -1,9 +1,11 @@
 import { Router, useRouter } from 'next/router'
-import { getDietData, getDietDataById } from '@/lib/diet'
+import { getDietData, getDietDataBySlug } from '@/lib/diet'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import Head from 'next/head'
 
-function Diets() {
+function Diets(props:{
+  slugData: any
+}) {
   const { slug } = useRouter().query
   return (
     <>
@@ -11,6 +13,7 @@ function Diets() {
       <title>hello</title>
     </Head>
     <div>{slug}</div>
+    <div>{JSON.stringify(props['slugData'])}</div>
     </>
   )
 }
@@ -33,7 +36,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: Params) {
   const { slug } = await context.params
-  const slugData = await getDietDataById(slug)
+  const slugData = await getDietDataBySlug(slug)
   return {
     props: {
       slugData

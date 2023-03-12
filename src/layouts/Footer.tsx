@@ -51,10 +51,10 @@ function Footer(props: {
                 }
             </div>
             <div className='w-full h-[8vh] flex max-xl:flex-row bg-[#232631] border-t-2 border-borderColor text-[#AAAAAA]'>
-                <div className={` ${roboto.className} text-[0.7rem] flex-[60%] flex flex-col h-full text-center justify-center`}>
+                <div className={` ${roboto.className} text-[0.7rem] flex-[30%] flex flex-col h-full text-center justify-center`}>
                     <div>Copyright © 2015 - 2022 All Rights Reserved.</div>
                 </div>
-                <div className={`${roboto.className} text-[0.7rem] flex-[40%] flex h-full text-center justify-center p-3`}>
+                <div className={`${roboto.className} text-[0.7rem] flex-[70%] flex h-full text-center justify-center p-3`}>
                     <div className='border-r-2 h-full w-full border-borderColor text-right flex items-center justify-center'>
                         Privacy Policy
                     </div>

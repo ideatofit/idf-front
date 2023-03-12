@@ -80,7 +80,8 @@ export async function getPostsBySlug(slug: string){
         slug:{
           $eq: slug
         }
-      }
+      },
+      populate:"*"
     });
     const url = await `${process.env.PUBLIC_URL}/api/posts?${query}`;
     const fetchData = await fetch(url);
