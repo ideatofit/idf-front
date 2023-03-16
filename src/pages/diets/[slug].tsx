@@ -34,14 +34,9 @@ type comments = {
 function Diets(props: {
   diets: DietDataBySlug,
   footer: FooterProps
+  comment: comments
 }) {
-  const [comment, setComment] = useState([{
-    id: NaN,
-    name: '',
-    content: '',
-    avatar: '',
-    commentId: NaN
-  }]);
+  const [comment, setComment] = useState(props['comment']);
   const [userComment, setUserComment] = useState('')
   const [showLogin, setShowLogin] = useState(false)
   const [sending, setSending] = useState(false)
@@ -65,10 +60,6 @@ function Diets(props: {
     setSending(false)
     setUserComment('')
   };
-
-  useEffect(() => {
-    fetchComments()
-  }, [])
 
   return (
     <>
@@ -115,7 +106,7 @@ function Diets(props: {
             comment.map((data, i) => {
               // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
               //@ts-ignore
-              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar']} postId={props['diets']['id']} />
+              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['diets']['id']} />
               //@ts-check
             })
           }
@@ -154,9 +145,10 @@ export async function getStaticProps(context: Params) {
   const { slug } = await context.params
   const diets = await getDietDataBySlug(slug)
   const footer = await getFooterData()
+  const comment = await getDietComments(diets['id'])
   return {
     props: {
-      diets, footer
+      diets, footer, comment
     },
     revalidate: 60
   }

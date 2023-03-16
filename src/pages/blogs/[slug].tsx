@@ -33,18 +33,12 @@ type comments = {
 function Blogs(props: {
   posts: PostBySlug,
   footer: FooterProps
+  comments: comments
 }) {
-  const [comment, setComment] = useState([{
-    id: NaN,
-    name: '',
-    content: '',
-    avatar: '',
-    commentId: NaN
-  }]);
+  const [comment, setComment] = useState(props['comments']);
   const [userComment, setUserComment] = useState('')
   const [showLogin, setShowLogin] = useState(false)
   const [sending, setSending] = useState(false)
-
 
   const { data: session, status } = useSession()
 
@@ -64,10 +58,6 @@ function Blogs(props: {
     setSending(false)
     setUserComment('')
   };
-
-  useEffect(() => {
-    fetchComments()
-  }, [])
 
   return (
     <>
@@ -114,7 +104,7 @@ function Blogs(props: {
             comment.map((data, i) => {
               // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
               //@ts-ignore
-              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar']} postId={props['posts']['id']} />
+              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['posts']['id']} />
               //@ts-check
             })
           }
@@ -153,9 +143,10 @@ export async function getStaticProps(context: Params) {
   const { slug } = await context.params
   const posts = await getPostsBySlug(slug)
   const footer = await getFooterData()
+  const comments = await getPostComments(posts['id'])
   return {
     props: {
-      posts, footer
+      posts, footer, comments
     },
     revalidate: 60
   }

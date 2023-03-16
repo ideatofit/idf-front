@@ -2,7 +2,7 @@ import Blogscard from '@/components/Blogscard'
 import Footer from '@/layouts/Footer'
 import Navigation from '@/layouts/Navigation'
 import getFooterData, { FooterProps } from '@/lib/footer'
-import { PostsProps, getPostsData } from '@/lib/posts'
+import { PostsProps, getPostComments, getPostsData } from '@/lib/posts'
 import Gotaquestion from '@/components/Gotaquestion'
 
 function Index(props: {

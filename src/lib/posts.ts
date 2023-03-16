@@ -70,6 +70,7 @@ export async function getPostsData() {
   const filteredData = {
     posts: parsedData["data"].map((data) => {
       return {
+        id: data['id'],
         title: data["attributes"]["title"],
         description: data["attributes"]["description"],
         slug: data["attributes"]["slug"],
@@ -237,7 +238,7 @@ export async function getPostComments(id: number) {
     return{
       id: data['author']['id'],
       name: data['author']['name'],
-      avatar: data['author']['avatar'],
+      avatar: data['author']['avatar'] ?? '',
       content: data['content'],
       commentId: data['id']
     }

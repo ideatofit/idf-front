@@ -58,7 +58,7 @@ function Login() {
             </form>
       }
       <div className={`${style['form-section']}`}>
-        <p>Don't have an account? <span onClick={()=>{setState('register')}} className='text-Midnight'>click here</span></p>
+        <p>Don&#39;t have an account? <span onClick={()=>{setState('register')}} className='text-Midnight'>click here</span></p>
       </div>
     </div>
   )
