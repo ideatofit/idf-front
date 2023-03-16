@@ -1,12 +1,16 @@
 import qs from "qs";
+import formatDate from "./dateformatter";
+import { Session } from "next-auth";
 
 type PostsData = {
   data: {
+    id: number;
     attributes: {
       title: string;
       description: string;
       slug: string;
       publishedAt: string;
+      content: string;
       img: {
         data: {
           attributes: {
@@ -14,6 +18,32 @@ type PostsData = {
             name: string;
           };
         };
+      };
+      categories: {
+        data: {
+          id: number;
+          attributes: {
+            title: string;
+            posts: {
+              data: {
+                id: number;
+                attributes: {
+                  title: string;
+                  description: string;
+                  slug: string;
+                  publishedAt: string;
+                  img: {
+                    data: {
+                      attributes: {
+                        url: string;
+                      };
+                    };
+                  };
+                };
+              }[];
+            };
+          };
+        }[];
       };
     };
   }[];
@@ -29,28 +59,6 @@ export type PostsProps = {
     publisdedat: string;
   }[];
 };
-
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const formattedDate = `${
-    monthNames[date.getMonth()]
-  } ${date.getDate()} , ${date.getFullYear()}`;
-  return formattedDate;
-}
 
 export async function getPostsData() {
   const query = await qs.stringify({
@@ -74,17 +82,189 @@ export async function getPostsData() {
   return filteredData;
 }
 
-export async function getPostsBySlug(slug: string){
-    const query = await qs.stringify({
-      filters: {
-        slug:{
-          $eq: slug
-        }
+export type PostBySlug = {
+  id: number;
+  title: string;
+  description: string;
+  publishedat: string;
+  content: string;
+  img: string;
+  alt: string;
+  relations: {
+    id: number;
+    title: string;
+    description: string;
+    img: string;
+    slug: string;
+    publishedat: string;
+  }[];
+  comment: {
+    commentId: number;
+    id: number;
+    name: string;
+    content: string;
+    avatar: string;
+  }[];
+};
+
+type comments = {
+  data: {
+    id: number;
+    author: {
+      id: number;
+      name: string;
+      avatar: string;
+    };
+    content: string;
+    createdat: string;
+  }[];
+};
+
+export async function getComments(id: number, filtered: boolean = false) {
+  const url = `${process.env.PUBLIC_URL}/api/comments/api::post.post:${id}/flat`;
+  const fetchData = await fetch(url);
+  const parsedData: comments = await fetchData.json();
+  return parsedData
+}
+
+export async function getCommentsFiltered(id: number, filtered: boolean = false) {
+  const url = `${process.env.PUBLIC_URL}/api/comments/api::post.post:${id}/flat`;
+  const fetchData = await fetch(url);
+  const parsedData: comments = await fetchData.json();
+  const fileterdData = parsedData.data.map(
+    (data) => {
+      return {
+        commentId: data?.id,
+        id: data?.author?.id || NaN,
+        name: data?.author?.name || "",
+        content: data?.content || "",
+        avatar: data?.author?.avatar || "",
+      };
+    }
+  )
+  return fileterdData
+}
+
+export async function getPostsBySlug(slug: string) {
+  const query = await qs.stringify({
+    filters: {
+      slug: {
+        $eq: slug,
       },
-      populate:"*"
+    },
+    populate: {
+      img: true,
+      categories: {
+        populate: {
+          posts: {
+            populate: "img",
+          },
+        },
+      },
+    },
+  });
+  const url = await `${process.env.PUBLIC_URL}/api/posts?${query}`;
+  const fetchData = await fetch(url);
+  const parsedData: PostsData = await fetchData.json();
+  const filteredData: PostBySlug = {
+    id: parsedData["data"][0]["id"],
+    title: parsedData["data"][0]["attributes"]["title"],
+    description: parsedData["data"][0]["attributes"]["description"],
+    publishedat: formatDate(parsedData["data"][0]["attributes"]["publishedAt"]),
+    content: parsedData["data"][0]["attributes"]["content"],
+    img: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"][
+      "url"
+    ],
+    alt: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"][
+      "name"
+    ],
+    relations: parsedData["data"][0]["attributes"]["categories"]["data"]
+      .map((data) => {
+        const relationsArray = [];
+        for (
+          let index = 0;
+          index < data["attributes"]["posts"]["data"].length;
+          index++
+        ) {
+          const post = data["attributes"]["posts"]["data"][index];
+          if (post["attributes"]) {
+            relationsArray.push({
+              title: post["attributes"]["title"],
+              description: post["attributes"]["description"],
+              publishedat: formatDate(post["attributes"]["publishedAt"]),
+              img: post["attributes"]["img"]["data"]["attributes"]["url"],
+              slug: post["attributes"]["slug"],
+              id: post["id"],
+            });
+          }
+        }
+        return relationsArray;
+      })
+      .flat(),
+    comment: (await getComments(parsedData["data"][0]["id"])).data.map(
+      (data) => {
+        return {
+          commentId: data?.id,
+          id: data?.author?.id || NaN,
+          name: data?.author?.name || "",
+          content: data?.content || "",
+          avatar: data?.author?.avatar || "",
+        };
+      }
+    ),
+  };
+  return filteredData;
+}
+
+export async function sendPostsComments(
+  PostsId: number,
+  content: string,
+  session: any
+) {
+  const commentBody = {
+    author: {
+      id: (session?.user?.id),
+      name: session?.user?.name,
+      avatar: session?.user?.image,
+    },
+    content: content,
+  };
+  const url = `https://server.ideatofit.com/api/comments/api::post.post:${PostsId}`;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(commentBody),
     });
-    const url = await `${process.env.PUBLIC_URL}/api/posts?${query}`;
-    const fetchData = await fetch(url);
-    const parsedData = await fetchData.json();
-    return parsedData
+    const parsedData = await res.json();
+    console.log(parsedData);
+    console.log(JSON.stringify(commentBody));
+    return { request: "fullfilled", response: parsedData };
+  } catch (err) {
+    return { request: "unfulfilled" };
   }
+}
+
+export async function editPostsComments(
+  PostsId: number,
+  content: string,
+  CommentId: number
+) {
+  const commentBody = {
+    content: content,
+  };
+  const url = `${process.env.PUBLIC_ULR}/api/comments/api::post.post/${PostsId}/comment/${CommentId}`;
+  try {
+    const res = await fetch(url, {
+      method: "Post",
+      body: JSON.stringify(commentBody),
+    });
+    const parsedData = await res.json();
+    return { request: "fullfilled", response: parsedData };
+  } catch (err) {
+    return { request: "unfulfilled" };
+  }
+}

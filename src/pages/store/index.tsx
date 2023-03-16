@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Link from 'next/link'
 import Head from 'next/head'
 import Image from 'next/image'
 import shoelace from '../../../public/shoelace.png'
@@ -26,9 +27,9 @@ function Store(props: {
   return (
     <>
       <Head>
-        <title>Store</title>
+        <title>ideatofit-Store</title>
       </Head>
-      <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden z-10'>
+      <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden z-10 scroll-smooth'>
         <Header />
         <motion.div initial={'initial'} animate={'animate'} variants={{
           initial: {
@@ -47,17 +48,17 @@ function Store(props: {
         }} className='relative h-fit max-w-[100vw]'>
           <Image className='relative max-w-[100vw] w-full' style={{ maxWidth: "100vw", aspectRatio: "16 / 9" }} src={shoelace} alt={'shoelace typing women'} />
         </motion.div>
-        <div className={`absolute z-50 max-sm:h-[35%] max-sm:w-full h-full w-full max-w-full flex flex-col items-start justify-center ${opensans.className} max-sm:pl-8 max-xl:pl-[5rem] xl:pl-[5rem]`}>
+        <div className={`absolute z-50 max-sm:h-[35%] xl:pr-[35%] max-sm:w-full h-full w-full max-w-full flex flex-col items-start justify-center ${opensans.className} max-sm:pl-8 max-xl:pl-[5rem] xl:pl-[5rem]`}>
           <h1 className={`max-xl:text-[4rem] xl:text-[4rem] max-sm:text-[1.3rem] ${poppins.className}`}>STAY HEALTHY AND WEIGHTLESS</h1>
           <p className='pr-24 max-sm:text-[0.8rem]'>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature.</p>
-          <Button text={'VIEW ALL PRODUCTS'}/>
+          <Link href="#products" className='text-decoration-none text-white'><Button text={'VIEW ALL PRODUCTS'}/></Link>
         </div>
         <div className='h-fit min-w-full text-center'>
           <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>Shop by Categories</h1>
-          <div className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
+          <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
             {
               props['products']['categories'].map((data, i) => {
-                return <CategoryCard key={i} img={''} alt={''} />
+                return <CategoryCard key={i} img={''} alt={''} title={data['title']}/>
               })
             }
           </div>

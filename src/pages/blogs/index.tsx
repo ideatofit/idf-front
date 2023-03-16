@@ -2,13 +2,15 @@ import Blogscard from '@/components/Blogscard'
 import Footer from '@/layouts/Footer'
 import Navigation from '@/layouts/Navigation'
 import getFooterData, { FooterProps } from '@/lib/footer'
-import { PostsProps, getPostsData } from '@/lib/posts'
+import { PostsProps, getComments, getPostsData } from '@/lib/posts'
 import Gotaquestion from '@/components/Gotaquestion'
 
 function Index(props: {
   footer: FooterProps
-  posts: PostsProps
+  posts: PostsProps,
+  comments: any
 }) {
+
   return (
     <>
     <div className='max-h-fit min-h-screen w-full bg-backgroundColor grid place-items-center text-themeColor'>
@@ -32,8 +34,9 @@ function Index(props: {
 export async function getStaticProps() {
   const footer = await getFooterData()
   const posts = await getPostsData()
+  const comments = await getComments(1)
   return {
-    props: { footer, posts }
+    props: { footer, posts, comments }
   }
 }
 

@@ -10,6 +10,7 @@ import cart from '../../public/cart.svg'
 import profile from '../../public/profile.svg'
 
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useEffect } from 'react';
 
 function Header() {
   const {data: session, status} = useSession()
@@ -33,9 +34,9 @@ function Header() {
             </Nav>
             <div className='d-flex'>
               {/* <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' /> */}
-              <Image src={session ? `${session?.user?.image}` : profile} alt="cart" width={35} height={35} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full' onClick={()=>{
-                signIn()
-              }}/>
+              <Link href={`/user`}>
+              <Image src={session ? `${session?.user?.image}` : profile} alt="cart" width={35} height={35} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full'/>
+              </Link>
             </div>
           </Navbar.Collapse>
         </Container>

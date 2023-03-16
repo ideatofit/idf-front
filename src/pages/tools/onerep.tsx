@@ -1,9 +1,29 @@
+import Footer from '@/layouts/Footer'
+import Navigation from '@/layouts/Navigation'
+import getFooterData, { FooterProps } from '@/lib/footer'
 import React from 'react'
 
-function Onerep() {
+function Onerep(props:{
+  footer: FooterProps
+}) {
   return (
-    <div>Onerep</div>
+    <>
+    <Navigation/>
+    <div className='min-h-screen bg-backgroundColor'>
+
+    </div>
+    <Footer footer={props['footer']}/>
+    </>
   )
+}
+
+export async function getStaticProps(){
+  const footer = await getFooterData()
+  return{
+    props:{
+      footer
+    }
+  }
 }
 
 export default Onerep

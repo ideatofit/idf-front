@@ -10,8 +10,10 @@ const roboto = Roboto({weight:"500", subsets:['latin']})
 function CategoryCard(props: {
   img: string,
   alt: string
+  title: string
 }) {
   return (
+    <div className='text-left'>
     <motion.div initial={'initial'} animate={'animate'} variants={{
       initial:{
         x: -100
@@ -22,12 +24,7 @@ function CategoryCard(props: {
     }} className='relative min-h-[17rem] w-[16rem] max-sm:min-h-[14rem] max-sm:w-[13rem] rounded-[1.4rem] bg-slate-300 overflow-hidden'>
       <div className='absolute h-full w-full z-10 text-themeColor flex items-end'>
         <div className='relative z-20 border-2 border-white w-full h-[20%] rounded-b-[1.4rem] flex'>
-          <div className='relative flex-[50%] h-full border-r-2 border-white flex items-center justify-center'>
-          <span className={`${robotoCondensed.className} text-[1.6rem]`}>
-          ₹299
-          </span>
-          </div>
-          <div className='relative flex-[50%] h-full border-l-2 border-white flex items-center justify-center'>
+          <div className='relative flex-[100%] h-full border-l-2 border-white flex items-center justify-center'>
             <span className={`${roboto.className} text-[1rem]`}>
             Explore More
             </span>
@@ -36,6 +33,8 @@ function CategoryCard(props: {
       </div>
       <Image src={category1} alt={'alt'} className='relative h-full w-full' />
     </motion.div>
+    <h1 className='text-[1.2rem] ml-4 mt-2'>{props['title']}</h1>
+    </div>
   )
 }
 

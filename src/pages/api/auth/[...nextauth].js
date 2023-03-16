@@ -7,17 +7,16 @@ export default NextAuth({
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        }),
+        })
     ],
     secret: process.env.JWT_SECRET,
 
     session: { strategy: "jwt" },
 
     callbacks: {
-        
         async session({ session, token, user }) {
-            session.jwt = token.jwt;
-            session.id = token.id;
+            session.user.jwt = token.jwt;
+            session.user.id = token.id;
             return session;
         },
 
@@ -31,6 +30,7 @@ export default NextAuth({
                 const data = await response.json();
                 token.jwt = data.jwt;
                 token.id = data.user.id;
+                token.avatar = data.user.image
             }
             return token
         }

@@ -3,7 +3,6 @@ import Footer from '@/layouts/Footer'
 import Navigation from '@/layouts/Navigation'
 import getFooterData, { FooterProps } from '@/lib/footer'
 import { Public_Sans } from '@next/font/google'
-import UserInfoForm from '@/components/UserInfoForm'
 import Recipecard from '@/components/Recipecard'
 import { getDietData } from '@/lib/diet'
 import { RecipesProps } from '@/lib/diet'
@@ -18,8 +17,8 @@ function Index(props: {
     <div className='h-screen max-w-[100vw] bg-backgroundColor text-themeColor '>
       <Navigation />
       <div className='h-fit bg-inherit flex flex-col items-start'>
-      <span className='mt-24 ml-12 text-[1.7rem]'>Recipes</span>
-      <div className='min-h-screen max-h-fit w-[100vw] bg-inherit grid max-xl:grid-cols-3 max-sm:grid-cols-1 gap-6 xl:grid-cols-3 place-items-center max-xl:p-24 xl:p-24 max-sm:p-12'>
+      <span className='mt-24 xl:ml-24 max-xl:ml-24 max-sm:ml:8 text-[1.7rem]'>Recipes</span>
+      <div className='min-h-screen max-h-fit w-[100vw] bg-inherit grid max-xl:grid-cols-3 max-sm:grid-cols-1 gap-6 xl:grid-cols-3 place-items-center max-xl:p-24 xl:px-24 max-sm:p-12'>
         {
           props['recipes']['recipes'].map((data, index) => {
             return (
