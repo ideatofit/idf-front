@@ -6,52 +6,69 @@ import Footer from '@/layouts/Footer'
 import getFooterData, { FooterProps } from '@/lib/footer'
 import Image from 'next/image'
 import font from '../../styles/font.module.css'
-import { PostBySlug, PostsProps, getComments, getCommentsFiltered, getPostsBySlug, getPostsData, sendPostsComments } from '@/lib/posts'
+import { PostBySlug, getPostComments, getPostsBySlug, getPostsData, sendPostsComments } from '@/lib/posts'
 import Blogscard from '@/components/Blogscard'
 import { useSession } from 'next-auth/react'
 import Comments from '@/components/Comments'
 import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Login from '@/components/Login'
 import { Button } from 'react-bootstrap'
+import style from '../../styles/spinner.module.css'
 
-interface userSession{
+interface userSession {
   session: any,
-  status: 'loading' | 'authenticated' | 'unauthenticated'
-  newComments: PostBySlug['comment']
+  status: 'loading' | 'authenticated' | 'unauthenticated',
 }
+
+type comments = {
+  id: number
+  name: string
+  avatar: string
+  content: string
+  commentId: number
+}[]
 
 function Blogs(props: {
   posts: PostBySlug,
   footer: FooterProps
 }) {
-  const [comment, setComment] = useState('');
-  const [newComments, setNewComments] = useState<userSession['newComments']>()
-  const[useNewComments, setUseNewComments] = useState(false)
+  const [comment, setComment] = useState([{
+    id: NaN,
+    name: '',
+    content: '',
+    avatar: '',
+    commentId: NaN
+  }]);
+  const [userComment, setUserComment] = useState('')
   const [showLogin, setShowLogin] = useState(false)
-  const [user, setUser] = useState<userSession['session']>({})
-  const [userStatus, setUserStatus] = useState<userSession['status']>()
+  const [sending, setSending] = useState(false)
 
-  const {data: session, status} = useSession()
+
+  const { data: session, status } = useSession()
+
+  const fetchComments = async () => {
+    const data = await getPostComments(props['posts']['id'])
+    setComment(data)
+  }
 
   const handleSendComment = async () => {
     if (status === 'unauthenticated') {
       setShowLogin(true)
       return
     }
-    const res = await sendPostsComments(props['posts']['id'], comment, session)
-    if(res['request'] === 'fulfilled'){
-      const freshComments = await getCommentsFiltered(props['posts']['id'])
-      setNewComments(freshComments)
-    }
+    setSending(true)
+    await sendPostsComments(props['posts']['id'], userComment, session)
+    await fetchComments()
+    setSending(false)
+    setUserComment('')
   };
 
-  useEffect(()=>{
-    if(newComments){
-      setUseNewComments(true)
-    }
-  }, [newComments])
+  useEffect(() => {
+    fetchComments()
+  }, [])
+
   return (
     <>
       <Head>
@@ -74,31 +91,31 @@ function Blogs(props: {
           <span>{props['posts']['publishedat']}</span>
         </div>
         <div className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['posts']['content'] ?? "<h1>No post are available</h1>" }}></div>
-        <div className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${props['posts']['comment'].length}`}</div>
+        <div className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comment.length}`}</div>
         <div className='flex flex-col gap-2 py-2 w-full'>
           <div className="relative">
             <textarea
               className="w-full h-12 bg-transparent border-b-2 border-themeColor focus:outline-none px-4 py-2 resize-none"
               placeholder="Leave a comment..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
+              value={userComment}
+              onChange={(e) => {
+                setUserComment(e.target.value)
+              }
+              }
             />
             <button
               className="absolute bottom-2 right-2 focus:outline-none"
               onClick={handleSendComment}
             >
-              <FontAwesomeIcon icon={faPaperPlane} className="text-themeColor p-2" />
+              <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} text-themeColor p-2`} />
             </button>
           </div>
-          { !useNewComments &&
-            props['posts']['comment'].map((data, i) => {
-              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar']}/>
-            })
-          }
           {
-            useNewComments && newComments !== undefined &&
-            newComments.map((data, i)=>{
-              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar']}/>
+            comment.map((data, i) => {
+              // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
+              //@ts-ignore
+              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar']} postId={props['posts']['id']} />
+              //@ts-check
             })
           }
         </div>

@@ -2,13 +2,12 @@ import Blogscard from '@/components/Blogscard'
 import Footer from '@/layouts/Footer'
 import Navigation from '@/layouts/Navigation'
 import getFooterData, { FooterProps } from '@/lib/footer'
-import { PostsProps, getComments, getPostsData } from '@/lib/posts'
+import { PostsProps, getPostsData } from '@/lib/posts'
 import Gotaquestion from '@/components/Gotaquestion'
 
 function Index(props: {
   footer: FooterProps
   posts: PostsProps,
-  comments: any
 }) {
 
   return (
@@ -34,9 +33,8 @@ function Index(props: {
 export async function getStaticProps() {
   const footer = await getFooterData()
   const posts = await getPostsData()
-  const comments = await getComments(1)
   return {
-    props: { footer, posts, comments }
+    props: { footer, posts }
   }
 }
 

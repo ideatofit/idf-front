@@ -1,45 +1,130 @@
-import { Router, useRouter } from 'next/router'
-import { getDietData, getDietDataBySlug } from '@/lib/diet'
+import { useRouter } from 'next/router'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import Head from 'next/head'
 import Navigation from '@/layouts/Navigation'
 import Footer from '@/layouts/Footer'
 import getFooterData, { FooterProps } from '@/lib/footer'
-import { DietDataBySlug } from '@/lib/diet'
 import Image from 'next/image'
-import Recipecard from '@/components/Recipecard'
-import { useEffect, useLayoutEffect } from 'react'
 import font from '../../styles/font.module.css'
+import { getDietComments, getDietData, sendDietComments } from '@/lib/diet'
+import { useSession } from 'next-auth/react'
+import Comments from '@/components/Comments'
+import { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import Login from '@/components/Login'
+import { Button } from 'react-bootstrap'
+import style from '../../styles/spinner.module.css'
+import { DietDataBySlug, getDietDataBySlug } from '@/lib/diet'
+import Recipecard from '@/components/Recipecard'
+
+interface userSession {
+  session: any,
+  status: 'loading' | 'authenticated' | 'unauthenticated',
+}
+
+type comments = {
+  id: number
+  name: string
+  avatar: string
+  content: string
+  commentId: number
+}[]
 
 function Diets(props: {
-  recipe: DietDataBySlug,
+  diets: DietDataBySlug,
   footer: FooterProps
 }) {
-  const { slug } = useRouter().query
+  const [comment, setComment] = useState([{
+    id: NaN,
+    name: '',
+    content: '',
+    avatar: '',
+    commentId: NaN
+  }]);
+  const [userComment, setUserComment] = useState('')
+  const [showLogin, setShowLogin] = useState(false)
+  const [sending, setSending] = useState(false)
+
+
+  const { data: session, status } = useSession()
+
+  const fetchComments = async () => {
+    const data = await getDietComments(props['diets']['id'])
+    setComment(data)
+  }
+
+  const handleSendComment = async () => {
+    if (status === 'unauthenticated') {
+      setShowLogin(true)
+      return
+    }
+    setSending(true)
+    await sendDietComments(props['diets']['id'], userComment, session)
+    await fetchComments()
+    setSending(false)
+    setUserComment('')
+  };
+
+  useEffect(() => {
+    fetchComments()
+  }, [])
+
   return (
     <>
       <Head>
-        <title>{`ideatofit-${props['recipe']['recipe']['title']}`}</title>
+        <title>{`ideatofit-${props['diets']['title']}`}</title>
       </Head>
       <Navigation />
-      <div className={`${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-36 max-xl:p-36 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
+      {
+        showLogin &&
+        <div className='fixed h-screen w-[100vw] grid place-items-center z-40'>
+          <Login />
+          <Button onClick={() => { setShowLogin(false) }}>Cancel</Button>
+        </div>
+      }
+      <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-36 max-xl:p-36 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
         <div className={`max-h-[50vh] w-full text-themeColor rounded-lg overflow-hidden`}>
-          <Image src={props['recipe']['recipe']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />
+          <Image src={props['diets']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />
         </div>
         <div className='flex flex-col gap-1 py-4'>
-          <h5>{props['recipe']['recipe']['title']}</h5>
-          <span>{props['recipe']['recipe']['date']}</span>
+          <h5>{props['diets']['title']}</h5>
+          <span>{props['diets']['date']}</span>
         </div>
-        <div className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['recipe']['recipe']['content'] ?? "<h1>No post are available</h1>" }}></div>
-        <div className='min-h-fit w-full border-borderColor border-t-2 text-themeColor'>0 views   comments</div>
-        <div className='flex flex-col'>
-
+        <div className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['diets']['content'] ?? "<h1>No post are available</h1>" }}></div>
+        <div className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comment.length}`}</div>
+        <div className='flex flex-col gap-2 py-2 w-full'>
+          <div className="relative">
+            <textarea
+              className="w-full h-12 bg-transparent border-b-2 border-themeColor focus:outline-none px-4 py-2 resize-none"
+              placeholder="Leave a comment..."
+              value={userComment}
+              onChange={(e) => {
+                setUserComment(e.target.value)
+              }
+              }
+            />
+            <button
+              className="absolute bottom-2 right-2 focus:outline-none"
+              onClick={handleSendComment}
+            >
+              <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} text-themeColor p-2`} />
+            </button>
+          </div>
+          {
+            comment.map((data, i) => {
+              // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
+              //@ts-ignore
+              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar']} postId={props['diets']['id']} />
+              //@ts-check
+            })
+          }
         </div>
         <h2 className='text-themeColor my-4'>Related Recipes</h2>
         <div className='w-full h-fit flex flex-row justify-start gap-3 overflow-auto'>
           {
-            props['recipe']['recipe']['relations'].map((data, i) => {
-              return <Recipecard key={`recipeCard${i}`} img={data['img']} title={data['title']} description={data['description']} vegeterian={false} slug={data['slug']} />
+            props['diets']['relations'].map((data, i) => {
+              return <Recipecard key={`postsBlogCard${i}`} img={data['img']} title={data['title']} description={data['description']} slug={data['slug']} vegeterian={data['vegeterian']} />
             })
           }
         </div>
@@ -67,11 +152,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: Params) {
   const { slug } = await context.params
-  const recipe = await getDietDataBySlug(slug)
+  const diets = await getDietDataBySlug(slug)
   const footer = await getFooterData()
   return {
     props: {
-      recipe, footer
+      diets, footer
     },
     revalidate: 60
   }
