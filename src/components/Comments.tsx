@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Poppins } from '@next/font/google';
@@ -27,6 +27,7 @@ const Comment = (props: {
   const [loading, setLoading] = useState(false)
   const [deleted, setDeleted] = useState(false)
   const [newComment, setNewComment] = useState('')
+  const [readmore, setReadmore] = useState(false)
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -60,7 +61,7 @@ const Comment = (props: {
 
   return (
     <div
-      className={`${poppins.className} flex flex-col gap-1 pt-2 px-4 rounded-lg bg-MidnightOcean text-themeColor ${deleted && 'hidden'}`}
+      className={`${poppins.className} h-fit flex flex-col gap-1 py-3 px-4 rounded-lg bg-MidnightOcean text-themeColor ${deleted && 'hidden'}`}
     >
       <div className="flex items-center justify-between gap-2">
         <div className='flex'>
@@ -85,7 +86,8 @@ const Comment = (props: {
           </div>
         }
       </div>
-      {!isEditing && newComment === '' ? <p>{props.content}</p> : <p>{newComment}</p>}
+      {/*@ts-ignore*/}
+      {!isEditing && newComment === '' ? <div className={`max-w-full ${readmore ? 'max-h-fit': 'max-h-18'} break-words overflow-hidden`}>{`${props['content'].length > 180 ? props['content'].slice(0, 180) + '...' : props['content']}`}</div> : <div>{newComment}</div>}
       {isEditing && (
         <div className="flex flex-col gap-1">
           <textarea

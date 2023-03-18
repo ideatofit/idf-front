@@ -26,6 +26,8 @@ module.exports = {
     './src/components/Recipecard.tsx',
     './src/components/Comments.tsx',
     './src/components/Login.tsx',
+    './src/components/Select.tsx',
+    './src/components/Unitinput.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',
