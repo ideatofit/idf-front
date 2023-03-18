@@ -44,8 +44,8 @@ function Select(props: {
                 <Image src={option} alt={''} className='mx-2 cursor-pointer h-full'/>
             </motion.div>
             {select && <div className='absolute top-[105%] h-fit w-full bg-white rounded-md flex flex-col p-2 transition z-50'>
-                {props['options'].map((data) => {
-                    return (<div className='p-2 text-left hover:bg-slate-300 text-black rounded-md hover:cursor-pointer' onClick={handleValueSubmit}>{data}</div>)
+                {props['options'].map((data, i) => {
+                    return (<div key={`option${i}`} className='p-2 text-left hover:bg-slate-300 text-black rounded-md hover:cursor-pointer' onClick={handleValueSubmit}>{data}</div>)
                 })}
             </div>}
         </div>
