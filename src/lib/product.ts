@@ -59,7 +59,7 @@ export default async function getProducts() {
       img: true,
     },
   });
-  let url = await `${process.env.PUBLIC_URL}/api/categories?${query}`;
+  let url = await `https://server.ideatofit.com/api/categories?${query}`;
   let fetchedProducts = await fetch(url);
   let parsedProductsData: { data: [] } = await fetchedProducts.json();
   const filteredProductsData: ProductsProps = await {

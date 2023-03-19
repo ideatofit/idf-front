@@ -62,7 +62,7 @@ export async function getDietData() {
   const query = qs.stringify({
     populate: "img",
   });
-  const url = `${process.env.PUBLIC_URL}/api/recipes?${query}`;
+  const url = `https://server.ideatofit.com/api/recipes?${query}`;
   const fetchData = await fetch(url);
   const parsedData: RecipesData = await fetchData.json();
   console.log(parsedData);
@@ -120,7 +120,7 @@ export async function getDietDataBySlug(slug: string) {
     },
   });
 
-  const url = `${process.env.PUBLIC_URL}/api/recipes?${query}`;
+  const url = `https://server.ideatofit.com/api/recipes?${query}`;
   const fetchData = await fetch(url);
   const parsedData: RecipesData = await fetchData.json();
   const filteredData: DietDataBySlug = {

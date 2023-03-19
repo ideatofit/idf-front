@@ -64,7 +64,7 @@ export async function getPostsData() {
   const query = await qs.stringify({
     populate: "img",
   });
-  const url = await `${process.env.PUBLIC_URL}/api/posts?${query}`;
+  const url = await `https://server.ideatofit.com/api/posts?${query}`;
   const data = await fetch(url);
   const parsedData: PostsData = await data.json();
   const filteredData = {
@@ -134,7 +134,7 @@ export async function getPostsBySlug(slug: string) {
       },
     },
   });
-  const url = await `${process.env.PUBLIC_URL}/api/posts?${query}`;
+  const url = await `https://server.ideatofit.com/api/posts?${query}`;
   const fetchData = await fetch(url);
   const parsedData: PostsData = await fetchData.json();
   const filteredData: PostBySlug = {

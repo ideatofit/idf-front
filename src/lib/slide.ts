@@ -36,7 +36,7 @@ export async function getSlideData() {
   let query: string = await qs.stringify({
     populate: "img"
   });
-  const url = await `${process.env.PUBLIC_URL}/api/slides?${query}`;
+  const url = await `https://server.ideatofit.com/api/slides?${query}`;
   const slideData = await fetch(url);
   const parsedSlideData = await slideData.json();
   const filteredSlideData: SlideProps = {

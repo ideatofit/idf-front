@@ -82,7 +82,7 @@ export default async function getWellnesshubData() {
       tab3: true,
     },
   });
-  const url = await `${process.env.PUBLIC_URL}/api/wellnesshub?${query}`;
+  const url = await `https://server.ideatofit.com/api/wellnesshub?${query}`;
   const fetchedData = await fetch(url);
   const parsedData:{data: wellnesshubData} = await fetchedData.json();
 //   return parsedData

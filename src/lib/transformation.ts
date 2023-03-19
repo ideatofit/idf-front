@@ -31,7 +31,7 @@ export default async function getTransformationData() {
     populate: "*",  
   });
   try {
-    let url = await `${process.env.PUBLIC_URL}/api/transformations?${query}`;
+    let url = await `https://server.ideatofit.com/api/transformations?${query}`;
     let fetchedTransformationData = await fetch(url);
     let parsedTransformationData: {data: TransformationData} = await fetchedTransformationData.json();
     const filteredTransformationData: TransformationProps = {

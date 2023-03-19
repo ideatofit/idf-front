@@ -13,7 +13,7 @@ export type GoalProps = {
 }
 
 export async function getGoals(){
-    const url = `${process.env.PUBLIC_URL}/api/goals`
+    const url = `https://server.ideatofit.com/api/goals`
     const fetchData = await fetch(url)
     const parsedData: GoalData = await fetchData.json()
     const filteredData = {

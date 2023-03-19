@@ -61,7 +61,7 @@ export default async function getFooterData() {
       },
     },
   });
-  const url = `${process.env.PUBLIC_URL}/api/footer?${query}`;
+  const url = `https://server.ideatofit.com/api/footer?${query}`;
   const fetchedData = await fetch(url);
   const parsedData: { data: footerData } = await fetchedData.json();
   //   return parsedData;
