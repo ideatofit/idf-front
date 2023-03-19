@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import Head from 'next/head'
 import Navigation from '@/layouts/Navigation'
@@ -10,7 +9,7 @@ import { PostBySlug, getPostComments, getPostsBySlug, getPostsData, sendPostsCom
 import Blogscard from '@/components/Blogscard'
 import { useSession } from 'next-auth/react'
 import Comments from '@/components/Comments'
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Login from '@/components/Login'

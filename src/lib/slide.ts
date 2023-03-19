@@ -5,9 +5,10 @@ export type SlideProps = {
     img: string;
     title: string;
     description: string;
-    button: boolean
-    link: string
-    textonbutton: string
+    button: boolean;
+    link: string;
+    textonbutton: string;
+    rank: number;
   }[];
 };
 
@@ -15,9 +16,10 @@ type Data = {
   attributes: {
     title: string;
     description: string;
-    button: boolean | null
-    link: string | null
-    textonbutton: string | null
+    button: boolean | null;
+    link: string | null;
+    textonbutton: string | null;
+    rank: number;
     img: {
       data: [
         {
@@ -32,12 +34,12 @@ type Data = {
 
 export async function getSlideData() {
   let query: string = await qs.stringify({
-    populate: "img",
+    populate: "img"
   });
   const url = await `${process.env.PUBLIC_URL}/api/slides?${query}`;
   const slideData = await fetch(url);
   const parsedSlideData = await slideData.json();
-  const filteredSlideData: SlideProps = await {
+  const filteredSlideData: SlideProps = {
     slide: parsedSlideData["data"].map((data: Data) => {
       return {
         img: data["attributes"]["img"]["data"][0]["attributes"]["url"],
@@ -45,9 +47,11 @@ export async function getSlideData() {
         description: data["attributes"]["description"],
         button: data['attributes']['button'] ?? false,
         link: data['attributes']['link'] ?? "",
-        textonbutton: data['attributes']['textonbutton'] ?? ""
+        textonbutton: data['attributes']['textonbutton'] ?? "",
+        rank: data['attributes']['rank'] ?? 0
       };
     }),
   };
+  filteredSlideData.slide.sort((a, b) => a.rank - b.rank);
   return filteredSlideData;
 }

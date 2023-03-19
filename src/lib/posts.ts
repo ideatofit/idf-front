@@ -190,6 +190,7 @@ export async function sendPostsComments(
     },
     content: content,
   };
+  console.log(session)
   const url = `https://server.ideatofit.com/api/comments/api::post.post:${PostsId}`;
   try {
     const res = await fetch(url, {
@@ -240,7 +241,7 @@ export async function getPostComments(id: number) {
       name: data['author']['name'],
       avatar: data['author']['avatar'] ?? '',
       content: data['content'],
-      commentId: data['id']
+      commentId: data['id']         
     }
   })
   return filteredData
