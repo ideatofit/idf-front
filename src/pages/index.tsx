@@ -38,6 +38,8 @@ import { wellnesshubProps } from '@/lib/wellnesshub';
 import Link from 'next/link';
 import Gotaquestion from '@/components/Gotaquestion';
 import getFooterData from '@/lib/footer';
+import Head from 'next/head';
+
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
 const opensans = Open_Sans({ subsets: ['latin'], weight: '400' })
@@ -54,6 +56,11 @@ type Props = {
 const Home = (props: Props) => {
   const [tab, setTab] = useState('tab1')
   return (
+    <>
+    <Head>
+      <title>ideatofit</title>
+      <link rel="icon" type="image/png" sizes="32x32" href="../../public/logo.svg"/>
+    </Head>
     <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
       <Navigation />
       <Slide slide={props.slide} />
@@ -157,24 +164,24 @@ const Home = (props: Props) => {
                 <p className={`${inter.className} font-[500] pr-32`}>{props['wellnesshub']['tab1']['description']}</p>
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
-                <Link href={`${tab === 'tab2' ? (props['wellnesshub']['tab1']['link']) ?? '#' : '#'}`} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                <div className={`text-decoration-none w-[50%] h-[25%] rounded-full hover:pointer-events-auto	 ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab1')
                 }}>
                   <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>{props['wellnesshub']['tab1']['textonbutton']}</div>
                   <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
-                </Link>
-                <Link href={`${tab === 'tab2' ? (props['wellnesshub']['tab2']['link']) ?? '#' : '#'}`} className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                </div>
+                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto	 text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab2')
                 }}>
                   <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
                   <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
-                </Link>
-                <Link href={`${tab === 'tab2' ? (props['wellnesshub']['tab2']['link']) ?? '#' : '#'}`} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
+                </div>
+                <div className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
                   setTab('tab3')
                 }}>
                   <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
                   <div className={`${tab !== 'tab3' && 'opacity-0'} text-black`}>&#62;</div>
-                </Link>
+                </div>
               </div>
             </div>
             <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-2'>
@@ -242,6 +249,7 @@ const Home = (props: Props) => {
       <Gotaquestion/>
       <Footer footer={props.footer}/>
     </div>
+    </>
   )
 };
 

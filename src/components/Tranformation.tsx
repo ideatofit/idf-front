@@ -52,7 +52,7 @@ function Transformation(props: {
        }} className={` w-fit h-full flex flex-row gap-3`} ref={containerRef1}>
          {
            props['transformation']['upperImage']['img'].map((data, i) => {
-             return <Image style={{height:"160px", width:"250px"}} key={i + Math.random() * 100} src={data} alt={'img1'} width={263} height={421} />
+             return <Image style={{height:"160px", width:"250px", borderRadius: "0.7rem"}} key={i + Math.random() * 100} src={data} alt={'img1'} width={263} height={421} />
            })
          }
        </motion.div>
@@ -74,7 +74,7 @@ function Transformation(props: {
          className={`relative h-full flex flex-row gap-3`} ref={containerRef2}>
          {
            props['transformation']['lowerImage']['img'].map((data, i) => {
-             return <Image style={{height:"160px", width:"250px"}} key={i + Math.random() * 10} src={data} alt={'img1'} width={263} height={421} />
+             return <Image style={{height:"160px", width:"250px", borderRadius:"0.7rem"}} key={i + Math.random() * 10} src={data} alt={'img1'} width={263} height={421} />
            })
          }
        </motion.div>

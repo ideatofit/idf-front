@@ -19,8 +19,10 @@ function Header() {
       <Navbar style={{background:"linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)"}} className='fixed-top' expand="lg">
         <Container>
           <Navbar.Brand>
+            <Link href={'/'}>
             <Image src={logo}
               alt="logo" />
+              </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "rgba(255, 255, 255, 0.9)"}}/>
           <Navbar.Collapse id="navbarScroll" className='max-sm:flex max-sm:flex-col max-sm:p-4 max-sm:gap-4 max-sm:rounded-xl'>
