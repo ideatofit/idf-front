@@ -9,7 +9,7 @@ import Image from 'next/image'
 const poppins = Poppins({weight:['100', '200', '400', '600', '700', '800'], subsets:['latin']})
 const inter = Inter({weight:['100', '200', '400', '600', '700', '800'], subsets:['latin']})
 
-function index(props:{
+function Index(props:{
   footer: FooterProps
   wellnesshub: wellnesshubProps
 }) {
@@ -83,4 +83,4 @@ export async function getStaticProps(){
   }
 }
 
-export default index
+export default Index
