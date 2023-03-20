@@ -17,7 +17,7 @@ import rep from '../../public/1rep.png'
 import bmr from '../../public/bmr.png'
 import bodyFat from '../../public/bodyFat.png'
 import check from '../../public/check.svg'
-import femaledoctor from '../../public/femaledoctor.png'
+import deepakbhaiya from '../../public/images/deepakbhaiya.png'
 import Navigation from '@/layouts/Navigation';
 import Slide from '@/components/Slide';
 import Transformation from '@/components/Tranformation';
@@ -218,7 +218,7 @@ const Home = (props: Props) => {
         <div style={{ background: '#232631' }} className='max-xl:h-[65vh] xl:h-[65vh] max-sm:h-fit max-sm:py-8 max-xl:w-[80%] xl:w-[80%] max-sm:w-[90%] flex max-xl:flex-row xl:flex-row max-sm:flex-col rounded-xl border-2 border-borderColor overflow-hidden'>
           <div className='h-full flex-[40%]'>
             <div style={{ borderRadius: '0px 243.54px 389.67px 0px' }} className='relative h-full w-[80%] left-0 bg-[#454958]'>
-              <Image src={femaledoctor} alt='woman doctor' height={450} className='max-sm:relative absolute bottom-0 max-sm:left-0 left-[25%]' />
+              <Image src={deepakbhaiya} alt='deepak sahu' height={550} className='max-sm:relative absolute bottom-0 max-sm:left-0 left-[10%]' />
             </div>
           </div>
           <div className='flex-[60%] h-full'>

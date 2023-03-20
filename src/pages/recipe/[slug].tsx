@@ -6,7 +6,7 @@ import Footer from '@/layouts/Footer'
 import getFooterData, { FooterProps } from '@/lib/footer'
 import Image from 'next/image'
 import font from '../../styles/font.module.css'
-import { getDietComments, getDietData, sendDietComments } from '@/lib/diet'
+import { getDietComments, getDietData, sendDietComments } from '@/lib/recipe'
 import { useSession } from 'next-auth/react'
 import Comments from '@/components/Comments'
 import { useEffect, useState } from 'react'
@@ -15,7 +15,7 @@ import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Login from '@/components/Login'
 import { Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
-import { DietDataBySlug, getDietDataBySlug } from '@/lib/diet'
+import { DietDataBySlug, getDietDataBySlug } from '@/lib/recipe'
 import Recipecard from '@/components/Recipecard'
 
 interface userSession {

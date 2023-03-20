@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Image from 'next/image';
-import logo from '../../public/logo.svg'
+import logo from '../../public/images/whitelogo.svg'
 import cart from '../../public/cart.svg'
 import profile from '../../public/profile.svg'
 
@@ -21,7 +21,7 @@ function Header() {
           <Navbar.Brand>
             <Link href={'/'}>
             <Image src={logo}
-              alt="logo" />
+              alt="logo" className=' w-[7.5rem]'/>
               </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "rgba(255, 255, 255, 0.9)"}}/>

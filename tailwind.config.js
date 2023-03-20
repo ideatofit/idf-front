@@ -5,6 +5,7 @@ module.exports = {
     './src/pages/store/index.tsx',
     './src/pages/recipe/index.tsx',
     './src/pages/recipe/[slug].tsx',
+    './src/pages/diets/index.tsx',
     './src/pages/blogs/index.tsx',
     './src/pages/blogs/[slug].tsx',
     './src/pages/tools/index.tsx',
