@@ -34,7 +34,7 @@ function Index(props: {
                 {
                   props['plans']['plans'].map((data, i) => {
                     return (
-                      <div className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === `tab${i}` ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                      <div key={`plansButton${i}`} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === `tab${i}` ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                         setTab(`tab${i}`)
                       }}>
                         <div className={`${tab === `tab${i}` ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>{data['title']}</div>
@@ -49,14 +49,14 @@ function Index(props: {
               {
                 props['plans']['plans'].map((data, i) => {
                   return (
-                    <div className={`min-h-[25vh] flex flex-col items-start justify-start ${tab === `tab${i}` ? '' : 'hidden'}`}>
+                    <div key={`plansCard${i}`} className={`min-h-[25vh] flex flex-col items-start justify-start ${tab === `tab${i}` ? '' : 'hidden'}`}>
                       <h4>What will you get?</h4>
                       <h6>Explore various plans according to you</h6>
                       <div className='py-3 text-left'>
                         {
-                          data['offerDetails'].map((data) => {
+                          data['offerDetails'].map((data, i) => {
                             return (
-                              <h6 className='my-3'>{data['text']}</h6>
+                              <h6 key={`h6${i}`} className='my-3'>{data['text']}</h6>
                             )
                           })
                         }
