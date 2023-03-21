@@ -5,20 +5,25 @@ import { useState } from 'react'
 import { Poppins, Inter } from '@next/font/google'
 import getWellnesshubData, { wellnesshubProps } from '@/lib/wellnesshub'
 import Image from 'next/image'
+import getPlans, { PlanProps } from '@/lib/diet'
+import Recipecard from '@/components/Recipecard'
+import DietCard from '@/components/DietCard'
 
-const poppins = Poppins({weight:['100', '200', '400', '600', '700', '800'], subsets:['latin']})
-const inter = Inter({weight:['100', '200', '400', '600', '700', '800'], subsets:['latin']})
+const poppins = Poppins({ weight: ['100', '200', '400', '600', '700', '800'], subsets: ['latin'] })
+const inter = Inter({ weight: ['100', '200', '400', '600', '700', '800'], subsets: ['latin'] })
 
-function Index(props:{
+function Index(props: {
   footer: FooterProps
-  wellnesshub: wellnesshubProps
+  wellnesshub: wellnesshubProps,
+  plans: PlanProps
 }) {
-  const [tab, setTab] = useState('tab1')
+  const [tab, setTab] = useState('tab0')
+  console.log(props['plans'])
   return (
     <>
-    <Navigation/>
-    <div className='min-h-screen w-full bg-backgroundColor grid place-items-center text-themeColor'>
-    <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
+      <Navigation />
+      <div className='min-h-screen max-h-fit w-full bg-backgroundColor flex flex-col items-center text-themeColor py-24'>
+        <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
           <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
             <div className='flex-[45%] flex flex-col'>
               <div className='relative h-[40%] text-left'>
@@ -26,60 +31,63 @@ function Index(props:{
                 <p className={`${inter.className} font-[700] pr-32`}>Explore various plans according to you</p>
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
-                <div className={`text-decoration-none w-[50%] h-[25%] rounded-full hover:pointer-events-auto	 ${tab === 'tab1' ? 'bg-white' : 'bg-transparent'} flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
-                  setTab('tab1')
-                }}>
-                  <div className={`${tab === 'tab1' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>One Time Consultation</div>
-                  <div className={`${tab !== 'tab1' && 'opacity-0'} text-black`}>&#62;</div>
-                </div>
-                <div className={`w-[50%] h-[25%] rounded-full ${tab === 'tab2' ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto	 text-decoration-none flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
-                  setTab('tab2')
-                }}>
-                  <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
-                  <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
-                </div>
-                <div className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
-                  setTab('tab3')
-                }}>
-                  <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
-                  <div className={`${tab !== 'tab3' && 'opacity-0'} text-black`}>&#62;</div>
-                </div>
+                {
+                  props['plans']['plans'].map((data, i) => {
+                    return (
+                      <div className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === `tab${i}` ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                        setTab(`tab${i}`)
+                      }}>
+                        <div className={`${tab === `tab${i}` ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>{data['title']}</div>
+                        <div className={`${tab !== `tab${i}` && 'opacity-0'} text-black`}>&#62;</div>
+                      </div>
+                    )
+                  })
+                }
               </div>
             </div>
             <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-2'>
-              {tab === 'tab1' &&
-                <>
-                  <div className='flex-[33%] relative h-full gap-2 flex flex-col justify-center items-start'>
-                    <h1></h1>
-                  </div>
-                </>
-              }
               {
-                tab === 'tab2' &&
-                <div className='min-h-[25vh] flex items-center text-center'>
-                  <h1>tab2</h1>
-                </div>
-              }
-              {
-                tab === 'tab3' &&
-                <div className='min-h-[25vh] flex items-center text-center'>
-                  <h1>tab3</h1>
-                </div>
+                props['plans']['plans'].map((data, i) => {
+                  return (
+                    <div className={`min-h-[25vh] flex flex-col items-start justify-start ${tab === `tab${i}` ? '' : 'hidden'}`}>
+                      <h4>What will you get?</h4>
+                      <h6>Explore various plans according to you</h6>
+                      <div className='py-3 text-left'>
+                        {
+                          data['offerDetails'].map((data) => {
+                            return (
+                              <h6 className='my-3'>{data['text']}</h6>
+                            )
+                          })
+                        }
+                      </div>
+                    </div>
+                  )
+                })
               }
             </div>
           </div>
         </div>
-    </div>
-    <Footer footer={props['footer']}/>
+        <div className={`${poppins.className} flex justify-start w-[80%] pt-8`}>
+          <h3>More things for your fitness lifestyle</h3>
+        </div>
+        <div className='flex items-center justify-evenly min-h-fit w-[80%] py-2 text-black'>
+          <DietCard />
+          <DietCard />
+          <DietCard />
+        </div>
+      </div>
+      <Footer footer={props['footer']} />
     </>
   )
 }
 
-export async function getStaticProps(){
+export async function getStaticProps() {
   const footer = await getFooterData()
   const wellnesshub = await getWellnesshubData()
-  return{
-    props:{ footer, wellnesshub }
+  const plans = await getPlans()
+  return {
+    props: { footer, wellnesshub, plans }
   }
 }
 

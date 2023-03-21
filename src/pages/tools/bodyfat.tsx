@@ -1,8 +1,11 @@
 import Select from '@/components/Select'
+import Tools from '@/components/Tools'
 import Footer from '@/layouts/Footer'
 import Navigation from '@/layouts/Navigation'
 import getFooterData, { FooterProps } from '@/lib/footer'
 import { useState } from 'react'
+import bmr from '../../../public/bmr.png'
+import rep from '../../../public/1rep.png'
 
 interface States {
   heightUnit: 'cm' | 'ft/in'
@@ -46,11 +49,11 @@ function BodyFat(props: {
   const handleGenderChange = (value: string) => {
     setGender(value === 'Male' ? 'Male' : 'Female');
   };
-  
+
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const heightValue = Number(e.target.value);
     console.log('heightValue: ' + heightValue)
-    if (heightValue >= 0   && heightValue <= 220) {
+    if (heightValue >= 0 && heightValue <= 220) {
       setHeight(heightValue);
       setHeightError('');
       console.log('mai chal gya')
@@ -58,7 +61,7 @@ function BodyFat(props: {
       setHeightError('Height must be between 120cm and 220cm');
     }
   };
-  
+
   const handleWaistChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const waistValue = Number(e.target.value);
     if (waistValue >= 40 && waistValue <= 200) {
@@ -68,7 +71,7 @@ function BodyFat(props: {
       setWaistError('Waist circumference must be between 40cm and 200cm');
     }
   };
-  
+
   const handleNeckCircumferenceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const neckValue = Number(e.target.value);
     if (neckValue >= 20 && neckValue <= 60) {
@@ -79,18 +82,14 @@ function BodyFat(props: {
     }
   };
 
-  //validators
-  type Gender = 'Male' | 'Female';
 
-  type ExerciseLevel = 'Sedentary' | 'Lightly Active' | 'Moderately Active' | 'Very Active' | 'Extra Active';
+  async function calculateBodyFatPercentage() {
 
- async function calculateBodyFatPercentage(){
-  
-  const circumference = waist * 2.54 - neckCircumference;
-  const bodyFatPercentage = parseFloat((495 / (1.0324 - 0.19077 * Math.log10(circumference - 450 / height) + 0.15456 * Math.log10(height)) - 450).toFixed(2));
-  
-  setBodyFat(bodyFatPercentage); 
-  
+    const circumference = waist * 2.54 - neckCircumference;
+    const bodyFatPercentage = parseFloat((495 / (1.0324 - 0.19077 * Math.log10(circumference - 450 / height) + 0.15456 * Math.log10(height)) - 450).toFixed(2));
+
+    setBodyFat(bodyFatPercentage);
+
   }
 
 
@@ -98,28 +97,28 @@ function BodyFat(props: {
   return (
     <>
       <Navigation />
-      <div className='h-screen w-full bg-backgroundColor grid place-items-center text-themeColor'>
-        <div className='h-[65vh] max-h-fit w-[80vw] rounded-[2rem] border-2 border-borderColor bg-inherit overflow-hidden'>
+      <div className='min-h-screen max-h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
+        <div className='max-sm:min-h-[100vh] h-[65vh] max-h-fit max-sm:min-w-[90vw] w-[80vw] rounded-[2rem] border-2 border-borderColor bg-inherit overflow-hidden'>
           <div className='flex xl:flex-row max-xl:flex-row max-sm:flex-col w-full h-full max-h-fit p-8 gap-8'>
             <div className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-3'>
               <div className='h-full w-full max-h-fit'>
                 <h1>BMR Calculator</h1>
               </div>
-              <div className='h-[80%] w-full max-h-fit flex gap-3'>
+              <div className='max-sm:min-h-[10rem] h-[80%] w-full max-h-fit flex max-sm:flex-col gap-3'>
                 {/* ---------------------------Gender------------------------ */}
                 <Select placeholder={'Geder*'} options={genderOptions} onChange={handleGenderChange} width={50} error={genderError} />
                 {/* ---------------------------Gender------------------------ */}
                 {/* ---------------------------waist------------------------- */}
-                <input type="number" placeholder='waist*' onChange={handleWaistChange} className={`w-[50%] border-white border-2 rounded-xl text-left ${waistError !== '' ? 'border-red-500' : ''} pl-4`} />
+                <input type="number" placeholder='waist*' onChange={handleWaistChange} className={`h-full max-sm:w-full w-[50%] border-white border-2 rounded-xl text-left ${waistError !== '' ? 'border-red-500' : ''} pl-4`} />
 
                 {/* ---------------------------waist------------------------- */}
               </div>
-              <div className='h-[80%] w-full max-h-fit flex gap-3'>
+              <div className='max-sm:min-h-[10rem] h-[80%] w-full max-h-fit flex max-sm:flex-col gap-3'>
                 {/* ---------------------------Height-------------------- */}
-                <div className='h-full w-[50%] flex gap-2'>
+                <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='cm' onChange={handleHeightChange} className='h-full w-[70%] border-white border-2 rounded-xl text-left pl-4' />
+                      <input type="number" placeholder='Height' onChange={handleHeightChange} className='h-full max-sm:min-w-[70%] w-[70%] border-white border-2 rounded-xl text-left pl-4' />
                       :
                       <>
                         <input type="number" placeholder='ft' onChange={(e: any) => setFt(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
@@ -131,10 +130,10 @@ function BodyFat(props: {
                 {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
                 {/* ---------------------------Height-------------------------- */}
                 {/* ---------------------------neck circumference-------------------- */}
-                <div className='h-full w-[50%] flex gap-2'>
+                <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='cm' onChange={handleNeckCircumferenceChange} className='h-full w-[70%] border-white border-2 rounded-xl text-left pl-4' />
+                      <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className='h-full max-sm:min-w-[70%] w-[70%] border-white border-2 rounded-xl text-left pl-4' />
                       :
                       <>
                         <input type="number" placeholder='ft' onChange={(e: any) => setFt(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
@@ -165,6 +164,10 @@ function BodyFat(props: {
               </div>
             </div>
           </div>
+        </div>
+        <div className='flex max-sm:flex-col max-sm:items-center max-sm:gap-3 justify-around p-4'>
+        <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} />
+            <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} />
         </div>
       </div>
       <Footer footer={props['footer']} />

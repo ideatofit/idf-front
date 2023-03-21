@@ -1,8 +1,11 @@
 import Select from '@/components/Select'
+import Tools from '@/components/Tools'
 import Footer from '@/layouts/Footer'
 import Navigation from '@/layouts/Navigation'
 import getFooterData, { FooterProps } from '@/lib/footer'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import rep from '../../../public/1rep.png'
+import bodyFatimg from '../../../public/bodyFat.png'
 
 interface States {
   heightUnit: 'cm' | 'ft/in'
@@ -56,20 +59,20 @@ function Bmr(props: {
     //@ts-check
   };
 
-  const handleHeightChange = (e: any) => {
-    setHeight(e.target.value);
+  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setHeight(Number(e.target.value));
   };
 
-  const handleWeightChange = (e: any) => {
-    setWeight(e.target.value);
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWeight(Number(e.target.value));
   };
 
-  const handleAgeChange = (e: any) => {
-    setAge(e.target.value);
+  const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAge(Number(e.target.value));
   };
 
-  const handleBodyFatPercentageChange = (e: any) => {
-    setBodyFatPercentage(e.target.value);
+  const handleBodyFatPercentageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBodyFatPercentage(Number(e.target.value));
   };
 
   //validators
@@ -112,11 +115,11 @@ function Bmr(props: {
       setWeightError('Please enter a valid weight. Weight must be greater than 0.');
       valid = false;
     }
-     if (weight > 500) {
+    if (weight > 500) {
       setWeightError('Please enter a valid weight. Weight cannot be greater than 500 kg.');
       valid = false;
-    } 
-    if(weight > 0 && weight < 500){
+    }
+    if (weight > 0 && weight < 500) {
       setWeightError('');
     }
 
@@ -186,7 +189,7 @@ function Bmr(props: {
 
   const handleCalculate = async () => {
     const valid = validateInputs(gender, exercise, height, weight, age, bodyFatPercentage)
-    if(!valid){
+    if (!valid) {
       return
     }
     let { BMR, TDEE } = calculateBMRAndTDEE(gender, exercise, height, weight, age, bodyFatPercentage)
@@ -194,23 +197,38 @@ function Bmr(props: {
     setTdee(TDEE)
   }
 
-  // converter
-  function convertToCm(feet: number, inches: number) {
-    const centimeters = (feet * 30.48) + (inches * 2.54);
-    return centimeters;
+  // convert ft and inch to cm
+  function convertToCm(e: React.ChangeEvent<HTMLInputElement>) {
+    const placeholder: string = e.target.placeholder
+    const value: number = Number(e.target.value)
+    let centimeters: number = 0;
+    // to avoid the delay of states instead of states we are using fresh values using switch statement
+    switch (placeholder) {
+      case 'ft':
+        setFt(value)
+        centimeters = ((value * 30.48) + (inch * 2.54))
+        break;
+
+      case 'in':
+        setInch(value)
+        centimeters = ((ft * 30.48) + (value * 2.54))
+        break;
+    }
+    setHeight(Math.round(centimeters))
+    return centimeters
   }
 
   return (
     <>
       <Navigation />
-      <div className='h-screen w-full bg-backgroundColor grid place-items-center text-themeColor'>
-        <div className='h-[80vh] max-h-fit w-[80vw] rounded-[2rem] border-2 border-borderColor bg-inherit overflow-hidden'>
-          <div className='flex xl:flex-row max-xl:flex-row max-sm:flex-col w-full h-full max-h-fit p-8 gap-8'>
+      <div className='h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
+        <div className='xl:h-[80vh] max-xl:h-[80vh] max-sm:min-h-[135vh] xl:w-[80vw] max-xl:w-[80vw] max-sm:w-[90vw] rounded-[2rem] border-2 border-borderColor bg-inherit '>
+          <div className='flex xl:flex-row max-xl:flex-row max-sm:flex-col w-full h-full max-h-fit xl:p-8 max-xl:p-8 max-sm:p-4 gap-8'>
             <div className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-3'>
               <div className='h-full w-full max-h-fit'>
                 <h1>BMR Calculator</h1>
               </div>
-              <div className='h-[80%] w-full max-h-fit flex gap-3'>
+              <div className='max-xl:h-[80%] xl:h-[80%] max-sm:min-h-[10rem] w-full max-h-fit flex max-sm:flex-col gap-3'>
                 {/* ---------------------------Gender------------------------ */}
                 <Select placeholder={'Geder*'} options={genderOptions} onChange={handleGenderChange} width={50} error={genderError} />
                 {/* ---------------------------Gender------------------------ */}
@@ -219,40 +237,40 @@ function Bmr(props: {
                 <Select placeholder={''} options={exerciseOptions} onChange={handleExerciseChange} width={50} error={exerciseError} />
                 {/* ---------------------------Exercise--------------------- */}
               </div>
-              <div className='h-[80%] w-full max-h-fit flex gap-3'>
+              <div className='max-sm:min-h-[10rem] max-xl:h-[80%] xl:h-[80%] w-full flex max-sm:flex-col gap-3'>
                 {/* ---------------------------Height-------------------- */}
-                <div className='h-full w-[50%] flex gap-2'>
+                <div className='h-full max-sm:w-full xl:w-[50%] max-xl:w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='cm' onChange={handleHeightChange} className='h-full w-[70%] border-white border-2 rounded-xl text-left pl-4' />
+                      <input type="number" placeholder='cm' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
                       :
                       <>
-                        <input type="number" placeholder='ft' onChange={(e: any)=>setFt(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
-                        <input type="number" placeholder='in' onChange={(e: any)=>setInch(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
+                        <input type="number" placeholder='ft' onChange={convertToCm} className='h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
+                        <input type="number" placeholder='in' onChange={convertToCm} className='h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
                       </>
                   }
                   <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={heightError} />
                 </div>
-                  {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
+                {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
                 {/* ---------------------------Height-------------------------- */}
 
                 {/* ---------------------------Weight------------------------- */}
-                <input type="number" placeholder='Weight*' onChange={handleWeightChange} className={`w-[50%] border-white border-2 rounded-xl text-left ${weightError !== '' ? 'border-red-500' : ''} pl-4`} />
+                <input type="number" placeholder='Weight*' onChange={handleWeightChange} className={`h-full max-xl:w-[50%] xl:w-[50%] max-sm:w-full border-white border-2 rounded-xl text-left ${weightError !== '' ? 'border-red-500' : ''} pl-4`} />
 
                 {/* ---------------------------Weight------------------------- */}
               </div>
-                {weightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
-              <div className='h-[80%] w-full max-h-fit flex gap-3'>
+              {weightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
+              <div className='xl:h-[80%] max-xl:h-[80%] max-sm:min-h-[10rem] w-full max-h-fit flex gap-3 max-sm:flex-col'>
                 {/* ---------------------------Age-------------------------- */}
-                <input type="number" placeholder='Age' onChange={handleAgeChange} className='w-[50%] border-white border-2 rounded-xl text-left pl-4' />
+                <input type="number" placeholder='Age' onChange={handleAgeChange} className='h-full max-xl:w-[50%] xl:w-[50%] max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
                 {ageError !== '' && <div className='text-red-500 text-[0.7rem]'>{ageError}</div>}
                 {/* ---------------------------Age-------------------------- */}
 
                 {/* ---------------------------BodyFatPercentage-------------------------- */}
-                <input type="number" placeholder='BodyFatPercentage' onChange={handleBodyFatPercentageChange} className='w-[50%] border-white border-2 rounded-xl text-left pl-4' />
+                <input type="number" placeholder='BodyFatPercentage' onChange={handleBodyFatPercentageChange} className='h-full max-xl:w-[50%] xl:w-[50%] max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
                 {/* ---------------------------BodyFatPercentage-------------------------- */}
               </div>
-                {bodyFatError !== '' && <div className='text-red-500 text-[0.7rem]'>{bodyFatError}</div>}
+              {bodyFatError !== '' && <div className='text-red-500 text-[0.7rem]'>{bodyFatError}</div>}
               <div className='h-full w-full max-h-fit flex gap-3'>
                 <div className='h-full w-full bg-themeColor rounded-xl flex justify-between items-center p-3 text-black'>
                   <div className='font-[400] text-[1.2rem]'>Let&apos;s calculate it</div>
@@ -276,7 +294,7 @@ function Bmr(props: {
                 <div className='h-full w-full max-h-fit flex flex-col gap-1'>
                   <h4>Your TDEE is</h4>
                   <div className=' flex items-center py-3 px-2 justify-between text-black bg-white w-full h-fit rounded-xl'>
-                    <div className={`${tdee !== 0 && 'font-bold text-[1.1rem]'}`}>{ tdee === 0 ? 'Your result will appear here': Math.round(tdee)}</div>
+                    <div className={`${tdee !== 0 && 'font-bold text-[1.1rem]'}`}>{tdee === 0 ? 'Your result will appear here' : Math.round(tdee)}</div>
                     <div className='font-bold'>Kcal</div>
                   </div>
                   <div>TDEE is your Total Daily Energy Expenditure. It is BMR plus the number of calories burnt through activity.</div>
@@ -285,19 +303,25 @@ function Bmr(props: {
             </div>
           </div>
         </div>
+        <div className='flex justify-around p-4'>
+        </div>
+        <div className='xl:flex max-xl:flex max-sm:flex-col items-center gap-3 justify-around p-4'>
+          <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} />
+          <Tools img={bodyFatimg} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} />
+        </div>
       </div>
-      <Footer footer={props['footer']} />
+      {/* <Footer footer={props['footer']} /> */}
     </>
   )
 }
 
-export async function getStaticProps() {
-  const footer = await getFooterData()
-  return {
-    props: {
-      footer
-    }
-  }
-}
+// export async function getStaticProps() {
+//   const footer = await getFooterData()
+//   return {
+//     props: {
+//       footer
+//     }
+//   }
+// }
 
 export default Bmr

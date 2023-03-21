@@ -38,7 +38,7 @@ function Select(props: {
         }
     }
     return (
-        <div className={`relative w-[${props.width}%] h-full rounded-xl border-2 ${props['error'] === '' ? 'border-white' : 'border-red-800'} text-themeColor flex justify-between items-center cursor-pointer`} onClick={() => setSelect(!select)}>
+        <div className={`relative xl:w-[${props.width}%] max-xl:w-[${props.width}%] max-sm:w-full h-full rounded-xl border-2 ${props['error'] === '' ? 'border-white' : 'border-red-800'} text-themeColor flex justify-between items-center cursor-pointer`} onClick={() => setSelect(!select)}>
             <div className='mx-2'>{value === '' ? props['placeholder'] : value}</div>
             <motion.div initial='initial' animate='animate' variants={select ? animationin : animationout} className='hover:cursor-pointer'>
                 <Image src={option} alt={''} className='mx-2 cursor-pointer h-full'/>

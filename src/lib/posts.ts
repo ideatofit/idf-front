@@ -1,6 +1,5 @@
 import qs from "qs";
 import formatDate from "./dateformatter";
-import { Session } from "next-auth";
 
 type PostsData = {
   data: {
@@ -114,8 +113,6 @@ type comments = {
   }[];
 };
 
-
-
 export async function getPostsBySlug(slug: string) {
   const query = await qs.stringify({
     filters: {
@@ -174,8 +171,6 @@ export async function getPostsBySlug(slug: string) {
     }
   return filteredData;
 }
-
-
 
 export async function sendPostsComments(
   PostsId: number,
