@@ -29,6 +29,7 @@ module.exports = {
     './src/components/Login.tsx',
     './src/components/Select.tsx',
     './src/components/Unitinput.tsx',
+    './src/components/DietCard.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

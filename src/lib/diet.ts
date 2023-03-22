@@ -2,52 +2,106 @@ import qs from "qs";
 
 // response json type !not representing everything from real response json only included necessary things
 type Plans = {
-    data:{
-        attributes:{
-            title: string
-            redirectTo: string
-            plans:{
-                title: string
-                offerDetails:{
-                    text: string
-                }[]
-            }[]
-        }
-    }
-}
+  data: {
+    attributes: {
+      title: string;
+      redirectTo: string;
+      plans: {
+        title: string;
+        offerDetails: {
+          text: string;
+        }[];
+      }[];
+      moreForTheUsers: {
+        id: number;
+        title: string;
+        link: string
+        img: {
+          data: {
+            attributes: {
+              url: string;
+            };
+          } |  null;
+        };
+      }[];
+      testimonials: {
+        id: number;
+        name: string;
+        text: string;
+        img: {
+          data: {
+            attributes: {
+              url: string | null;
+            };
+          };
+        } | null;
+      }[];
+    };
+  };
+};
 
 // return this after filtering out
 export type PlanProps = {
+  title: string;
+  plans: {
     title: string;
-    plans: {
-        title: string;
-        offerDetails: {
-            text: string;
-        }[];
+    offerDetails: {
+      text: string;
     }[];
-}
+  }[];
+  moreForTheUsers:{
+    title: string
+    img: string
+    link: string
+  }[]
+  testimonials:{
+    name: string
+    text: string
+    img: string
+  }[]
+};
 
-export default async function getPlans(){
-    const query = qs.stringify({
-        populate: {
-            plans:{
-                populate: "*"
-            }
+export default async function getPlans() {
+  const query = qs.stringify({
+    populate: {
+      plans: {
+        populate: "*",
+      },
+      moreForTheUsers: {
+        populate: "*",
+      },
+      testimonials: {
+        populate: "*",
+      },
+    },
+  });
+  let url = `https://server.ideatofit.com/api/diet?${query}`;
+  let fetchData = await fetch(url);
+  let response: Plans = await fetchData.json();
+  const filteredData: PlanProps = {
+    title: response["data"]["attributes"]["title"],
+    plans: response["data"]["attributes"]["plans"].map((data) => {
+      return {
+        title: data["title"],
+        offerDetails: data["offerDetails"].map((data) => {
+          return data;
+        }),
+      };
+    }),
+    moreForTheUsers: response['data']['attributes']['moreForTheUsers'].map((data)=>{
+        return {
+            title: data['title'],
+            img: data?.img?.data?.attributes?.url ?? '',
+            link: data?.link ?? ''
+        }
+    }),
+    testimonials: response['data']['attributes']['testimonials'].map((data)=>{
+        return{
+            name: data['name'],
+            text: data['text'],
+            img: data?.img?.data?.attributes?.url ?? '',
         }
     })
-    let url = `https://server.ideatofit.com/api/diet?${query}`
-    let fetchData = await fetch(url)
-    let response: Plans = await fetchData.json()
-    const filteredData: PlanProps = {
-        title: response['data']['attributes']['title'],
-        plans: response['data']['attributes']['plans'].map((data)=>{
-            return{
-                title: data['title'],
-                offerDetails: data['offerDetails'].map((data)=>{
-                    return data
-                })
-            }
-        })
-    }
-    return filteredData
+  };
+  return filteredData;
 }

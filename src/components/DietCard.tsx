@@ -1,17 +1,25 @@
 import Card from 'react-bootstrap/Card';
 import paneer from '../../public/AsianNoodleSaladwithTofu.png'
 import Image from 'next/image';
+import { Poppins } from '@next/font/google';
+import Link from 'next/link';
 
-function DietCard() {
+const poppins = Poppins({weight: "400", subsets:['latin']})
+
+function DietCard(props:{
+    title: string
+    link: string
+    img: string
+}) {
     return (
-        <Card className="bg-dark text-white">
-            <Image src={paneer} alt={''}/>
-            <Card.ImgOverlay>
-                <Card.Title style={{ color: "black" }}>Card title</Card.Title>
-                <Card.Text>
-                </Card.Text>
-            </Card.ImgOverlay>
-        </Card>
+        <>
+        <Link href={props['link'] ?? ''} className='text-decoration-none'>
+        <div className='h-fit w-[18rem] max-h-full max-w-[18rem] overflow-hidden cursor-pointer text-themeColor'>
+            <h4>{props['title']}</h4>
+            <Image src={props['img']} alt={''} width={300} height={150} className='relative hover:scale-[1.04] transition z-10'/>
+        </div>
+        </Link>
+        </>
     );
 }
 

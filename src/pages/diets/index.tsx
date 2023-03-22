@@ -3,22 +3,20 @@ import Navigation from '@/layouts/Navigation'
 import getFooterData, { FooterProps } from '@/lib/footer'
 import { useState } from 'react'
 import { Poppins, Inter } from '@next/font/google'
-import getWellnesshubData, { wellnesshubProps } from '@/lib/wellnesshub'
 import Image from 'next/image'
 import getPlans, { PlanProps } from '@/lib/diet'
-import Recipecard from '@/components/Recipecard'
 import DietCard from '@/components/DietCard'
+import Testimonial from '@/components/Testimonial'
+
 
 const poppins = Poppins({ weight: ['100', '200', '400', '600', '700', '800'], subsets: ['latin'] })
 const inter = Inter({ weight: ['100', '200', '400', '600', '700', '800'], subsets: ['latin'] })
 
 function Index(props: {
   footer: FooterProps
-  wellnesshub: wellnesshubProps,
-  plans: PlanProps
+  diet: PlanProps
 }) {
   const [tab, setTab] = useState('tab0')
-  console.log(props['plans'])
   return (
     <>
       <Navigation />
@@ -32,7 +30,7 @@ function Index(props: {
               </div>
               <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>
                 {
-                  props['plans']['plans'].map((data, i) => {
+                  props['diet']['plans'].map((data, i) => {
                     return (
                       <div key={`plansButton${i}`} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === `tab${i}` ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                         setTab(`tab${i}`)
@@ -47,7 +45,7 @@ function Index(props: {
             </div>
             <div className='flex-[55%] flex max-xl:flex-row xl:flex-row justify-evenly gap-2'>
               {
-                props['plans']['plans'].map((data, i) => {
+                props['diet']['plans'].map((data, i) => {
                   return (
                     <div key={`plansCard${i}`} className={`min-h-[25vh] flex flex-col items-start justify-start ${tab === `tab${i}` ? '' : 'hidden'}`}>
                       <h4>What will you get?</h4>
@@ -71,10 +69,22 @@ function Index(props: {
         <div className={`${poppins.className} flex justify-start w-[80%] pt-8`}>
           <h3>More things for your fitness lifestyle</h3>
         </div>
-        <div className='flex items-center justify-evenly min-h-fit w-[80%] py-2 text-black'>
-          <DietCard />
-          <DietCard />
-          <DietCard />
+        <div className='flex items-center justify-evenly overflow-auto min-h-fit w-[80%] py-2 text-black'>
+          {
+            props['diet']['moreForTheUsers'].map((data, i) => {
+              return <DietCard key={`moreForTheUsers${i}`} title={data['title']} img={data['img']} link={data['link']} />
+            })
+          }
+        </div>
+        <div className='w-[80%] text-left pt-12'>
+          <h3>Testimonials</h3>
+        </div>
+        <div className='flex h-fit w-[80%] overflow-auto'>
+          {
+            props['diet']['testimonials'].map((data, i)=>{
+              return <Testimonial key={`testimonials${i}`} text={data['text']} avatar={data['img']} name={data['name']}/>
+            })
+          }
         </div>
       </div>
       <Footer footer={props['footer']} />
@@ -84,10 +94,9 @@ function Index(props: {
 
 export async function getStaticProps() {
   const footer = await getFooterData()
-  const wellnesshub = await getWellnesshubData()
-  const plans = await getPlans()
+  const diet = await getPlans()
   return {
-    props: { footer, wellnesshub, plans }
+    props: { footer, diet }
   }
 }
 
