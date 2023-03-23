@@ -1,4 +1,5 @@
 import qs from "qs";
+import { getkeywords } from "./keywords";
 
 export type FooterProps = {
   contact: {
@@ -17,6 +18,7 @@ export type FooterProps = {
       url: string;
     }[];
   }[];
+  keywords: string[]
 };
 
 type footerData = {
@@ -69,9 +71,7 @@ export default async function getFooterData() {
     contact: {
       phone: parsedData["data"]["attributes"]["contact"]["phone"],
       gmail: parsedData["data"]["attributes"]["contact"]["gmail"],
-      socialmedia: parsedData["data"]["attributes"]["contact"][
-        "socialmedia"
-      ].map((data) => {
+      socialmedia: parsedData["data"]["attributes"]["contact"]["socialmedia"].map((data) => {
         return {
           name: data["name"],
           logo: data["logo"]["data"]["attributes"]["url"],
@@ -92,6 +92,7 @@ export default async function getFooterData() {
         };
       }
     ),
+    keywords: (await getkeywords())
   };
   return filteredData;
 }

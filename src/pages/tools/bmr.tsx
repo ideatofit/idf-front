@@ -6,6 +6,8 @@ import getFooterData, { FooterProps } from '@/lib/footer'
 import React, { useState } from 'react'
 import rep from '../../../public/1rep.png'
 import bodyFatimg from '../../../public/bodyFat.png'
+import Head from 'next/head'
+import Gotaquestion from '@/components/Gotaquestion'
 
 interface States {
   heightUnit: 'cm' | 'ft/in'
@@ -220,6 +222,31 @@ function Bmr(props: {
 
   return (
     <>
+    <Head>
+    <title>Ideaotift - bmr calculator</title>
+        <meta name="description" content="Ideaotift - calculate your body mass ratio with the help of our ideatofit body mass ratio calculator." />
+        <meta name="keywords" content="Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips
+,meal planning services
+,nutritionist consultation
+,Weight loss coaching
+,Online fitness classes
+,Fitness training programs
+,Workout routines for weight loss
+,Low-calorie meal ideas
+,Plant-based diet plans
+,High-fiber recipes
+,Gluten-free meal ideas
+,Meal prep delivery services
+,Healthy eating habits
+,Meal replacement options
+,Mindful eating techniques
+,High-intensity interval training (HIIT) workouts
+,Resistance training programs
+,Cardiovascular exercise routines
+,Nutrition education programs
+,Personalized workout plans., body mass ratio calculator, bmr caculator" />
+        <meta name="author" content="deepak sahu" />
+    </Head>
       <Navigation />
       <div className='h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
         <div className='xl:h-[80vh] max-xl:h-[80vh] max-sm:min-h-[135vh] xl:w-[80vw] max-xl:w-[80vw] max-sm:w-[90vw] rounded-[2rem] border-2 border-borderColor bg-inherit '>
@@ -310,18 +337,19 @@ function Bmr(props: {
           <Tools img={bodyFatimg} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} />
         </div>
       </div>
-      {/* <Footer footer={props['footer']} /> */}
+      <Gotaquestion/>
+      <Footer footer={props['footer']} />
     </>
   )
 }
 
-// export async function getStaticProps() {
-//   const footer = await getFooterData()
-//   return {
-//     props: {
-//       footer
-//     }
-//   }
-// }
+export async function getStaticProps() {
+  const footer = await getFooterData()
+  return {
+    props: {
+      footer
+    }
+  }
+}
 
 export default Bmr

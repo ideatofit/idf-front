@@ -15,8 +15,8 @@ function DietCard(props:{
         <>
         <Link href={props['link'] ?? ''} className='text-decoration-none'>
         <div className='h-fit w-[18rem] max-h-full max-w-[18rem] overflow-hidden cursor-pointer text-themeColor'>
-            <h4>{props['title']}</h4>
-            <Image src={props['img']} alt={''} width={300} height={150} className='relative hover:scale-[1.04] transition z-10'/>
+            <h4 className='mb-3'>{props['title']}</h4>
+            <Image src={props['img']} alt={''} width={300} height={150} className='z-10'/>
         </div>
         </Link>
         </>

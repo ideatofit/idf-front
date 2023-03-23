@@ -14,6 +14,16 @@ function Footer(props: {
 }) {
     return (
         <>
+            <div className={`${opensans.className} min-h-[40vh] max-h-fit w-full border-borderColor border-y-2 flex flex-col p-4  bg-Midnight`}>
+                <div className='text-start text-themeColor'>
+                    <h5>Keywords</h5>
+                </div>
+                <div className='flex flex-wrap justify-start gap-8 text-white min-h-full p-4'>
+                    {
+                        props['footer']['keywords'].map((data) => data)
+                    }
+                </div>
+            </div>
             <div className='w-full min-h-[40vh] max-h-fit max-sm:h-fit max-xl:flex xl:flex max-xl:flex-row xl:flex-row max-sm:grid max-sm:grid-cols-2 bg-[#232631] text-themeColor'>
                 <div className='flex-[20%] flex flex-col justify-start items-start gap-2 p-8'>
                     <h6 className={`${roboto.className}`}>Contact us</h6>
@@ -50,6 +60,7 @@ function Footer(props: {
                     })
                 }
             </div>
+
             <div className='w-full h-[8vh] flex max-xl:flex-row bg-[#232631] border-t-2 border-borderColor text-[#AAAAAA]'>
                 <div className={` ${roboto.className} text-[0.7rem] flex-[30%] flex flex-col h-full text-center justify-center`}>
                     <div>Copyright © 2015 - 2022 All Rights Reserved.</div>

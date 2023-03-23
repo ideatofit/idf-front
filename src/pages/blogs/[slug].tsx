@@ -38,6 +38,8 @@ function Blogs(props: {
   const [userComment, setUserComment] = useState('')
   const [showLogin, setShowLogin] = useState(false)
   const [sending, setSending] = useState(false)
+  const [displayedComments, setDisplayedComments] = useState(4);
+
 
   const { data: session, status } = useSession()
 
@@ -58,11 +60,31 @@ function Blogs(props: {
     setUserComment('')
   };
 
+  const showMoreComments = () => {
+    setDisplayedComments(displayedComments + 4);
+  };
+
   return (
     <>
       <Head>
-        <title>{`ideatofit-${props['posts']['title']}`}</title>
-      </Head>
+      <title>Ideaotift - {props['posts']['title']}</title>
+        <meta name="description" content={props['posts']['description']} />
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props['posts']['keywords'].join(", ")}`} />
+        <meta name="author" content="deepak sahu" />
+
+        {/* open graph for social media cards */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Ideaotift - ${props['posts']['keywords'].join(", ")}`} />
+        <meta property="og:description" content={props['posts']['description']} />
+        <meta property="og:image" content={props['posts']['img']} />
+        <meta property="og:url" content="https://www.ideatofit.com/" />
+
+        {/* twitters open graph */}
+        <meta property="twitter:card" content="Summary Large Image" />
+        <meta property="twitter:title" content={`Ideaotift - ${props['posts']['keywords'].join(", ")}`} />
+        <meta property="twitter:description" content={props['posts']['description']} />
+        <meta property="twitter:image" content={props['posts']['img']}/>     
+         </Head>
       <Navigation />
       {
         showLogin &&
@@ -99,14 +121,15 @@ function Blogs(props: {
               <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} text-themeColor p-2`} />
             </button>
           </div>
-          {
-            comment.map((data, i) => {
-              // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
-              //@ts-ignore
-              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['posts']['id']} />
-              //@ts-check
-            })
-          }
+          {comment.slice(0, displayedComments).map((data, i) => {
+        // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
+        //@ts-ignore
+        return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['posts']['id']} />;
+        //@ts-check
+      })}
+      {comment.length > displayedComments && (
+        <button onClick={showMoreComments}>Show More</button>
+      )}
         </div>
         <h2 className='text-themeColor my-4'>Related Recipes</h2>
         <div className='w-full h-fit flex flex-row justify-start gap-3 overflow-auto'>

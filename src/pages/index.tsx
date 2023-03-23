@@ -29,7 +29,7 @@ import Button from '@/components/Button';
 import storyStyle from '../styles/Stories.module.css'
 import { getSlideData } from '@/lib/slide';
 import { getStoriesData } from '@/lib/stories';
-import getTransformationData  from '@/lib/transformation';
+import getTransformationData from '@/lib/transformation';
 import { SlideProps } from '@/lib/slide';
 import { StoriesProps } from '@/lib/stories';
 import { TransformationProps } from '@/lib/transformation';
@@ -39,6 +39,7 @@ import Link from 'next/link';
 import Gotaquestion from '@/components/Gotaquestion';
 import getFooterData from '@/lib/footer';
 import Head from 'next/head';
+import { getVideo } from '@/lib/video';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
@@ -50,6 +51,7 @@ type Props = {
   stories: StoriesProps
   transformation: TransformationProps,
   wellnesshub: wellnesshubProps
+  video: string
   footer: any
 }
 
@@ -57,44 +59,88 @@ const Home = (props: Props) => {
   const [tab, setTab] = useState('tab1')
   return (
     <>
-    <Head>
-      <title>ideatofit</title>
-      <link rel="icon" type="image/png" sizes="32x32" href="../../public/logo.svg"/>
-    </Head>
-    <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
-      <Navigation />
-      <Slide slide={props.slide} />
-      <Transformation transformation={props.transformation} />
-      {/* why to choose us */}
-      <div className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
-        <div className='text-center text-themeColor'>
-          <h1 className='font-bold'>The IDEATOFIT way</h1>
-        </div>
-        <div className='flex justify-evenly max-sm:p-4 max-sm:flex-col max-xl:flex-row xl:flex-row text-themeColor'>
-          <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
-            <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>1</span>
-            <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
-            <Image src={arrow1} alt={'arrow1'} className='relative left-[60%] max-sm:hidden' />
+      <Head>
+      <title>Ideaotift - Health and Fitness Tips | Workout Plans </title>
+        <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
+        <meta name="keywords" content="Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips
+,meal planning services
+,nutritionist consultation
+,Weight loss coaching
+,Online fitness classes
+,Fitness training programs
+,Workout routines for weight loss
+,Low-calorie meal ideas
+,Plant-based diet plans
+,High-fiber recipes
+,Gluten-free meal ideas
+,Meal prep delivery services
+,Healthy eating habits
+,Meal replacement options
+,Mindful eating techniques
+,High-intensity interval training (HIIT) workouts
+,Resistance training programs
+,Cardiovascular exercise routines
+,Nutrition education programs
+,Personalized workout plans." />
+        <meta name="author" content="deepak sahu" />
+
+        {/* open graph for social media cards */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Ideaotift - Health and Fitness Tips | Workout Plans" />
+        <meta property="og:description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
+        <meta property="og:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/v1679590456/logo_fy99df.png" />
+        <meta property="og:url" content="https://www.ideatofit.com/" />
+
+        <link rel="canonical" href="https://www.ideatofit.com/" />
+        <link rel="icon" href="https://res.cloudinary.com/dyurrus9p/image/upload/v1679590456/logo_fy99df.png" type="image/x-icon" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+        <link rel="manifest" href="/images/site.webmanifest" />
+
+        {/* twitters open graph */}
+        <meta property="twitter:card" content="Summary Large Image" />
+        <meta property="twitter:title" content="Ideaotift - Health and Fitness Tips | Workout Plans" />
+        <meta property="twitter:description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
+        <meta property="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_scale,w_1200,h_675/v1679590456/logo_fy99df.png" />
+      </Head>
+        <Navigation />
+      <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
+        <Slide slide={props.slide} />
+        <Transformation transformation={props.transformation} />
+        {/* why to choose us */}
+        <div className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
+          <div className='text-center text-themeColor'>
+            <h1 className='font-bold'>The IDEATOFIT way</h1>
           </div>
-          <div className='flex xl:items-center max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
-            <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>2</span>
-            <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
-            <Image src={arrow2} alt="arrow2" className="relative top-[-10%] md:transform md:translate-x-1/4 md:translate-y-1/2 xl:right-[2rem] max-sm:hidden" />
+          <div className='flex justify-evenly max-sm:p-4 max-sm:flex-col max-xl:flex-row xl:flex-row text-themeColor'>
+            <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
+              <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>1</span>
+              <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
+              <Image src={arrow1} alt={'arrow1'} className='relative left-[60%] max-sm:hidden' />
+            </div>
+            <div className='flex xl:items-center max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
+              <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>2</span>
+              <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
+              <Image src={arrow2} alt="arrow2" className="relative top-[-10%] md:transform md:translate-x-1/4 md:translate-y-1/2 xl:right-[2rem] max-sm:hidden" />
+            </div>
+            <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
+              <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>3</span>
+              <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
+              <Image src={arrow3} alt={'arrow3'} className='relative lg:md:right-[50%] xl:right-0 max-sm:hidden' />
+            </div>
           </div>
-          <div className='flex max-sm:flex-row max-sm:items-center max-xl:flex-col xl:flex-col text-center'>
-            <span className='antialiased font-bold text-[11rem] max-sm:text-[6rem] max-sm:flex-[33%]'>3</span>
-            <p className='px-8 max-sm:text-left'>Science-backed workout & diet plans made for your body</p>
-            <Image src={arrow3} alt={'arrow3'} className='relative lg:md:right-[50%] xl:right-0 max-sm:hidden' />
+          <div className='max-xl:my-4 md:mt-14 text-center text-themeColor xl:my-4 flex flex-col items-center'>
+            <p className='px-4'>The result: You achieve a fitter body...and a happier life!</p>
+            <Button text={'GET PERSONALIZED TRAINING'} />
           </div>
         </div>
-        <div className='max-xl:my-4 md:mt-14 text-center text-themeColor xl:my-4 flex flex-col items-center'>
-          <p className='px-4'>The result: You achieve a fitter body...and a happier life!</p>
-          <Button text={'GET PERSONALIZED TRAINING'} />
+        {/*  */}
+        <label htmlFor="iframe">hello</label>
+        <div className='min-w-[100vw] h-fit flex items-center justify-center gap-4 p-24'>
+          <iframe className='h-[85vh] w-[85vw] rounded-xl' src={props['video']} title="YouTube video player" frameBorder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
         </div>
-      </div>
-      {/*  */}
-      <div className='min-w-[100vw] h-fit py-4 flex flex-col gap-4 bg-backgroundColor'>
-        <div className='absolute w-full max-sm:h-[36%] max-md:h-[26%] md:h-[36%] flex flex-col justify-center'>
+        {/* <div className='absolute w-full max-sm:h-[36%] max-md:h-[26%] md:h-[36%] flex flex-col justify-center'>
           <Image src={yellowshade} alt='yellowshade.png' />
         </div>
         <div className='absolute xl:h-[90%] max-sm:h-[36%] sm:h-[36%] w-full flex items-center justify-center'>
@@ -113,8 +159,7 @@ const Home = (props: Props) => {
           <Image src={rectangle2} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
           <Image src={rectangle3} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
           <Image src={rectangle4} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
-        </div>
-      </div>
+        </div> */}
       <div className='min-w-[100vw] bg-backgroundColor text-themeColor flex flex-col text-center'>
         <div>
           <h1>Meet our expert fitness coaches</h1>
@@ -176,7 +221,7 @@ const Home = (props: Props) => {
                   <div className={`${tab === 'tab2' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>SUPPLIMENT</div>
                   <div className={`${tab !== 'tab2' && 'opacity-0'} text-black`}>&#62;</div>
                 </div>
-                <div className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`}  onClick={() => {
+                <div className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === 'tab3' ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                   setTab('tab3')
                 }}>
                   <div className={`${tab === 'tab3' ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>EQUIPMENT</div>
@@ -246,9 +291,9 @@ const Home = (props: Props) => {
           </div>
         </div>
       </div>
-      <Gotaquestion/>
-      <Footer footer={props.footer}/>
-    </div>
+      <Gotaquestion />
+      <Footer footer={props.footer} />
+    </div >
     </>
   )
 };
@@ -258,9 +303,10 @@ export async function getStaticProps() {
   const stories: object | undefined = await getStoriesData()
   const transformation: object | undefined = await getTransformationData()
   const wellnesshub: object | undefined = await getWellnesshubData()
+  const video: string = await getVideo()
   const footer: any = await getFooterData()
   return {
-    props: { slide, stories, transformation, wellnesshub, footer },
+    props: { slide, stories, transformation, wellnesshub, video, footer },
     revalidate: 60
   }
 }

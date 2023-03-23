@@ -34,12 +34,13 @@ type comments = {
 function Diets(props: {
   diets: DietDataBySlug,
   footer: FooterProps
-  comment: comments
+  comments: comments
 }) {
-  const [comment, setComment] = useState(props['comment']);
+  const [comments, setComment] = useState(props['comments']);
   const [userComment, setUserComment] = useState('')
   const [showLogin, setShowLogin] = useState(false)
   const [sending, setSending] = useState(false)
+  const [displayedComments, setDisplayedComments] = useState(4);
 
 
   const { data: session, status } = useSession()
@@ -61,11 +62,32 @@ function Diets(props: {
     setUserComment('')
   };
 
+  
+    const showMoreComments = () => {
+      setDisplayedComments(displayedComments + 4);
+    };
+
   return (
     <>
       <Head>
-        <title>{`ideatofit-${props['diets']['title']}`}</title>
-      </Head>
+      <title>Ideaotift - {props['diets']['title']}</title>
+        <meta name="description" content={props['diets']['description']} />
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props['diets']['keywords'].join(", ")}`} />
+        <meta name="author" content="deepak sahu" />
+
+        {/* open graph for social media cards */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Ideaotift - ${props['diets']['keywords'].join(", ")}`} />
+        <meta property="og:description" content={props['diets']['description']} />
+        <meta property="og:image" content={props['diets']['img']} />
+        <meta property="og:url" content="https://www.ideatofit.com/" />
+
+        {/* twitters open graph */}
+        <meta property="twitter:card" content="Summary Large Image" />
+        <meta property="twitter:title" content={`Ideaotift - ${props['diets']['keywords'].join(", ")}`} />
+        <meta property="twitter:description" content={props['diets']['description']} />
+        <meta property="twitter:image" content={props['diets']['img']}/>     
+         </Head>
       <Navigation />
       {
         showLogin &&
@@ -83,7 +105,7 @@ function Diets(props: {
           <span>{props['diets']['date']}</span>
         </div>
         <div className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['diets']['content'] ?? "<h1>No post are available</h1>" }}></div>
-        <div className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comment.length}`}</div>
+        <div className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comments.length}`}</div>
         <div className='flex flex-col gap-2 py-2 w-full'>
           <div className="relative">
             <textarea
@@ -102,14 +124,15 @@ function Diets(props: {
               <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} text-themeColor p-2`} />
             </button>
           </div>
-          {
-            comment.map((data, i) => {
-              // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
-              //@ts-ignore
-              return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['diets']['id']} />
-              //@ts-check
-            })
-          }
+          {comments.slice(0, displayedComments).map((data, i) => {
+        // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
+        //@ts-ignore
+        return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['diets']['id']} />;
+        //@ts-check
+      })}
+      {comments.length > displayedComments && (
+        <button onClick={showMoreComments}>Show More</button>
+      )}
         </div>
         <h2 className='text-themeColor my-4'>Related Recipes</h2>
         <div className='w-full h-fit flex flex-row justify-start gap-3 overflow-auto'>
@@ -145,10 +168,10 @@ export async function getStaticProps(context: Params) {
   const { slug } = await context.params
   const diets = await getDietDataBySlug(slug)
   const footer = await getFooterData()
-  const comment = await getDietComments(diets['id'])
+  const comments = await getDietComments(diets['id'])
   return {
     props: {
-      diets, footer, comment
+      diets, footer, comments
     },
     revalidate: 60
   }

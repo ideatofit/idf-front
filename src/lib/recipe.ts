@@ -53,6 +53,13 @@ type RecipesData = {
           };
         }[];
       };
+      keywords:{
+        data:{
+          attributes:{
+            keywords: string
+          }
+        }[]
+      }
     };
   }[];
 };
@@ -65,8 +72,6 @@ export async function getDietData() {
   const url = `https://server.ideatofit.com/api/recipes?${query}`;
   const fetchData = await fetch(url);
   const parsedData: RecipesData = await fetchData.json();
-  console.log(parsedData);
-  console.log(url);
   const filteredData: RecipesProps = {
     recipes: parsedData["data"].map((data) => {
       return {
@@ -98,6 +103,7 @@ export type DietDataBySlug = {
     publishedat: string
     vegeterian: boolean
   }[];
+  keywords: string[]
 };
 
 // this function only returns the data for a specific slug
@@ -110,10 +116,13 @@ export async function getDietDataBySlug(slug: string) {
     },
     populate: {
       img: true,
+      keywords: true,
       categories: {
         populate: {
           recipes: {
-            populate: "img",
+            populate: {
+              img: true,
+            },
           },
         },
       },
@@ -155,7 +164,10 @@ export async function getDietDataBySlug(slug: string) {
         }
       }
       return relationsArray;
-    }).flat()
+    }).flat(),
+    keywords: parsedData['data'][0]['attributes']['keywords']['data'].map((data)=>{
+      return data['attributes']['keywords']
+    })
   };
   return filteredData;
 }
@@ -185,8 +197,6 @@ export async function sendDietComments(
       body: JSON.stringify(commentBody),
     });
     const parsedData = await res.json();
-    console.log(parsedData);
-    console.log(JSON.stringify(commentBody));
     return { request: "fullfilled", response: parsedData };
   } catch (err) {
     return { request: "unfulfilled" };

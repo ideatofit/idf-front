@@ -6,6 +6,8 @@ import getFooterData, { FooterProps } from '@/lib/footer'
 import { useState } from 'react'
 import bmr from '../../../public/bmr.png'
 import rep from '../../../public/1rep.png'
+import Head from 'next/head'
+import Gotaquestion from '@/components/Gotaquestion'
 
 interface States {
   heightUnit: 'cm' | 'ft/in'
@@ -96,6 +98,32 @@ function BodyFat(props: {
 
   return (
     <>
+    <Head>
+    <title>Ideaotift - bodyfat calculator</title>
+        <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
+        <meta name="keywords" content="Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips
+,bodyfat calculator
+,meal planning services
+,nutritionist consultation
+,Weight loss coaching
+,Online fitness classes
+,Fitness training programs
+,Workout routines for weight loss
+,Low-calorie meal ideas
+,Plant-based diet plans
+,High-fiber recipes
+,Gluten-free meal ideas
+,Meal prep delivery services
+,Healthy eating habits
+,Meal replacement options
+,Mindful eating techniques
+,High-intensity interval training (HIIT) workouts
+,Resistance training programs
+,Cardiovascular exercise routines
+,Nutrition education programs
+,Personalized workout plans." />
+        <meta name="author" content="deepak sahu" />
+    </Head>
       <Navigation />
       <div className='min-h-screen max-h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
         <div className='max-sm:min-h-[100vh] h-[65vh] max-h-fit max-sm:min-w-[90vw] w-[80vw] rounded-[2rem] border-2 border-borderColor bg-inherit overflow-hidden'>
@@ -170,6 +198,7 @@ function BodyFat(props: {
             <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} />
         </div>
       </div>
+      <Gotaquestion/>
       <Footer footer={props['footer']} />
     </>
   )

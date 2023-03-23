@@ -6,6 +6,8 @@ import getFooterData, { FooterProps } from '@/lib/footer'
 import { useState } from 'react'
 import bmr from '../../../public/bmr.png'
 import bodyFat from '../../../public/bodyFat.png'
+import Head from 'next/head'
+import Gotaquestion from '@/components/Gotaquestion'
 
 interface States {
   weightUnit: 'kg' | 'lb'
@@ -79,6 +81,32 @@ function OneRep(props: {
 
   return (
     <>
+    <Head>
+    <title>Ideaotift - onerep calculator</title>
+        <meta name="description" content="Ideaotift provides A One Rep Max (1RM) calculator that is a fitness tool that estimates the maximum amount of weight an individual can lift for a single repetition in a particular exercise" />
+        <meta name="keywords" content="Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips
+,onerep calculator
+,meal planning services
+,nutritionist consultation
+,Weight loss coaching
+,Online fitness classes
+,Fitness training programs
+,Workout routines for weight loss
+,Low-calorie meal ideas
+,Plant-based diet plans
+,High-fiber recipes
+,Gluten-free meal ideas
+,Meal prep delivery services
+,Healthy eating habits
+,Meal replacement options
+,Mindful eating techniques
+,High-intensity interval training (HIIT) workouts
+,Resistance training programs
+,Cardiovascular exercise routines
+,Nutrition education programs
+,Personalized workout plans." />
+        <meta name="author" content="deepak sahu" />
+    </Head>
       <Navigation />
       <div className='min-h-screen max-h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
         <div className='max-xl:h-[65vh] xl:h-[65vh] max-sm:min-h-[90vh] max-h-fit max-sm:min-w-[90vw] w-[80vw] rounded-[2rem] border-2 border-borderColor bg-inherit overflow-hidden'>
@@ -143,6 +171,7 @@ function OneRep(props: {
           <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} />
           <Tools img={bodyFat} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} />      </div>
       </div>
+      <Gotaquestion/>
       <Footer footer={props['footer']} />
     </>
   )

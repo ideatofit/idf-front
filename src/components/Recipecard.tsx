@@ -15,7 +15,7 @@ function Recipecard(props: {
   slug: string
 }) {
   return (
-    <Link href={`/diets/${props['slug']}`} className='text-decoration-none text-inherit'>
+    <Link href={`/recipes/${props['slug']}`} className='text-decoration-none text-inherit'>
     <Card bg='transparent' border='8' className={`max-w-[363px] min-h-[20rem] ${poppins.className} text-[1rem]`}>
       <Image src={props['img']} alt={''} width={363} height={194}  className='aspect-16/9'/>
       <Card.Body className='p-0 pt-3'>

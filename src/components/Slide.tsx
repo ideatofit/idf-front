@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 function Slide(props: {
   slide: SlideProps
 }) {
+
   return (
     <Carousel pause={false} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
       {
@@ -21,6 +22,7 @@ function Slide(props: {
                 alt="First slide" 
                 width={2880}
                 height={1620}
+                priority={true}
                 style={{ maxHeight: '100vh', objectFit: "cover", aspectRatio: "16 / 9" }}
               />
               <Carousel.Caption className={`${style.caption}`}>

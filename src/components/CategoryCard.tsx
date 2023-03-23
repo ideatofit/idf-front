@@ -3,6 +3,7 @@ import Image from 'next/image'
 import category1 from '../../public/category1.png'
 import { Roboto_Condensed, Roboto } from '@next/font/google'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 const robotoCondensed = Roboto_Condensed({weight:"700", subsets:['latin']})
 const roboto = Roboto({weight:"500", subsets:['latin']})
@@ -11,6 +12,8 @@ function CategoryCard(props: {
   img: string,
   alt: string
   title: string
+  id: string
+
 }) {
   return (
     <div className='text-left'>
@@ -25,9 +28,9 @@ function CategoryCard(props: {
       <div className='absolute h-full w-full z-10 text-themeColor flex items-end'>
         <div className='relative z-20 border-2 border-white w-full h-[20%] rounded-b-[1.4rem] flex'>
           <div className='relative flex-[100%] h-full border-l-2 border-white flex items-center justify-center'>
-            <span className={`${roboto.className} text-[1rem]`}>
+            <Link href={props['id']} className={`${roboto.className} text-[1rem]`}>
             Explore More
-            </span>
+            </Link>
           </div>
         </div>
       </div>

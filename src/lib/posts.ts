@@ -44,6 +44,13 @@ type PostsData = {
           };
         }[];
       };
+      keywords:{
+        data:{
+          attributes:{
+            keywords: string
+          }
+        }[]
+      }
     };
   }[];
 };
@@ -98,6 +105,7 @@ export type PostBySlug = {
     slug: string;
     publishedat: string;
   }[];
+  keywords: string[]
 };
 
 type comments = {
@@ -122,10 +130,13 @@ export async function getPostsBySlug(slug: string) {
     },
     populate: {
       img: true,
+      keywords: true,
       categories: {
         populate: {
           posts: {
-            populate: "img",
+            populate: {
+              img: true,
+            },
           },
         },
       },
@@ -134,26 +145,19 @@ export async function getPostsBySlug(slug: string) {
   const url = await `https://server.ideatofit.com/api/posts?${query}`;
   const fetchData = await fetch(url);
   const parsedData: PostsData = await fetchData.json();
+  console.log(parsedData)
   const filteredData: PostBySlug = {
     id: parsedData["data"][0]["id"],
     title: parsedData["data"][0]["attributes"]["title"],
     description: parsedData["data"][0]["attributes"]["description"],
     publishedat: formatDate(parsedData["data"][0]["attributes"]["publishedAt"]),
     content: parsedData["data"][0]["attributes"]["content"],
-    img: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"][
-      "url"
-    ],
-    alt: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"][
-      "name"
-    ],
+    img: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"]["url"],
+    alt: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"]["name"],
     relations: parsedData["data"][0]["attributes"]["categories"]["data"]
       .map((data) => {
         const relationsArray = [];
-        for (
-          let index = 0;
-          index < data["attributes"]["posts"]["data"].length;
-          index++
-        ) {
+        for (let index = 0; index < data["attributes"]["posts"]["data"].length; index++) {
           const post = data["attributes"]["posts"]["data"][index];
           if (post["attributes"]) {
             relationsArray.push({
@@ -168,7 +172,8 @@ export async function getPostsBySlug(slug: string) {
         }
         return relationsArray;
       }).flat(),
-    }
+    keywords: parsedData['data'][0]['attributes']['keywords']['data'].map((data) => data['attributes']['keywords'])
+  }
   return filteredData;
 }
 
@@ -185,7 +190,6 @@ export async function sendPostsComments(
     },
     content: content,
   };
-  console.log(session)
   const url = `https://server.ideatofit.com/api/comments/api::post.post:${PostsId}`;
   try {
     const res = await fetch(url, {
@@ -197,8 +201,6 @@ export async function sendPostsComments(
       body: JSON.stringify(commentBody),
     });
     const parsedData = await res.json();
-    console.log(parsedData);
-    console.log(JSON.stringify(commentBody));
     return { request: "fullfilled", response: parsedData };
   } catch (err) {
     return { request: "unfulfilled" };
