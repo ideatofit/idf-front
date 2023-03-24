@@ -13,7 +13,7 @@ function Footer(props: {
     footer: FooterProps
 }) {
     return (
-        <>
+        <footer className='h-fit w-[100vw]'>
             <div className={`${opensans.className} min-h-[40vh] max-h-fit w-full border-borderColor border-y-2 flex flex-col p-4  bg-Midnight`}>
                 <div className='text-start text-themeColor'>
                     <h5>Keywords</h5>
@@ -77,7 +77,7 @@ function Footer(props: {
                     </div>
                 </div>
             </div>
-        </>
+        </footer>
     )
 }
 

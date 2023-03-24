@@ -43,8 +43,7 @@ function Index(props: {
     </Head>
     <div className='h-screen max-w-[100vw] bg-backgroundColor text-themeColor '>
       <Navigation />
-      <div className='h-fit bg-inherit flex flex-col items-start'>
-      <span className='mt-24 xl:ml-24 max-xl:ml-24 max-sm:ml:8 text-[1.7rem]'>Recipes</span>
+      <div className='h-fit bg-inherit flex flex-col '>
       <div className='min-h-screen max-h-fit w-[100vw] bg-inherit grid max-xl:grid-cols-3 max-sm:grid-cols-1 gap-6 xl:grid-cols-3 place-items-center max-xl:p-24 xl:px-24 max-sm:p-12'>
         {
           props['recipes']['recipes'].map((data, index) => {

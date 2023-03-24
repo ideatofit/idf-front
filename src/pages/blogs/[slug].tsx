@@ -9,12 +9,13 @@ import { PostBySlug, getPostComments, getPostsBySlug, getPostsData, sendPostsCom
 import Blogscard from '@/components/Blogscard'
 import { useSession } from 'next-auth/react'
 import Comments from '@/components/Comments'
-import {  useState } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Login from '@/components/Login'
 import { Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
+import { ArticleJsonLd } from 'next-seo'
 
 interface userSession {
   session: any,
@@ -65,26 +66,32 @@ function Blogs(props: {
   };
 
   return (
-    <>
-      <Head>
-      <title>Ideaotift - {props['posts']['title']}</title>
-        <meta name="description" content={props['posts']['description']} />
-        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props['posts']['keywords'].join(", ")}`} />
-        <meta name="author" content="deepak sahu" />
-
-        {/* open graph for social media cards */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={`Ideaotift - ${props['posts']['keywords'].join(", ")}`} />
-        <meta property="og:description" content={props['posts']['description']} />
-        <meta property="og:image" content={props['posts']['img']} />
-        <meta property="og:url" content="https://www.ideatofit.com/" />
-
-        {/* twitters open graph */}
-        <meta property="twitter:card" content="Summary Large Image" />
-        <meta property="twitter:title" content={`Ideaotift - ${props['posts']['keywords'].join(", ")}`} />
-        <meta property="twitter:description" content={props['posts']['description']} />
-        <meta property="twitter:image" content={props['posts']['img']}/>     
-         </Head>
+    <main>
+      <ArticleJsonLd
+        url="https://example.com/article"
+        title="Article headline"
+        images={[
+          'https://example.com/photos/1x1/photo.jpg',
+          'https://example.com/photos/4x3/photo.jpg',
+          'https://example.com/photos/16x9/photo.jpg',
+        ]}
+        datePublished="2015-02-05T08:00:00+08:00"
+        dateModified="2015-02-05T09:00:00+08:00"
+        authorName={[
+          {
+            name: 'Jane Blogs',
+            url: 'https://example.com',
+          },
+          {
+            name: 'Mary Stone',
+            url: 'https://example.com',
+          },
+        ]}
+        publisherName="Gary Meehan"
+        publisherLogo="https://www.example.com/photos/logo.jpg"
+        description="This is a mighty good description of this article."
+        isAccessibleForFree={true}
+      />
       <Navigation />
       {
         showLogin &&
@@ -97,12 +104,12 @@ function Blogs(props: {
         <div className={`max-h-[50vh] w-full text-themeColor rounded-lg overflow-hidden`}>
           <Image src={props['posts']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />
         </div>
-        <div className='flex flex-col gap-1 py-4'>
+        <header className='flex flex-col gap-1 py-4'>
           <h5>{props['posts']['title']}</h5>
           <span>{props['posts']['publishedat']}</span>
-        </div>
-        <div className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['posts']['content'] ?? "<h1>No post are available</h1>" }}></div>
-        <div className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comment.length}`}</div>
+        </header>
+        <article className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['posts']['content'] ?? "<h1>No post are available</h1>" }}></article>
+        <div aria-label='Comments' className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comment.length}`}</div>
         <div className='flex flex-col gap-2 py-2 w-full'>
           <div className="relative">
             <textarea
@@ -122,14 +129,14 @@ function Blogs(props: {
             </button>
           </div>
           {comment.slice(0, displayedComments).map((data, i) => {
-        // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
-        //@ts-ignore
-        return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['posts']['id']} />;
-        //@ts-check
-      })}
-      {comment.length > displayedComments && (
-        <button onClick={showMoreComments}>Show More</button>
-      )}
+            // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
+            //@ts-ignore
+            return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['posts']['id']} />;
+            //@ts-check
+          })}
+          {comment.length > displayedComments && (
+            <button onClick={showMoreComments}>Show More</button>
+          )}
         </div>
         <h2 className='text-themeColor my-4'>Related Recipes</h2>
         <div className='w-full h-fit flex flex-row justify-start gap-3 overflow-auto'>
@@ -141,7 +148,7 @@ function Blogs(props: {
         </div>
       </div>
       <Footer footer={props['footer']} />
-    </>
+    </main>
   )
 }
 

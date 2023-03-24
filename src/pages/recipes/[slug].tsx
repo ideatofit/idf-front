@@ -17,11 +17,7 @@ import { Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
 import { DietDataBySlug, getDietDataBySlug } from '@/lib/recipe'
 import Recipecard from '@/components/Recipecard'
-
-interface userSession {
-  session: any,
-  status: 'loading' | 'authenticated' | 'unauthenticated',
-}
+import { RecipeJsonLd } from 'next-seo'
 
 type comments = {
   id: number
@@ -62,32 +58,46 @@ function Diets(props: {
     setUserComment('')
   };
 
-  
-    const showMoreComments = () => {
-      setDisplayedComments(displayedComments + 4);
-    };
+
+  const showMoreComments = () => {
+    setDisplayedComments(displayedComments + 4);
+  };
 
   return (
     <>
-      <Head>
-      <title>Ideaotift - {props['diets']['title']}</title>
-        <meta name="description" content={props['diets']['description']} />
-        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props['diets']['keywords'].join(", ")}`} />
-        <meta name="author" content="deepak sahu" />
-
-        {/* open graph for social media cards */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={`Ideaotift - ${props['diets']['keywords'].join(", ")}`} />
-        <meta property="og:description" content={props['diets']['description']} />
-        <meta property="og:image" content={props['diets']['img']} />
-        <meta property="og:url" content="https://www.ideatofit.com/" />
-
-        {/* twitters open graph */}
-        <meta property="twitter:card" content="Summary Large Image" />
-        <meta property="twitter:title" content={`Ideaotift - ${props['diets']['keywords'].join(", ")}`} />
-        <meta property="twitter:description" content={props['diets']['description']} />
-        <meta property="twitter:image" content={props['diets']['img']}/>     
-         </Head>
+    <Head>
+      <title>{props['diets']['title']}</title>
+      <meta title='description' content={props['diets']['description']}/>
+    </Head>
+      <RecipeJsonLd
+        name={props['diets']['title']}
+        description={props['diets']['description']}
+        datePublished={props['diets']['publishedAt']}
+        authorName= {props['diets']['author']}
+        prepTime= {props['diets']['preptime']}
+        cookTime={props['diets']['cooktime']}
+        totalTime={props['diets']['totaltime']}
+        keywords={props['diets']['keywords'].join(", ").toLocaleLowerCase()}
+        yields={props['diets']['yields'].toString()}
+        category={props['diets']['recipeCategory']}
+        cuisine={props['diets']['cuisine']}
+        calories={props['diets']['calories']}
+        images={props['diets']['images']}
+        ingredients={props['diets']['ingredients']}
+        instructions={props['diets']['instructions'].map((data)=>{
+          return{
+            name: data['name'],
+            text: data['text'],
+            url: data['url']
+            // image: 'https://example.com/photos/party-coffee-cake/step1.jpg',
+          }
+        })}
+        aggregateRating={{
+          ratingValue: '5',
+          ratingCount: '18',
+        }}
+        video={props['diets']['video']}
+      />
       <Navigation />
       {
         showLogin &&
@@ -101,10 +111,10 @@ function Diets(props: {
           <Image src={props['diets']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />
         </div>
         <div className='flex flex-col gap-1 py-4'>
-          <h5>{props['diets']['title']}</h5>
+          <h3>{props['diets']['title']}</h3>
           <span>{props['diets']['date']}</span>
         </div>
-        <div className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['diets']['content'] ?? "<h1>No post are available</h1>" }}></div>
+        <article itemType='' className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['diets']['content'] ?? "<h1>No post are available</h1>" }}></article>
         <div className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comments.length}`}</div>
         <div className='flex flex-col gap-2 py-2 w-full'>
           <div className="relative">
@@ -118,6 +128,7 @@ function Diets(props: {
               }
             />
             <button
+              type='button'
               className="absolute bottom-2 right-2 focus:outline-none"
               onClick={handleSendComment}
             >
@@ -125,14 +136,14 @@ function Diets(props: {
             </button>
           </div>
           {comments.slice(0, displayedComments).map((data, i) => {
-        // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
-        //@ts-ignore
-        return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['diets']['id']} />;
-        //@ts-check
-      })}
-      {comments.length > displayedComments && (
-        <button onClick={showMoreComments}>Show More</button>
-      )}
+            // the session has the id property but the @type Session is not mentioned that in its types so it keep giving errors so i supressed it
+            //@ts-ignore
+            return <Comments key={`postsComments${i}`} name={data['name']} content={data['content']} isEditable={data['id'] == (session?.user?.id)} commentId={data['commentId']} image={data['avatar'] ?? ''} postId={props['diets']['id']} />;
+            //@ts-check
+          })}
+          {comments.length > displayedComments && (
+            <button onClick={showMoreComments}>Show More</button>
+          )}
         </div>
         <h2 className='text-themeColor my-4'>Related Recipes</h2>
         <div className='w-full h-fit flex flex-row justify-start gap-3 overflow-auto'>
