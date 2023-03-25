@@ -89,8 +89,8 @@ function Diets(props: {
           return{
             name: data['name'],
             text: data['text'],
-            url: data['url']
-            // image: 'https://example.com/photos/party-coffee-cake/step1.jpg',
+            url: data['url'],
+            image: data['img'],
           }
         })}
         aggregateRating={{

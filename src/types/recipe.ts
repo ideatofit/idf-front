@@ -9,11 +9,9 @@ export type RecipesData = {
         publishedAt: string
         recipeCategory: string
         recipeCuisine: string
-        cookTime: string
-        prepTime: string
-        totalTime: string
-        recipeInstructions: string[]
-        recipeIngredient: string[]
+        cookTime: number
+        prepTime: number
+        totalTime: number
         title: string
         slug: string
         content: string
@@ -106,6 +104,13 @@ export type RecipesData = {
             name: string
             text: string
             url: string
+            img:{
+              data:{
+                attributes:{
+                  url: string
+                }
+              }
+            }
           }
         ];
         ingredients: 
@@ -133,9 +138,9 @@ export type RecipesData = {
                         publishedAt: string
                         recipeCategory: string
                         recipeCuisine: string
-                        cookTime: string
-                        prepTime: string
-                        totalTime: string
+                        cookTime: number
+                        prepTime: number
+                        totalTime: number
                         recipeInstructions: string[]
                         recipeIngredient: string[]
                         title: string
@@ -239,6 +244,7 @@ export type RecipeData = {
     name: string;
     text: string;
     url: string;
+    img: string
   }[];
   // aggregateRating: {
   //   ratingValue: string
@@ -251,7 +257,7 @@ export type RecipeData = {
     embedurl: string;
     uploaddate: string;
     duration: string;
-    thumbnailurls: string[];
+    thumbnailUrl: string[];
     haspart: {
       "@type": string;
       name: string;

@@ -1,59 +1,6 @@
 import qs from "qs";
 import formatDate from "./dateformatter";
-
-type PostsData = {
-  data: {
-    id: number;
-    attributes: {
-      title: string;
-      description: string;
-      slug: string;
-      publishedAt: string;
-      content: string;
-      img: {
-        data: {
-          attributes: {
-            url: string;
-            name: string;
-          };
-        };
-      };
-      categories: {
-        data: {
-          id: number;
-          attributes: {
-            title: string;
-            posts: {
-              data: {
-                id: number;
-                attributes: {
-                  title: string;
-                  description: string;
-                  slug: string;
-                  publishedAt: string;
-                  img: {
-                    data: {
-                      attributes: {
-                        url: string;
-                      };
-                    };
-                  };
-                };
-              }[];
-            };
-          };
-        }[];
-      };
-      keywords:{
-        data:{
-          attributes:{
-            keywords: string
-          }
-        }[]
-      }
-    };
-  }[];
-};
+import { PostsData } from "@/types/posts";
 
 export type PostsProps = {
   posts: {

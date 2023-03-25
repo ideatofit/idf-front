@@ -42,7 +42,9 @@ export async function getDietDataBySlug(slug: string) {
       video: {
         populate: "*"
       },
-      instructions: true,
+      instructions: {
+        populate: "*"
+      },
       ingredients: true,
       categories: {
         populate: {
@@ -66,9 +68,9 @@ export async function getDietDataBySlug(slug: string) {
     content: parsedData['data'][0]['attributes']['content'],
     date: formatDate(parsedData["data"][0]['attributes']['publishedAt']),
     author: parsedData["data"][0]["attributes"]["authorname"],
-    preptime: parsedData["data"][0]["attributes"]["prepTime"],
-    cooktime: parsedData["data"][0]["attributes"]["cookTime"],
-    totaltime: parsedData["data"][0]["attributes"]["totalTime"],
+    preptime: `PT${parsedData["data"][0]["attributes"]["prepTime"]}M`,
+    cooktime: `PT${parsedData["data"][0]["attributes"]["cookTime"]}M`,
+    totaltime: `PT${parsedData["data"][0]["attributes"]["totalTime"]}M`,
     yields: parsedData["data"][0]["attributes"]["yeild"].toString(),
     recipeCategory: parsedData["data"][0]["attributes"]["recipeCategory"],
     cuisine: parsedData["data"][0]["attributes"]["recipeCuisine"],
@@ -81,17 +83,17 @@ export async function getDietDataBySlug(slug: string) {
     ),
     instructions: parsedData["data"][0]["attributes"]["instructions"].map(
       (data) => {
-        return { name: data["name"], text: data["text"], url: data["url"] };
+        return { name: data["name"], text: data["text"], url: data["url"], img: data['img']['data']['attributes']['url'] };
       }
     ),
     video: {
       name: parsedData["data"][0]["attributes"]["video"]["name"],
       description: parsedData["data"][0]["attributes"]["video"]["description"],
-      duration: parsedData["data"][0]["attributes"]["video"]["duration"].toString(),
+      duration: `PT${parsedData["data"][0]["attributes"]["video"]["duration"]}M`,
       contenturl: parsedData["data"][0]["attributes"]["video"]["contenturl"],
       embedurl: parsedData["data"][0]["attributes"]["video"]["embedurl"],
       uploaddate: parsedData["data"][0]["attributes"]["publishedAt"],
-      thumbnailurls: [
+      thumbnailUrl: [
         parsedData["data"][0]["attributes"]["video"]["thumbnailurl"],
       ],
       haspart: parsedData["data"][0]["attributes"]["video"]["hasparts"].map((data) => {
