@@ -1,158 +1,15 @@
 import qs from "qs";
 import formatDate from "./dateformatter";
+import { RecipesData } from "@/types/recipe";
+import { RecipesProps } from "@/types/recipe";
+import { RecipeData } from "@/types/recipe";
+import { Comment } from "@/types/comment";
 
-export type RecipesProps = {
-  recipes: {
-    title: string;
-    description: string;
-    img: string;
-    vegeterian: boolean;
-    slug: string;
-  }[];
-};
-
-type RecipesData = {
-  data: {
-    id: number;
-    attributes: {
-      description: string;
-      createdAt: string;
-      updatedAt: string;
-      publishedAt: string;
-      recipeCategory: string;
-      recipeCuisine: string;
-      cookTime: string;
-      prepTime: string;
-      totalTime: string;
-      title: string;
-      slug: string;
-      content: string;
-      authorname: string;
-      yeild: number;
-      calories: number;
-      vegeterian: true;
-      image: {
-        data: {
-          id: number;
-          attributes: {
-            name: string;
-            alternativeText: null | string;
-            caption: null | string;
-            width: number;
-            height: number;
-            formats: {
-              thumbnail: {
-                name: string;
-                path: null;
-                size: number;
-                width: number;
-                height: number;
-                provider_metadata: {
-                  public_id: string;
-                  resource_type: string;
-                };
-              };
-            };
-            size: number;
-            url: string;
-            previewUrl: null;
-            createdAt: "2023-03-11T03:08:53.712Z";
-            updatedAt: "2023-03-24T18:41:28.609Z";
-          };
-        };
-      };
-      keywords: {
-        data: [
-          {
-            id: number;
-            attributes: {
-              keywords: string;
-              createdAt: string;
-              updatedAt: string;
-              publishedAt: string;
-            };
-          }
-        ];
-      };
-      video: {
-        id: number;
-        name: string;
-        description: string;
-        contenturl: string;
-        embedurl: string;
-        duration: number;
-        thumbnailurl: string;
-        hasparts: {
-              type: string;
-              name: string;
-              startoffset: number;
-              url: string;
-          }[];
-        watchcount: number;
-        publication: {
-          "@type": "BroadcastEvent";
-          islivebroadcast: boolean;
-          startdate: string;
-          enddate: string;
-        };
-      };
-      instructions: {
-        id: number;
-        name: string;
-        text: string;
-        url: string;
-        image: {
-          data:{
-            attributes:{
-              url: string
-              height: number
-              width: number
-            }
-          }
-        }
-      }[];
-      ingredients: {
-        id: number;
-        text: string;
-      }[];
-      categories: {
-        data: {
-          id: number;
-          attributes: {
-            recipes: {
-              data: {
-                id: number;
-                attributes: {
-                  title: string;
-                  description: string;
-                  vegeterian: true;
-                  image: {
-                    data: {
-                      attributes: {
-                        url: string;
-                      };
-                    };
-                  };
-                  publishedAt: string;
-                  slug: string;
-                };
-              }[];
-            };
-            category: string;
-            createdAt: string;
-            updatedAt: string;
-            publishedAt: string;
-          };
-        }[];
-      };
-    };
-  }[];
-};
 
 // this function returns the whole list of recipes
 export async function getDietData() {
   const query = qs.stringify({
-    populate: "img",
+    populate: "image",
   });
   const url = `https://server.ideatofit.com/api/recipes?${query}`;
   const fetchData = await fetch(url);
@@ -162,7 +19,7 @@ export async function getDietData() {
       return {
         title: data["attributes"]["title"],
         description: data["attributes"]["description"],
-        img: '',
+        img: data['attributes']['image']['data']['attributes']['url'],
         vegeterian: true,
         slug: data["attributes"]["slug"],
       };
@@ -170,68 +27,6 @@ export async function getDietData() {
   };
   return filteredData;
 }
-
-export type DietDataBySlug = {
-  id: number;
-  title: string;
-  description: string;
-  slug: string;
-  img: string;
-  content: string;
-  date: string;
-  author: string;
-  preptime: string;
-  cooktime: string;
-  totaltime: string;
-  yields: string;
-  recipeCategory: string;
-  cuisine: string;
-  calories: number;
-  images: string[];
-  ingredients: string[];
-  instructions: {
-    name: string;
-    text: string;
-    url: string;
-  }[];
-  // aggregateRating: {
-  //   ratingValue: string
-  //   ratingCount: string
-  // }
-  video: {
-    name: string;
-    description: string;
-    contenturl: string;
-    embedurl: string;
-    uploaddate: string;
-    duration: string;
-    thumbnailurls: string[];
-    haspart: {
-      "@type": string;
-      name: string;
-      startoffset: number | null;
-      url: string;
-    }[];
-    watchcount: number | null;
-    publication: {
-      "@type": "BroadcastEvent";
-      islivebroadcast: boolean;
-      startdate: string | null;
-      enddate: string | null;
-    };
-  };
-  publishedAt: string
-  relations: {
-    id: number;
-    title: string;
-    description: string;
-    slug: string;
-    img: string;
-    publishedat: string;
-    vegeterian: boolean;
-  }[];
-  keywords: string[];
-};
 
 // this function only returns the data for a specific slug
 export async function getDietDataBySlug(slug: string) {
@@ -262,14 +57,14 @@ export async function getDietDataBySlug(slug: string) {
   const url = `https://server.ideatofit.com/api/recipes?${query}`;
   const fetchData = await fetch(url);
   const parsedData: RecipesData = await fetchData.json();
-  const filteredData: DietDataBySlug = {
+  const filteredData: RecipeData = {
     id: parsedData["data"][0]["id"],
     title: parsedData["data"][0]["attributes"]["title"],
     description: parsedData["data"][0]["attributes"]["description"],
     img: parsedData["data"][0]["attributes"]["image"]["data"]["attributes"]["url"],
     slug: parsedData["data"][0]["attributes"]["slug"],
     content: parsedData['data'][0]['attributes']['content'],
-    date: formatDate(parsedData["data"][0]["attributes"]["publishedAt"]),
+    date: formatDate(parsedData["data"][0]['attributes']['publishedAt']),
     author: parsedData["data"][0]["attributes"]["authorname"],
     preptime: parsedData["data"][0]["attributes"]["prepTime"],
     cooktime: parsedData["data"][0]["attributes"]["cookTime"],
@@ -375,23 +170,10 @@ export async function sendDietComments(
   }
 }
 
-type comments = {
-  data: {
-    id: number;
-    author: {
-      id: number;
-      name: string;
-      avatar: string;
-    };
-    content: string;
-    createdat: string;
-  }[];
-};
-
 export async function getDietComments(id: number) {
   const url = `https://server.ideatofit.com/api/comments/api::recipe.recipe:${id}/flat`;
   const fetchData = await fetch(url);
-  const parsedData: comments = await fetchData.json();
+  const parsedData: Comment = await fetchData.json();
   const filteredData = parsedData["data"].map((data) => {
     return {
       id: data["author"]["id"] || NaN,

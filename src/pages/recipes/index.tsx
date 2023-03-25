@@ -5,7 +5,7 @@ import getFooterData, { FooterProps } from '@/lib/footer'
 import { Public_Sans } from '@next/font/google'
 import Recipecard from '@/components/Recipecard'
 import { getDietData } from '@/lib/recipe'
-import { RecipesProps } from '@/lib/recipe'
+import { RecipesProps } from '@/types/recipe'
 import Head from 'next/head'
 
 const publicsans = Public_Sans({ weight: '800', subsets: ['latin'] })

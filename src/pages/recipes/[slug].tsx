@@ -15,8 +15,9 @@ import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Login from '@/components/Login'
 import { Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
-import { DietDataBySlug, getDietDataBySlug } from '@/lib/recipe'
+import { getDietDataBySlug } from '@/lib/recipe'
 import Recipecard from '@/components/Recipecard'
+import { RecipeData } from '@/types/recipe'
 import { RecipeJsonLd } from 'next-seo'
 
 type comments = {
@@ -28,7 +29,7 @@ type comments = {
 }[]
 
 function Diets(props: {
-  diets: DietDataBySlug,
+  diets: RecipeData,
   footer: FooterProps
   comments: comments
 }) {
