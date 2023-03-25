@@ -80,7 +80,7 @@ export type RecipesData = {
           contenturl: string
           embedurl: string
           duration:number
-          thumbnailurl: string
+          thumbnailurl: string[]
           hasparts: [
             {
               id:number
@@ -141,8 +141,6 @@ export type RecipesData = {
                         cookTime: number
                         prepTime: number
                         totalTime: number
-                        recipeInstructions: string[]
-                        recipeIngredient: string[]
                         title: string
                         slug: string
                         content: string

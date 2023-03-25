@@ -89,18 +89,17 @@ export async function getDietDataBySlug(slug: string) {
     video: {
       name: parsedData["data"][0]["attributes"]["video"]["name"],
       description: parsedData["data"][0]["attributes"]["video"]["description"],
+      thumbnailUrl: parsedData['data'][0]['attributes']['video']['thumbnailurl'],
       duration: `PT${parsedData["data"][0]["attributes"]["video"]["duration"]}M`,
       contenturl: parsedData["data"][0]["attributes"]["video"]["contenturl"],
       embedurl: parsedData["data"][0]["attributes"]["video"]["embedurl"],
       uploaddate: parsedData["data"][0]["attributes"]["publishedAt"],
-      thumbnailUrl: [
-        parsedData["data"][0]["attributes"]["video"]["thumbnailurl"],
-      ],
       haspart: parsedData["data"][0]["attributes"]["video"]["hasparts"].map((data) => {
         return {
           "@type": data["type"],
           name: data["name"],
           startoffset: null,
+          endoffset: null,
           url: data["url"],
         };
       }),

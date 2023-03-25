@@ -5,7 +5,8 @@ import Footer from '@/layouts/Footer'
 import getFooterData, { FooterProps } from '@/lib/footer'
 import Image from 'next/image'
 import font from '../../styles/font.module.css'
-import { PostBySlug, getPostComments, getPostsBySlug, getPostsData, sendPostsComments } from '@/lib/posts'
+import { getPostComments, getPostsBySlug, getPostsData, sendPostsComments } from '@/lib/posts'
+import { PostBySlug } from '@/types/posts'
 import Blogscard from '@/components/Blogscard'
 import { useSession } from 'next-auth/react'
 import Comments from '@/components/Comments'
@@ -16,6 +17,7 @@ import Login from '@/components/Login'
 import { Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
 import { ArticleJsonLd } from 'next-seo'
+import { useRouter } from 'next/router'
 
 interface userSession {
   session: any,
@@ -65,32 +67,28 @@ function Blogs(props: {
     setDisplayedComments(displayedComments + 4);
   };
 
+  const {slug} = useRouter().query
+
   return (
     <main>
+      <Head>
+        <title>{props['posts']['title']}</title>
+        <meta name="description" content={props['posts']['description']} />
+      </Head>
       <ArticleJsonLd
-        url="https://example.com/article"
-        title="Article headline"
-        images={[
-          'https://example.com/photos/1x1/photo.jpg',
-          'https://example.com/photos/4x3/photo.jpg',
-          'https://example.com/photos/16x9/photo.jpg',
-        ]}
-        datePublished="2015-02-05T08:00:00+08:00"
-        dateModified="2015-02-05T09:00:00+08:00"
-        authorName={[
-          {
-            name: 'Jane Blogs',
-            url: 'https://example.com',
-          },
-          {
-            name: 'Mary Stone',
-            url: 'https://example.com',
-          },
-        ]}
-        publisherName="Gary Meehan"
-        publisherLogo="https://www.example.com/photos/logo.jpg"
-        description="This is a mighty good description of this article."
-        isAccessibleForFree={true}
+        url={`https://www.ideatofit.com/posts/${slug}`}
+        title={props['posts']['title']}
+        images={[props['posts']['img']]}
+        datePublished={props['posts']['publishedat']}
+        dateModified={props['posts']['modifiedDate']}
+        authorName={{
+          name: props['posts']['author'],
+          url: 'https://www.ideatofit.com'
+        }}
+        publisherName={props['posts']['author']}
+        publisherLogo={props['posts']['publisherlogo']}
+        description={props['posts']['description']}
+        isAccessibleForFree={props['posts']['isaccessibleforfree']}
       />
       <Navigation />
       {

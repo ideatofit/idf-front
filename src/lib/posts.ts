@@ -1,6 +1,7 @@
 import qs from "qs";
 import formatDate from "./dateformatter";
 import { PostsData } from "@/types/posts";
+import { PostBySlug } from "@/types/posts";
 
 export type PostsProps = {
   posts: {
@@ -35,25 +36,6 @@ export async function getPostsData() {
   };
   return filteredData;
 }
-
-export type PostBySlug = {
-  id: number;
-  title: string;
-  description: string;
-  publishedat: string;
-  content: string;
-  img: string;
-  alt: string;
-  relations: {
-    id: number;
-    title: string;
-    description: string;
-    img: string;
-    slug: string;
-    publishedat: string;
-  }[];
-  keywords: string[]
-};
 
 type comments = {
   data: {
@@ -97,7 +79,7 @@ export async function getPostsBySlug(slug: string) {
     id: parsedData["data"][0]["id"],
     title: parsedData["data"][0]["attributes"]["title"],
     description: parsedData["data"][0]["attributes"]["description"],
-    publishedat: formatDate(parsedData["data"][0]["attributes"]["publishedAt"]),
+    date: formatDate(parsedData["data"][0]["attributes"]["publishedAt"]),
     content: parsedData["data"][0]["attributes"]["content"],
     img: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"]["url"],
     alt: parsedData["data"][0]["attributes"]["img"]["data"]["attributes"]["name"],
@@ -119,7 +101,13 @@ export async function getPostsBySlug(slug: string) {
         }
         return relationsArray;
       }).flat(),
-    keywords: parsedData['data'][0]['attributes']['keywords']['data'].map((data) => data['attributes']['keywords'])
+    keywords: parsedData['data'][0]['attributes']['keywords']['data'].map((data) => data['attributes']['keywords']),
+    modifiedDate: parsedData['data'][0]['attributes']['updatedAt'],
+    author: parsedData['data']['0']['attributes']['author'],
+    publishername: parsedData['data'][0]['attributes']['author'],
+    publisherlogo: '/images/logo.png',
+    isaccessibleforfree: parsedData['data'][0]['attributes']['isaccessibleforfree'],
+    publishedat: parsedData['data'][0]['attributes']['publishedAt']
   }
   return filteredData;
 }

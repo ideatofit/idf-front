@@ -64,6 +64,8 @@ function Diets(props: {
     setDisplayedComments(displayedComments + 4);
   };
 
+  console.log(props['diets']['video']['thumbnailUrl'])
+
   return (
     <>
     <Head>
@@ -97,7 +99,17 @@ function Diets(props: {
           ratingValue: '5',
           ratingCount: '18',
         }}
-        video={props['diets']['video']}
+        video={{
+          name: props['diets']['video']['name'],
+          description: props['diets']['video']['description'],
+          contentUrl: props['diets']['video']['contenturl'],
+          embedUrl: props['diets']['video']['embedurl'],
+          uploadDate: props['diets']['publishedAt'],
+          duration: props['diets']['video']['duration'],
+          thumbnailUrls: props['diets']['video']['thumbnailUrl'],
+          hasPart: props['diets']['video']['haspart'],
+          regionsAllowed: ['IT', 'NL'],
+        }}
       />
       <Navigation />
       {
