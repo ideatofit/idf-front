@@ -36,9 +36,12 @@ function Header() {
             </Nav>
             <div className='d-flex'>
               {/* <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' /> */}
-              <Link href={`/user`}>
-              <Image src={session ? `${session?.user?.image}` : profile} alt="cart" width={35} height={35} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full'/>
-              </Link>
+              <Image src={session ? `${session?.user?.image}` : profile} alt="cart" width={35} height={35} onClick={()=> {
+                if(status === 'authenticated'){
+                  return
+                }
+                signIn()
+              }} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full'/>
             </div>
           </Navbar.Collapse>
         </Container>

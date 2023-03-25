@@ -17,13 +17,13 @@ function Recipecard(props: {
   return (
     <Link href={`/recipes/${props['slug']}`} className='text-decoration-none text-inherit'>
     <Card bg='transparent' border='8' className={`max-w-[363px] min-h-[20rem] ${poppins.className} text-[1rem]`}>
-      <Image src={props['img']} alt={''} width={363} height={194}  className='aspect-16/9'/>
+      <Image src={props['img']} alt={''} width={323} height={174}  className='aspect-16/9'/>
       <Card.Body className='p-0 pt-3'>
-        <div className='flex items-center h-[1.8rem] w-full gap-2'>
+        <div className='flex items-center h-[1.8rem] w-full gap-2 mb-2'>
           <Image src={props['vegeterian'] ? veg : nonveg} alt={''} width={30} height={30}/>
           <div style={{fontSize: "1.05rem"}}>{props['title']}</div>
         </div>
-        <Card.Text style={{fontSize:"0.9rem"}}>
+        <Card.Text style={{fontSize:"0.75rem"}}>
           {props['description']}
         </Card.Text>
       </Card.Body>

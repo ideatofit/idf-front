@@ -32,6 +32,12 @@ a:hover {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
+.react-tel-input > input{
+  height: 3rem !important;
+  width: 100% !important;
+  
+}
+
 
 @media only screen and (max-width: 767px) {
     html{

@@ -18,43 +18,18 @@ function Index(props: {
     goals: GoalProps,
 }) {
     const [step, setStep] = useState(1)
-    const [animationin, setAnimationin] = useState(true)
 
     const handleNextButton = () => {
         if (step < 6) {
             setStep(step + 1);
         }
-        setAnimationin(true)
     };
 
     const handleBackButton = () => {
         if (step > 1) {
             setStep(step - 1);
         }
-        setAnimationin(false)
     };
-
-    const animateout = {
-        initial: {
-            opacity: 1,
-            x: 0
-        },
-        animate: {
-            opacity: 0,
-            x: -100
-        }
-    }
-
-    const animatein = {
-        initial: {
-            opacity: 0,
-            x: 100
-        },
-        animate: {
-            opacity: 1,
-            x: 0
-        }
-    }
 
     const handleGender = () => {
         console.log('hello')

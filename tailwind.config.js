@@ -14,6 +14,7 @@ module.exports = {
     './src/pages/tools/bodyfat.tsx',
     './src/pages/donate/index.tsx',
     './src/pages/user/index.tsx',
+    './src/pages/contactus.tsx',
     //components
     './src/componensts/Slide.tsx',
     './src/components/Testimonial.tsx',
@@ -30,6 +31,7 @@ module.exports = {
     './src/components/Select.tsx',
     './src/components/Unitinput.tsx',
     './src/components/DietCard.tsx',
+    './src/components/Socialmedia.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

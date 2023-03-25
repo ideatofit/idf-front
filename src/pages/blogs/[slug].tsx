@@ -13,10 +13,9 @@ import Comments from '@/components/Comments'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import Login from '@/components/Login'
 import { Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
-import { ArticleJsonLd } from 'next-seo'
+import { ArticleJsonLd, NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 
 interface userSession {
@@ -67,15 +66,37 @@ function Blogs(props: {
     setDisplayedComments(displayedComments + 4);
   };
 
-  const {slug} = useRouter().query
+  const { slug } = useRouter().query
 
   return (
     <main>
       <Head>
         <title>{props['posts']['title']}</title>
         <meta name="description" content={props['posts']['description']} />
+        <meta name="keywords" content={props['posts']['keywords'].join(", ").toLocaleLowerCase()} />
       </Head>
-      <ArticleJsonLd
+      <NextSeo
+        openGraph={{
+          title: props['posts']['title'],
+          description: props['posts']['description'],
+          url: `https://www.ideatofit.com/recipes/${slug}`,
+          type: 'article',
+          article: {
+            publishedTime: props['posts']['publishedat'],
+            modifiedTime: props['posts']['modifiedDate'],
+            section: 'Fitness',
+          },
+          images: [
+            {
+              url: props['posts']['img'],
+              width: 850,
+              height: 650,
+              alt: 'Photo of text',
+            },
+          ],
+        }}
+      />    
+        <ArticleJsonLd
         url={`https://www.ideatofit.com/posts/${slug}`}
         title={props['posts']['title']}
         images={[props['posts']['img']]}
@@ -91,13 +112,13 @@ function Blogs(props: {
         isAccessibleForFree={props['posts']['isaccessibleforfree']}
       />
       <Navigation />
-      {
+      {/* {
         showLogin &&
         <div className='fixed h-screen w-[100vw] grid place-items-center z-40'>
           <Login />
           <Button onClick={() => { setShowLogin(false) }}>Cancel</Button>
         </div>
-      }
+      } */}
       <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-36 max-xl:p-36 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
         <div className={`max-h-[50vh] w-full text-themeColor rounded-lg overflow-hidden`}>
           <Image src={props['posts']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />
