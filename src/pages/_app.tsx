@@ -8,9 +8,15 @@ import Head from 'next/head';
 
 export default function App({ Component, pageProps: {
   session, ...pageProps
-} }: AppProps) {
+}, router }: AppProps) {
   return (
-    <>
+    <motion.div
+    key={router.route}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.3 }}
+  >
       <Head>
         <title>Ideaotift - Health and Fitness Tips | Workout Plans </title>
         <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
@@ -59,6 +65,6 @@ export default function App({ Component, pageProps: {
       <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>
-    </>
+    </motion.div>
   )
 }

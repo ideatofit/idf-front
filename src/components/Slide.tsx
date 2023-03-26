@@ -8,6 +8,12 @@ import { useEffect } from 'react';
 
 function Slide(props: {
   slide: SlideProps
+  images: {
+    alt: string;
+    blurDataURL: string;
+    src: string;
+    type?: string | undefined;
+}[]
 }) {
 
   return (
@@ -18,8 +24,10 @@ function Slide(props: {
             <Carousel.Item key={i}>
               <Image
                 className="d-block w-100"
-                src={data['img']}
-                alt="First slide" 
+                src={props.images[i].src}
+                alt={props.images[i].alt}
+                blurDataURL={props.images[i].blurDataURL}
+                placeholder="blur" 
                 width={2880}
                 height={1620}
                 priority={true}

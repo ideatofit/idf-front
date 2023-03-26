@@ -17,6 +17,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/material": "^5.11.13",
     "@next/font": "13.1.6",
+    "@plaiceholder/next": "^2.5.0",
     "@popperjs/core": "^2.11.6",
     "@types/node": "18.13.0",
     "@types/react": "18.0.28",

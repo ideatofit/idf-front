@@ -8,6 +8,7 @@ specifiers:
   '@fortawesome/react-fontawesome': ^0.2.0
   '@mui/material': ^5.11.13
   '@next/font': 13.1.6
+  '@plaiceholder/next': ^2.5.0
   '@popperjs/core': ^2.11.6
   '@types/node': 18.13.0
   '@types/qs': ^6.9.7
@@ -51,6 +52,7 @@ dependencies:
   '@fortawesome/react-fontawesome': 0.2.0_d5rbrisxfyemehbvmdbryvgjte
   '@mui/material': 5.11.13_xqeqsl5kvjjtyxwyi3jhw3yuli
   '@next/font': 13.1.6
+  '@plaiceholder/next': 2.5.0_next@13.1.6+sharp@0.31.3
   '@popperjs/core': 2.11.6
   '@types/node': 18.13.0
   '@types/react': 18.0.28
@@ -670,6 +672,16 @@ packages:
       picocolors: 1.0.0
       tiny-glob: 0.2.9
       tslib: 2.5.0
+    dev: false
+
+  /@plaiceholder/next/2.5.0_next@13.1.6+sharp@0.31.3:
+    resolution: {integrity: sha512-vT8YtPpgQEKFtz0QiiCnH3NfyVlldYpnxR6X2sqCJvHk+pi/Be1nb62CdYQ7RoNePPcjBQoRDSPpZpGmg8mEdw==}
+    peerDependencies:
+      next: '>= 10.0.0'
+      sharp: '>= 0.30.6'
+    dependencies:
+      next: 13.1.6_biqbaboplfbrettd7655fr4n2y
+      sharp: 0.31.3
     dev: false
 
   /@popperjs/core/2.11.6:

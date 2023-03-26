@@ -14,16 +14,7 @@ function Footer(props: {
 }) {
     return (
         <footer className='h-fit w-[100vw]'>
-            <div className={`${opensans.className} min-h-[40vh] max-h-fit w-full border-borderColor border-y-2 flex flex-col p-4  bg-Midnight`}>
-                <div className='text-start text-themeColor'>
-                    <h5>Keywords</h5>
-                </div>
-                <div className='flex flex-wrap justify-start gap-8 text-white min-h-full p-4'>
-                    {
-                        props['footer']['keywords'].map((data) => data)
-                    }
-                </div>
-            </div>
+
             <div className='w-full min-h-[40vh] max-h-fit max-sm:h-fit max-xl:flex xl:flex max-xl:flex-row xl:flex-row max-sm:grid max-sm:grid-cols-2 bg-[#232631] text-themeColor'>
                 <div className='flex-[20%] flex flex-col justify-start items-start gap-2 p-8'>
                     <h6 className={`${roboto.className}`}>Contact us</h6>
@@ -75,6 +66,16 @@ function Footer(props: {
                     <div className='h-full w-full flex items-center justify-center'>
                         Sitemap
                     </div>
+                </div>
+            </div>
+            <div className={`${opensans.className} min-h-[40vh] max-h-fit w-full border-borderColor border-y-2 flex flex-col p-4  bg-Midnight`}>
+                <div className='text-start text-themeColor'>
+                    <h6>Keywords</h6>
+                </div>
+                <div className='flex flex-wrap justify-start gap-8 text-white min-h-full p-3 text-[0.9rem]'>
+                    {
+                        props['footer']['keywords'].map((data) => data)
+                    }
                 </div>
             </div>
         </footer>
