@@ -13,7 +13,7 @@ export default function ComingSoon() {
                 Feature Coming Soon
             </h1>
             <p style={{ fontSize: '24px', textAlign: 'center', marginTop: '30px', maxWidth: '600px' }}>
-                We're working hard to bring you this amazing new feature. Stay tuned for updates!
+                We&apos;re working hard to bring you this amazing new feature. Stay tuned for updates!
             </p>
         </div>
     );
