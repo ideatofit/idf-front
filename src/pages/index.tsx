@@ -83,7 +83,7 @@ const Home = (props: Props) => {
       </Head>
       <Navigation />
       <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
-        <Slide slide={props.slide} images={props.images} />
+        <Slide slide={props.slide} />
         <Transformation transformation={props.transformation} />
         {/* why to choose us */}
         <motion.div initial={{ opacity: 0}} whileInView={{ opacity: 1}} transition={{duration: 1}} className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
