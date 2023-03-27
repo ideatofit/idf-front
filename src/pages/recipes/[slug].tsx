@@ -19,6 +19,7 @@ import Recipecard from '@/components/Recipecard'
 import { RecipeData } from '@/types/recipe'
 import { NextSeo, RecipeJsonLd } from 'next-seo'
 import SocialMedia from '@/components/Socialmedia'
+import { getkeywords } from '@/lib/keywords'
 
 type comments = {
   id: number
@@ -32,6 +33,7 @@ function Diets(props: {
   diets: RecipeData,
   footer: FooterProps
   comments: comments
+  keywords: string[]
 }) {
   const [comments, setComment] = useState(props['comments']);
   const [userComment, setUserComment] = useState('')
@@ -70,6 +72,7 @@ function Diets(props: {
       <Head>
         <title>{props['diets']['title']}</title>
         <meta title='description' content={props['diets']['description']} />
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
       </Head>
       <NextSeo
       openGraph={{
@@ -166,7 +169,7 @@ function Diets(props: {
               className="absolute bottom-2 right-2 focus:outline-none"
               onClick={handleSendComment}
             >
-              <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} text-themeColor p-2`} />
+              <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} relative h-4 w-4 bottom-2 right-2`} />
             </button>
           </div>
           {comments.slice(0, displayedComments).map((data, i) => {
@@ -214,9 +217,10 @@ export async function getStaticProps(context: Params) {
   const diets = await getDietDataBySlug(slug)
   const footer = await getFooterData()
   const comments = await getDietComments(diets['id'])
+  const keywords = await getkeywords()
   return {
     props: {
-      diets, footer, comments
+      diets, footer, comments, keywords
     },
     revalidate: 60
   }

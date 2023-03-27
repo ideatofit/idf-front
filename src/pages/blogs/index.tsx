@@ -5,10 +5,12 @@ import getFooterData, { FooterProps } from '@/lib/footer'
 import { PostsProps, getPostComments, getPostsData } from '@/lib/posts'
 import Gotaquestion from '@/components/Gotaquestion'
 import Head from 'next/head'
+import { getkeywords } from '@/lib/keywords'
 
 function Index(props: {
   footer: FooterProps
   posts: PostsProps,
+  keywords: string[]
 }) {
 
   return (
@@ -16,26 +18,7 @@ function Index(props: {
       <Head>
       <title>Ideaotift - Blogs, Health and Fitness Tips</title>
         <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
-        <meta name="keywords" content="Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips
-,meal planning services
-,nutritionist consultation
-,Weight loss coaching
-,Online fitness classes
-,Fitness training programs
-,Workout routines for weight loss
-,Low-calorie meal ideas
-,Plant-based diet plans
-,High-fiber recipes
-,Gluten-free meal ideas
-,Meal prep delivery services
-,Healthy eating habits
-,Meal replacement options
-,Mindful eating techniques
-,High-intensity interval training (HIIT) workouts
-,Resistance training programs
-,Cardiovascular exercise routines
-,Nutrition education programs
-,Personalized workout plans." />
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
         <meta name="author" content="deepak sahu" />
       </Head>
       <div className='max-h-fit min-h-screen w-full bg-backgroundColor grid place-items-center text-themeColor'>
@@ -59,8 +42,9 @@ function Index(props: {
 export async function getStaticProps() {
   const footer = await getFooterData()
   const posts = await getPostsData()
+  const keywords = await getkeywords()
   return {
-    props: { footer, posts }
+    props: { footer, posts, keywords }
   }
 }
 

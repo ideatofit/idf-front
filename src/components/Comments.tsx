@@ -74,14 +74,14 @@ const Comment = (props: {
               className="focus:outline-none"
               onClick={handleEditClick}
             >
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon icon={faEdit} className='h-4 w-4'/>
             </button>
 
             <button
               className="focus:outline-none"
               onClick={handleDelete}
             >
-              <FontAwesomeIcon icon={loading ? faSpinner : faTrash} className={`${loading && spinnerStyle.spinner}`}/>
+              <FontAwesomeIcon icon={loading ? faSpinner : faTrash} className={`${loading && spinnerStyle.spinner} h-4 w-4`}/>
             </button>
           </div>
         }
@@ -96,8 +96,8 @@ const Comment = (props: {
             onChange={handleContentChange}
           />
           <div className="flex justify-end gap-1">
-            <button className="bg-MidnightOcean text-white px-4 py-2 rounded focus:outline-none" onClick={handleSaveEdit}>{loading && <FontAwesomeIcon icon={faSpinner} className={`${loading && spinnerStyle.spinner}`}/>} Save</button>
-            <button className="text-white px-4 py-2 rounded border bg-Midnight focus:outline-none" onClick={handleCancelEdit}>Cancel</button>
+            <button className="bg-MidnightOcean text-white px-4 py-2 rounded focus:outline-none flex gap-2" onClick={handleSaveEdit}>{loading && <FontAwesomeIcon icon={faSpinner} className={`${loading && spinnerStyle.spinner} h-4 w-4`}/>} Save</button>
+            <button className="text-white px-4 py-2 rounded border bg-Midnight focus:outline-none flex gap-2" onClick={handleCancelEdit}>Cancel</button>
           </div>
         </div>
       )}

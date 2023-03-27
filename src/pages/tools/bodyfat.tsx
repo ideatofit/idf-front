@@ -8,6 +8,7 @@ import bmr from '../../../public/bmr.png'
 import rep from '../../../public/1rep.png'
 import Head from 'next/head'
 import Gotaquestion from '@/components/Gotaquestion'
+import { getkeywords } from '@/lib/keywords'
 
 interface States {
   heightUnit: 'cm' | 'ft/in'
@@ -21,11 +22,11 @@ type ExerciseLevel = 'Sedentary' | 'Lightly Active' | 'Moderately Active' | 'Ver
 
 function BodyFat(props: {
   footer: FooterProps
+  keywords: string[]
 }) {
 
   // states handling input elements state
   const [heightUnit, setHeightUnit] = useState<States['heightUnit']>('cm')
-  const [neckCircumferenceUnit, setNeckCircumferenceUnit] = useState<States['neckCircumference']>('cm')
 
   // states handling input elements output values
   const [gender, setGender] = useState<States['gender']>('Male')
@@ -101,27 +102,7 @@ function BodyFat(props: {
     <Head>
     <title>Ideaotift - bodyfat calculator</title>
         <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
-        <meta name="keywords" content="Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips
-,bodyfat calculator
-,meal planning services
-,nutritionist consultation
-,Weight loss coaching
-,Online fitness classes
-,Fitness training programs
-,Workout routines for weight loss
-,Low-calorie meal ideas
-,Plant-based diet plans
-,High-fiber recipes
-,Gluten-free meal ideas
-,Meal prep delivery services
-,Healthy eating habits
-,Meal replacement options
-,Mindful eating techniques
-,High-intensity interval training (HIIT) workouts
-,Resistance training programs
-,Cardiovascular exercise routines
-,Nutrition education programs
-,Personalized workout plans." />
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
         <meta name="author" content="deepak sahu" />
     </Head>
       <Navigation />
@@ -130,7 +111,7 @@ function BodyFat(props: {
           <div className='flex xl:flex-row max-xl:flex-row max-sm:flex-col w-full h-full max-h-fit p-8 gap-8'>
             <div className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-3'>
               <div className='h-full w-full max-h-fit'>
-                <h1>BMR Calculator</h1>
+                <h1>BodyFat Calculator</h1>
               </div>
               <div className='max-sm:min-h-[10rem] h-[80%] w-full max-h-fit flex max-sm:flex-col gap-3'>
                 {/* ---------------------------Gender------------------------ */}
@@ -159,16 +140,7 @@ function BodyFat(props: {
                 {/* ---------------------------Height-------------------------- */}
                 {/* ---------------------------neck circumference-------------------- */}
                 <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
-                  {
-                    heightUnit === 'cm' ?
-                      <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className='h-full max-sm:min-w-[70%] w-[70%] border-white border-2 rounded-xl text-left pl-4' />
-                      :
-                      <>
-                        <input type="number" placeholder='ft' onChange={(e: any) => setFt(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
-                        <input type="number" placeholder='in' onChange={(e: any) => setInch(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
-                      </>
-                  }
-                  <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={heightError} />
+                      <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className='h-full max-sm:min-w-[100%] w-[100%] border-white border-2 rounded-xl text-left pl-4' />
                 </div>
                 {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
                 {/* ---------------------------neck circumference-------------------------- */}
@@ -206,9 +178,10 @@ function BodyFat(props: {
 
 export async function getStaticProps() {
   const footer = await getFooterData()
+  const keywords = await getkeywords()
   return {
     props: {
-      footer
+      footer, keywords
     }
   }
 }

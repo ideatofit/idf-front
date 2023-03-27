@@ -144,7 +144,7 @@ function Blogs(props: {
               className="absolute bottom-2 right-2 focus:outline-none"
               onClick={handleSendComment}
             >
-              <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} text-themeColor p-2`} />
+              <FontAwesomeIcon icon={sending ? faSpinner : faPaperPlane} className={`${sending && style.spinner} text-themeColor relative bottom-2 h-4 w-4`} />
             </button>
           </div>
           {comment.slice(0, displayedComments).map((data, i) => {

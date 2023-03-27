@@ -8,6 +8,7 @@ import rep from '../../../public/1rep.png'
 import bodyFatimg from '../../../public/bodyFat.png'
 import Head from 'next/head'
 import Gotaquestion from '@/components/Gotaquestion'
+import { getkeywords } from '@/lib/keywords'
 
 interface States {
   heightUnit: 'cm' | 'ft/in'
@@ -20,6 +21,7 @@ type ExerciseLevel = 'Sedentary' | 'Lightly Active' | 'Moderately Active' | 'Ver
 
 function Bmr(props: {
   footer: FooterProps
+  keywords: string[]
 }) {
 
   // states handling input elements state
@@ -225,26 +227,7 @@ function Bmr(props: {
     <Head>
     <title>Ideaotift - bmr calculator</title>
         <meta name="description" content="Ideaotift - calculate your body mass ratio with the help of our ideatofit body mass ratio calculator." />
-        <meta name="keywords" content="Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips
-,meal planning services
-,nutritionist consultation
-,Weight loss coaching
-,Online fitness classes
-,Fitness training programs
-,Workout routines for weight loss
-,Low-calorie meal ideas
-,Plant-based diet plans
-,High-fiber recipes
-,Gluten-free meal ideas
-,Meal prep delivery services
-,Healthy eating habits
-,Meal replacement options
-,Mindful eating techniques
-,High-intensity interval training (HIIT) workouts
-,Resistance training programs
-,Cardiovascular exercise routines
-,Nutrition education programs
-,Personalized workout plans., body mass ratio calculator, bmr caculator" />
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
         <meta name="author" content="deepak sahu" />
     </Head>
       <Navigation />
@@ -345,9 +328,10 @@ function Bmr(props: {
 
 export async function getStaticProps() {
   const footer = await getFooterData()
+  const keywords = await getkeywords()
   return {
     props: {
-      footer
+      footer, keywords
     }
   }
 }

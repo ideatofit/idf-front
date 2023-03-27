@@ -13,7 +13,7 @@ function Footer(props: {
     footer: FooterProps
 }) {
     return (
-        <footer className='h-fit w-[100vw]'>
+        <footer className='h-fit max-w-[100vw] overflow-hidden'>
 
             <div className='w-full min-h-[40vh] max-h-fit max-sm:h-fit max-xl:flex xl:flex max-xl:flex-row xl:flex-row max-sm:grid max-sm:grid-cols-2 bg-[#232631] text-themeColor'>
                 <div className='flex-[20%] flex flex-col justify-start items-start gap-2 p-8'>
