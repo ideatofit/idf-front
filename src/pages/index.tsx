@@ -3,15 +3,6 @@ import Image from 'next/image';
 import arrow1 from '../../public/arrow1.svg'
 import arrow2 from '../../public/arrow2.svg'
 import arrow3 from '../../public/arrow3.svg'
-import rectangle1 from '../../public/rectangle1.png'
-import rectangle2 from '../../public/rectangle2.png'
-import rectangle3 from '../../public/rectangle3.png'
-import rectangle4 from '../../public/rectangle4.png'
-import rectangle5 from '../../public/rectangle5.png'
-import rectangle6 from '../../public/rectangle6.png'
-import rectangle7 from '../../public/rectangle7.png'
-import rectangle8 from '../../public/rectangle8.png'
-import yellowshade from '../../public/yellowshade.png'
 import groupofpeople from '../../public/groupofpeople.png'
 import rep from '../../public/1rep.png'
 import bmr from '../../public/bmr.png'
@@ -42,6 +33,7 @@ import Head from 'next/head';
 import { getVideo } from '@/lib/video';
 import { getkeywords } from '@/lib/keywords';
 import { getPlaiceholder } from 'plaiceholder';
+import { motion } from 'framer-motion';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
@@ -94,7 +86,7 @@ const Home = (props: Props) => {
         <Slide slide={props.slide} images={props.images} />
         <Transformation transformation={props.transformation} />
         {/* why to choose us */}
-        <div className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
+        <motion.div initial={{ opacity: 0}} whileInView={{ opacity: 1}} transition={{duration: 1}} className={`${poppins.className} bg-backgroundColor flex flex-col h-fit min-w-full relative`}>
           <div className='text-center text-themeColor'>
             <h1 className='font-bold'>The IDEATOFIT way</h1>
           </div>
@@ -119,72 +111,51 @@ const Home = (props: Props) => {
             <p className='px-4'>The result: You achieve a fitter body...and a happier life!</p>
             <Link href="/user" className='text-decoration-none text-inherit'><Button text={'GET PERSONALIZED TRAINING'} /></Link>
           </div>
-        </div>
+        </motion.div>
         {/*  */}
-        <label htmlFor="iframe">hello</label>
-        <div className='min-w-[100vw] h-fit flex items-center justify-center gap-4 p-24'>
+        <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} className='min-w-[100vw] h-fit flex items-center justify-center gap-4 p-24'>
           <iframe className='h-[85vh] w-[85vw] rounded-xl' src={props['video']} title="YouTube video player" frameBorder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-        </div>
-        {/* <div className='absolute w-full max-sm:h-[36%] max-md:h-[26%] md:h-[36%] flex flex-col justify-center'>
-          <Image src={yellowshade} alt='yellowshade.png' />
-        </div>
-        <div className='absolute xl:h-[90%] max-sm:h-[36%] sm:h-[36%] w-full flex items-center justify-center'>
-          <h1 className={` ${inter.className} font-[700] text-[4.3rem] max-sm:text-[2.4rem] text-center text-white md:px-48 lg:px-48 xl:px-48`}>
-            Fun, trainer led group classes
-          </h1>
-        </div>
-        <div className='w-full flex flex-row max-xl:gap-4 xl:gap-4 justify-center'>
-          <Image src={rectangle5} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle6} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle7} alt='fitness image' className='max-xl:max-h-[20%] xl:max-h[20%] max-xl:max-w-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle8} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
-        </div>
-        <div className='w-full flex flex-row gap-4 justify-center'>
-          <Image src={rectangle1} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle2} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle3} alt='fitness image' className='max-xl:max-h-[20%] xl:max-w-[20%] max-sm:max-w-[30%] max-h-[20%] max-w-[20%]' />
-          <Image src={rectangle4} alt='fitness image' className='max-h-[20%] max-w-[20%] max-sm:hidden ' />
-        </div> */}
-        <div className='min-w-[100vw] bg-backgroundColor text-themeColor flex flex-col text-center'>
+        </motion.div>
+        <motion.div className='min-w-[100vw] bg-backgroundColor text-themeColor flex flex-col text-center'>
           <div>
-            <h1>Meet our expert fitness coaches</h1>
-            <p>Whether you&apos;re a beginner or an advanced fitness enthusiast, we have<br />the right coaches for all your fitness needs.</p>
+            <motion.h1 initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}}>Meet our expert fitness coaches</motion.h1>
+            <motion.p initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1.5}}>Whether you&apos;re a beginner or an advanced fitness enthusiast, we have<br />the right coaches for all your fitness needs.</motion.p>
           </div>
           <div className='flex max-xl:flex-row xl:flex-row max-sm:flex-col max-sm:p-4 gap-4 md:p-4'>
-            <div className='flex-[50%] flex justify-end'>
+            <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1.5}} className='flex-[50%] flex justify-end'>
               <Image src={groupofpeople} alt='group of fit people' />
-            </div>
+            </motion.div>
             <div className={`${opensans.className} font-thin flex-[50%] flex flex-col justify-evenly max-xl:pr-[8%] xl:pr-[8%] md:pr-[0]`}>
-              <section className='w-full flex flex-row items-center'>
+              <motion.section initial={{x: 100, opacity: 0}} whileInView={{x: 0, opacity: 1}} transition={{duration: 1, delay: 0.5}} className='w-full flex flex-row items-center'>
                 <Image src={check} alt='check png' />
                 <div className='p-2 text-left text-[1rem]'>Whether you&apos;re a beginner or a pro, our expert coaches can help you achieve your fitness goals</div>
-              </section>
-              <section className='w-full flex flex-row items-center'>
+              </motion.section>
+              <motion.section initial={{x: 100, opacity: 0}} whileInView={{x: 0, opacity: 1}} transition={{duration: 1, delay: 0.5}} className='w-full flex flex-row items-center'>
                 <Image src={check} alt='check png' />
                 <div className='p-2 text-left text-[1rem]'>Get a customised diet & workout plan made for your body and lifestyle</div>
-              </section>
-              <section className='w-full flex flex-row items-center'>
+              </motion.section>
+              <motion.section initial={{x: 100, opacity: 0}} whileInView={{x: 0, opacity: 1}} transition={{duration: 1, delay: 0.5}} className='w-full flex flex-row items-center'>
                 <Image src={check} alt='check png' />
                 <div className='p-2 text-left text-[1rem]'>One-on-one guidance to help you create the right long-term habits</div>
-              </section>
-              <section className='w-full flex flex-row items-center'>
+              </motion.section>
+              <motion.section initial={{x: 100, opacity: 0}} whileInView={{x: 0, opacity: 1}} transition={{duration: 1, delay: 0.5}} className='w-full flex flex-row items-center'>
                 <Image src={check} alt='check png' />
                 <div className='p-2 text-left text-[1rem]'>Love the gym or prefer home workouts? Get a plan tailored to your needs!</div>
-              </section>
+              </motion.section>
             </div>
           </div>
           <div className={`${opensans.className} flex flex-col text-center my-4`}>
             <div>
-              <h1 className='font-bold'>Track your fitness progress</h1>
-              <p className='font-thin'>Use our free fitness tools & trackers to take your journey<br /> to the next level!</p>
+              <motion.h1 initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} className='font-bold'>Track your fitness progress</motion.h1>
+              <motion.p initial={{opacity: 0}} whileInView={{opacity: 1.5}} transition={{duration: 1}} className='font-thin'>Use our free fitness tools & trackers to take your journey<br /> to the next level!</motion.p>
             </div>
             <div className='flex max-xl:flex-row xl:flex-row max-xl:justify-center xl:justify-center gap-2 font-thin max-sm:flex-col max-sm:items-center'>
-              <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} />
-              <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} />
-              <Tools img={bodyFat} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} />
+              <Tools initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.9 }} img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} animation={undefined} />
+              <Tools initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.9 }} img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} animation={undefined} />
+              <Tools initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1.9 }} img={bodyFat} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} animation={undefined} />
             </div>
           </div>
-        </div>
+        </motion.div>
         <div className={`min-w-[100vw] text-white text-[1rem] bg-backgroundColor w-full flex flex-col items-center gap-4`}>
           <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
             <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
@@ -308,23 +279,8 @@ export async function getStaticProps() {
     getFooterData(),
     (await getkeywords()).join(", ").toLocaleLowerCase(),
   ]);
-  const imagePaths = slide.slide.map((data)=> data['img'])
-  const images = await Promise.all(
-    imagePaths.map(async (src) => {
-      const {
-        base64,
-        img: { width, height, ...img },
-      } = await getPlaiceholder(src);
-
-      return {
-        ...img,
-        alt: "Paint Splashes",
-        blurDataURL: base64,
-      };
-    })
-  ).then((values) => values);
   return {
-    props: { slide, images, stories, transformation, wellnesshub, video, footer, keywords },
+    props: { slide, stories, transformation, wellnesshub, video, footer, keywords },
     revalidate: 60
   }
 }

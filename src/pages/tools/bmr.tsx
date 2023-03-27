@@ -333,8 +333,8 @@ function Bmr(props: {
         <div className='flex justify-around p-4'>
         </div>
         <div className='xl:flex max-xl:flex max-sm:flex-col items-center gap-3 justify-around p-4'>
-          <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} />
-          <Tools img={bodyFatimg} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} />
+          <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
+          <Tools img={bodyFatimg} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
         </div>
       </div>
       <Gotaquestion/>

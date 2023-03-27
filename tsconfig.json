@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/footer.ts", "src/pages/api/auth/[...nextauth].js", "src/pages/user/index.tsx", "src/lib/userdata.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/lib/footer.ts", "src/pages/api/auth/[...nextauth].js", "src/pages/user/index.tsx", "src/lib/userdata.js", "src/lib/userinfo.ts"],
   "exclude": ["node_modules"]
 }

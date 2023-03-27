@@ -168,8 +168,8 @@ function OneRep(props: {
           </div>
         </div>
         <div className='flex max-sm:flex-col max-sm:items-center max-sm:gap-3 justify-around p-4'>
-          <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} />
-          <Tools img={bodyFat} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} />      </div>
+          <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
+          <Tools img={bodyFat} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />      </div>
       </div>
       <Gotaquestion/>
       <Footer footer={props['footer']} />

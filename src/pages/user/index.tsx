@@ -31,9 +31,7 @@ function Index(props: {
         }
     };
 
-    const handleGender = () => {
-        console.log('hello')
-    }
+
 
     return (
         <>
@@ -96,7 +94,7 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your Gender?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-16'>
-                                <Select placeholder={'Gender'} options={['Male', 'Female']} onChange={handleGender} width={100} error={''} />
+                                <Select placeholder={'Gender'} options={['Male', 'Female']} width={100} error={''} onChange={(value)=> null} />
                             </div>
                         </div>}
                         {step === 6 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>

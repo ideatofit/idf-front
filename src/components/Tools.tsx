@@ -2,16 +2,21 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { MotionProps, motion } from 'framer-motion';
 
 const Tools = (props: {
  img: StaticImageData,
   alt: string,
   title: string,
   description: string
-  slug: string
+  slug: string,
+  initial: any,
+  whileInView: any,
+  transition: any,
+  animation: any
 }) => {
   return (
-    <div className='w-[27%] min-h-[25.5rem] max-sm:w-[90%] border-2 border-borderColor rounded-xl overflow-hidden'>
+    <motion.div initial={props['initial']} animate={props['animation']} whileInView={props['whileInView']} transition={props['transition']} className='w-[27%] min-h-[25.5rem] max-sm:w-[90%] border-2 border-borderColor rounded-xl overflow-hidden'>
       <Card style={{ width: '100%', border: 'none' }}>
         <div className='relative w-full'>
           <Image src={props.img} alt={props.alt} />
@@ -28,7 +33,7 @@ const Tools = (props: {
           </Link>
         </Card.Body>
       </Card>
-    </div>
+    </motion.div>
   );
 }
 

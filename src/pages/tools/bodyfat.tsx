@@ -194,8 +194,8 @@ function BodyFat(props: {
           </div>
         </div>
         <div className='flex max-sm:flex-col max-sm:items-center max-sm:gap-3 justify-around p-4'>
-        <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} />
-            <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} />
+        <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
+            <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
         </div>
       </div>
       <Gotaquestion/>
