@@ -113,8 +113,8 @@ const Home = (props: Props) => {
           </div>
         </motion.div>
         {/*  */}
-        <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} className='min-w-[100vw] h-fit flex items-center justify-center gap-4 p-24'>
-          <iframe className='h-[85vh] w-[85vw] rounded-xl' src={props['video']} title="YouTube video player" frameBorder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+        <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} className='min-w-[100vw] h-fit flex items-center justify-center gap-4 max-sm:p-2 p-24'>
+          <iframe className='xl:h-[85vh] max-xl:h-[85vh] xl:w-[85vw] max-xl:w-[85vw] max-sm:h-[24vh] max-sm:w-[100vw] rounded-xl' src={props['video']} title="YouTube video player" frameBorder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
         </motion.div>
         <motion.div className='min-w-[100vw] bg-backgroundColor text-themeColor flex flex-col text-center'>
           <div>
@@ -156,7 +156,7 @@ const Home = (props: Props) => {
             </div>
           </div>
         </motion.div>
-        <div className={`min-w-[100vw] text-white text-[1rem] bg-backgroundColor w-full flex flex-col items-center gap-4`}>
+        <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} className={`min-w-[100vw] text-white text-[1rem] bg-backgroundColor w-full flex flex-col items-center gap-4`}>
           <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
             <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
               <div className='flex-[45%] flex flex-col'>
@@ -223,7 +223,7 @@ const Home = (props: Props) => {
               </div>
             </div>
           </div>
-          <div style={{ background: '#232631' }} className='max-xl:h-[65vh] xl:h-[65vh] max-sm:h-fit max-sm:py-8 max-xl:w-[80%] xl:w-[80%] max-sm:w-[90%] flex max-xl:flex-row xl:flex-row max-sm:flex-col rounded-xl border-2 border-borderColor overflow-hidden'>
+          <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} style={{ background: '#232631' }} className='max-xl:h-[65vh] xl:h-[65vh] max-sm:h-fit max-sm:py-8 max-xl:w-[80%] xl:w-[80%] max-sm:w-[90%] flex max-xl:flex-row xl:flex-row max-sm:flex-col rounded-xl border-2 border-borderColor overflow-hidden'>
             <div className='h-full flex-[40%]'>
               <div style={{ borderRadius: '0px 243.54px 389.67px 0px' }} className='relative h-full w-[80%] left-0 bg-[#454958]'>
                 <Image src={deepakbhaiya} alt='deepak sahu' height={550} className='max-sm:relative absolute bottom-0 max-sm:left-0 left-[10%]' />
@@ -238,13 +238,13 @@ const Home = (props: Props) => {
                 <Link href="/user"><button className='bg-white h-12 w-32 rounded-xl text-[#252525]'>BOOK NOW</button></Link>
               </div>
             </div>
-          </div>
-        </div>
-        <div className={`${poppins.className} min-w-[100vw] h-[100%] bg-backgroundColor text-themeColor flex flex-col text-center py-4`}>
+          </motion.div>
+        </motion.div>
+        <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} className={`${poppins.className} min-w-[100vw] h-[100%] bg-backgroundColor text-themeColor flex flex-col text-center py-4`}>
           <div>
             <h1 className='font-[700]'>IDEATOFIT Stories</h1>
           </div>
-          <div className={` py-4 overflow-hidden `}>
+          <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} className={` py-4 overflow-hidden `}>
             <div className={`${storyStyle.stories} h-fit flex flex-row gap-4`}>
               {
                 props['stories']['stories'].map((data: any, i: number) => {
@@ -252,8 +252,8 @@ const Home = (props: Props) => {
                 })
               }
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         <Gotaquestion />
         <Footer footer={props.footer} />
       </div >

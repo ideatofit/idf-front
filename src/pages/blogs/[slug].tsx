@@ -17,6 +17,7 @@ import { Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
 import { ArticleJsonLd, NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
+import Socialmedia from '@/components/Socialmedia'
 
 interface userSession {
   session: any,
@@ -95,8 +96,8 @@ function Blogs(props: {
             },
           ],
         }}
-      />    
-        <ArticleJsonLd
+      />
+      <ArticleJsonLd
         url={`https://www.ideatofit.com/posts/${slug}`}
         title={props['posts']['title']}
         images={[props['posts']['img']]}
@@ -119,13 +120,14 @@ function Blogs(props: {
           <Button onClick={() => { setShowLogin(false) }}>Cancel</Button>
         </div>
       } */}
-      <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-36 max-xl:p-36 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
-        <div className={`max-h-[50vh] w-full text-themeColor rounded-lg overflow-hidden`}>
+      <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-32 max-xl:p-32 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
+        <div className={`max-h-[60vh] w-full text-themeColor rounded-lg overflow-hidden`}>
           <Image src={props['posts']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />
         </div>
         <header className='flex flex-col gap-1 py-4'>
-          <h5>{props['posts']['title']}</h5>
-          <span>{props['posts']['publishedat']}</span>
+          <h2><b>{props['posts']['title']}</b></h2>
+          <span>{props['posts']['date']}</span>
+          <Socialmedia/>
         </header>
         <article className={`text-themeColor py-8`} dangerouslySetInnerHTML={{ __html: props['posts']['content'] ?? "<h1>No post are available</h1>" }}></article>
         <div aria-label='Comments' className='min-h-fit w-full border-borderColor border-b-2 text-themeColor'>{`comments ${comment.length}`}</div>

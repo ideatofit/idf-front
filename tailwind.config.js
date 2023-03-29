@@ -15,6 +15,8 @@ module.exports = {
     './src/pages/donate/index.tsx',
     './src/pages/user/index.tsx',
     './src/pages/contactus.tsx',
+    './src/pages/aboutus/index.tsx',
+    './src/pages/comingsoon/index.tsx',
     //components
     './src/componensts/Slide.tsx',
     './src/components/Testimonial.tsx',

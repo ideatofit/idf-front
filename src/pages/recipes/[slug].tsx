@@ -72,7 +72,7 @@ function Diets(props: {
       <Head>
         <title>{props['diets']['title']}</title>
         <meta title='description' content={props['diets']['description']} />
-        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips`} />
       </Head>
       <NextSeo
       openGraph={{
@@ -217,7 +217,7 @@ export async function getStaticProps(context: Params) {
   const diets = await getDietDataBySlug(slug)
   const footer = await getFooterData()
   const comments = await getDietComments(diets['id'])
-  const keywords = await getkeywords()
+  const keywords = (await getkeywords()).join(", ").toLocaleLowerCase()
   return {
     props: {
       diets, footer, comments, keywords

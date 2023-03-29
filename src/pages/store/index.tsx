@@ -6,8 +6,7 @@ import shoelace from '../../../public/shoelace.png'
 import Header from '../../layouts/Navigation'
 import { Open_Sans, Poppins } from '@next/font/google'
 import CategoryCard from '@/components/CategoryCard'
-import getProducts from '@/lib/product'
-import { ProductsProps } from '@/lib/product'
+import getStoreData from '@/lib/storedata'
 import ProductsCard from '@/components/ProductsCard'
 import { motion } from 'framer-motion'
 import Footer from '@/layouts/Footer'
@@ -16,14 +15,15 @@ import getFooterData, { FooterProps } from '@/lib/footer'
 import { useSession, signIn, signOut } from "next-auth/react"
 import Button from '@/components/Button'
 import { getkeywords } from '@/lib/keywords'
+import { StoreProps } from '@/types/store'
 
 const opensans = Open_Sans({ subsets: ['latin'], weight: "400" })
 const poppins = Poppins({ subsets: ['latin'], weight: "500" })
 
 function Store(props: {
-  products: ProductsProps,
   footer: FooterProps
   keywords: string[]
+  store: StoreProps
 }) {
 
   return (
@@ -51,32 +51,31 @@ function Store(props: {
             damping: 14
           }
         }} className='relative h-fit max-w-[100vw]'>
-          <Image className='relative max-w-[100vw] w-full' style={{ maxWidth: "100vw", aspectRatio: "16 / 9" }} src={shoelace} alt={'shoelace typing women'} />
+          <Image className='relative max-w-[100vw] w-full' height={props['store']['banner']['height']} width={props['store']['banner']['width']} style={{ maxWidth: "100vw", aspectRatio: "16 / 9" }} src={props['store']['banner']['coverimage']} alt={props['store']['banner']['alt']} />
         </motion.div>
         <div className={`absolute z-50 max-sm:h-[35%] xl:pr-[35%] max-sm:w-full h-full w-full max-w-full flex flex-col items-start justify-center ${opensans.className} max-sm:pl-8 max-xl:pl-[5rem] xl:pl-[5rem]`}>
-          <h1 className={`max-xl:text-[4rem] xl:text-[4rem] max-sm:text-[1.3rem] ${poppins.className}`}>STAY HEALTHY AND WEIGHTLESS</h1>
-          <p className='pr-24 max-sm:text-[0.8rem]'>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature.</p>
-          <Link href="#products" className='text-decoration-none text-white'><Button text={'VIEW ALL PRODUCTS'} /></Link>
-        </div>
+          <h1 className={`max-xl:text-[4rem] xl:text-[4rem] max-sm:text-[1.3rem] ${poppins.className} pr-[10%]`}>{props['store']['banner']['title']}</h1>
+          { props['store']['banner']['button'] && <Link href={props['store']['banner']['target']} className='text-decoration-none text-white'><Button text={props['store']['banner']['textonbutton']} /></Link>}        
+          </div>
         <div className='h-fit min-w-full text-center'>
           <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>Shop by Categories</h1>
           <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
             {
-              props['products']['categories'].map((data, i) => {
+              props['store']['sections'].map((data, i) => {
                 return <CategoryCard key={i} img={''} alt={''} title={data['title']} id={`#${data['title']}`} />
               })
             }
           </div>
         </div>
         {
-          props['products']['categories'].map((data, i) => {
+          props['store']['sections'].map((data, i) => {
             return (
               <div id={`${data['title']}`} className='h-fit min-w-full text-center' key={`productsCard${i}`}>
                 <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>{data['title']}</h1>
                 <div className='w-[100vw] h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
-                  {data['products'].map((data) => {
+                  {data['products'].map((data, i) => {
                     return (
-                      <ProductsCard title={data['title']} price={data['price']} stars={data['stars']} img={data['img']} key={`${Math.ceil(Math.random() * 1.22)}`} />
+                      <Link key={`products${i}`} href={data['affiliate'][0]['link']} className='text-inherit text-decoration-none'><ProductsCard title={data['name']} price={data['price']} stars={data['stars']} img={data['img']} key={`ProductsCards${i}`} /></Link>
                     )
                   })}
                 </div>
@@ -92,11 +91,11 @@ function Store(props: {
 }
 
 export async function getStaticProps() {
-  const products = await getProducts()
+  const store = await getStoreData()
   const footer = await getFooterData()
   const keywords = await getkeywords()
   return {
-    props: { products, footer, keywords },
+    props: { store, footer, keywords },
     revalidate: 60
   }
 }

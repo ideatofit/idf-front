@@ -10,7 +10,6 @@ import cart from '../../public/cart.svg'
 import profile from '../../public/profile.svg'
 
 import { useSession, signIn, signOut } from 'next-auth/react';
-import { useEffect } from 'react';
 
 function Header() {
   const {data: session, status} = useSession()

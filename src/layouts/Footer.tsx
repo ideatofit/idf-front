@@ -26,7 +26,7 @@ function Footer(props: {
                     </div>
                     <div className='flex flex-row items-start gap-2'>
                         <Image src={email} alt={'phone'} className='hover:cursor-pointer' />
-                        <div className={`${opensans.className} font-[100] text-[0.8rem] text-[#AAAAAA]`}><a className='text-decoration-none text-[#AAAAAA]' href='mailto:desidevlopers@gmail.com'>desidevlopers@gmail.com</a></div>
+                        <div className={`${opensans.className} font-[100] text-[0.8rem] text-[#AAAAAA]`}><a className='text-decoration-none text-[#AAAAAA]' href={`mailto:${props['footer']['contact']['gmail']}`}>{props['footer']['contact']['gmail']}</a></div>
                     </div>
                     <div className='flex flex-row w-full gap-2'>
                         {

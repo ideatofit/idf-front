@@ -52,10 +52,5 @@ function Select(props: {
     )
 }
 
-export function unitSelect() {
-    return (
-        <h1>hello</h1>
-    )
-}
-
 export default Select
+

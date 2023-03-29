@@ -7,6 +7,7 @@ import Recipecard from '@/components/Recipecard'
 import { getDietData } from '@/lib/recipe'
 import { RecipesProps } from '@/types/recipe'
 import Head from 'next/head'
+import { getkeywords } from '@/lib/keywords'
 
 const publicsans = Public_Sans({ weight: '800', subsets: ['latin'] })
 
@@ -20,7 +21,7 @@ function Index(props: {
     <Head>
     <title>Ideaotift - Recipes, Health and Fitness Tips</title>
         <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
-        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(', ').toLocaleLowerCase()} `}/>
+        <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords} `}/>
         <meta name="author" content="deepak sahu" />
     </Head>
     <div className='h-screen max-w-[100vw] bg-backgroundColor text-themeColor '>
@@ -45,9 +46,10 @@ function Index(props: {
 export async function getStaticProps() {
   const footer = await getFooterData()
   const recipes = await getDietData()
+  const keywords = (await getkeywords()).join(", ").toLocaleLowerCase()
   return {
     props: {
-      footer, recipes
+      footer, recipes, keywords
     },
     revalidate: 60
   }

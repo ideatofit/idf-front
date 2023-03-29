@@ -28,7 +28,7 @@ function CategoryCard(props: {
       <div className='absolute h-full w-full z-10 text-themeColor flex items-end'>
         <div className='relative z-20 border-2 border-white w-full h-[20%] rounded-b-[1.4rem] flex'>
           <div className='relative flex-[100%] h-full border-l-2 border-white flex items-center justify-center'>
-            <Link href={props['id']} className={`${roboto.className} text-[1rem]`}>
+            <Link href={props['id']} className={`${roboto.className} text-[1rem] text-decoration-none text-inherit`}>
             Explore More
             </Link>
           </div>

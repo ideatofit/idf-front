@@ -2,14 +2,27 @@ import { useState } from 'react'
 import Checkbox from '@/components/Checkbox'
 import { Public_Sans } from '@next/font/google'
 import getFooterData, { FooterProps } from '@/lib/footer'
-import { GoalProps, getGoals } from '@/lib/userinfo'
+import { GoalProps, getGoals, submitData } from '@/lib/userinfo'
 import Navigation from '@/layouts/Navigation'
 import Footer from '@/layouts/Footer'
 import Select from '@/components/Select'
 import Form from 'react-bootstrap/Form';
 import { faPhone, faCircleExclamation, faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { signIn, useSession } from 'next-auth/react'
 
+
+type Payload = {
+    goal: {
+        connect: number[]
+    },
+    height: number,
+    age: number,
+    weight: number,
+    gender: {
+        connect: [number]
+    }
+}
 
 const publicsans = Public_Sans({ weight: ['400', '800', '300'], subsets: ['latin'] })
 
@@ -17,21 +30,109 @@ function Index(props: {
     footer: FooterProps,
     goals: GoalProps,
 }) {
+    const genderOptions = ['Male', 'Female']
     const [step, setStep] = useState(1)
+    const [goalId, setGoalId] = useState([7])
+    const [height, setHeight] = useState(0)
+    const [weight, setWeight] = useState(0)
+    const [age, setAge] = useState(0)
+    const [gender, setGender] = useState(1)
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+
+    const payload: Payload = {
+        goal: {
+            connect: goalId
+        },
+        height,
+        age,
+        weight,
+        gender:{
+            connect: [gender]
+        }
+    }
+
+    const { data: session, status } = useSession()
 
     const handleNextButton = () => {
         if (step < 6) {
+            const currentUrl = window.location.href
+            if (status === 'unauthenticated') {
+                signIn('google', { callbackUrl: currentUrl })
+            }
             setStep(step + 1);
         }
+
+        if (step === 6) {
+            submitData(payload, session)
+        }
+
     };
 
     const handleBackButton = () => {
         if (step > 1) {
+            const currentUrl = window.location.href
+            if (status === 'unauthenticated') {
+                signIn('google', { callbackUrl: currentUrl })
+            }
             setStep(step - 1);
         }
     };
 
+    const handleCheckboxChange = (id: number) => {
+        // Update the goals state variable based on which checkbox was checked or unchecked
+        // For example:
+        if (goalId.includes(id)) {
+            // Remove id from goals
+            setGoalId(goalId.filter(item => item !== id));
+            console.log(payload)
+        } else {
+            // Add id to goals
+            setGoalId([...goalId, id]);
+            console.log(payload)
 
+        }
+    }
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        // Update the state variables based on the name and value of the input field that changed
+        // For example:
+        if (name === 'height') {
+            setHeight(parseInt(value));
+            console.log(payload)
+
+        } else if (name === 'age') {
+            setAge(parseInt(value));
+            console.log(payload)
+
+        } else if (name === 'weight') {
+            setWeight(parseInt(value));
+            console.log(payload)
+
+        } else if (name === 'gender') {
+            setGender(value === 'Male' ? 1 : 2);
+            console.log(payload)
+
+        }
+
+        else if (name === 'name'){
+            setName(value)
+        }
+
+        else if(name === 'email'){
+            setEmail(value)
+        }
+    }
+
+    const handleGenderChange = (value: string) => {
+        // Update the payload based on which option was selected
+        // For example:
+        if (value === 'Male') {
+            setGender(0)
+        } else if (value === 'Female') {
+            setGender(1)
+        }
+    }
 
     return (
         <>
@@ -59,8 +160,8 @@ function Index(props: {
                             <div className='flex flex-col gap-4 w-full h-fit'>
                                 <p className={`font-[300]`}>Choose any one</p>
                                 {
-                                    props['goals']['goals'].map((data, i) => {
-                                        return <Checkbox key={`checkbox${i}`} text={data} />
+                                    props['goals'].map((data, i) => {
+                                        return <Checkbox key={`checkbox${i}`} text={data['goals']} id={data['id']} onSelect={handleCheckboxChange} />
                                     })
                                 }
                             </div>
@@ -70,7 +171,7 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your height?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
-                                <input type="number" className='h-16 w-full border-white border-2 rounded p-3' />
+                                <input type="number" name='height'  className='h-16 w-full border-white border-2 rounded p-3' placeholder='height in cm' onChange={handleInputChange} />
                             </div>
                         </div>}
                         {step === 3 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
@@ -78,7 +179,7 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your weight?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
-                                <input type="number" className='h-16 w-full border-white border-2 rounded p-3' />
+                                <input type="number" name='weight' placeholder='weight in kg' className='h-16 w-full border-white border-2 rounded p-3' onChange={handleInputChange} />
                             </div>
                         </div>}
                         {step === 4 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
@@ -86,7 +187,7 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your age?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
-                                <input type="number" className='h-16 w-full border-white border-2 rounded p-3' />
+                                <input type="number" name='age' placeholder='age' className='h-16 w-full border-white border-2 rounded p-3' onChange={handleInputChange} />
                             </div>
                         </div>}
                         {step === 5 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
@@ -94,7 +195,7 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your Gender?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-16'>
-                                <Select placeholder={'Gender'} options={['Male', 'Female']} width={100} error={''} onChange={(value)=> null} />
+                                <Select placeholder={'Gender'} options={genderOptions} width={100} error={''} onChange={handleGenderChange} />
                             </div>
                         </div>}
                         {step === 6 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
@@ -105,24 +206,24 @@ function Index(props: {
                                 <Form>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Full name</Form.Label>
-                                        <Form.Control type="text" placeholder="Full Name" className='text-white h-12' />
+                                        <Form.Control name='name' type="text" placeholder="Full Name" className='text-white h-12' />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Email address</Form.Label>
-                                        <Form.Control type="email" placeholder="name@example.com" className='text-white h-12' />
+                                        <Form.Control name='email' type="email" placeholder="name@example.com" className='text-white h-12' />
                                     </Form.Group>
                                 </Form>
                                 <div className='h-fit flex justify-evenly items-center'>
                                     <div className="h-12 w-full flex justify-center">
-                                        <FontAwesomeIcon icon={faPhone} className='h-6 w-6'/>
+                                        <FontAwesomeIcon icon={faPhone} className='h-6 w-6' />
                                         <span className='text-[0.65rem] pb-1 pl-2'>we will call you in a 1 - 2 business days</span>
                                     </div>
                                     <div className="h-12 w-full flex justify-center">
-                                        <FontAwesomeIcon icon={faCircleExclamation} className='h-6 w-6'/>
+                                        <FontAwesomeIcon icon={faCircleExclamation} className='h-6 w-6' />
                                         <span className='text-[0.65rem] pl-2 pt-1'>personalized solution</span>
                                     </div>
                                     <div className="h-12 w-full flex justify-center">
-                                        <FontAwesomeIcon icon={faCircleQuestion} className='h-6 w-6'/>
+                                        <FontAwesomeIcon icon={faCircleQuestion} className='h-6 w-6' />
                                         <span className='text-[0.65rem] pl-2 pt-1'>get your doubts solved</span>
                                     </div>
                                 </div>

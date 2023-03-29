@@ -7,6 +7,9 @@ import Image from 'next/image'
 import getPlans, { PlanProps } from '@/lib/diet'
 import DietCard from '@/components/DietCard'
 import Testimonial from '@/components/Testimonial'
+import Button from '@/components/Button'
+import Link from 'next/link'
+import Gotaquestion from '@/components/Gotaquestion'
 
 
 const poppins = Poppins({ weight: ['100', '200', '400', '600', '700', '800'], subsets: ['latin'] })
@@ -47,17 +50,24 @@ function Index(props: {
               {
                 props['diet']['plans'].map((data, i) => {
                   return (
-                    <div key={`plansCard${i}`} className={`min-h-[25vh] flex flex-col items-start justify-start ${tab === `tab${i}` ? '' : 'hidden'}`}>
-                      <h4>What will you get?</h4>
-                      <h6>Explore various plans according to you</h6>
-                      <div className='py-3 text-left'>
-                        {
-                          data['offerDetails'].map((data, i) => {
-                            return (
-                              <h6 key={`h6${i}`} className='my-3'>{data['text']}</h6>
-                            )
-                          })
-                        }
+                    <div key={`plansCard${i}`} className={`min-h-[25vh] flex flex-col items-start justify-between ${tab === `tab${i}` ? '' : 'hidden'}`}>
+                      <div>
+                        <h4>What will you get?</h4>
+                        <h6>Explore various plans according to you</h6>
+                        <div className='py-3 text-left'>
+                          {
+                            data['offerDetails'].map((data, i) => {
+                              return (
+                                <h6 key={`h6${i}`} className='my-3'>{data['text']}</h6>
+                              )
+                            })
+                          }
+                        </div>
+                      </div>
+                      <div>
+                        <Link href={''} className='text-decoration-none text-inherit'>
+                        <Button text={'START NOW'} />
+                        </Link>
                       </div>
                     </div>
                   )
@@ -81,12 +91,13 @@ function Index(props: {
         </div>
         <div className='flex h-fit w-[80%] overflow-auto'>
           {
-            props['diet']['testimonials'].map((data, i)=>{
-              return <Testimonial key={`testimonials${i}`} text={data['text']} avatar={data['img']} name={data['name']}/>
+            props['diet']['testimonials'].map((data, i) => {
+              return <Testimonial key={`testimonials${i}`} text={data['text']} avatar={data['img']} name={data['name']} />
             })
           }
         </div>
       </div>
+      <Gotaquestion/>
       <Footer footer={props['footer']} />
     </>
   )

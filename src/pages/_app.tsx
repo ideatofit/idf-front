@@ -14,7 +14,7 @@ export default function App({ Component, pageProps: {
     key={router.route}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
+    exit={{ opacity: 0.6 }}
     transition={{ duration: 0.3 }}
   >
       <Head>
