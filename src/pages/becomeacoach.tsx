@@ -28,7 +28,7 @@ const BecomeACoach = (props:{
     <>
         <Navigation/>
     <div className="min-h-screen max-sm:flex-col flex items-center justify-center bg-backgroundColor p-8">
-      <div className=" bg-gradient-to-r from-Midnight to-MidnightOcean text-white p-8 rounded-lg shadow-md max-w-[70%] w-full">
+      <div className=" bg-gradient-to-r from-Midnight to-MidnightOcean text-white p-8 rounded-lg shadow-md max-sm:max-w-full max-w-[70%] w-full">
         <h2 className="text-2xl font-bold mb-4 text-center">Become a Coach</h2>
         <img
           className="w-full rounded-lg mb-4"
@@ -38,7 +38,7 @@ const BecomeACoach = (props:{
         <p className="text-gray-200 mb-4 text-center">
           Join our team of fitness coaches and help others achieve their goals!
         </p>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit} className='flex flex-col gap-3'>
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
