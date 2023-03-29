@@ -27,7 +27,7 @@ const BecomeACoach = (props:{
   return (
     <>
         <Navigation/>
-    <div className="min-h-screen flex items-center justify-center bg-backgroundColor p-8">
+    <div className="min-h-screen max-sm:flex-col flex items-center justify-center bg-backgroundColor p-8">
       <div className=" bg-gradient-to-r from-Midnight to-MidnightOcean text-white p-8 rounded-lg shadow-md max-w-[70%] w-full">
         <h2 className="text-2xl font-bold mb-4 text-center">Become a Coach</h2>
         <img
