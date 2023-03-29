@@ -95,6 +95,27 @@ function BodyFat(props: {
 
   }
 
+    // convert ft and inch to cm
+    function convertToCm(e: React.ChangeEvent<HTMLInputElement>) {
+      const placeholder: string = e.target.placeholder
+      const value: number = Number(e.target.value)
+      let centimeters: number = 0;
+      // to avoid the delay of states instead of states we are using fresh values using switch statement
+      switch (placeholder) {
+        case 'ft':
+          setFt(value)
+          centimeters = ((value * 30.48) + (inch * 2.54))
+          break;
+  
+        case 'in':
+          setInch(value)
+          centimeters = ((ft * 30.48) + (value * 2.54))
+          break;
+      }
+      setHeight(Math.round(centimeters))
+      return centimeters
+    }
+
 
 
   return (
@@ -127,20 +148,20 @@ function BodyFat(props: {
                 <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='Height' onChange={handleHeightChange} className='h-full max-sm:min-w-[70%] w-[70%] border-white border-2 rounded-xl text-left pl-4' />
+                      <input type="number" placeholder='Height' onChange={handleHeightChange} className={`h-full max-sm:min-w-[70%] w-[70%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-500'}`} />
                       :
                       <>
-                        <input type="number" placeholder='ft' onChange={(e: any) => setFt(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
-                        <input type="number" placeholder='in' onChange={(e: any) => setInch(e.target.value)} className='h-full w-[35%] border-white border-2 rounded-xl text-left pl-4' />
+                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full w-[35%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-500'}`} />
+                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full w-[35%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-500'}`} />
                       </>
                   }
-                  <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={heightError} />
+                  <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={''} />
                 </div>
                 {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
                 {/* ---------------------------Height-------------------------- */}
                 {/* ---------------------------neck circumference-------------------- */}
                 <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
-                      <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className='h-full max-sm:min-w-[100%] w-[100%] border-white border-2 rounded-xl text-left pl-4' />
+                      <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className={`h-full max-sm:min-w-[100%] w-[100%] border-white border-2 rounded-xl text-left pl-4 ${neckCircumferenceError === '' ? '' : 'bg-red-500'}`} />
                 </div>
                 {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
                 {/* ---------------------------neck circumference-------------------------- */}

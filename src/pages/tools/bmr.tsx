@@ -244,7 +244,7 @@ function Bmr(props: {
                 {/* ---------------------------Gender------------------------ */}
 
                 {/* ---------------------------Exercise----------------------- */}
-                <Select placeholder={''} options={exerciseOptions} onChange={handleExerciseChange} width={50} error={exerciseError} />
+                <Select placeholder={'Activity level'} options={exerciseOptions} onChange={handleExerciseChange} width={50} error={exerciseError} />
                 {/* ---------------------------Exercise--------------------- */}
               </div>
               <div className='max-sm:min-h-[10rem] max-xl:h-[80%] xl:h-[80%] w-full flex max-sm:flex-col gap-3'>
@@ -255,11 +255,11 @@ function Bmr(props: {
                       <input type="number" placeholder='cm' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
                       :
                       <>
-                        <input type="number" placeholder='ft' onChange={convertToCm} className='h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
-                        <input type="number" placeholder='in' onChange={convertToCm} className='h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
+                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} />
+                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} />
                       </>
                   }
-                  <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={heightError} />
+                  <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={''} />
                 </div>
                 {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
                 {/* ---------------------------Height-------------------------- */}

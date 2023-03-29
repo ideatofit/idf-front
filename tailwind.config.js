@@ -17,6 +17,7 @@ module.exports = {
     './src/pages/contactus.tsx',
     './src/pages/aboutus/index.tsx',
     './src/pages/comingsoon/index.tsx',
+    './src/pages/becomeacoach.tsx',
     //components
     './src/componensts/Slide.tsx',
     './src/components/Testimonial.tsx',
