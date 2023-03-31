@@ -88,11 +88,11 @@ export async function getDietDataBySlug(slug: string) {
           name: data["name"],
           text: data["text"],
           url: data["url"],
-          img: data["img"]["data"]["attributes"]["url"],
+          img: data?.img?.data?.attributes?.url ?? '',
         };
       }
     ),
-    ...(parsedData?.data?.[0]?.attributes?.video
+    ...(parsedData?.data[0]?.attributes?.video
       ? {
           video: {
             name: parsedData["data"][0]["attributes"]["video"]["name"],

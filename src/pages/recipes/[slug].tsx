@@ -142,7 +142,7 @@ function Diets(props: {
           <Button onClick={() => { setShowLogin(false) }}>Cancel</Button>
         </div>
       } */}
-      <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-36 max-xl:p-36 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
+      <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-24 max-xl:p-36 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
         <div className={`max-h-[50vh] w-full text-themeColor rounded-lg overflow-hidden`}>
           <Image src={props['diets']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />
         </div>

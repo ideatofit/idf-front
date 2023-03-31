@@ -3,8 +3,8 @@ module.exports = {
   content: [
     './src/pages/index.tsx',
     './src/pages/store/index.tsx',
-    './src/pages/recipe/index.tsx',
-    './src/pages/recipe/[slug].tsx',
+    './src/pages/recipes/index.tsx',
+    './src/pages/recipes/[slug].tsx',
     './src/pages/diets/index.tsx',
     './src/pages/blogs/index.tsx',
     './src/pages/blogs/[slug].tsx',
