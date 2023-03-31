@@ -20,19 +20,10 @@ function Aboutus(props: {
   return (
     <>
       <Navigation />
-      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col pt-28 text-themeColor gap-12`}>
-        <Image src={props['aboutusData']['coverimage']} alt={''} width={1440} height={518}/>
-        <div className='flex'>
-          <div className='flex flex-[50%] p-4 gap-4 items-end justify-end'>
-            <Image src={about1} alt='' className='rounded-lg' />
-            <Image src={about2} alt='' className='rounded-lg h-[80%]' />
-          </div>
-          <div className='flex-[50%] items-start justify-start pr-[13%]' dangerouslySetInnerHTML={{__html: props['aboutusData']['aboutus']}}>
-          </div>
-        </div>
-        <div className='text-center px-[12%]' dangerouslySetInnerHTML={{__html: props['aboutusData']['otherContent']}}>
-        </div>
-        <Gotaquestion/>
+      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col pt-28 text-themeColor gap-12 max-w-[100vw] overflow-hidden`}>
+        <Image src={props['aboutusData']['coverimage']} alt={''} width={1440} height={518} className='max-w-[100vw] object-cover' />
+        <main className='p-24 max-w-full' dangerouslySetInnerHTML={{ __html: props['aboutusData']['aboutus'] }} />
+        <Gotaquestion />
       </div>
       <Footer footer={props['footer']} />
     </>
