@@ -20,8 +20,8 @@ function Aboutus(props: {
   return (
     <>
       <Navigation />
-      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col pt-28 text-themeColor gap-12 max-w-[100vw] overflow-hidden`}>
-        <Image src={props['aboutusData']['coverimage']} alt={''} width={1440} height={518} className='max-w-[100vw] object-cover' />
+      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col text-themeColor gap-12 max-w-[100vw] overflow-hidden`}>
+        <Image src={props['aboutusData']['coverimage']} alt={''} width={1440} height={518} className='max-w-[100vw] min-h-screen object-cover' />
         <main className='p-24 max-w-full' dangerouslySetInnerHTML={{ __html: props['aboutusData']['aboutus'] }} />
         <Gotaquestion />
       </div>
