@@ -45,7 +45,8 @@ export async function getStaticProps() {
   return {
     props: {
       footer, aboutusData
-    }
+    },
+    revalidate: 60
   }
 }
 
