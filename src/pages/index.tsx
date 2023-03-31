@@ -47,9 +47,7 @@ import { TransformationProps } from '@/lib/transformation';
 import { wellnesshubProps } from '@/lib/wellnesshub';
 
 // Utils
-import { getPlaiceholder } from 'plaiceholder';
 import { NextSeo } from 'next-seo';
-import Livecustomercounter from '@/components/livecustomercounter';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
@@ -271,7 +269,6 @@ const Home = (props: Props) => {
             </div>
           </motion.div>
         </motion.div>
-        <Livecustomercounter/>
         <Gotaquestion />
         <Footer footer={props.footer} />
       </div >
