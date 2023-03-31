@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import Head from 'next/head';
+import { motion } from 'framer-motion';
+
+// assets
 import arrow1 from '../../public/arrow1.svg'
 import arrow2 from '../../public/arrow2.svg'
 import arrow3 from '../../public/arrow3.svg'
@@ -9,31 +14,42 @@ import bmr from '../../public/bmr.png'
 import bodyFat from '../../public/bodyFat.png'
 import check from '../../public/check.svg'
 import deepakbhaiya from '../../public/images/deepakbhaiya.png'
+
+// Components
 import Navigation from '@/layouts/Navigation';
 import Slide from '@/components/Slide';
 import Transformation from '@/components/Tranformation';
 import Tools from '@/components/Tools';
-import { Poppins, Open_Sans, Inter } from '@next/font/google'
 import Stories from '@/components/Stories';
 import Footer from '@/layouts/Footer';
 import Button from '@/components/Button';
+import Gotaquestion from '@/components/Gotaquestion';
+
+// Styles
 import storyStyle from '../styles/Stories.module.css'
+
+// Fonts
+import { Poppins, Open_Sans, Inter } from '@next/font/google'
+
+// Data
 import { getSlideData } from '@/lib/slide';
 import { getStoriesData } from '@/lib/stories';
 import getTransformationData from '@/lib/transformation';
+import getWellnesshubData from '@/lib/wellnesshub';
+import getFooterData, { FooterProps } from '@/lib/footer';
+import { getVideo } from '@/lib/video';
+import { getkeywords } from '@/lib/keywords';
+
+// Types
 import { SlideProps } from '@/lib/slide';
 import { StoriesProps } from '@/lib/stories';
 import { TransformationProps } from '@/lib/transformation';
-import getWellnesshubData from '@/lib/wellnesshub';
 import { wellnesshubProps } from '@/lib/wellnesshub';
-import Link from 'next/link';
-import Gotaquestion from '@/components/Gotaquestion';
-import getFooterData, { FooterProps } from '@/lib/footer';
-import Head from 'next/head';
-import { getVideo } from '@/lib/video';
-import { getkeywords } from '@/lib/keywords';
+
+// Utils
 import { getPlaiceholder } from 'plaiceholder';
-import { motion } from 'framer-motion';
+import { NextSeo } from 'next-seo';
+import Livecustomercounter from '@/components/livecustomercounter';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
@@ -81,6 +97,7 @@ const Home = (props: Props) => {
         <meta property="twitter:description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
         <meta property="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_scale,w_1200,h_675/v1679590456/logo_fy99df.png" />
       </Head>
+      <NextSeo noindex={true}/>
       <Navigation />
       <div className='w-100vw h-fit bg-backgroundColor overflow-hidden'>
         <Slide slide={props.slide} />
@@ -226,7 +243,7 @@ const Home = (props: Props) => {
           <motion.div initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{duration: 1}} style={{ background: '#232631' }} className='max-xl:h-[65vh] xl:h-[65vh] max-sm:h-fit max-sm:py-8 max-xl:w-[80%] xl:w-[80%] max-sm:w-[90%] flex max-xl:flex-row xl:flex-row max-sm:flex-col rounded-xl border-2 border-borderColor overflow-hidden'>
             <div className='h-full flex-[40%]'>
               <div style={{ borderRadius: '0px 243.54px 389.67px 0px' }} className='relative h-full w-[80%] left-0 bg-[#454958]'>
-                <Image src={deepakbhaiya} alt='deepak sahu' height={550} className='max-sm:relative absolute bottom-0 max-sm:left-0 left-[10%]' />
+                <Image src={deepakbhaiya} alt='deepak sahu' height={550} width={750} className='scale-[1.3] max-sm:relative absolute top-0 max-sm:left-0 left-[10%]' />
               </div>
             </div>
             <div className='flex-[60%] h-full'>
@@ -254,6 +271,7 @@ const Home = (props: Props) => {
             </div>
           </motion.div>
         </motion.div>
+        <Livecustomercounter/>
         <Gotaquestion />
         <Footer footer={props.footer} />
       </div >

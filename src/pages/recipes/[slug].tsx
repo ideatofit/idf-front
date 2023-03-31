@@ -75,26 +75,26 @@ function Diets(props: {
         <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips`} />
       </Head>
       <NextSeo
-      openGraph={{
-        title: props['diets']['title'],
-        description: props['diets']['description'],
-        url: `https://www.ideatofit.com/recipes/${slug}`,
-        type: 'article',
-        article: {
-          publishedTime: props['diets']['publishedAt'],
-          section: 'Yoga',
-          tags: ['cardio', 'weight loss', 'nutrition'],
-        },
-        images: [
-          {
-            url: `${props['diets']['img']}`,
-            width: 850,
-            height: 650,
-            alt: props['diets']['title'],
+        openGraph={{
+          title: props['diets']['title'],
+          description: props['diets']['description'],
+          url: `https://www.ideatofit.com/recipes/${slug}`,
+          type: 'article',
+          article: {
+            publishedTime: props['diets']['publishedAt'],
+            section: 'Yoga',
+            tags: ['cardio', 'weight loss', 'nutrition'],
           },
-        ],
-      }}
-    />
+          images: [
+            {
+              url: `${props['diets']['img']}`,
+              width: 850,
+              height: 650,
+              alt: props['diets']['title'],
+            },
+          ],
+        }}
+      />
       <RecipeJsonLd
         name={props['diets']['title']}
         description={props['diets']['description']}
@@ -122,17 +122,17 @@ function Diets(props: {
           ratingValue: '5',
           ratingCount: '18',
         }}
-        video={{
-          name: props['diets']['video']['name'],
-          description: props['diets']['video']['description'],
-          contentUrl: props['diets']['video']['contenturl'],
-          embedUrl: props['diets']['video']['embedurl'],
-          uploadDate: props['diets']['publishedAt'],
-          duration: props['diets']['video']['duration'],
-          thumbnailUrls: props['diets']['video']['thumbnailUrl'],
-          hasPart: props['diets']['video']['haspart'],
-          regionsAllowed: ['IT', 'NL'],
-        }}
+        // adding video props conditionally
+        {...(props['diets']['video'] && { video:{
+      name: props['diets']['video']['name'],
+      description: props['diets']['video']['description'],
+      contentUrl: props['diets']['video']['contenturl'],
+      embedUrl: props['diets']['video']['embedurl'],
+      uploadDate: props['diets']['publishedAt'],
+      duration: props['diets']['video']['duration'],
+      thumbnailUrls: props['diets']['video']['thumbnailUrl'],
+      hasPart: props['diets']['video']['haspart'],
+}})}
       />
       <Navigation />
       {/* {

@@ -73,7 +73,7 @@ export type RecipesData = {
             }
           ];
         };
-        video: {
+        video?: {
           id:number
           name: string
           description: string
@@ -248,7 +248,7 @@ export type RecipeData = {
   //   ratingValue: string
   //   ratingCount: string
   // }
-  video: {
+  video?: {
     name: string;
     description: string;
     contenturl: string;

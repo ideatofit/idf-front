@@ -10,6 +10,8 @@ import Form from 'react-bootstrap/Form';
 import { faPhone, faCircleExclamation, faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { signIn, useSession } from 'next-auth/react'
+import { Button } from 'react-bootstrap'
+import { motion } from 'framer-motion'
 
 
 type Payload = {
@@ -39,6 +41,13 @@ function Index(props: {
     const [gender, setGender] = useState(1)
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
+    const [validated, setValidated] = useState(false);
+    const [submitted, setSubmitted] = useState(false)
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+        setValidated(true);
+    };
 
     const payload: Payload = {
         goal: {
@@ -47,7 +56,7 @@ function Index(props: {
         height,
         age,
         weight,
-        gender:{
+        gender: {
             connect: [gender]
         }
     }
@@ -115,11 +124,11 @@ function Index(props: {
 
         }
 
-        else if (name === 'name'){
+        else if (name === 'name') {
             setName(value)
         }
 
-        else if(name === 'email'){
+        else if (name === 'email') {
             setEmail(value)
         }
     }
@@ -171,7 +180,24 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your height?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
-                                <input type="number" name='height'  className='h-16 w-full border-white border-2 rounded p-3' placeholder='height in cm' onChange={handleInputChange} />
+                                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Height</Form.Label>
+                                        <Form.Control
+                                            name="height"
+                                            type="number"
+                                            placeholder="Height in cm"
+                                            className="h-16 w-full border-white border-2 rounded p-3"
+                                            value={height}
+                                            onChange={handleInputChange}
+                                            required
+                                            isInvalid={validated && (height < 50 || height > 300)}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please enter a valid height between 50 and 300 cm.
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Form>
                             </div>
                         </div>}
                         {step === 3 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
@@ -179,7 +205,24 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your weight?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
-                                <input type="number" name='weight' placeholder='weight in kg' className='h-16 w-full border-white border-2 rounded p-3' onChange={handleInputChange} />
+                                <Form noValidate validated={validated} onChange={handleSubmit}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Weight</Form.Label>
+                                        <Form.Control
+                                            name="weight"
+                                            type="number"
+                                            placeholder="Weight in kg"
+                                            className="h-16 w-full text-white border-2 rounded p-3"
+                                            value={weight}
+                                            onChange={handleInputChange}
+                                            required
+                                            isInvalid={validated && (weight < 1 || weight > 500)}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please enter a valid weight between 1 and 500 kg.
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Form>
                             </div>
                         </div>}
                         {step === 4 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
@@ -187,7 +230,24 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your age?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
-                                <input type="number" name='age' placeholder='age' className='h-16 w-full border-white border-2 rounded p-3' onChange={handleInputChange} />
+                                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Age</Form.Label>
+                                        <Form.Control
+                                            name="age"
+                                            type="number"
+                                            placeholder="Age"
+                                            className="h-16 w-full border-2 rounded p-3 text-white"
+                                            value={age}
+                                            onChange={handleInputChange}
+                                            required
+                                            isInvalid={validated && (age < 18 || age > 120)}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please enter a valid age between 18 and 120.
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Form>
                             </div>
                         </div>}
                         {step === 5 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
@@ -203,16 +263,35 @@ function Index(props: {
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>We are almost there</h1>
                             <p className={`font-[400]`}>Share your contact details and our expert will call you back and help you unlock a happier, healthier life!</p>
                             <div className='flex flex-col gap-4 w-full h-fit px-16 py-12'>
-                                <Form>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Full name</Form.Label>
-                                        <Form.Control name='name' type="text" placeholder="Full Name" className='text-white h-12' />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Email address</Form.Label>
-                                        <Form.Control name='email' type="email" placeholder="name@example.com" className='text-white h-12' />
-                                    </Form.Group>
-                                </Form>
+                                {
+                                    !submitted ?
+                                        <Form noValidate validated={validated} onChange={handleSubmit}>
+                                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                <Form.Label>Full name</Form.Label>
+                                                <Form.Control name='name' type="text" placeholder="Full Name" className='text-white h-12' required isInvalid={validated && name.trim() === ''} onChange={(e) => setName(e.target.value)} />
+                                                <Form.Control.Feedback type="invalid">
+                                                    Please enter your full name.
+                                                </Form.Control.Feedback>
+                                            </Form.Group>
+                                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                <Form.Label>Email address</Form.Label>
+                                                <Form.Control name='email' type="email" placeholder="name@example.com" className='text-white h-12' required isInvalid={validated && !email.includes('@')} onChange={(e) => setEmail(e.target.value)} />
+                                                <Form.Control.Feedback type="invalid">
+                                                    Please enter a valid email address.
+                                                </Form.Control.Feedback>
+                                            </Form.Group>
+                                            <Button type='submit'>Submit</Button>
+                                        </Form>
+                                        : <motion.div
+                                            initial={{ opacity: 0, y: -50 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.5 }}
+                                        >
+                                            <h2>Hurray! 🎉</h2>
+                                            <p>Thank you for submitting the form. We will contact you soon.</p>
+                                        </motion.div>
+
+                                }
                                 <div className='h-fit flex justify-evenly items-center'>
                                     <div className="h-12 w-full flex justify-center">
                                         <FontAwesomeIcon icon={faPhone} className='h-6 w-6' />
@@ -233,7 +312,7 @@ function Index(props: {
                     </div>
                     <div className='w-[78%] h-fit flex flex-row justify-between'>
                         <button className='bg-[#1D202C] h-12 w-24 rounded-lg' onClick={handleBackButton}>&larr; Back</button>
-                        <button className='bg-[#1D202C] h-12 w-24 rounded-lg' onClick={handleNextButton}>Next &rarr;</button>
+                        <button className='bg-[#1D202C] h-12 w-24 rounded-lg' onClick={handleNextButton} >Next &rarr;</button>
                     </div>
                 </div>
             </div>

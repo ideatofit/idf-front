@@ -234,7 +234,7 @@ function Bmr(props: {
       <div className='h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
         <div className='xl:h-[80vh] max-xl:h-[80vh] max-sm:min-h-[135vh] xl:w-[80vw] max-xl:w-[80vw] max-sm:w-[90vw] rounded-[2rem] border-2 border-borderColor bg-inherit '>
           <div className='flex xl:flex-row max-xl:flex-row max-sm:flex-col w-full h-full max-h-fit xl:p-8 max-xl:p-8 max-sm:p-4 gap-8'>
-            <div className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-3'>
+            <div className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-6'>
               <div className='h-full w-full max-h-fit'>
                 <h1>BMR Calculator</h1>
               </div>
@@ -249,10 +249,10 @@ function Bmr(props: {
               </div>
               <div className='max-sm:min-h-[10rem] max-xl:h-[80%] xl:h-[80%] w-full flex max-sm:flex-col gap-3'>
                 {/* ---------------------------Height-------------------- */}
-                <div className='h-full max-sm:w-full xl:w-[50%] max-xl:w-[50%] flex gap-2'>
+                <div className='relative h-full max-sm:w-full xl:w-[50%] max-xl:w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='cm' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
+                      <input type="number" placeholder='Height' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
                       :
                       <>
                         <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} />
@@ -261,7 +261,7 @@ function Bmr(props: {
                   }
                   <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={''} />
                 </div>
-                {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
+                {heightError !== '' && <div className='absolute text-red-500 text-[0.7rem] bottom-0'>{weightError}</div>}
                 {/* ---------------------------Height-------------------------- */}
 
                 {/* ---------------------------Weight------------------------- */}
@@ -272,16 +272,20 @@ function Bmr(props: {
               {weightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
               <div className='xl:h-[80%] max-xl:h-[80%] max-sm:min-h-[10rem] w-full max-h-fit flex gap-3 max-sm:flex-col'>
                 {/* ---------------------------Age-------------------------- */}
-                <input type="number" placeholder='Age' onChange={handleAgeChange} className='h-full max-xl:w-[50%] xl:w-[50%] max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
+                <div className='h-full w-[50%]'>
+                <input type="number" placeholder='Age' onChange={handleAgeChange} className=' h-full max-xl:w-full xl:w-full max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
                 {ageError !== '' && <div className='text-red-500 text-[0.7rem]'>{ageError}</div>}
+                </div>
                 {/* ---------------------------Age-------------------------- */}
 
                 {/* ---------------------------BodyFatPercentage-------------------------- */}
-                <input type="number" placeholder='BodyFatPercentage' onChange={handleBodyFatPercentageChange} className='h-full max-xl:w-[50%] xl:w-[50%] max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
+                <div className='h-full w-[50%]'>
+                <input type="number" placeholder='BodyFatPercentage' onChange={handleBodyFatPercentageChange} className='h-full max-xl:w-full xl:w-full max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
+              {bodyFatError !== '' && <div className='text-red-500 text-[0.7rem]'>{bodyFatError}</div>}
+                </div>
                 {/* ---------------------------BodyFatPercentage-------------------------- */}
               </div>
-              {bodyFatError !== '' && <div className='text-red-500 text-[0.7rem]'>{bodyFatError}</div>}
-              <div className='h-full w-full max-h-fit flex gap-3'>
+              <div className='h-full w-full max-h-fit flex gap-3 mt-4'>
                 <div className='h-full w-full bg-themeColor rounded-xl flex justify-between items-center p-3 text-black'>
                   <div className='font-[400] text-[1.2rem]'>Let&apos;s calculate it</div>
                   <button type='button' className='px-4 py-2 rounded-md bg-white font-[600]' onClick={handleCalculate}>Calculate</button>

@@ -5,7 +5,6 @@ import { RecipesProps } from "@/types/recipe";
 import { RecipeData } from "@/types/recipe";
 import { Comment } from "@/types/comment";
 
-
 // this function returns the whole list of recipes
 export async function getDietData() {
   const query = qs.stringify({
@@ -19,7 +18,7 @@ export async function getDietData() {
       return {
         title: data["attributes"]["title"],
         description: data["attributes"]["description"],
-        img: data['attributes']['image']['data']['attributes']['url'],
+        img: data["attributes"]["image"]["data"]["attributes"]["url"],
         vegeterian: true,
         slug: data["attributes"]["slug"],
       };
@@ -40,16 +39,16 @@ export async function getDietDataBySlug(slug: string) {
       image: true,
       keywords: true,
       video: {
-        populate: "*"
+        populate: "*",
       },
       instructions: {
-        populate: "*"
+        populate: "*",
       },
       ingredients: true,
       categories: {
         populate: {
           recipes: {
-            populate: "image"
+            populate: "image",
           },
         },
       },
@@ -63,10 +62,12 @@ export async function getDietDataBySlug(slug: string) {
     id: parsedData["data"][0]["id"],
     title: parsedData["data"][0]["attributes"]["title"],
     description: parsedData["data"][0]["attributes"]["description"],
-    img: parsedData["data"][0]["attributes"]["image"]["data"]["attributes"]["url"],
+    img: parsedData["data"][0]["attributes"]["image"]["data"]["attributes"][
+      "url"
+    ],
     slug: parsedData["data"][0]["attributes"]["slug"],
-    content: parsedData['data'][0]['attributes']['content'],
-    date: formatDate(parsedData["data"][0]['attributes']['publishedAt']),
+    content: parsedData["data"][0]["attributes"]["content"],
+    date: formatDate(parsedData["data"][0]["attributes"]["publishedAt"]),
     author: parsedData["data"][0]["attributes"]["authorname"],
     preptime: `PT${parsedData["data"][0]["attributes"]["prepTime"]}M`,
     cooktime: `PT${parsedData["data"][0]["attributes"]["cookTime"]}M`,
@@ -83,45 +84,66 @@ export async function getDietDataBySlug(slug: string) {
     ),
     instructions: parsedData["data"][0]["attributes"]["instructions"].map(
       (data) => {
-        return { name: data["name"], text: data["text"], url: data["url"], img: data['img']['data']['attributes']['url'] };
+        return {
+          name: data["name"],
+          text: data["text"],
+          url: data["url"],
+          img: data["img"]["data"]["attributes"]["url"],
+        };
       }
     ),
-    video: {
-      name: parsedData["data"][0]["attributes"]["video"]["name"],
-      description: parsedData["data"][0]["attributes"]["video"]["description"],
-      thumbnailUrl: parsedData['data'][0]['attributes']['video']['thumbnailurl'],
-      duration: `PT${parsedData["data"][0]["attributes"]["video"]["duration"]}M`,
-      contenturl: parsedData["data"][0]["attributes"]["video"]["contenturl"],
-      embedurl: parsedData["data"][0]["attributes"]["video"]["embedurl"],
-      uploaddate: parsedData["data"][0]["attributes"]["publishedAt"],
-      haspart: parsedData["data"][0]["attributes"]["video"]["hasparts"].map((data) => {
-        return {
-          "@type": data["type"],
-          name: data["name"],
-          startoffset: null,
-          endoffset: null,
-          url: data["url"],
-        };
-      }),
-      watchcount: null,
-      publication: {
-        "@type": "BroadcastEvent",
-        islivebroadcast: parsedData['data'][0]['attributes']['video']['publication']['islivebroadcast'],
-        startdate: null,
-        enddate: null
-      }
-    },
+    ...(parsedData?.data?.[0]?.attributes?.video
+      ? {
+          video: {
+            name: parsedData["data"][0]["attributes"]["video"]["name"],
+            description:
+              parsedData["data"][0]["attributes"]["video"]["description"],
+            thumbnailUrl:
+              parsedData["data"][0]["attributes"]["video"]["thumbnailurl"],
+            duration: `PT${parsedData["data"][0]["attributes"]["video"]["duration"]}M`,
+            contenturl:
+              parsedData["data"][0]["attributes"]["video"]["contenturl"],
+            embedurl: parsedData["data"][0]["attributes"]["video"]["embedurl"],
+            uploaddate: parsedData["data"][0]["attributes"]["publishedAt"],
+            haspart: parsedData["data"][0]["attributes"]["video"][
+              "hasparts"
+            ].map((data) => {
+              return {
+                "@type": data["type"],
+                name: data["name"],
+                startoffset: null,
+                endoffset: null,
+                url: data["url"],
+              };
+            }),
+            watchcount: null,
+            publication: {
+              "@type": "BroadcastEvent",
+              islivebroadcast:
+                parsedData["data"][0]["attributes"]["video"]["publication"][
+                  "islivebroadcast"
+                ],
+              startdate: null,
+              enddate: null,
+            },
+          },
+        }
+      : {}),
     relations: parsedData["data"][0]["attributes"]["categories"]["data"]
       .map((data) => {
         const relationsArray = [];
-        for (let index = 0; index < data["attributes"]["recipes"]["data"].length; index++) {
+        for (
+          let index = 0;
+          index < data["attributes"]["recipes"]["data"].length;
+          index++
+        ) {
           const recipe = data["attributes"]["recipes"]["data"][index];
           if (recipe["attributes"]) {
             relationsArray.push({
               title: recipe["attributes"]["title"],
               description: recipe["attributes"]["description"],
               publishedat: formatDate(recipe["attributes"]["publishedAt"]),
-              img: recipe['attributes']['image']['data']['attributes']['url'],
+              img: recipe["attributes"]["image"]["data"]["attributes"]["url"],
               slug: recipe["attributes"]["slug"],
               id: recipe["id"],
               vegeterian: true,
@@ -136,7 +158,7 @@ export async function getDietDataBySlug(slug: string) {
         return data["attributes"]["keywords"];
       }
     ),
-    publishedAt: parsedData['data'][0]['attributes']['publishedAt']
+    publishedAt: parsedData["data"][0]["attributes"]["publishedAt"],
   };
   return filteredData;
 }
