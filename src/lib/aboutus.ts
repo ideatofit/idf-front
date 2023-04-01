@@ -1,17 +1,29 @@
 import qs from "qs";
-import { AboutUs } from "@/types/aboutus";
+import { AboutUs, AboutUsProps } from "@/types/aboutus";
 
-export const getAboutusData = async () =>  {
-    const query = qs.stringify({
-        populate: "coverImage"
-    })
-    const url = `https://server.ideatofit.com/api/aboutus?${query}`
-    const fetchedData = await fetch(url)
-    const parsedData: AboutUs = await fetchedData.json()
-    const filteredData = {
-        coverimage: parsedData['data']['attributes']['coverImage']['data']['attributes']['url'],
-        aboutus: parsedData['data']['attributes']['aboutus'],
-        otherContent: parsedData['data']['attributes']['otherContent'] ? parsedData['data']['attributes']['otherContent'] : ''
+export const getAboutUsData = async () => {
+  const query = qs.stringify({
+    populate: {
+        aboutus: {
+        populate: "image",
+      },
+    },
+  });
+  const url = `https://server.ideatofit.com/api/aboutus?${query}`;
+  const fetchedData = await fetch(url);
+  const parsedData: AboutUs = await fetchedData.json();
+  console.log(parsedData)
+  const filteredData: AboutUsProps = parsedData["data"]["attributes"]["aboutus"].map(
+    (data) => {
+      return {
+        text: data['text'],
+        image: {
+            url: data["image"]['data']['attributes']['url'],
+            height: data["image"]['data']['attributes']['height'],
+            width: data["image"]['data']['attributes']['width']
+        }
+      };
     }
-    return filteredData
-}
+  );
+  return filteredData
+};

@@ -162,7 +162,7 @@ function Diets(props: {
               onChange={(e) => {
                 setUserComment(e.target.value)
               }
-              }
+            }
             />
             <button
               type='button'

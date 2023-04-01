@@ -6,11 +6,31 @@ export type wellnesshubProps = {
     description: string;
     textonbutton: string;
     link: string;
-    img1: string;
-    img2: string;
-    img3: string;
-    img4: string;
-    img5: string;
+    img1:{
+      url: string
+      height: number
+      width: number
+    }
+    img2:{
+      url: string
+      height: number
+      width: number
+    }
+    img3:{
+      url: string
+      height: number
+      width: number
+    }
+    img4:{
+      url: string
+      height: number
+      width: number
+    }
+    img5:{
+      url: string
+      height: number
+      width: number
+    }
   };
   tab2: {
     title: string
@@ -35,6 +55,8 @@ type wellnesshubData = {
         data: {
           attributes: {
             url: string;
+            height: number
+            width: number
           };
         };
       };
@@ -42,6 +64,8 @@ type wellnesshubData = {
         data: {
           attributes: {
             url: string;
+            height: number
+            width: number
           };
         };
       };
@@ -49,6 +73,8 @@ type wellnesshubData = {
         data: {
           attributes: {
             url: string;
+            height: number
+            width: number
           };
         };
       };
@@ -56,6 +82,8 @@ type wellnesshubData = {
         data: {
           attributes: {
             url: string;
+            height: number
+            width: number
           };
         };
       };
@@ -63,6 +91,8 @@ type wellnesshubData = {
         data: {
           attributes: {
             url: string;
+            height: number
+            width: number
           };
         };
       };
@@ -92,11 +122,31 @@ export default async function getWellnesshubData() {
           description: parsedData['data']['attributes']['tab1']['description'],
           textonbutton: parsedData['data']['attributes']['tab1']['textonbutton'],
           link: parsedData['data']['attributes']['tab1']['link'],
-          img1: parsedData['data']['attributes']['tab1']['img1']['data']['attributes']['url'],
-          img2: parsedData['data']['attributes']['tab1']['img2']['data']['attributes']['url'],
-          img3: parsedData['data']['attributes']['tab1']['img3']['data']['attributes']['url'],
-          img4: parsedData['data']['attributes']['tab1']['img4']['data']['attributes']['url'],
-          img5: parsedData['data']['attributes']['tab1']['img5']['data']['attributes']['url'],
+          img1: {
+            url: parsedData['data']['attributes']['tab1']['img1']['data']['attributes']['url'],
+            height: parsedData['data']['attributes']['tab1']['img1']['data']['attributes']['height'],
+            width: parsedData['data']['attributes']['tab1']['img1']['data']['attributes']['width'],
+          },
+          img2: {
+            url: parsedData['data']['attributes']['tab1']['img2']['data']['attributes']['url'],
+            height: parsedData['data']['attributes']['tab1']['img2']['data']['attributes']['height'],
+            width: parsedData['data']['attributes']['tab1']['img2']['data']['attributes']['width'],
+          },
+          img3: {
+            url: parsedData['data']['attributes']['tab1']['img3']['data']['attributes']['url'],
+            height: parsedData['data']['attributes']['tab1']['img3']['data']['attributes']['height'],
+            width: parsedData['data']['attributes']['tab1']['img3']['data']['attributes']['width'],
+          },
+          img4: {
+            url: parsedData['data']['attributes']['tab1']['img4']['data']['attributes']['url'],
+            height: parsedData['data']['attributes']['tab1']['img4']['data']['attributes']['height'],
+            width: parsedData['data']['attributes']['tab1']['img4']['data']['attributes']['width'],
+          },
+          img5: {
+            url: parsedData['data']['attributes']['tab1']['img5']['data']['attributes']['url'],
+            height: parsedData['data']['attributes']['tab1']['img5']['data']['attributes']['height'],
+            width: parsedData['data']['attributes']['tab1']['img5']['data']['attributes']['width'],
+          }
       },
       tab2: {
         title: '',

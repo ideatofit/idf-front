@@ -7,7 +7,7 @@ import about1 from '../../../public/aboutus_1.jpg.webp'
 import about2 from '../../../public/aboutus_2.jpg.webp'
 import { Roboto, Open_Sans } from '@next/font/google'
 import Gotaquestion from '@/components/Gotaquestion'
-import { getAboutusData } from '@/lib/aboutus'
+import { getAboutUsData } from '@/lib/aboutus'
 import { AboutUsProps } from '@/types/aboutus'
 
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
@@ -20,11 +20,23 @@ function Aboutus(props: {
   return (
     <>
       <Navigation />
-      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col text-themeColor gap-12 max-w-[100vw] overflow-hidden`}>
-        <Image src={props['aboutusData']['coverimage']} alt={''} width={1440} height={518} className='max-w-[100vw] min-h-screen object-cover' />
-        <main className='p-24 max-w-full' dangerouslySetInnerHTML={{ __html: props['aboutusData']['aboutus'] }} />
-        <Gotaquestion />
+      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col items-center text-themeColor max-w-[100vw] overflow-hidden p-48`}>
+        {
+          props['aboutusData'].map((data, i) => {
+            return (
+              <div key={`aboutus${i}`} className={`max-h-[50vh] min-h-[50vh] w-full flex ${i % 2 == 0 ? 'flex-row-reverse' : ''} `}>
+                <div className='min-h-full min-w-[50%] flex items-center justify-center'>
+                  <Image src={data['image']['url']} height={data['image']['height']} width={data['image']['width']} alt='' className='max-w-full max-h-full' />
+                </div>
+                <div className='min-h-full min-w-[50%] bg-MidnightOcean'>
+                  <article dangerouslySetInnerHTML={{ __html: data['text'] }} className='h-full min-w-full min-h-full p-4 items-center' />
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
+      <Gotaquestion />
       <Footer footer={props['footer']} />
     </>
   )
@@ -32,7 +44,7 @@ function Aboutus(props: {
 
 export async function getStaticProps() {
   const footer = await getFooterData()
-  const aboutusData = await getAboutusData()
+  const aboutusData = await getAboutUsData()
   return {
     props: {
       footer, aboutusData

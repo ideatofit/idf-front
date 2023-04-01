@@ -36,6 +36,7 @@ module.exports = {
     './src/components/DietCard.tsx',
     './src/components/Socialmedia.tsx',
     './src/components/Livecustomercounter.tsx',
+    './src/components/Blogscard.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

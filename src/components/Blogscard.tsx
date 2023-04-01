@@ -12,7 +12,7 @@ function Blogscard(props: {
   publishedOn: string
 }) {
   return (
-    <Link href={`/blogs/${props['slug']}`} className='relative z-10 max-w-fit text-decoration-none text-inherit border-4 border-borderColor'>
+    <Link href={`/blogs/${props['slug']}`} className='relative z-10 w-[24rem] text-decoration-none text-inherit '>
     <Card bg='transparent' className='relative z-0 h-full w-full border-0'>
       <Image src={props['img']} alt={''} width={363} height={194}  className='aspect-16/9 w-full rounded-lg'/>
       <Card.Body className='p-0 pt-3'>

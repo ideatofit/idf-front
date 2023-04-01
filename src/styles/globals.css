@@ -35,7 +35,11 @@ a:hover {
 .react-tel-input > input{
   height: 3rem !important;
   width: 100% !important;
-  
+}
+
+.country-list{
+  color: black;
+  background-color: white !important;
 }
 
 
