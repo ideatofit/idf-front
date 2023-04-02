@@ -65,7 +65,7 @@ function Store(props: {
             <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
               {
                 props['store']['sections'].map((data, i) => {
-                  return <CategoryCard key={i} img={data['img']} alt={''} title={data['title']} min-price={data['min-price']} />
+                  return <CategoryCard key={i} img={data['img']} alt={''} title={data['title']} min-price={data['min-price']} redirectToId={data['title']} />
                 })
               }
             </div>

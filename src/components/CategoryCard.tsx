@@ -17,6 +17,7 @@ function CategoryCard(props: {
   },
   alt: string
   'min-price': number
+  redirectToId: string
 }) {
   return (
     <motion.div initial={'initial'} animate={'animate'} variants={{
@@ -35,7 +36,7 @@ function CategoryCard(props: {
             </span>
           </div>
           <div className='relative flex-[50%] h-full border-l-2 border-white flex items-center justify-center'>
-            <Link href={'#'} className={`${roboto.className} text-[1rem] text-decoration-none text-inherit`}>
+            <Link href={`#${props['redirectToId']}`} className={`${roboto.className} text-[1rem] text-decoration-none text-inherit`}>
               Explore More
             </Link>
           </div>
