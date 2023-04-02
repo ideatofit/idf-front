@@ -296,7 +296,7 @@ function Bmr(props: {
               <div className='h-full w-full max-h-fit '>
                 <h6>Fill the required details and your results will appear here!</h6>
                 <h4>Your BMR is</h4>
-                <div className=' flex items-center py-3 px-2 justify-between text-black bg-white w-full h-fit rounded-xl'>
+                <div className=' flex items-center py-3 px-3 justify-between text-black bg-white w-full h-fit rounded-xl'>
                   <div className={`${bmr !== 0 && 'font-bold text-[1.1rem]'}`}>{bmr === 0 ? 'Your result will appear here' : Math.round(bmr)}</div>
                   <div className='font-bold'>Kcal</div>
                 </div>
@@ -307,7 +307,7 @@ function Bmr(props: {
               <div className='h-full w-full max-h-fit '>
                 <div className='h-full w-full max-h-fit flex flex-col gap-1'>
                   <h4>Your TDEE is</h4>
-                  <div className=' flex items-center py-3 px-2 justify-between text-black bg-white w-full h-fit rounded-xl'>
+                  <div className=' flex items-center py-3 px-3 justify-between text-black bg-white w-full h-fit rounded-xl'>
                     <div className={`${tdee !== 0 && 'font-bold text-[1.1rem]'}`}>{tdee === 0 ? 'Your result will appear here' : Math.round(tdee)}</div>
                     <div className='font-bold'>Kcal</div>
                   </div>

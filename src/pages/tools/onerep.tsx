@@ -138,7 +138,7 @@ function OneRep(props: {
               <div className='h-full w-full max-h-fit flex flex-col gap-2'>
                 <h6>Fill the required details and your results will appear here!</h6>
                 <h4>Your 1RM is</h4>
-                <div className=' flex items-center py-3 px-2 justify-between text-black bg-white w-full h-fit rounded-xl'>
+                <div className=' flex items-center py-3 px-3 justify-between text-black bg-white w-full h-fit rounded-xl'>
                   <div className={`${oneRepMax !== 0 && 'font-bold text-[1.1rem]'}`}>{oneRepMax === 0 ? 'Your result will appear here' : oneRepMax}</div>
                   <div className='font-bold'>Kg</div>
                 </div>

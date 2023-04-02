@@ -95,37 +95,37 @@ function BodyFat(props: {
 
   }
 
-    // convert ft and inch to cm
-    function convertToCm(e: React.ChangeEvent<HTMLInputElement>) {
-      const placeholder: string = e.target.placeholder
-      const value: number = Number(e.target.value)
-      let centimeters: number = 0;
-      // to avoid the delay of states instead of states we are using fresh values using switch statement
-      switch (placeholder) {
-        case 'ft':
-          setFt(value)
-          centimeters = ((value * 30.48) + (inch * 2.54))
-          break;
-  
-        case 'in':
-          setInch(value)
-          centimeters = ((ft * 30.48) + (value * 2.54))
-          break;
-      }
-      setHeight(Math.round(centimeters))
-      return centimeters
+  // convert ft and inch to cm
+  function convertToCm(e: React.ChangeEvent<HTMLInputElement>) {
+    const placeholder: string = e.target.placeholder
+    const value: number = Number(e.target.value)
+    let centimeters: number = 0;
+    // to avoid the delay of states instead of states we are using fresh values using switch statement
+    switch (placeholder) {
+      case 'ft':
+        setFt(value)
+        centimeters = ((value * 30.48) + (inch * 2.54))
+        break;
+
+      case 'in':
+        setInch(value)
+        centimeters = ((ft * 30.48) + (value * 2.54))
+        break;
     }
+    setHeight(Math.round(centimeters))
+    return centimeters
+  }
 
 
 
   return (
     <>
-    <Head>
-    <title>Ideaotift - bodyfat calculator</title>
+      <Head>
+        <title>Ideaotift - bodyfat calculator</title>
         <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
         <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
         <meta name="author" content="deepak sahu" />
-    </Head>
+      </Head>
       <Navigation />
       <div className='min-h-screen max-h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
         <div className='max-sm:min-h-[100vh] h-[65vh] max-h-fit max-sm:min-w-[90vw] w-[80vw] rounded-[2rem] border-2 border-borderColor bg-inherit overflow-hidden'>
@@ -161,7 +161,7 @@ function BodyFat(props: {
                 {/* ---------------------------Height-------------------------- */}
                 {/* ---------------------------neck circumference-------------------- */}
                 <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
-                      <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className={`h-full max-sm:min-w-[100%] w-[100%] border-white border-2 rounded-xl text-left pl-4 ${neckCircumferenceError === '' ? '' : 'bg-red-500'}`} />
+                  <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className={`h-full max-sm:min-w-[100%] w-[100%] border-white border-2 rounded-xl text-left pl-4 ${neckCircumferenceError === '' ? '' : 'bg-red-500'}`} />
                 </div>
                 {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
                 {/* ---------------------------neck circumference-------------------------- */}
@@ -178,7 +178,7 @@ function BodyFat(props: {
               <div className='h-full w-full max-h-fit '>
                 <h6>Fill the required details and your results will appear here!</h6>
                 <h4>Your BMR is</h4>
-                <div className=' flex items-center py-3 px-2 justify-between text-black bg-white w-full h-fit rounded-xl'>
+                <div className=' flex items-center py-3 px-3 justify-between text-black bg-white w-full h-fit rounded-xl'>
                   <div className={`${bodyFat !== 0 && 'font-bold text-[1.1rem]'}`}>{bodyFat === 0 ? 'Your result will appear here' : Math.round(bodyFat) + '%'}</div>
                   <div className='font-bold'>Kcal</div>
                 </div>
@@ -187,11 +187,11 @@ function BodyFat(props: {
           </div>
         </div>
         <div className='flex max-sm:flex-col max-sm:items-center max-sm:gap-3 justify-around p-4'>
-        <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
-            <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
+          <Tools img={bmr} alt={'bmr'} title={'BMR Calculator'} description={'Your basal metabolic rate (BMR) is the number of calories your body needs to sustain itself if you do absolutely nothing all day.'} slug={'bmr'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
+          <Tools img={rep} alt={'1rep'} title={'1 Rep Max Calculator'} description={'1 Rep Max (1RM) is the maximum weight that can be lifted in a specific exercise in 1 repetition. This determines your strength level for that exercise.'} slug={'onerep'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
         </div>
       </div>
-      <Gotaquestion/>
+      <Gotaquestion />
       <Footer footer={props['footer']} />
     </>
   )
