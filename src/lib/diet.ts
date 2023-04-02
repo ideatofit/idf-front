@@ -8,6 +8,7 @@ type Plans = {
       redirectTo: string;
       plans: {
         title: string;
+        redirectTo: string
         offerDetails: {
           text: string;
         }[];
@@ -31,10 +32,12 @@ type Plans = {
         img: {
           data: {
             attributes: {
-              url: string | null;
+              url: string ;
+              height: number
+              width: number
             };
           };
-        } | null;
+        }
       }[];
     };
   };
@@ -45,6 +48,7 @@ export type PlanProps = {
   title: string;
   plans: {
     title: string;
+    redirectTo: string
     offerDetails: {
       text: string;
     }[];
@@ -57,7 +61,11 @@ export type PlanProps = {
   testimonials:{
     name: string
     text: string
-    img: string
+    img: {
+      url: string
+      height: number
+      width: number
+    }
   }[]
 };
 
@@ -76,13 +84,16 @@ export default async function getPlans() {
     },
   });
   let url = `https://server.ideatofit.com/api/diet?${query}`;
+  console.log(query)
   let fetchData = await fetch(url);
   let response: Plans = await fetchData.json();
+  console.log(response)
   const filteredData: PlanProps = {
     title: response["data"]["attributes"]["title"],
     plans: response["data"]["attributes"]["plans"].map((data) => {
       return {
         title: data["title"],
+        redirectTo: data['redirectTo'],
         offerDetails: data["offerDetails"].map((data) => {
           return data;
         }),
@@ -99,7 +110,11 @@ export default async function getPlans() {
         return{
             name: data['name'],
             text: data['text'],
-            img: data?.img?.data?.attributes?.url ?? '',
+            img: {
+              url: data?.img?.data?.attributes?.url ?? '',
+              height: data?.img?.data?.attributes?.height ,
+              width: data?.img?.data?.attributes?.width
+            },
         }
     })
   };

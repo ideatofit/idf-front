@@ -65,8 +65,8 @@ function Index(props: {
                         </div>
                       </div>
                       <div>
-                        <Link href={''} className='text-decoration-none text-inherit'>
-                        <Button text={'START NOW'} />
+                        <Link href={data['redirectTo']} className='text-decoration-none text-inherit'>
+                        <Button text={'START NOW'}/>
                         </Link>
                       </div>
                     </div>
@@ -92,7 +92,7 @@ function Index(props: {
         <div className='flex h-fit w-[80%] overflow-auto'>
           {
             props['diet']['testimonials'].map((data, i) => {
-              return <Testimonial key={`testimonials${i}`} text={data['text']} avatar={data['img']} name={data['name']} />
+              return <Testimonial key={`testimonials${i}`} text={data['text']} avatar={data['img']['url']} name={data['name']} />
             })
           }
         </div>

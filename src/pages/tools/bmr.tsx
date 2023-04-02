@@ -240,7 +240,7 @@ function Bmr(props: {
               </div>
               <div className='max-xl:h-[80%] xl:h-[80%] max-sm:min-h-[10rem] w-full max-h-fit flex max-sm:flex-col gap-3'>
                 {/* ---------------------------Gender------------------------ */}
-                <Select placeholder={'Geder*'} options={genderOptions} onChange={handleGenderChange} width={50} error={genderError} />
+                <Select placeholder={'Gender*'} options={genderOptions} onChange={handleGenderChange} width={50} error={genderError} />
                 {/* ---------------------------Gender------------------------ */}
 
                 {/* ---------------------------Exercise----------------------- */}

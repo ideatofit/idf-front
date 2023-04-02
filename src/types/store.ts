@@ -167,6 +167,18 @@ export type StoreTypes = {
           };
         }
       ];
+      slides:{
+        link: string
+        img:{
+          data:{
+            attributes:{
+              url: string
+              height: number
+              width: number
+            }
+          }
+        }
+      }[]
     };
   };
   meta: {};
@@ -185,6 +197,12 @@ export type StoreProps = {
     };
     sections: {
         title: string;
+        img:{
+          url: string
+          height: number
+          width: number
+        }
+        'min-price': number
         products: {
             name: string;
             price: number;
@@ -192,8 +210,16 @@ export type StoreProps = {
                 name: string;
                 link: string;
             }[];
-            img: string;
+            img: string
             stars: number;
         }[];
     }[];
+    slides:{
+      img:{
+            url: string
+            height: number
+            width: number
+      }
+      link: string
+    }[]
 }

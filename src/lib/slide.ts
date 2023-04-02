@@ -12,7 +12,7 @@ export type SlideProps = {
   }[];
 };
 
-type Data = {
+type SlideData = {
   attributes: {
     title: string;
     description: string;
@@ -25,6 +25,8 @@ type Data = {
         {
           attributes: {
             url: string;
+            height: number
+            width: number
           };
         }
       ];
@@ -40,7 +42,7 @@ export async function getSlideData() {
   const slideData = await fetch(url);
   const parsedSlideData = await slideData.json();
   const filteredSlideData: SlideProps = {
-    slide: parsedSlideData["data"].map((data: Data) => {
+    slide: parsedSlideData["data"].map((data: SlideData) => {
       return {
         img: data["attributes"]["img"]["data"][0]["attributes"]["url"],
         title: data["attributes"]["title"],

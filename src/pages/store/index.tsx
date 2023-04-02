@@ -16,6 +16,9 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import Button from '@/components/Button'
 import { getkeywords } from '@/lib/keywords'
 import { StoreProps } from '@/types/store'
+import Slide from '@/components/Slide'
+import { SlideProps } from '@/lib/slide'
+import { Carousel, CarouselItem } from 'react-bootstrap'
 
 const opensans = Open_Sans({ subsets: ['latin'], weight: "400" })
 const poppins = Poppins({ subsets: ['latin'], weight: "500" })
@@ -36,53 +39,55 @@ function Store(props: {
       </Head>
       <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden z-10 scroll-smooth'>
         <Header />
-        <motion.div initial={'initial'} animate={'animate'} variants={{
-          initial: {
-            scale: 1.2,
-            opacity: 0.6
-          },
-          animate: {
-            scale: 1,
-            opacity: 1
-          }
-        }} transition={{
-          ease: 'easeInOut', duration: 0.3, scale: {
-            type: 'spring',
-            damping: 14
-          }
-        }} className='relative h-fit max-w-[100vw]'>
-          <Image className='relative max-w-[100vw] w-full' height={props['store']['banner']['height']} width={props['store']['banner']['width']} style={{ maxWidth: "100vw", aspectRatio: "16 / 9" }} src={props['store']['banner']['coverimage']} alt={props['store']['banner']['alt']} />
-        </motion.div>
-        <div className={`absolute z-50 max-sm:h-[35%] xl:pr-[35%] max-sm:w-full h-full w-full max-w-full flex flex-col items-start justify-center ${opensans.className} max-sm:pl-8 max-xl:pl-[5rem] xl:pl-[5rem]`}>
-          <h1 className={`max-xl:text-[4rem] xl:text-[4rem] max-sm:text-[1.3rem] ${poppins.className} pr-[10%]`}>{props['store']['banner']['title']}</h1>
-          { props['store']['banner']['button'] && <Link href={props['store']['banner']['target']} className='text-decoration-none text-white'><Button text={props['store']['banner']['textonbutton']} /></Link>}        
-          </div>
-        <div className='h-fit min-w-full text-center'>
-          <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>Shop by Categories</h1>
-          <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
+          <Carousel pause={false} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
             {
-              props['store']['sections'].map((data, i) => {
-                return <CategoryCard key={i} img={''} alt={''} title={data['title']} id={`#${data['title']}`} />
+              props.store.slides.map((data, i) => {
+                return (
+                  <Carousel.Item key={`storeCarousel${i}`}>
+                    <Link href={data['link']}>
+                    <Image
+                      className="d-block w-100"
+                      src={data['img']['url']}
+                      alt={''}
+                      width={data['img']['width']}
+                      height={data['img']['height']}
+                      priority={true}
+                      style={{ maxHeight: '70vh', objectFit: "cover" }}
+                    />
+                    </Link>
+                  </Carousel.Item>
+                )
               })
             }
+          </Carousel>
+          <div className='h-fit min-w-full text-center'>
+            <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>Shop by Categories</h1>
+            <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
+              {
+                props['store']['sections'].map((data, i) => {
+                  return <CategoryCard key={i} img={data['img']} alt={''} title={data['title']} min-price={data['min-price']} />
+                })
+              }
+            </div>
           </div>
-        </div>
-        {
-          props['store']['sections'].map((data, i) => {
-            return (
-              <div id={`${data['title']}`} className='h-fit min-w-full text-center' key={`productsCard${i}`}>
-                <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>{data['title']}</h1>
-                <div className='w-[100vw] h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
-                  {data['products'].map((data, i) => {
-                    return (
-                      <Link key={`products${i}`} href={data['affiliate'][0]['link']} className='text-inherit text-decoration-none'><ProductsCard title={data['name']} price={data['price']} stars={data['stars']} img={data['img']} key={`ProductsCards${i}`} /></Link>
-                    )
-                  })}
+          {
+            props['store']['sections'].map((data, i) => {
+              return (
+                <div id={`${data['title']}`} className='h-fit min-w-full text-center' key={`productsCard${i}`}>
+                  <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>{data['title']}</h1>
+                  <div className='w-[100vw] h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
+                    {data['products'].map((data, i) => {
+                      return (
+                        <Link key={`products${i}`} href={data['affiliate'][0]['link']} className='text-inherit text-decoration-none'>
+                          <ProductsCard title={data['name']} price={data['price']} stars={data['stars']} img={data['img']} key={`ProductsCards${i}`} affiliate={data['affiliate']} />
+                        </Link>
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            )
-          })
-        }
+              )
+            })
+          }
       </div>
       <Gotaquestion />
       <Footer footer={props['footer']} />
