@@ -25,6 +25,7 @@
     "bootstrap": "^5.2.3",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
+    "formik": "^2.2.9",
     "framer-motion": "^10.0.1",
     "install": "^0.13.0",
     "next": "13.1.6",
@@ -41,7 +42,8 @@
     "react-phone-input-2": "^2.15.1",
     "react-select-country-list": "^2.2.3",
     "strapi-sdk-javascript": "^0.3.3",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/qs": "^6.9.7",

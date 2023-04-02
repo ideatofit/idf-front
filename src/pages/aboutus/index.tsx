@@ -20,11 +20,11 @@ function Aboutus(props: {
   return (
     <>
       <Navigation />
-      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col items-center text-themeColor max-w-[100vw] overflow-hidden p-48`}>
+      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col items-center text-themeColor max-w-[100vw] overflow-hidden max-sm:p-0 max-sm:pt-24 p-48`}>
         {
           props['aboutusData'].map((data, i) => {
             return (
-              <div key={`aboutus${i}`} className={`max-h-[50vh] min-h-[50vh] w-full flex ${i % 2 == 0 ? 'flex-row-reverse' : ''} `}>
+              <div key={`aboutus${i}`} className={` xl:max-h-[50vh] min-h-[50vh] w-full flex max-sm:flex-col-reverse ${i % 2 == 0 ? 'xl:flex-row-reverse' : ''} `}>
                 <div className='min-h-full min-w-[50%] flex items-center justify-center'>
                   <Image src={data['image']['url']} height={data['image']['height']} width={data['image']['width']} alt='' className='max-w-full max-h-full' />
                 </div>
