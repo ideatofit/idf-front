@@ -37,6 +37,8 @@ module.exports = {
     './src/components/Socialmedia.tsx',
     './src/components/Livecustomercounter.tsx',
     './src/components/Blogscard.tsx',
+    './src/components/Statistics.tsx',
+    './src/components/ScrollButton.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

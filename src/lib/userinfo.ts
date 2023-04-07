@@ -17,7 +17,11 @@ export type GoalProps = {
 let goalData: GoalData;
 
 export async function getGoals(filter = false) {
-  const url = `https://server.ideatofit.com/api/goals`;
+  const query = qs.stringify({
+    sort: 'id',
+    order: 'createdAt'
+  })
+  const url = `https://server.ideatofit.com/api/goals?${query}`;
   const fetchData = await fetch(url);
   const parsedData: GoalData = await fetchData.json();
   goalData = parsedData;

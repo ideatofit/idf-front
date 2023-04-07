@@ -72,9 +72,9 @@ function Footer(props: {
                 <div className='text-start text-themeColor'>
                     <h6>Keywords</h6>
                 </div>
-                <div className='flex flex-wrap justify-start gap-8 text-white min-h-full p-3 text-[0.9rem]'>
+                <div className='grid grid-cols-5 gap-2 text-white min-h-full p-3 text-[0.9rem]'>
                     {
-                        props['footer']['keywords'].map((data) => data)
+                        props['footer']['keywords'].map((data) => <div key={data}>{data}</div>)
                     }
                 </div>
             </div>

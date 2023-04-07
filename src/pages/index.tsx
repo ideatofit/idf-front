@@ -48,6 +48,8 @@ import { wellnesshubProps } from '@/lib/wellnesshub';
 
 // Utils
 import { NextSeo } from 'next-seo';
+import Statistics from '@/components/Statistics';
+import ScrollButton from '@/components/ScrollButton';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: '400' })
@@ -96,8 +98,9 @@ const Home = (props: Props) => {
         <meta property="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_scale,w_1200,h_675/v1679590456/logo_fy99df.png" />
       </Head>
       <NextSeo noindex={true} />
+      <ScrollButton />
       <Navigation />
-      <div className='w-100vw h-fit bg-backgroundColor overflow-hidden '>
+      <div className='w-100vw h-fit bg-backgroundColor overflow-hidden z-0'>
         <Slide slide={props.slide} />
         <Transformation transformation={props.transformation} />
         {/* why to choose us */}
@@ -124,7 +127,7 @@ const Home = (props: Props) => {
           </div>
           <div className='max-xl:my-4 md:mt-14 text-center text-themeColor xl:my-4 flex flex-col items-center'>
             <p className='px-4'>The result: You achieve a fitter body...and a happier life!</p>
-            <Link href="/diets" className='text-decoration-none text-inherit'><Button text={'GET PERSONALIZED TRAINING'} /></Link>
+            <Link href="/diets?" className='text-decoration-none text-inherit'><Button text={'GET PERSONALIZED TRAINING'} /></Link>
           </div>
         </motion.div>
         {/*  */}
@@ -295,6 +298,7 @@ const Home = (props: Props) => {
             </div>
           </motion.div>
         </motion.div>
+        <Statistics />
         <Gotaquestion />
         <Footer footer={props.footer} />
       </div >

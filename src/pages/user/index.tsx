@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { signIn, useSession } from 'next-auth/react'
 import { Button } from 'react-bootstrap'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 
 type Payload = {
@@ -46,6 +47,7 @@ function Index(props: {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        submitData(payload, session)
         setValidated(true);
     };
 
@@ -64,18 +66,22 @@ function Index(props: {
     const { data: session, status } = useSession()
 
     const handleNextButton = () => {
-        if (step < 6) {
-            const currentUrl = window.location.href
-            if (status === 'unauthenticated') {
-                signIn('google', { callbackUrl: currentUrl })
-            }
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get('redirect');
+    
+        if (step >= 1 && step < 5) {
             setStep(step + 1);
+            scrollTo(0, 0)
         }
-
-        if (step === 6) {
-            submitData(payload, session)
+    
+        if (step === 5) {
+            if (redirect) {
+                window.location.href = redirect;
+            } else{
+                setStep(6)
+                scrollTo(0, 0)
+            }
         }
-
     };
 
     const handleBackButton = () => {
@@ -163,7 +169,7 @@ function Index(props: {
                     </div>
                     <div className='flex justify-center'>
                         {step === 1 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
-                            <span className={`font-[400]`}>step 1 of 6</span>
+                            <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your fitness goal?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
@@ -176,7 +182,7 @@ function Index(props: {
                             </div>
                         </div>}
                         {step === 2 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
-                            <span className={`font-[400]`}>step 1 of 6</span>
+                            <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your height?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
@@ -187,7 +193,7 @@ function Index(props: {
                                             name="height"
                                             type="number"
                                             placeholder="Height in cm"
-                                            className="h-16 w-full border-white border-2 rounded p-3"
+                                            className="h-16 w-full border-white border-2 rounded p-3 text-white"
                                             value={height}
                                             onChange={handleInputChange}
                                             required
@@ -201,7 +207,7 @@ function Index(props: {
                             </div>
                         </div>}
                         {step === 3 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
-                            <span className={`font-[400]`}>step 1 of 6</span>
+                            <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your weight?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
@@ -226,7 +232,7 @@ function Index(props: {
                             </div>
                         </div>}
                         {step === 4 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
-                            <span className={`font-[400]`}>step 1 of 6</span>
+                            <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your age?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-fit'>
@@ -251,7 +257,7 @@ function Index(props: {
                             </div>
                         </div>}
                         {step === 5 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
-                            <span className={`font-[400]`}>step 1 of 6</span>
+                            <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your Gender?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-16'>
@@ -259,7 +265,7 @@ function Index(props: {
                             </div>
                         </div>}
                         {step === 6 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
-                            <span className={`font-[400]`}>step 1 of 6</span>
+                            <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>We are almost there</h1>
                             <p className={`font-[400]`}>Share your contact details and our expert will call you back and help you unlock a happier, healthier life!</p>
                             <div className='flex flex-col gap-4 w-full h-fit px-16 py-12'>
@@ -280,7 +286,7 @@ function Index(props: {
                                                     Please enter a valid email address.
                                                 </Form.Control.Feedback>
                                             </Form.Group>
-                                            <Button type='submit'>Submit</Button>
+                                            <Button type='button' onClick={handleSubmit}>Submit</Button>
                                         </Form>
                                         : <motion.div
                                             initial={{ opacity: 0, y: -50 }}
