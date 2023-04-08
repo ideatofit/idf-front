@@ -76,9 +76,9 @@ function Store(props: {
                 <div id={`${data['title']}`} className='h-fit min-w-full text-center' key={`productsCard${i}`}>
                   <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>{data['title']}</h1>
                   {
-                    data['sub-category'].map((data)=>{
+                    data['sub-category'].map((data, i)=>{
                       return (
-                        <div className='text-left'>
+                        <div className='text-left' key={`sub-category${i}`}>
                           <h4 className='m-4'>{data['category']}</h4>
                         <div className='w-[100vw] h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
                         {data['products'].map((data, i) => {
