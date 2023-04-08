@@ -6,9 +6,10 @@ function ScrollButton() {
   const [up, setUp] = useState(true);
 
   useEffect(() => {
-    let currentPageOffset: number = 0
+    let currentPageOffset: number = 0 
+
     const handleScroll = () => {
-      if(window.pageYOffset > currentPageOffset){
+      if (window.pageYOffset > currentPageOffset) {
         // when the page value is increasing it means the page is going down
         // so when the page is going down the arrow should points upward direction
         setUp(true)
@@ -36,10 +37,10 @@ function ScrollButton() {
       onClick={handleClick}
       className="fixed bottom-16 right-6 text-white p-2 rounded-full z-50"
     >
-      {up ? 
-      <FontAwesomeIcon icon={faArrowAltCircleDown} className='h-6 w-6'/>
-      :
-      <FontAwesomeIcon icon={faArrowAltCircleUp} className='h-6 w-6'/>
+      {up ?
+        <FontAwesomeIcon icon={faArrowAltCircleDown} className='h-6 w-6' />
+        :
+        <FontAwesomeIcon icon={faArrowAltCircleUp} className='h-6 w-6' />
       }
     </button>
   );
