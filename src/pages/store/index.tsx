@@ -65,7 +65,7 @@ function Store(props: {
             <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
               {
                 props['store']['sections'].map((data, i) => {
-                  return <CategoryCard key={i} img={data['img']} alt={''} title={data['title']} min-price={data['min-price']} redirectToId={data['title']} />
+                  return <CategoryCard key={i} img={data['img']} alt={''} title={data['title']} min-price={0} redirectToId={data['title']} />
                 })
               }
             </div>
@@ -75,15 +75,24 @@ function Store(props: {
               return (
                 <div id={`${data['title']}`} className='h-fit min-w-full text-center' key={`productsCard${i}`}>
                   <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>{data['title']}</h1>
-                  <div className='w-[100vw] h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
-                    {data['products'].map((data, i) => {
+                  {
+                    data['sub-category'].map((data)=>{
                       return (
-                        <Link key={`products${i}`} href={data['affiliate'][0]['link']} className='text-inherit text-decoration-none'>
-                          <ProductsCard title={data['name']} price={data['price']} stars={data['stars']} img={data['img']} key={`ProductsCards${i}`} affiliate={data['affiliate']} />
-                        </Link>
+                        <div className='text-left'>
+                          <h4 className='m-4'>{data['category']}</h4>
+                        <div className='w-[100vw] h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
+                        {data['products'].map((data, i) => {
+                          return (
+                            <Link key={`products${i}`} href={data['affiliate'][0]['link']} className='text-inherit text-decoration-none'>
+                              <ProductsCard title={data['name']} price={data['price']} stars={data['stars']} img={data['img']} key={`ProductsCards${i}`} affiliate={data['affiliate']} />
+                            </Link>
+                          )
+                        })}
+                      </div>
+                      </div>
                       )
-                    })}
-                  </div>
+                    })
+                  }
                 </div>
               )
             })
