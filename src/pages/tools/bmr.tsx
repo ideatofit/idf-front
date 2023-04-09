@@ -252,11 +252,11 @@ function Bmr(props: {
                 <div className='relative h-full max-sm:w-full xl:w-[50%] max-xl:w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='Height' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' />
+                      <input type="number" placeholder='Height' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' required/>
                       :
                       <>
-                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} />
-                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} />
+                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} required/>
+                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} required/>
                       </>
                   }
                   <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={''} />

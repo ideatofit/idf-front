@@ -179,7 +179,7 @@ const Home = (props: Props) => {
             <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
               <div className='flex-[45%] flex flex-col'>
                 <div className='relative h-[40%] text-left'>
-                  <h1 className={`${poppins.className} text-[2.2rem]`}>{props['wellnesshub']['tab1']['title']}</h1>
+                  <h1 className={`${poppins.className} text-[2rem]`}>{props['wellnesshub']['tab1']['title']}</h1>
                   <p className={`${inter.className} font-[500] pr-32`}>{props['wellnesshub']['tab1']['description']}</p>
                 </div>
                 <div className='relative h-[60%] flex flex-col justify-end gap-2 md:pt-6'>

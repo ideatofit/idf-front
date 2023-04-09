@@ -40,6 +40,7 @@ module.exports = {
     './src/components/Blogscard.tsx',
     './src/components/Statistics.tsx',
     './src/components/ScrollButton.tsx',
+    './src/components/Otp.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

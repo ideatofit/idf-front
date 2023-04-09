@@ -241,6 +241,7 @@ export type StoreProps = {
       height: number;
       width: number;
     };
+    'min-price': number
     "sub-category": {
       category: string;
       products: {

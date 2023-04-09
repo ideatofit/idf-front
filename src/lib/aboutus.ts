@@ -12,7 +12,6 @@ export const getAboutUsData = async () => {
   const url = `https://server.ideatofit.com/api/aboutus?${query}`;
   const fetchedData = await fetch(url);
   const parsedData: AboutUs = await fetchedData.json();
-  console.log(parsedData)
   const filteredData: AboutUsProps = parsedData["data"]["attributes"]["aboutus"].map(
     (data) => {
       return {
