@@ -6,13 +6,14 @@ import { GoalProps, getGoals, submitData } from '@/lib/userinfo'
 import Navigation from '@/layouts/Navigation'
 import Footer from '@/layouts/Footer'
 import Select from '@/components/Select'
-import Form from 'react-bootstrap/Form';
+import {Form, Row, Col} from 'react-bootstrap';
 import { faPhone, faCircleExclamation, faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { signIn, useSession } from 'next-auth/react'
 import { Button } from 'react-bootstrap'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import Otp from '@/components/Otp'
+import PhoneInput from 'react-phone-input-2'
 
 
 type Payload = {
@@ -44,6 +45,10 @@ function Index(props: {
     const [name, setName] = useState('')
     const [validated, setValidated] = useState(false);
     const [submitted, setSubmitted] = useState(false)
+    const [otpVerified, setOtpVerified] = useState(false);
+    const [showOtpInput, setShowOtpInput] = useState(false);
+    const [phone, setPhone] = useState('');
+    const [countryCode, setCountryCode] = useState('');
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -68,16 +73,16 @@ function Index(props: {
     const handleNextButton = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const redirect = urlParams.get('redirect');
-    
+
         if (step >= 1 && step < 5) {
             setStep(step + 1);
             scrollTo(0, 0)
         }
-    
+
         if (step === 5) {
             if (redirect) {
                 window.location.href = redirect;
-            } else{
+            } else {
                 setStep(6)
                 scrollTo(0, 0)
             }
@@ -149,9 +154,37 @@ function Index(props: {
         }
     }
 
+    const handleSendOTP = async () => {
+        try {
+            const res = await fetch('/api/send-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ countryCode, phone }),
+            });
+            const response = await res.json()
+            console.log(response)
+            setShowOtpInput(true);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
     return (
         <>
             <Navigation />
+            {showOtpInput && (
+                <Otp
+                    onVerify={() => {
+                        setOtpVerified(true);
+                        setShowOtpInput(false);
+                    }}
+                    countryCode={countryCode}
+                    phone={phone}
+                />
+            )}
             <div className='h-fit max-w-[100vw] bg-backgroundColor text-themeColor grid place-items-center py-24'>
                 <div className={`h-fit max-sm:w-full w-[80%] flex flex-col gap-4 items-center rounded-xl bg-MidnightOcean border-2 border-borderColor max-sm:p-6 p-8`}>
                     <div className=' w-full h-16 flex flex-row justify-between items-center '>
@@ -285,6 +318,50 @@ function Index(props: {
                                                 <Form.Control.Feedback type="invalid">
                                                     Please enter a valid email address.
                                                 </Form.Control.Feedback>
+                                            </Form.Group>
+                                            <Form.Group
+                                                as={Col}
+                                                md={12}
+                                                lg={6}
+                                                controlId="formPhone"
+                                                className="my-3"
+                                            >
+                                                <Form.Label>Phone</Form.Label>
+                                                <Row>
+                                                    <Col xs={4}>
+                                                        <PhoneInput
+                                                            country={'us'}
+                                                            value={countryCode}
+                                                            onChange={(value) => setCountryCode(value)}
+                                                            inputProps={{
+                                                                name: 'countryCode',
+                                                                required: true,
+                                                            }}
+                                                            inputClass="bg-white"
+                                                            dropdownClass="bg-white text-black"
+                                                        />
+                                                    </Col>
+                                                    <Col xs={8}>
+                                                        <Form.Control
+                                                            type="tel"
+                                                            placeholder="Enter your phone number"
+                                                            className="bg-white h-12 mt-3"
+                                                            value={phone}
+                                                            onChange={(e) => setPhone(e.target.value)}
+                                                            required
+                                                        />
+                                                        <Form.Control.Feedback type="invalid">
+                                                            Please enter a valid phone number.
+                                                        </Form.Control.Feedback>
+                                                    </Col>
+                                                </Row>
+                                                {otpVerified ? (
+                                                    'verified'
+                                                ) : (
+                                                    <p className="text-sky-400 m-1 cursor-pointer" onClick={handleSendOTP}>
+                                                        send otp
+                                                    </p>
+                                                )}
                                             </Form.Group>
                                             <Button type='button' onClick={handleSubmit}>Submit</Button>
                                         </Form>
