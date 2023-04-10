@@ -1,18 +1,16 @@
 import twilio from 'twilio';
 
-interface OTPHandlerOptions {
-  accountSid: string;
-  authToken: string;
-  serviceSid: string;
-}
+
 
 class OTPHandler {
   private client: twilio.Twilio;
-  private serviceSid: string;
+  private accountSid: string = process.env.TWILIO_ACCOUNT_SID
+  private authToken: string = process.env.TWILIO_AUTH_TOKEN
+  private serviceSid: string = process.env.TWILIO_SERVICE_ID
 
-  constructor(options: OTPHandlerOptions) {
-    this.client = twilio(options.accountSid, options.authToken);
-    this.serviceSid = options.serviceSid;
+  constructor() {
+    this.client = twilio(this.accountSid, this.authToken);
+    this.serviceSid = this.serviceSid;
   }
 
   async sendOTP(countryCode: string, phone: string) {

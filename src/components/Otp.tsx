@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 interface OtpProps {
   onVerify: () => void;
@@ -9,11 +9,12 @@ interface OtpProps {
 function Otp({ onVerify, countryCode, phone }: OtpProps) {
   const [userOTP, setUserOTP] = useState(['', '', '', '']);
   const [activeInput, setActiveInput] = useState(0);
-  const [isResended, setIsResended] = useState(false)
+  const [isResended, setIsResended] = useState(false);
+
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleVerify = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    // Call API to verify OTP
     const response = await fetch('/api/verify-otp', {
       method: 'POST',
       headers: {
@@ -26,7 +27,7 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
       }),
     });
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     if (data.verified) {
       onVerify();
     } else {
@@ -46,28 +47,30 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
           phone: phone,
         }),
       });
-      if(response.ok){
-        setIsResended(true)
+      if (response.ok) {
+        setIsResended(true);
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
+
   const handleInput = (index: number, value: string) => {
     setUserOTP((prevUserOTP) => {
       const newUserOTP = [...prevUserOTP];
       newUserOTP[index] = value;
       return newUserOTP;
     });
-
     if (value && index < userOTP.length - 1) {
       setActiveInput(index + 1);
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
   const handleBackspace = (index: number) => {
     if (!userOTP[index] && index > 0) {
       setActiveInput(index - 1);
+      inputRefs.current[index - 1]?.focus();
     }
   };
 
@@ -83,7 +86,10 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
               <div className="flex flex-row text-sm font-medium text-gray-400">
                 <p>
                   We have sent a code to your phone{' '}
-                  {phone.replace(/(\d{3})\d{5}(\d{3})/, '$1*****$2')}
+                  {phone.replace(
+                    /(\d{3})\d{5}(\d{3})/,
+                    '$1*****$2'
+                  )}
                 </p>
               </div>
             </div>
@@ -92,9 +98,12 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-row items-center justify-around mx-auto w-full">
                     {userOTP.map((value, index) => (
-                      <div key={index} className="w-16 h-16 ">
+                      <div
+                        key={`otpInputForm${index}`}
+                        className="w-16 h-16 "
+                      >
                         <input
-                          autoFocus={index === activeInput}
+                          ref={(el) => (inputRefs.current[index] = el)}
                           onFocus={() => setActiveInput(index)}
                           className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-Midnight text-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                           type="text"
@@ -107,38 +116,42 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
                           }
                           onKeyDown={(e) =>
                             e.key === 'Backspace' && handleBackspace(index)
-                          }
-                        />
+                          }                        />
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <div>
-                      <button
-                        onClick={handleVerify}
-                        className="flex flex-row items-center justify-center text-center py-4 w-full border rounded-xl outline-none bg-blue-700 border-none text-white text-sm shadow-sm"
-                      >
-                        Verify OTP
-                      </button>
-                    </div>
-                    <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                      <div>{!isResended ? "Didn't receive code?" : "Code has been sended to you"}</div>
-                      <div
-                        onClick={handleResend}
-                        className="flex flex-row items-center text-blue-600 cursor-pointer"
-                      >
-                        {isResended ? 'counter' : 'Resend'}
+                      <div className="flex flex-col gap-3">
+                        <div>
+                          <button
+                            onClick={handleVerify}
+                            className="flex flex-row items-center justify-center text-center py-4 w-full border rounded-xl outline-none bg-blue-700 border-none text-white text-sm shadow-sm"
+                          >
+                            Verify OTP
+                          </button>
+                        </div>
+                        <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+                          <div>
+                            {!isResended
+                              ? "Didn't receive code?"
+                              : 'Code has been sended to you'}
+                          </div>
+                          <div
+                            onClick={handleResend}
+                            className="flex flex-row items-center text-blue-600 cursor-pointer"
+                          >
+                            {isResended ? 'counter' : 'Resend'}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-export default Otp;
+      );
+    }
+    
+    export default Otp;
+    
