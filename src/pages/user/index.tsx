@@ -163,8 +163,6 @@ function Index(props: {
                 },
                 body: JSON.stringify({ countryCode, phone }),
             });
-            const response = await res.json()
-            console.log(response)
             setShowOtpInput(true);
         } catch (error) {
             console.error(error);
@@ -345,7 +343,7 @@ function Index(props: {
                                                         <Form.Control
                                                             type="tel"
                                                             placeholder="Enter your phone number"
-                                                            className="bg-white h-12 mt-3"
+                                                            className="bg-white h-12 mt-4"
                                                             value={phone}
                                                             onChange={(e) => setPhone(e.target.value)}
                                                             required
