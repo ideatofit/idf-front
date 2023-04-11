@@ -40,9 +40,6 @@ function BodyFat(props: {
   // error states managing messages
   const [genderError, setGenderError] = useState('')
   const [exerciseError, setExerciseError] = useState('')
-  const [heightError, setHeightError] = useState('')
-  const [waistError, setWaistError] = useState('')
-  const [neckCircumferenceError, setNeckCircumferenceError] = useState('')
 
   // options
   const genderOptions = ['Male', 'Female']
@@ -51,38 +48,24 @@ function BodyFat(props: {
   // handlers
   const handleGenderChange = (value: string) => {
     setGender(value === 'Male' ? 'Male' : 'Female');
+    if(gender !== 'Male' && gender !== 'Female'){
+      setGenderError('Choose a valid value')
+    }
   };
 
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const heightValue = Number(e.target.value);
-    console.log('heightValue: ' + heightValue)
-    if (heightValue >= 0 && heightValue <= 220) {
       setHeight(heightValue);
-      setHeightError('');
-      console.log('mai chal gya')
-    } else {
-      setHeightError('Height must be between 120cm and 220cm');
-    }
   };
 
   const handleWaistChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const waistValue = Number(e.target.value);
-    if (waistValue >= 40 && waistValue <= 200) {
       setWaist(waistValue);
-      setWaistError('');
-    } else {
-      setWaistError('Waist circumference must be between 40cm and 200cm');
-    }
   };
 
   const handleNeckCircumferenceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const neckValue = Number(e.target.value);
-    if (neckValue >= 20 && neckValue <= 60) {
       setNeckCircumference(neckValue);
-      setNeckCircumferenceError('');
-    } else {
-      setNeckCircumferenceError('Neck circumference must be between 20cm and 60cm');
-    }
   };
 
 
@@ -130,50 +113,39 @@ function BodyFat(props: {
       <div className='min-h-screen max-h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
         <div className='max-sm:min-h-[100vh] h-[65vh] max-h-fit max-sm:min-w-[90vw] w-[80vw] rounded-[2rem] border-2 border-borderColor bg-inherit overflow-hidden'>
           <div className='flex xl:flex-row max-xl:flex-row max-sm:flex-col w-full h-full max-h-fit p-8 gap-8'>
-            <div className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-3'>
+            <form onSubmit={calculateBodyFatPercentage} className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-3'>
               <div className='h-full w-full max-h-fit'>
                 <h1>BodyFat Calculator</h1>
               </div>
               <div className='max-sm:min-h-[10rem] h-[80%] w-full max-h-fit flex max-sm:flex-col gap-3'>
-                {/* ---------------------------Gender------------------------ */}
                 <Select placeholder={'Geder*'} options={genderOptions} onChange={handleGenderChange} width={50} error={genderError} />
-                {/* ---------------------------Gender------------------------ */}
-                {/* ---------------------------waist------------------------- */}
-                <input type="number" placeholder='waist*' onChange={handleWaistChange} className={`h-full max-sm:w-full w-[50%] border-white border-2 rounded-xl text-left ${waistError !== '' ? 'border-red-500' : ''} pl-4`} />
+                <input type="number" placeholder='waist*' onChange={handleWaistChange} className={`h-full max-sm:w-full w-[50%] border-white border-2 rounded-xl text-left pl-4`} required min={40} max={200}/>
 
-                {/* ---------------------------waist------------------------- */}
               </div>
               <div className='max-sm:min-h-[10rem] h-[80%] w-full max-h-fit flex max-sm:flex-col gap-3'>
-                {/* ---------------------------Height-------------------- */}
                 <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='Height' onChange={handleHeightChange} className={`h-full max-sm:min-w-[70%] w-[70%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-500'}`} />
+                      <input type="number" placeholder='Height' onChange={handleHeightChange} className={`h-full max-sm:min-w-[70%] w-[70%] border-white border-2 rounded-xl text invalid:border-red-500`} required min={0} max={220}/>
                       :
                       <>
-                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full w-[35%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-500'}`} />
-                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full w-[35%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-500'}`} />
+                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full w-[35%] border-white border-2 rounded-xl text invalid:border-red-500`} required min={1} max={12}/>
+                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full w-[35%] border-white border-2 rounded-xl text invalid:border-red-500`} required min={0} max={100}/>
                       </>
                   }
                   <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={''} />
                 </div>
-                {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
-                {/* ---------------------------Height-------------------------- */}
-                {/* ---------------------------neck circumference-------------------- */}
                 <div className='h-full max-sm:min-w-full w-[50%] flex gap-2'>
-                  <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className={`h-full max-sm:min-w-[100%] w-[100%] border-white border-2 rounded-xl text-left pl-4 ${neckCircumferenceError === '' ? '' : 'bg-red-500'}`} />
+                  <input type="number" placeholder='neck circumference' onChange={handleNeckCircumferenceChange} className={`h-full max-sm:min-w-[100%] w-[100%] border-white border-2 rounded-xl text-left pl-4 invalid:border-red-500`} required min={20} max={60}/>
                 </div>
-                {heightError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
-                {/* ---------------------------neck circumference-------------------------- */}
               </div>
-              {waistError !== '' && <div className='text-red-500 text-[0.7rem]'>{waistError}</div>}
               <div className='h-full w-full max-h-fit flex gap-3'>
                 <div className='h-full w-full bg-themeColor rounded-xl flex justify-between items-center p-3 text-black'>
                   <div className='font-[400] text-[1.2rem]'>Let&apos;s calculate it</div>
-                  <button type='button' className='px-4 py-2 rounded-md bg-white font-[600]' onClick={calculateBodyFatPercentage}>Calculate</button>
+                  <button type='submit' className='px-4 py-2 rounded-md bg-white font-[600]'>Calculate</button>
                 </div>
               </div>
-            </div>
+            </form>
             <div className='xl:w-[40%] max-xl:w-[40%] max-sm:w-full h-full max-h-fit flex flex-col border-2 border-borderColor rounded-xl p-3'>
               <div className='h-full w-full max-h-fit '>
                 <h6>Fill the required details and your results will appear here!</h6>

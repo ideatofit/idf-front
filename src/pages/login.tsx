@@ -7,7 +7,7 @@ import { signIn } from 'next-auth/react'
 function login() {
     return (
         <>
-        <video src="/intro.mp4" className='relative blur-sm h-screen min-w-full object-fill z-0' autoPlay muted/>
+        <video src="/intro.mp4" className='relative blur-sm h-screen min-w-full object-fill z-0' autoPlay muted loop/>
         <section className="absolute bg-transparent opacity-95 top-0 h-screen w-full z-30">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <div className="w-full  rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">

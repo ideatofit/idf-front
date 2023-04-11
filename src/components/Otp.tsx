@@ -10,6 +10,7 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
   const [userOTP, setUserOTP] = useState(['', '', '', '']);
   const [activeInput, setActiveInput] = useState(0);
   const [isResended, setIsResended] = useState(false);
+  const [changePhoneNumber, setChangedPhoneNumber] = useState('')
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -77,7 +78,7 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
   return (
     <div className="fixed h-full w-full bg-transparent grid place-items-center z-50">
       <div className="bg-transparent flex max-h-full min-w-full flex-col justify-center overflow-hidden bg-gray-50 py-12">
-        <div className="relative bg-MidnightOcean text-white border-2 border-borderColor px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
+        <div className="relative bg-MidnightOcean text-white border-2 border-borderColor px-6 pt-10 pb-9 shadow-xl mx-auto w-[80%] max-w-lg rounded-2xl">
           <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
             <div className="flex flex-col items-center justify-center text-center space-y-2">
               <div className="font-semibold text-3xl">
@@ -86,10 +87,7 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
               <div className="flex flex-row text-sm font-medium text-gray-400">
                 <p>
                   We have sent a code to your phone{' '}
-                  {phone.replace(
-                    /(\d{3})\d{5}(\d{3})/,
-                    '$1*****$2'
-                  )}
+                  {phone.slice(0, 2) + '******' + phone.slice(8)}
                 </p>
               </div>
             </div>
@@ -106,7 +104,7 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
                           ref={(el) => (inputRefs.current[index] = el)}
                           onFocus={() => setActiveInput(index)}
                           className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-Midnight text-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                          type="text"
+                          type="number"
                           name=""
                           id=""
                           maxLength={1}

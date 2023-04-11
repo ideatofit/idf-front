@@ -6,15 +6,15 @@ import { GoalProps, getGoals, submitData } from '@/lib/userinfo'
 import Navigation from '@/layouts/Navigation'
 import Footer from '@/layouts/Footer'
 import Select from '@/components/Select'
-import {Form, Row, Col} from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { faPhone, faCircleExclamation, faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { signIn, useSession } from 'next-auth/react'
 import { Button } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 import Otp from '@/components/Otp'
-import PhoneInput from 'react-phone-input-2'
-
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 type Payload = {
     goal: {
@@ -163,7 +163,13 @@ function Index(props: {
                 },
                 body: JSON.stringify({ countryCode, phone }),
             });
-            setShowOtpInput(true);
+            const response = await res.json()
+            console.log(response)
+            if (res.ok) {
+                setShowOtpInput(true)
+            } else {
+                alert('oops! something went wrong try again in sometime')
+            }
         } catch (error) {
             console.error(error);
         }
@@ -326,10 +332,11 @@ function Index(props: {
                                             >
                                                 <Form.Label>Phone</Form.Label>
                                                 <Row>
-                                                    <Col xs={4}>
+                                                    <Col xs={5}>
                                                         <PhoneInput
-                                                            country={'us'}
+                                                            country={'in'}
                                                             value={countryCode}
+                                                            onMount={(value) => setCountryCode(value)}
                                                             onChange={(value) => setCountryCode(value)}
                                                             inputProps={{
                                                                 name: 'countryCode',
@@ -339,11 +346,11 @@ function Index(props: {
                                                             dropdownClass="bg-white text-black"
                                                         />
                                                     </Col>
-                                                    <Col xs={8}>
+                                                    <Col xs={7}>
                                                         <Form.Control
                                                             type="tel"
                                                             placeholder="Enter your phone number"
-                                                            className="bg-white h-12 mt-4"
+                                                            className="bg-white h-12 min-w-16"
                                                             value={phone}
                                                             onChange={(e) => setPhone(e.target.value)}
                                                             required
@@ -356,9 +363,9 @@ function Index(props: {
                                                 {otpVerified ? (
                                                     'verified'
                                                 ) : (
-                                                    <p className="text-sky-400 m-1 cursor-pointer" onClick={handleSendOTP}>
+                                                    <button className="mt-2 cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={handleSendOTP}>
                                                         send otp
-                                                    </p>
+                                                    </button>
                                                 )}
                                             </Form.Group>
                                             <Button type='button' onClick={handleSubmit}>Submit</Button>

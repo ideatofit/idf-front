@@ -102,53 +102,6 @@ function Bmr(props: {
     } else {
       setExerciseError('');
     }
-
-    // Validate height
-    if (height <= 0) {
-      setHeightError('Please enter a valid height. Height must be greater than 0.');
-      valid = false;
-    } else if (height > 300) {
-      setHeightError('Please enter a valid height. Height cannot be greater than 300 cm.');
-      valid = false;
-    } else {
-      setHeightError('');
-    }
-
-    // Validate weight
-    if (weight < 0) {
-      setWeightError('Please enter a valid weight. Weight must be greater than 0.');
-      valid = false;
-    }
-    if (weight > 500) {
-      setWeightError('Please enter a valid weight. Weight cannot be greater than 500 kg.');
-      valid = false;
-    }
-    if (weight > 0 && weight < 500) {
-      setWeightError('');
-    }
-
-    // Validate age
-    if (age <= 0) {
-      setAgeError('Please enter a valid age. Age must be greater than 0.');
-      valid = false;
-    } else if (age > 150) {
-      setAgeError('Please enter a valid age. Age cannot be greater than 150 years.');
-      valid = false;
-    } else {
-      setAgeError('');
-    }
-
-    // Validate body fat percentage
-    if (bodyFatPercentage < 0) {
-      setBodyFatError('Please enter a valid body fat percentage. Body fat percentage cannot be negative.');
-      valid = false;
-    } else if (bodyFatPercentage > 100) {
-      setBodyFatError('Please enter a valid body fat percentage. Body fat percentage cannot be greater than 100%.');
-      valid = false;
-    } else {
-      setBodyFatError('');
-    }
-
     return valid;
   }
 
@@ -224,74 +177,55 @@ function Bmr(props: {
 
   return (
     <>
-    <Head>
-    <title>Ideaotift - bmr calculator</title>
+      <Head>
+        <title>Ideaotift - bmr calculator</title>
         <meta name="description" content="Ideaotift - calculate your body mass ratio with the help of our ideatofit body mass ratio calculator." />
         <meta name="keywords" content={`Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
         <meta name="author" content="deepak sahu" />
-    </Head>
+      </Head>
       <Navigation />
       <div className='h-fit w-full bg-backgroundColor grid place-items-center text-themeColor pt-24'>
         <div className='xl:h-[80vh] max-xl:h-[80vh] max-sm:min-h-[135vh] xl:w-[80vw] max-xl:w-[80vw] max-sm:w-[90vw] rounded-[2rem] border-2 border-borderColor bg-inherit '>
           <div className='flex xl:flex-row max-xl:flex-row max-sm:flex-col w-full h-full max-h-fit xl:p-8 max-xl:p-8 max-sm:p-4 gap-8'>
-            <div className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-6'>
+            <form onSubmit={handleCalculate} className='xl:w-[60%] max-xl:w-[60%] max-sm:w-full h-full max-h-fit flex flex-col gap-6'>
               <div className='h-full w-full max-h-fit'>
                 <h1>BMR Calculator</h1>
               </div>
               <div className='max-xl:h-[80%] xl:h-[80%] max-sm:min-h-[10rem] w-full max-h-fit flex max-sm:flex-col gap-3'>
-                {/* ---------------------------Gender------------------------ */}
                 <Select placeholder={'Gender*'} options={genderOptions} onChange={handleGenderChange} width={50} error={genderError} />
-                {/* ---------------------------Gender------------------------ */}
-
-                {/* ---------------------------Exercise----------------------- */}
                 <Select placeholder={'Activity level'} options={exerciseOptions} onChange={handleExerciseChange} width={50} error={exerciseError} />
-                {/* ---------------------------Exercise--------------------- */}
               </div>
               <div className='max-sm:min-h-[10rem] max-xl:h-[80%] xl:h-[80%] w-full flex max-sm:flex-col gap-3'>
-                {/* ---------------------------Height-------------------- */}
                 <div className='relative h-full max-sm:w-full xl:w-[50%] max-xl:w-[50%] flex gap-2'>
                   {
                     heightUnit === 'cm' ?
-                      <input type="number" placeholder='Height' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4' required/>
+                      <input type="number" placeholder='Height' onChange={handleHeightChange} className='h-full xl:w-[70%] max-xl:w-[70%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 invalid:border-red-900' required min={50} max={300} />
                       :
                       <>
-                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} required/>
-                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'}`} required/>
+                        <input type="number" placeholder='ft' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'} invalid:border-red-900`} required min={2} max={12} />
+                        <input type="number" placeholder='in' onChange={convertToCm} className={`h-full xl:w-[35%] max-xl:w-[35%] max-sm:w-[90%] border-white border-2 rounded-xl text-left pl-4 ${heightError === '' ? '' : 'bg-red-600'} invalid:border-red-900`} required min={0} max={999} />
                       </>
                   }
                   <Select placeholder={'cm'} options={heightOptions} onChange={(value) => setHeightUnit(value === 'cm' ? 'cm' : 'ft/in')} width={25} error={''} />
                 </div>
-                {heightError !== '' && <div className='absolute text-red-500 text-[0.7rem] bottom-0'>{weightError}</div>}
-                {/* ---------------------------Height-------------------------- */}
-
-                {/* ---------------------------Weight------------------------- */}
-                <input type="number" placeholder='Weight*' onChange={handleWeightChange} className={`h-full max-xl:w-[50%] xl:w-[50%] max-sm:w-full border-white border-2 rounded-xl text-left ${weightError !== '' ? 'border-red-500' : ''} pl-4`} />
-
-                {/* ---------------------------Weight------------------------- */}
+                <input type="number" placeholder='Weight*' onChange={handleWeightChange} className={`h-full max-xl:w-[50%] xl:w-[50%] max-sm:w-full border-white border-2 rounded-xl text-left invalid:bg-red-900 pl-4`} required min={20} max={500} />
               </div>
-              {weightError !== '' && <div className='text-red-500 text-[0.7rem]'>{weightError}</div>}
               <div className='xl:h-[80%] max-xl:h-[80%] max-sm:min-h-[10rem] w-full max-h-fit flex gap-3 max-sm:flex-col'>
-                {/* ---------------------------Age-------------------------- */}
                 <div className='h-full w-[50%]'>
-                <input type="number" placeholder='Age' onChange={handleAgeChange} className=' h-full max-xl:w-full xl:w-full max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
-                {ageError !== '' && <div className='text-red-500 text-[0.7rem]'>{ageError}</div>}
+                  <input type="number" placeholder='Age' onChange={handleAgeChange} className=' h-full max-xl:w-full xl:w-full max-sm:w-full border-white border-2 rounded-xl text-left pl-4 invalid:border-red-900' required min={14} max={100} />
                 </div>
-                {/* ---------------------------Age-------------------------- */}
 
-                {/* ---------------------------BodyFatPercentage-------------------------- */}
                 <div className='h-full w-[50%]'>
-                <input type="number" placeholder='BodyFatPercentage' onChange={handleBodyFatPercentageChange} className='h-full max-xl:w-full xl:w-full max-sm:w-full border-white border-2 rounded-xl text-left pl-4' />
-              {bodyFatError !== '' && <div className='text-red-500 text-[0.7rem]'>{bodyFatError}</div>}
+                  <input type="number" placeholder='BodyFatPercentage' onChange={handleBodyFatPercentageChange} className='h-full max-xl:w-full xl:w-full max-sm:w-full border-white border-2 rounded-xl text-left pl-4 invalid:border-red-900' required min={0} max={100} />
                 </div>
-                {/* ---------------------------BodyFatPercentage-------------------------- */}
               </div>
               <div className='h-full w-full max-h-fit flex gap-3 mt-4'>
                 <div className='h-full w-full bg-themeColor rounded-xl flex justify-between items-center p-3 text-black'>
                   <div className='font-[400] text-[1.2rem]'>Let&apos;s calculate it</div>
-                  <button type='button' className='px-4 py-2 rounded-md bg-white font-[600]' onClick={handleCalculate}>Calculate</button>
+                  <button type='submit' className='px-4 py-2 rounded-md bg-white font-[600]'>Calculate</button>
                 </div>
               </div>
-            </div>
+            </form>
             <div className='xl:w-[40%] max-xl:w-[40%] max-sm:w-full h-full max-h-fit flex flex-col border-2 border-borderColor rounded-xl p-3'>
               <div className='h-full w-full max-h-fit '>
                 <h6>Fill the required details and your results will appear here!</h6>
@@ -324,7 +258,7 @@ function Bmr(props: {
           <Tools img={bodyFatimg} alt={'body fat'} title={'Body Fat % Calculator'} description={'Body fat percentage is a key indicator of good health. A high body fat % might put you at a greater risk of lifestyle diseases.'} slug={'bodyfat'} initial={undefined} whileInView={undefined} transition={undefined} animation={undefined} />
         </div>
       </div>
-      <Gotaquestion/>
+      <Gotaquestion />
       <Footer footer={props['footer']} />
     </>
   )

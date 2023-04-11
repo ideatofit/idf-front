@@ -1,7 +1,5 @@
 import twilio from 'twilio';
 
-
-
 class OTPHandler {
   private client: twilio.Twilio;
   private accountSid: string = process.env.TWILIO_ACCOUNT_SID
