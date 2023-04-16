@@ -12,6 +12,7 @@ import Link from 'next/link'
 import Gotaquestion from '@/components/Gotaquestion'
 import dynamic from 'next/dynamic'
 import Statistics from '@/components/Statistics'
+import animateGradient from '../../styles/animateGradient.module.css'
 
 
 const poppins = Poppins({ weight: ['100', '200', '400', '600', '700', '800'], subsets: ['latin'] })
@@ -26,7 +27,7 @@ function Index(props: {
     <>
       <Navigation />
       <div className='min-h-screen max-h-fit w-full bg-backgroundColor flex flex-col items-center text-themeColor py-24'>
-        <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className='max-xl:h-[65vh] xl:h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor'>
+        <div style={{ background: 'linear-gradient(90deg, #454958 0%, #232631 100%, #232631 100%)' }} className={` max-xl:min-h-[65vh] xl:min-h-[65vh] max-lg:h-fit max-lg:py-8 max-xl:w-[80%] xl:w-[80%] max-lg:w-[90%] flex max-xl:flex-row xl:flex-row max-xl:items-center xl:items-center justify-center rounded-xl border-2 border-borderColor`}>
           <div className='h-[70%] w-[90%] max-lg:w-[90%] rounded-xl flex max-xl:flex-row xl:flex-row max-lg:flex-col-reverse max-lg:gap-8 max-lg:justify-center'>
             <div className='flex-[45%] flex flex-col'>
               <div className='relative h-[40%] text-left'>
@@ -37,12 +38,15 @@ function Index(props: {
                 {
                   props['diet']['plans'].map((data, i) => {
                     return (
-                      <div key={`plansButton${i}`} className={`text-decoration-none w-[50%] h-[25%] rounded-full ${tab === `tab${i}` ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
+                      <button type='button' key={`plansButton${i}`} className={`text-decoration-none w-[60%] h-[25%] rounded-full ${tab === `tab${i}` ? 'bg-white' : 'bg-transparent'} hover:pointer-events-auto flex items-center justify-around p-2 cursor-pointer`} onClick={() => {
                         setTab(`tab${i}`)
                       }}>
                         <div className={`${tab === `tab${i}` ? 'text-black' : 'text-white'} text-[1rem] md:text-[0.8rem]`}>{data['title']}</div>
+                        <div className={`${animateGradient.animateGradient} text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500`}>
+                         ₹{i + 1}99
+                        </div>
                         <div className={`${tab !== `tab${i}` && 'opacity-0'} text-black`}>&#62;</div>
-                      </div>
+                      </button>
                     )
                   })
                 }

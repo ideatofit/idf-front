@@ -8,9 +8,9 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: '54M+', label: 'Healthy Customers' },
-  { value: '99%', label: 'Satisfaction Rate' },
-  { value: '100M+', label: 'Lives Improved' },
+  { value: '4', label: 'Healthy Customers' },
+  { value: '3', label: 'Satisfaction Rate' },
+  { value: '3.8', label: 'Lives Improved' },
 ];
 
 const Statistics: React.FC = () => {
@@ -40,7 +40,10 @@ const Statistics: React.FC = () => {
               <dl>
                 <dt className='text-4xl font-bold text-white'>
                   {viewPortEntered && (
-                    <CountUp end={parseInt(stat.value.replace(/\D/g, ''))} />
+                    <div className='flex justify-center'>
+                    <CountUp end={parseInt(stat.value)} />
+                    K
+                    </div>
                   )}
                 </dt>
                 <dd className='my-2 text-gray-400'>{stat.label}</dd>
