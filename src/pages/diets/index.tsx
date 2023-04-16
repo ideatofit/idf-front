@@ -11,6 +11,7 @@ import Button from '@/components/Button'
 import Link from 'next/link'
 import Gotaquestion from '@/components/Gotaquestion'
 import dynamic from 'next/dynamic'
+import Statistics from '@/components/Statistics'
 
 
 const poppins = Poppins({ weight: ['100', '200', '400', '600', '700', '800'], subsets: ['latin'] })
@@ -77,16 +78,7 @@ function Index(props: {
             </div>
           </div>
         </div>
-        <div className={`${poppins.className} flex justify-start w-[80%] pt-8`}>
-          <h3>More things for your fitness lifestyle</h3>
-        </div>
-        <div className='flex items-center justify-evenly overflow-auto min-h-fit w-[80%] py-2 text-black'>
-          {
-            props['diet']['moreForTheUsers'].map((data, i) => {
-              return <DietCard key={`moreForTheUsers${i}`} title={data['title']} img={data['img']} link={data['link']} />
-            })
-          }
-        </div>
+        <Statistics />
         <div className='w-[80%] text-left pt-12'>
           <h3>Testimonials</h3>
         </div>
@@ -105,11 +97,15 @@ function Index(props: {
 }
 
 export async function getStaticProps() {
-  const footer = await getFooterData()
-  const diet = await getPlans()
+  // const footer = await getFooterData()
+  // const diet = await getPlans()
+  const [footer, diet] = await Promise.all([
+    getFooterData(),
+    getPlans()
+  ])
   return {
     props: { footer, diet }
   }
 }
 
-export default dynamic(()=> Promise.resolve(Index), {ssr: false})
+export default dynamic(() => Promise.resolve(Index), { ssr: false })

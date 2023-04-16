@@ -170,8 +170,11 @@ function BodyFat(props: {
 }
 
 export async function getStaticProps() {
-  const footer = await getFooterData()
-  const keywords = await getkeywords()
+  // const footer = await getFooterData()
+  // const keywords = await getkeywords()
+  const [footer, keywords] = await Promise.all([
+    getFooterData(), getkeywords()
+  ])
   return {
     props: {
       footer, keywords

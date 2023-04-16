@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Image from 'next/image';
 import logo from '../../public/images/whitelogo.svg'
-import cart from '../../public/cart.svg'
+// import cart from '../../public/cart.svg'
 import profile from '../../public/profile.svg'
 
 import { useSession, signIn, signOut } from 'next-auth/react';
@@ -31,7 +31,7 @@ function Header() {
               <Link href="/diets" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Diet</Link>
               <Link href="/tools" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Tools</Link>
               <Link href="/blogs" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Blogs</Link>
-              <Link href="/donate" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Donate</Link>
+              <Link href="/aboutus" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>About us</Link>
             </Nav>
             <div className='d-flex'>
               {/* <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' /> */}
@@ -39,7 +39,7 @@ function Header() {
                 if(status === 'authenticated'){
                   return
                 }
-                signIn()
+                window.location.href = '/login'
               }} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full'/>
             </div>
           </Navbar.Collapse>

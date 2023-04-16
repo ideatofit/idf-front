@@ -34,7 +34,7 @@ function Store(props: {
       <Head>
         <title>Ideaotift - Store</title>
         <meta name="description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
-        <meta name="keywords" content={` Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords.join(", ").toLocaleLowerCase()}`} />
+        <meta name="keywords" content={` Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords}`} />
         <meta name="author" content="deepak sahu" />
       </Head>
       <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden z-10 scroll-smooth'>
@@ -105,9 +105,14 @@ function Store(props: {
 }
 
 export async function getStaticProps() {
-  const store = await getStoreData()
-  const footer = await getFooterData()
-  const keywords = await getkeywords()
+  // const store = await getStoreData()
+  // const footer = await getFooterData()
+  // const keywords = await getkeywords()
+  const [store, footer, keywords] = await Promise.all([
+    getStoreData(),
+    getFooterData(),
+    (await getkeywords()).join(", ").toLocaleLowerCase()
+  ])
   return {
     props: { store, footer, keywords },
     revalidate: 60

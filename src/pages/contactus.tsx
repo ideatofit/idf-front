@@ -42,6 +42,10 @@ function Contactus(props: {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget as HTMLFormElement;
+    if(!otpVerified){
+      alert('otp is not verified yet please verify it')
+      return;
+    }
     if (form.checkValidity() === false && otpVerified) {
       event.stopPropagation();
     } else {
@@ -72,7 +76,7 @@ function Contactus(props: {
           phone = {phone}
         />
       )}
-      <main className="min-h-[100vh] w-[100vw] bg-backgroundColor grid place-items-center text-themeColor z-0">
+      <main className="min-h-[100vh] w-full bg-backgroundColor grid place-items-center text-themeColor z-0">
         <div
           style={{
             background:

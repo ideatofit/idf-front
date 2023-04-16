@@ -44,9 +44,11 @@ function Index(props: {
 }
 
 export async function getStaticProps() {
-  const footer = await getFooterData()
-  const recipes = await getDietData()
-  const keywords = (await getkeywords()).join(", ").toLocaleLowerCase()
+  const [footer, recipes, keywords] = await Promise.all([
+    getFooterData(),
+    getDietData(),
+    (await getkeywords()).join(", ").toLocaleLowerCase()
+  ])
   return {
     props: {
       footer, recipes, keywords

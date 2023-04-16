@@ -15,6 +15,7 @@ import { motion } from 'framer-motion'
 import Otp from '@/components/Otp'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { NextSeo } from 'next-seo'
 
 type Payload = {
     goal: {
@@ -179,6 +180,7 @@ function Index(props: {
     return (
         <>
             <Navigation />
+            <NextSeo noindex={true} />
             {showOtpInput && (
                 <Otp
                     onVerify={() => {
@@ -242,8 +244,8 @@ function Index(props: {
                                     </Form.Group>
                                 </Form>
                             </div>
-                        </div>}
-                        {step === 3 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
+                        </div> }
+                        { step === 3 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
                             <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your weight?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
@@ -267,8 +269,8 @@ function Index(props: {
                                     </Form.Group>
                                 </Form>
                             </div>
-                        </div>}
-                        {step === 4 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
+                        </div> }
+                        { step === 4 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
                             <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your age?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
@@ -292,22 +294,21 @@ function Index(props: {
                                     </Form.Group>
                                 </Form>
                             </div>
-                        </div>}
-                        {step === 5 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
+                        </div> }
+                        { step === 5 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
                             <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>what is your Gender?</h1>
                             <p className={`font-[400]`}>This will help us understand your fitness needs better</p>
                             <div className='flex flex-col gap-4 w-full h-16'>
                                 <Select placeholder={'Gender'} options={genderOptions} width={100} error={''} onChange={handleGenderChange} />
                             </div>
-                        </div>}
-                        {step === 6 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
+                        </div> }
+                        { step === 6 && <div className={`${publicsans.className} h-fit max-sm:w-full w-[90%] rounded-xl max-sm:p-8 p-12 flex flex-col items-start justify-center bg-Midnight border-2 border-[#DFE3E8]`}>
                             <span className={`font-[400]`}>step 1 of {step}</span>
                             <h1 className={`max-sm:text-[2.8rem] text-[3.2rem] font-[800]`}>We are almost there</h1>
                             <p className={`font-[400]`}>Share your contact details and our expert will call you back and help you unlock a happier, healthier life!</p>
                             <div className='flex flex-col gap-4 w-full h-fit px-16 py-12'>
-                                {
-                                    !submitted ?
+                                { !submitted ?
                                         <Form noValidate validated={validated} onChange={handleSubmit}>
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                                 <Form.Label>Full name</Form.Label>
@@ -360,15 +361,15 @@ function Index(props: {
                                                         </Form.Control.Feedback>
                                                     </Col>
                                                 </Row>
-                                                {otpVerified ? (
+                                                { otpVerified ? (
                                                     'verified'
                                                 ) : (
-                                                    <button className="mt-2 cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={handleSendOTP}>
+                                                    <button type='button' className="mt-2 cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={handleSendOTP} >
                                                         send otp
                                                     </button>
                                                 )}
                                             </Form.Group>
-                                            <Button type='button' onClick={handleSubmit}>Submit</Button>
+                                            <Button type='submit' onClick={handleSubmit}>Submit</Button>
                                         </Form>
                                         : <motion.div
                                             initial={{ opacity: 0, y: -50 }}
@@ -377,9 +378,7 @@ function Index(props: {
                                         >
                                             <h2>Hurray! 🎉</h2>
                                             <p>Thank you for submitting the form. We will contact you soon.</p>
-                                        </motion.div>
-
-                                }
+                                        </motion.div> }
                                 <div className='h-fit flex justify-evenly items-center'>
                                     <div className="h-12 w-full flex justify-center">
                                         <FontAwesomeIcon icon={faPhone} className='h-6 w-6' />
@@ -396,7 +395,7 @@ function Index(props: {
                                 </div>
                                 <div className='h-fit border-t-2 border-borderColor text-[0.9rem]'>By proceeding you&apos;re allowing ideatofit team to contact you</div>
                             </div>
-                        </div>}
+                        </div> }
                     </div>
                     <div className='w-[78%] h-fit flex flex-row justify-between'>
                         <button className='bg-[#1D202C] h-12 w-24 rounded-lg' onClick={handleBackButton}>&larr; Back</button>
@@ -410,8 +409,9 @@ function Index(props: {
 }
 
 export async function getStaticProps() {
-    const footer = await getFooterData()
-    const goals = await getGoals()
+    // const footer = await getFooterData()
+    // const goals = await getGoals()
+    const [footer, goals] = await Promise.all([getFooterData(), getGoals()])
     return {
         props: { footer, goals }
     }

@@ -42,8 +42,10 @@ specifiers:
   react-countup: ^6.4.2
   react-dom: 18.2.0
   react-icons: ^4.8.0
+  react-intersection-observer: ^9.4.3
   react-phone-input-2: ^2.15.1
   react-select-country-list: ^2.2.3
+  react-visibility-sensor: ^5.1.1
   react-waypoint: ^10.3.0
   sharp: ^0.32.0
   strapi-sdk-javascript: ^0.3.3
@@ -87,8 +89,10 @@ dependencies:
   react-countup: 6.4.2_duavcg6prxxl5begav3y2fyxcu
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.8.0_react@18.2.0
+  react-intersection-observer: 9.4.3_react@18.2.0
   react-phone-input-2: 2.15.1_biqbaboplfbrettd7655fr4n2y
   react-select-country-list: 2.2.3
+  react-visibility-sensor: 5.1.1_biqbaboplfbrettd7655fr4n2y
   react-waypoint: 10.3.0_react@18.2.0
   strapi-sdk-javascript: 0.3.3
   tsl: 0.1.0
@@ -5469,6 +5473,14 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-intersection-observer/9.4.3_react@18.2.0:
+    resolution: {integrity: sha512-WNRqMQvKpupr6MzecAQI0Pj0+JQong307knLP4g/nBex7kYfIaZsPpXaIhKHR+oV8z+goUbH9e10j6lGRnTzlQ==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -5510,6 +5522,17 @@ packages:
       '@babel/runtime': 7.21.0
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-visibility-sensor/5.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-cTUHqIK+zDYpeK19rzW6zF9YfT4486TIgizZW53wEZ+/GPBbK7cNS0EHyJVyHYacwFEvvHLEKfgJndbemWhB/w==}
+    peerDependencies:
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0

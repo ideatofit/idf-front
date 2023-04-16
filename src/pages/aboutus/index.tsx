@@ -20,16 +20,16 @@ function Aboutus(props: {
   return (
     <>
       <Navigation />
-      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col items-center text-themeColor max-w-[100vw] overflow-hidden max-sm:p-0 max-sm:pt-24 p-48`}>
+      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col items-center text-themeColor max-w-[100vw] overflow-hidden max-sm:p-0 max-sm:pt-24 max-lg:p-0 xl:p-48`}>
         {
           props['aboutusData'].map((data, i) => {
             return (
-              <div key={`aboutus${i}`} className={` xl:max-h-[50vh] min-h-[50vh] w-full flex max-sm:flex-col-reverse ${i % 2 == 0 ? 'xl:flex-row-reverse' : ''} `}>
+              <div key={`aboutus${i}`} className={`xl:max-h-[50vh] min-h-[50vh] w-full flex max-sm:flex-col-reverse ${i % 2 == 0 ? 'xl:flex-row-reverse' : ''} overflow-hidden`}>
                 <div className='min-h-full min-w-[50%] flex items-center justify-center'>
-                  <Image src={data['image']['url']} height={data['image']['height']} width={data['image']['width']} alt='' className='max-w-full max-h-full' />
+                  <Image src={data['image']['url']} height={data['image']['height']} width={data['image']['width']} alt='' className='min-w-full min-h-full object-fill' />
                 </div>
                 <div className='min-h-full min-w-[50%] bg-MidnightOcean'>
-                  <article dangerouslySetInnerHTML={{ __html: data['text'] }} className='h-full min-w-full min-h-full p-4 items-center' />
+                  <article dangerouslySetInnerHTML={{ __html: data['text'] }} className='h-full min-w-full min-h-full p-3 items-center' />
                 </div>
               </div>
             )
@@ -43,8 +43,12 @@ function Aboutus(props: {
 }
 
 export async function getStaticProps() {
-  const footer = await getFooterData()
-  const aboutusData = await getAboutUsData()
+  // const footer = await getFooterData()
+  // const aboutusData = await getAboutUsData()
+  const [footer, aboutusData] = await Promise.all([
+    getFooterData(),
+    getAboutUsData()
+  ])
   return {
     props: {
       footer, aboutusData

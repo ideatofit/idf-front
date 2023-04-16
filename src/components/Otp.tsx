@@ -10,9 +10,9 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
   const [userOTP, setUserOTP] = useState(['', '', '', '']);
   const [activeInput, setActiveInput] = useState(0);
   const [isResended, setIsResended] = useState(false);
-  const [changePhoneNumber, setChangedPhoneNumber] = useState('')
-
+  const [changePhoneNumber, setChangedPhoneNumber] = useState('');
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [counter, setCounter] = useState(90);
 
   const handleVerify = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -37,24 +37,33 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
   };
 
   const handleResend = async () => {
-    try {
-      const response = await fetch('/api/resend-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          countryCode: countryCode,
-          phone: phone,
-        }),
-      });
-      if (response.ok) {
-        setIsResended(true);
+    if (counter === 0) {
+      try {
+        const response = await fetch('/api/resend-otp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            countryCode: countryCode,
+            phone: phone,
+          }),
+        });
+        if (response.ok) {
+          setIsResended(true);
+          setCounter(90);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
+
+  React.useEffect(() => {
+    if (counter > 0) {
+      setTimeout(() => setCounter(counter - 1), 1000);
+    }
+  }, [counter]);
 
   const handleInput = (index: number, value: string) => {
     setUserOTP((prevUserOTP) => {
@@ -96,10 +105,7 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-row items-center justify-around mx-auto w-full">
                     {userOTP.map((value, index) => (
-                      <div
-                        key={`otpInputForm${index}`}
-                        className="w-16 h-16 "
-                      >
+                      <div key={`otpInputForm${index}`} className="w-16 h-16 ">
                         <input
                           ref={(el) => (inputRefs.current[index] = el)}
                           onFocus={() => setActiveInput(index)}
@@ -109,47 +115,45 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
                           id=""
                           maxLength={1}
                           value={value}
-                          onChange={(e) =>
-                            handleInput(index, e.target.value)
-                          }
+                          onChange={(e) => handleInput(index, e.target.value)}
                           onKeyDown={(e) =>
                             e.key === 'Backspace' && handleBackspace(index)
-                          }                        />
-                          </div>
-                        ))}
+                          }
+                        />
                       </div>
-                      <div className="flex flex-col gap-3">
-                        <div>
-                          <button
-                            onClick={handleVerify}
-                            className="flex flex-row items-center justify-center text-center py-4 w-full border rounded-xl outline-none bg-blue-700 border-none text-white text-sm shadow-sm"
-                          >
-                            Verify OTP
-                          </button>
-                        </div>
-                        <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                          <div>
-                            {!isResended
-                              ? "Didn't receive code?"
-                              : 'Code has been sended to you'}
-                          </div>
-                          <div
-                            onClick={handleResend}
-                            className="flex flex-row items-center text-blue-600 cursor-pointer"
-                          >
-                            {isResended ? 'counter' : 'Resend'}
-                          </div>
-                        </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <button
+                        onClick={handleVerify}
+                        className="flex flex-row items-center justify-center text-center py-4 w-full border rounded-xl outline-none bg-blue-700 border-none text-white text-sm shadow-sm"
+                      >
+                        Verify OTP
+                      </button>
+                    </div>
+                    <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+                      <div>
+                        {!isResended
+                          ? "Didn't receive code?"
+                          : 'Code has been sent to you'}
+                      </div>
+                      <div
+                        onClick={handleResend}
+                        className="flex flex-row items-center text-blue-600 cursor-pointer"
+                      >
+                        {isResended ? counter : 'Resend'}
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
-      );
-    }
-    
-    export default Otp;
-    
+      </div>
+    </div>
+  );
+}
+
+export default Otp;

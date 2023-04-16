@@ -47,8 +47,6 @@ import { TransformationProps } from '@/lib/transformation';
 import { wellnesshubProps } from '@/lib/wellnesshub';
 
 // Utils
-import { NextSeo } from 'next-seo';
-import Statistics from '@/components/Statistics';
 import ScrollButton from '@/components/ScrollButton';
 
 
@@ -97,7 +95,6 @@ const Home = (props: Props) => {
         <meta property="twitter:description" content="Ideaotift provides you with the latest health and fitness tips, workout plans, diet plans, and expert advice to help you achieve your fitness goals. Get fit, stay healthy, and live a better life with Ideaotift." />
         <meta property="twitter:image" content="https://res.cloudinary.com/dyurrus9p/image/upload/c_scale,w_1200,h_675/v1679590456/logo_fy99df.png" />
       </Head>
-      <NextSeo noindex={true} />
       <ScrollButton />
       <Navigation />
       <div className='w-100vw h-fit bg-backgroundColor overflow-hidden z-0'>
@@ -298,7 +295,6 @@ const Home = (props: Props) => {
             </div>
           </motion.div>
         </motion.div>
-        <Statistics />
         <Gotaquestion />
         <Footer footer={props.footer} />
       </div >

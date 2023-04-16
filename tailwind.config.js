@@ -19,6 +19,7 @@ module.exports = {
     './src/pages/comingsoon/index.tsx',
     './src/pages/becomeacoach.tsx',
     './src/pages/login.tsx',
+    './src/pages/reset-password.tsx',
     //components
     './src/componensts/Slide.tsx',
     './src/components/Testimonial.tsx',
@@ -41,6 +42,7 @@ module.exports = {
     './src/components/Statistics.tsx',
     './src/components/ScrollButton.tsx',
     './src/components/Otp.tsx',
+    './src/components/Modal.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',

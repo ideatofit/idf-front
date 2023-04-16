@@ -192,8 +192,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: Params) {
   const { slug } = await context.params
   const posts = await getPostsBySlug(slug)
-  const footer = await getFooterData()
-  const comments = await getPostComments(posts['id'])
+  // const footer = await getFooterData()
+  // const comments = await getPostComments(posts['id'])
+  const [footer, comments] = await Promise.all([
+    getFooterData(),
+    getPostComments(posts['id'])
+  ])
   return {
     props: {
       posts, footer, comments

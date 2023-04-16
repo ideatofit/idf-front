@@ -123,16 +123,18 @@ function Diets(props: {
           ratingCount: '18',
         }}
         // adding video props conditionally
-        {...(props['diets']['video'] && { video:{
-      name: props['diets']['video']['name'],
-      description: props['diets']['video']['description'],
-      contentUrl: props['diets']['video']['contenturl'],
-      embedUrl: props['diets']['video']['embedurl'],
-      uploadDate: props['diets']['publishedAt'],
-      duration: props['diets']['video']['duration'],
-      thumbnailUrls: props['diets']['video']['thumbnailUrl'],
-      hasPart: props['diets']['video']['haspart'],
-}})}
+        {...(props['diets']['video'] && {
+          video: {
+            name: props['diets']['video']['name'],
+            description: props['diets']['video']['description'],
+            contentUrl: props['diets']['video']['contenturl'],
+            embedUrl: props['diets']['video']['embedurl'],
+            uploadDate: props['diets']['publishedAt'],
+            duration: props['diets']['video']['duration'],
+            thumbnailUrls: props['diets']['video']['thumbnailUrl'],
+            hasPart: props['diets']['video']['haspart'],
+          }
+        })}
       />
       <Navigation />
       {/* {
@@ -162,7 +164,7 @@ function Diets(props: {
               onChange={(e) => {
                 setUserComment(e.target.value)
               }
-            }
+              }
             />
             <button
               type='button'
@@ -215,9 +217,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: Params) {
   const { slug } = await context.params
   const diets = await getDietDataBySlug(slug)
-  const footer = await getFooterData()
-  const comments = await getDietComments(diets['id'])
-  const keywords = (await getkeywords()).join(", ").toLocaleLowerCase()
+  const [footer, comments, keywords] = await Promise.all([getFooterData(), getDietComments(diets['id']), (await getkeywords()).join(", ").toLocaleLowerCase()])
   return {
     props: {
       diets, footer, comments, keywords
