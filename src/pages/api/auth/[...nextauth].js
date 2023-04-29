@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
+import login from "@/lib/login";
 
 export default NextAuth({
   providers: [
@@ -15,22 +16,24 @@ export default NextAuth({
         password: { label: "Password", type: "text" },
       },
       async authorize(credentials, req) {
-        if (credentials == null) return null;
-
-        try {
-          const { user, jwt } = await signIn({
-            email: credentials.email,
-            password: credentials.password,
-          });
-          return { ...user, jwt };
-        } catch {
+        if (credentials === null) {
           return null;
+        }
+        try {
+          const { user, jwt } = await login({
+            email: credentials.email,
+            password: credentials.password
+          })
+
+          return {...user, jwt}
+        } catch (err) {
+          console.log(err);
         }
       },
     }),
   ],
-  pages:{
-    signIn: "/login"
+  pages: {
+    signIn: "/login",
   },
   secret: process.env.JWT_SECRET,
 
@@ -40,7 +43,7 @@ export default NextAuth({
     async session({ session, token, user }) {
       session.user.jwt = token.jwt;
       session.user.id = token.id;
-      return session;
+      return Promise.resolve(session);
     },
 
     async jwt({ token, user, account }) {
@@ -51,10 +54,10 @@ export default NextAuth({
         );
         const data = await response.json();
         token.jwt = data.jwt;
-        token.id = data.user.id;
-        token.avatar = data.user.image;
+        token.id = data.id;
+        token.avatar = data?.user?.image;
       }
-      return token;
+      return Promise.resolve(token);
     },
   },
 });

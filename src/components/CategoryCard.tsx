@@ -27,7 +27,7 @@ function CategoryCard(props: {
       animate: {
         x: 0
       }
-    }} className='relative min-h-[17rem] w-[16rem] rounded-[1.4rem] bg-slate-300 overflow-hidden'>
+    }} className='relative max-sm:h-[14rem] max-sm:w-[13rem] md:h-[17rem] md:[16rem] rounded-[1.4rem] bg-slate-300 overflow-hidden'>
       <div className='absolute h-full w-full z-10 text-themeColor flex items-end'>
         <div className='relative z-20 border-2 border-white w-full h-[20%] rounded-b-[1.4rem] flex'>
           <div className='relative flex-[50%] h-full border-r-2 border-white flex items-center justify-center'>

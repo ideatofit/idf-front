@@ -10,9 +10,14 @@ import logo from '../../public/images/whitelogo.svg'
 import profile from '../../public/profile.svg'
 
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useEffect } from 'react';
 
 function Header() {
   const {data: session, status} = useSession()
+  useEffect(()=>{
+    console.log(session)
+  },[])
+
   return (
     <>
       <Navbar style={{background:"linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)"}} className='fixed-top z-30' expand="lg">
@@ -37,7 +42,7 @@ function Header() {
               {/* <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' /> */}
               <Image src={session ? `${session?.user?.image}` : profile} alt="cart" width={35} height={35} onClick={()=> {
                 if(status === 'authenticated'){
-                  return
+                  signOut()
                 }
                 window.location.href = '/login'
               }} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full'/>

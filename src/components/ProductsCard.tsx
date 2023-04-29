@@ -22,7 +22,7 @@ function ProductsCard(props: {
     }[]
 }) {
     return (
-        <div className={`${poppins.className} h-fit w-[14.9rem] flex flex-col`}>
+        <div className={`${poppins.className} h-fit w-[14.9rem] flex flex-col max-sm:scale-90`}>
             <div className='max-w-[14.83rem] w-[14.83rem] max-h-[19.89rem] h-[19.89rem] rounded-xl overflow-hidden'>
                 <motion.div
                     className="group"

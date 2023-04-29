@@ -20,7 +20,7 @@ function Aboutus(props: {
   return (
     <>
       <Navigation />
-      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-[100vw] flex flex-col items-center text-themeColor max-w-[100vw] overflow-hidden max-sm:p-0 max-sm:pt-24 max-lg:p-0 xl:p-48`}>
+      <div className={`${roboto.className} bg-backgroundColor min-h-screen min-w-full flex flex-col items-center text-themeColor max-w-full overflow-hidden max-sm:p-0 max-sm:pt-24 max-lg:p-0 xl:p-48`}>
         {
           props['aboutusData'].map((data, i) => {
             return (

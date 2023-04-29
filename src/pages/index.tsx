@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -66,7 +66,9 @@ type Props = {
 }
 
 const Home = (props: Props) => {
+  console.log(props)
   const [tab, setTab] = useState('tab1')
+
   return (
     <>
       <Head>
@@ -214,23 +216,33 @@ const Home = (props: Props) => {
                   <>
                     <div className='flex-[33%] relative h-full gap-2'>
                       <div className='h-[103%] w-[100%] overflow-hidden '>
+                        <Link href={props['wellnesshub']['tab1']['link1'] ?? ''}>
                         <Image src={props['wellnesshub']['tab1']['img1']['url']} alt='wellness hub 1' height={props['wellnesshub']['tab1']['img1']['height']} width={props['wellnesshub']['tab1']['img1']['width']} className=' ' />
+                        </Link>
                       </div>
                     </div>
                     <div className='flex-[33%] relative h-full flex flex-col items-center gap-2'>
                       <div className='h-[55%] w-[100%] overflow-hidden rounded-xl'>
+                        <Link href={props['wellnesshub']['tab1']['link2'] ?? ''}>
                         <Image src={props['wellnesshub']['tab1']['img2']['url']} alt='wellness hub 2' height={props['wellnesshub']['tab1']['img2']['height']} width={props['wellnesshub']['tab1']['img2']['width']} className='' />
+                        </Link>
                       </div>
                       <div className='h-[45%] w-[100%] object-fill overflow-hidden rounded-xl'>
+                        <Link href={props['wellnesshub']['tab1']['link3'] ?? ''}>
                         <Image src={props['wellnesshub']['tab1']['img3']['url']} alt='wellness hub 3' height={props['wellnesshub']['tab1']['img3']['height']} width={props['wellnesshub']['tab1']['img3']['width']} className='' />
+                        </Link>
                       </div>
                     </div>
                     <div className='flex-[33%] relative h-full flex flex-col gap-2'>
                       <div className='h-[33%] w-[100%] overflow-hidden rounded-xl'>
+                        <Link href={props['wellnesshub']['tab1']['link4'] ?? ''}>
                         <Image src={props['wellnesshub']['tab1']['img4']['url']} alt='wellness hub 1' height={props['wellnesshub']['tab1']['img4']['height']} width={props['wellnesshub']['tab1']['img4']['width']} className='' />
+                        </Link>
                       </div>
                       <div className='h-[67%] w-[100%] overflow-hidden rounded-xl'>
+                        <Link href={props['wellnesshub']['tab1']['link5'] ?? ''}>
                         <Image src={props['wellnesshub']['tab1']['img5']['url']} alt='wellness hub 1' height={props['wellnesshub']['tab1']['img5']['height']} width={props['wellnesshub']['tab1']['img5']['width']} className='' />
+                        </Link>
                       </div>
                     </div>
                   </>
@@ -239,10 +251,15 @@ const Home = (props: Props) => {
                   tab === 'tab2' &&
                   <div className='min-h-[25vh] flex flex-col items-center text-center'>
                     <div className='flex max-w-full max-h-full overflow-hidden gap-2'>
+                      <Link href={props['wellnesshub']['tab2']['link1'] ?? ''}>
                       <Image src={props['wellnesshub']['tab2']['img1']['url']} alt='wellness hub 2' height={props['wellnesshub']['tab1']['img2']['height']} width={props['wellnesshub']['tab1']['img3']['width']} className='max-sm:w-[49%] rounded-lg my-1' />
+                      </Link>
+                      <Link href={props['wellnesshub']['tab2']['link2'] ?? ''}>
                       <Image src={props['wellnesshub']['tab2']['img2']['url']} alt='wellness hub 2' height={props['wellnesshub']['tab1']['img2']['height']} width={props['wellnesshub']['tab1']['img3']['width']} className='max-sm:w-[49%] rounded-lg my-1' />
+                      </Link>
                     </div>
                     <div className='flex max-w-full max-h-full overflow-hidden gap-2'>
+                      <Link href={props['wellnesshub']['tab2']['link3'] ?? ''}></Link>
                       <Image src={props['wellnesshub']['tab2']['img3']['url']} alt='wellness hub 2' height={props['wellnesshub']['tab1']['img2']['height']} width={props['wellnesshub']['tab1']['img3']['width']} className='max-sm:w-[49%] rounded-lg my-1' />
                       <Image src={props['wellnesshub']['tab2']['img4']['url']} alt='wellness hub 2' height={props['wellnesshub']['tab1']['img2']['height']} width={props['wellnesshub']['tab1']['img3']['width']} className='max-sm:w-[49%] rounded-lg my-1' />
                     </div>

@@ -28,6 +28,7 @@ export default async function getStoreData() {
       },
     },
   });
+
   let url = `https://server.ideatofit.com/api/store?${query}`;
   let fetchedProducts = await fetch(url);
   let parsedProductsData: StoreTypes = await fetchedProducts.json();
@@ -64,7 +65,9 @@ export default async function getStoreData() {
             height: data["img"]["data"]["attributes"]["height"],
             width: data["img"]["data"]["attributes"]["width"],
           },
-          'min-price': Math.min(),
+          'min-price': Math.min(...data["Storeproducts"].map((data) => {
+            return data["products"]["data"][0]["attributes"]["price"]
+          })),
           "sub-category": data["Storeproducts"].map((data) => {
             return {
               category: data["category"],

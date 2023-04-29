@@ -37,7 +37,7 @@ function Store(props: {
         <meta name="keywords" content={` Ideaotift, fitness, health, workout, diet, expert advice, Healthy living tips, ${props.keywords}`} />
         <meta name="author" content="deepak sahu" />
       </Head>
-      <div className='w-[100vw] max-w-[100vw] flex flex-col bg-backgroundColor text-themeColor overflow-hidden z-10 scroll-smooth'>
+      <div className='w-full max-w-full flex flex-col bg-backgroundColor text-themeColor overflow-hidden z-10 scroll-smooth'>
         <Header />
           <Carousel pause={false} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
             {
@@ -61,8 +61,8 @@ function Store(props: {
             }
           </Carousel>
           <div className='h-fit min-w-full text-center'>
-            <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>Shop by Categories</h1>
-            <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
+            <h1 className={`${poppins.className} text-[2rem] font-bold pt-4`}>Shop by Categories</h1>
+            <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 max-sm:grid-cols-2 place-items-center'>
               {
                 props['store']['sections'].map((data, i) => {
                   return <CategoryCard key={i} img={data['img']} alt={''} title={data['title']} min-price={0} redirectToId={data['title']} />
@@ -74,7 +74,7 @@ function Store(props: {
             props['store']['sections'].map((data, i) => {
               return (
                 <div id={`${data['title']}`} className='h-fit min-w-full text-center' key={`productsCard${i}`}>
-                  <h1 className={`${poppins.className} text-[2.4rem] font-bold pt-4`}>{data['title']}</h1>
+                  <h1 className={`${poppins.className} text-[2rem] font-bold pt-4`}>{data['title']}</h1>
                   {
                     data['sub-category'].map((data, i)=>{
                       return (

@@ -2,7 +2,7 @@ import qs from "qs";
 import formatDate from "./dateformatter";
 import { PostsData } from "@/types/posts";
 import { PostBySlug } from "@/types/posts";
-
+  
 export type PostsProps = {
   posts: {
     title: string;
