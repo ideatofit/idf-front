@@ -1,13 +1,12 @@
-import NextAuth from 'next-auth';
+import NextAuth from "next-auth";
+import { DefaultSession } from "next-auth/index";
 
-declare module 'next-auth' {
+declare module "next-auth/" {
   interface Session {
-    user:{
-      id: number
-      jwt: string
-      name: string
-      email: string
-      image: string
-    }
+    user: {
+      jwt?: string;
+      id?: string;
+    } & DefaultSession["user"];
   }
+
 }

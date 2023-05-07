@@ -1,10 +1,11 @@
-// @ts-nocheck
 import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth/index";
 import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import login from "@/lib/login";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default NextAuth({
+const authOptions = (): NextAuthOptions => ({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -62,3 +63,6 @@ export default NextAuth({
     },
   },
 });
+
+// @ts-ignore
+export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, authOptions());
