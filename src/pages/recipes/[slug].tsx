@@ -9,10 +9,10 @@ import font from '../../styles/font.module.css'
 import { getDietComments, getDietData, sendDietComments } from '@/lib/recipe'
 import { useSession } from 'next-auth/react'
 import Comments from '@/components/Comments'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'react-bootstrap'
+import { Alert, Button } from 'react-bootstrap'
 import style from '../../styles/spinner.module.css'
 import { getDietDataBySlug } from '@/lib/recipe'
 import Recipecard from '@/components/Recipecard'
@@ -20,6 +20,7 @@ import { RecipeData } from '@/types/recipe'
 import { NextSeo, RecipeJsonLd } from 'next-seo'
 import SocialMedia from '@/components/Socialmedia'
 import { getkeywords } from '@/lib/keywords'
+import Login from '../login'
 
 type comments = {
   id: number
@@ -37,12 +38,12 @@ function Diets(props: {
 }) {
   const [comments, setComment] = useState(props['comments']);
   const [userComment, setUserComment] = useState('')
-  const [showLogin, setShowLogin] = useState(false)
   const [sending, setSending] = useState(false)
   const [displayedComments, setDisplayedComments] = useState(4);
 
 
   const { data: session, status } = useSession()
+  const router = useRouter()
 
   const fetchComments = async () => {
     const data = await getDietComments(props['diets']['id'])
@@ -51,7 +52,10 @@ function Diets(props: {
 
   const handleSendComment = async () => {
     if (status === 'unauthenticated') {
-      setShowLogin(true)
+      const cnfrm = confirm('you have to login to make a comment on this post')
+      if (cnfrm) {
+        router.replace('/login')
+      }
       return
     }
     setSending(true)
@@ -137,13 +141,6 @@ function Diets(props: {
         })}
       />
       <Navigation />
-      {/* {
-        showLogin &&
-        <div className='fixed h-screen w-[100vw] grid place-items-center z-40'>
-          <Login />
-          <Button onClick={() => { setShowLogin(false) }}>Cancel</Button>
-        </div>
-      } */}
       <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-24 max-xl:p-36 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
         <div className={`max-h-[50vh] w-full text-themeColor rounded-lg overflow-hidden`}>
           <Image src={props['diets']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />

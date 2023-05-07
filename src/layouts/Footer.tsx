@@ -70,7 +70,7 @@ function Footer(props: {
             </div>
             <div className={`${opensans.className} min-h-[40vh] max-h-fit w-full border-borderColor border-y-2 flex flex-col p-4  bg-Midnight`}>
                 <div className='text-start text-themeColor'>
-                    <h6>Keywords</h6>
+                    <h6>Related searches</h6>
                 </div>
                 <div className='grid max-sm:grid-cols-3 grid-cols-5 gap-2 text-white min-h-full max-sm:p-2 p-3 text-[0.9rem]'>
                     {

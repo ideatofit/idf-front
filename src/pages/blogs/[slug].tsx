@@ -39,12 +39,13 @@ function Blogs(props: {
 }) {
   const [comment, setComment] = useState(props['comments']);
   const [userComment, setUserComment] = useState('')
-  const [showLogin, setShowLogin] = useState(false)
   const [sending, setSending] = useState(false)
   const [displayedComments, setDisplayedComments] = useState(4);
 
 
   const { data: session, status } = useSession()
+
+  const router = useRouter()
 
   const fetchComments = async () => {
     const data = await getPostComments(props['posts']['id'])
@@ -53,7 +54,10 @@ function Blogs(props: {
 
   const handleSendComment = async () => {
     if (status === 'unauthenticated') {
-      setShowLogin(true)
+      const cnfrm = confirm('you have to login to make a comment on this post')
+      if (cnfrm) {
+        router.replace('/login')
+      }
       return
     }
     setSending(true)
@@ -113,13 +117,7 @@ function Blogs(props: {
         isAccessibleForFree={props['posts']['isaccessibleforfree']}
       />
       <Navigation />
-      {/* {
-        showLogin &&
-        <div className='fixed h-screen w-[100vw] grid place-items-center z-40'>
-          <Login />
-          <Button onClick={() => { setShowLogin(false) }}>Cancel</Button>
-        </div>
-      } */}
+
       <div className={`relative ${font.gotham} min-h-screen w-full bg-backgroundColor xl:p-32 max-xl:p-32 max-sm:p-4 max-sm:pt-24 text-themeColor`}>
         <div className={`max-h-[60vh] w-full text-themeColor rounded-lg overflow-hidden`}>
           <Image src={props['posts']['img']} alt={''} height={360} width={1130} className='h-full w-full object-cover' />

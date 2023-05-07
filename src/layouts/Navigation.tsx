@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 
 function Header() {
   const {data: session, status} = useSession()
+  
   useEffect(()=>{
     console.log(session)
   },[])

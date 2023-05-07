@@ -10,7 +10,7 @@ type keywordsData = {
 
 type keywordsProps = string[];
 
-export async function getkeywords() {
+export async function getkeywords(): Promise<keywordsProps> {
   const url = `https://server.ideatofit.com/api/keywords`;
   const fetchedData = await fetch(url);
   const response: keywordsData = await fetchedData.json();
