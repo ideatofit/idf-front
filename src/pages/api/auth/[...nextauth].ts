@@ -24,10 +24,10 @@ const authOptions = (): NextAuthOptions => ({
         try {
           const { user, jwt } = await login({
             email: credentials.email,
-            password: credentials.password
-          })
+            password: credentials.password,
+          });
 
-          return {...user, jwt}
+          return { ...user, jwt };
         } catch (err) {
           console.log(err);
         }
@@ -45,10 +45,13 @@ const authOptions = (): NextAuthOptions => ({
     async session({ session, token, user }) {
       session.user.jwt = token.jwt;
       session.user.id = token.id;
+      session.user.image = token.picture;
+      session.user.name = token.name;
+      session.user.email = token.email;
       return Promise.resolve(session);
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       const isSignIn = user ? true : false;
       if (isSignIn) {
         const response = await fetch(
