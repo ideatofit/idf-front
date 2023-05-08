@@ -56,7 +56,7 @@ function Blogs(props: {
     if (status === 'unauthenticated') {
       const cnfrm = confirm('you have to login to make a comment on this post')
       if (cnfrm) {
-        router.replace('/login')
+        router.push('/login')
       }
       return
     }

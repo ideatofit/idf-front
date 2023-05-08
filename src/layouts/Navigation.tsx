@@ -11,25 +11,28 @@ import profile from '../../public/profile.svg'
 
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 function Header() {
-  const {data: session, status} = useSession()
-  
-  useEffect(()=>{
+  const { data: session, status } = useSession()
+
+  const router = useRouter()
+
+  useEffect(() => {
     console.log(session)
-  },[])
+  }, [])
 
   return (
     <>
-      <Navbar style={{background:"linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)"}} className='fixed-top z-30' expand="lg">
+      <Navbar style={{ background: "linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)" }} className='fixed-top z-30' expand="lg">
         <Container>
           <Navbar.Brand>
             <Link href={'/'}>
-            <Image src={logo}
-              alt="logo" className=' w-[7.5rem]'/>
-              </Link>
+              <Image src={logo}
+                alt="logo" className=' w-[7.5rem]' />
+            </Link>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "rgba(255, 255, 255, 0.9)"}}/>
+          <Navbar.Toggle aria-controls="navbarScroll" style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }} />
           <Navbar.Collapse id="navbarScroll" className='max-sm:flex max-sm:flex-col max-sm:p-4 max-sm:gap-4 max-sm:rounded-xl'>
             <Nav className="me-auto w-[80%] flex justify-evenly">
               <Link href="/" className='text-[1.5rem] decoration-transparent hover:opacity-[0.7] text-white antialiased'>Home</Link>
@@ -41,12 +44,10 @@ function Header() {
             </Nav>
             <div className='d-flex'>
               {/* <Image src={cart} alt="cart" width={30} className='cursor-pointer mx-4 hover:opacity-[0.7]' /> */}
-              <Image src={session ? `${session?.user?.image}` : profile} alt="cart" width={35} height={35} onClick={()=> {
-                if(status === 'authenticated'){
-                  signOut()
-                }
-                window.location.href = '/login'
-              }} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full'/>
+              {session ? <Image src={session?.user?.image ?? ''} alt="cart" width={35} height={35} className='cursor-pointer mx-4 hover:opacity-[0.7] rounded-full' />
+                : <span className='text-white hover:opacity-70 cursor-pointer' onClick={() => {
+                  router.push('/login')
+                }}>Login</span>}
             </div>
           </Navbar.Collapse>
         </Container>

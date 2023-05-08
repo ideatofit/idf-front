@@ -1,4 +1,9 @@
-async function login({ email, password }: { email: string; password: string }) {
+type CredTypes = {
+  email: string;
+  password: string;
+}
+
+async function login({ email, password }: CredTypes) {
   try {
     const postUser = await fetch(
       "https://server.ideatofit.com/api/auth/local",
@@ -14,8 +19,10 @@ async function login({ email, password }: { email: string; password: string }) {
         },
       }
     );
-    const response = await postUser.json();
-    return response;
+    if(postUser.ok){
+      const user = await postUser.json();
+      return user;
+    } else return null
   } catch (err) { return null }
 }
 

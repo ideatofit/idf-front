@@ -35,7 +35,7 @@ function Login() {
     const emailRegister = async (e: React.FormEvent<HTMLFormElement>) => {
        e.preventDefault()
        const register = await registerUser({ email, password })
-
+       console.log(register)
        if(register){
         router.replace('/')
        }
@@ -64,7 +64,7 @@ function Login() {
                                     <a href="#" className="text-sm font-medium text-primary-600 hover:underline text-primary-500">Forgot password?</a>
                                 </div>
                                 <div className='flex flex-col items-center justify-center gap-3'>
-                                    <button type="submit" className="w-64 h-12 text-white bg-slate-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800">Sign in</button>
+                                    <button type="submit" className="w-64 h-12 text-white bg-slate-900 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800">{register ? 'SignUp' : 'SignIn'}</button>
                                     <button type="button" className="flex gap-2 w-64 h-12 text-white bg-slate-900 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2" onClick={() => signIn('google', { callbackUrl: `${window.location.origin}` })}>
                                         <Image src={googleIcon} alt="google" width={30} height={30} />
                                         Sign in with Google

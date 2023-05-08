@@ -86,7 +86,7 @@ function Index(props: {
         <div className='w-[80%] text-left pt-12'>
           <h3>Testimonials</h3>
         </div>
-        <div className='flex h-fit w-[80%] overflow-auto'>
+        <div className='flex h-fit w-[80%] overflow-auto gap-4'>
           {
             props['diet']['testimonials'].map((data, i) => {
               return <Testimonial key={`testimonials${i}`} text={data['text']} avatar={data['img']['url']} name={data['name']} />

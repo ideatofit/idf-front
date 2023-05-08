@@ -43,10 +43,14 @@ module.exports = {
     './src/components/ScrollButton.tsx',
     './src/components/Otp.tsx',
     './src/components/Modal.tsx',
+    './src/components/Whytochooseus.tsx',
+    './src/components/ToolsShowcase.tsx',
+    './src/components/Transformation.tsx',
+    './src/components/Videobanner.tsx',
+    './src/components/Wellnesshub.tsx',
     //layouts
     './src/layouts/Navigation.tsx',
     './src/layouts/Footer.tsx',
-
   ],
   theme: {
     extend: {

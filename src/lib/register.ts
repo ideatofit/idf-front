@@ -11,13 +11,12 @@ export default async function register({
 }: UserDetails){
 
     try{
-
     // first check if the user exists
     const userExists = await login({email, password})
 
     if(userExists){
-        alert('user already exists')
-        return
+        alert('User already exists')
+        return null
     }
 
     // if user doesn't exist, then register them. 
@@ -39,10 +38,13 @@ export default async function register({
     })
 
     if(postUserData.ok){
-        signIn('credentials', {
+        const isSignedInSuccessfully = await signIn('credentials', {
             email: email,
             password: password,
         })
+        if(isSignedInSuccessfully){
+            return true
+        }
     }
 } catch (err) {
     return null
