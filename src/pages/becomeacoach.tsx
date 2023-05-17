@@ -4,13 +4,12 @@ import Navigation from '@/layouts/Navigation';
 import getFooterData, { FooterProps } from '@/lib/footer';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { NextSeo } from 'next-seo';
 import Otp from '@/components/Otp';
 import { handleBcmCoach } from '@/lib/becomeacoach';
-
 
 const BecomeACoach = (props: {
   footer: FooterProps
@@ -175,7 +174,8 @@ export async function getStaticProps() {
   return {
     props: {
       footer
-    }
+    },
+    revalidate: 60
   }
 }
 

@@ -112,8 +112,8 @@ export default async function getPlans() {
             text: data['text'],
             img: {
               url: data?.img?.data?.attributes?.url ?? '',
-              height: data?.img?.data?.attributes?.height ,
-              width: data?.img?.data?.attributes?.width
+              height: data?.img?.data?.attributes?.height ?? 0,
+              width: data?.img?.data?.attributes?.width ?? 0
             },
         }
     })
