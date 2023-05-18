@@ -36,20 +36,20 @@ function Index(props: {
     goals: GoalProps,
 }) {
     const genderOptions = ['Male', 'Female']
-    const [step, setStep] = useState(1)
-    const [goalId, setGoalId] = useState([7])
-    const [height, setHeight] = useState(0)
-    const [weight, setWeight] = useState(0)
-    const [age, setAge] = useState(0)
-    const [gender, setGender] = useState(1)
-    const [email, setEmail] = useState('')
-    const [name, setName] = useState('')
-    const [validated, setValidated] = useState(false);
-    const [submitted, setSubmitted] = useState(false)
-    const [otpVerified, setOtpVerified] = useState(false);
-    const [showOtpInput, setShowOtpInput] = useState(false);
-    const [phone, setPhone] = useState('');
-    const [countryCode, setCountryCode] = useState('');
+    const [ step, setStep ] = useState(1)
+    const [ goalId, setGoalId ] = useState([7])
+    const [ height, setHeight ] = useState(0)
+    const [ weight, setWeight ] = useState(0)
+    const [ age, setAge ] = useState(0)
+    const [ gender, setGender ] = useState(1)
+    const [ email, setEmail ] = useState('')
+    const [ name, setName ] = useState('')
+    const [ validated, setValidated ] = useState(false);
+    const [ submitted, setSubmitted ] = useState(false)
+    const [ otpVerified, setOtpVerified ] = useState(false);
+    const [ showOtpInput, setShowOtpInput ] = useState(false);
+    const [ phone, setPhone ] = useState('');
+    const [ countryCode, setCountryCode ] = useState('');
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -258,8 +258,8 @@ function Index(props: {
                                             type="number"
                                             placeholder="Weight in kg"
                                             className="h-16 w-full text-white border-2 rounded p-3"
-                                            value={weight}
-                                            onChange={handleInputChange}
+                                            value={ weight }
+                                            onChange={ handleInputChange }
                                             required
                                             isInvalid={validated && (weight < 1 || weight > 500)}
                                         />

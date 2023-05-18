@@ -37,7 +37,7 @@ function Index(props: {
               {
                 props.diet.plans.map((data, i) => {
                   return (
-                    <button className={`${tab === i + 1 && 'bg-white text-black'} text-sm rounded-full w-[90%] px-2 py-2 flex justify-around`} onMouseEnter={() => {
+                    <button key={`dietPlansButton${i}`} className={`${tab === i + 1 && 'bg-white text-black'} text-sm rounded-full w-[90%] px-2 py-2 flex justify-around`} onMouseEnter={() => {
                       setTab(i + 1)
                     }}>
                       <span>{data.title}</span>
@@ -57,17 +57,19 @@ function Index(props: {
             {
               props.diet.plans.map((data, i) => {
                 return (
-                  <div className={` ${tab !== i + 1 && 'hidden'} ${inter.className} text-sm`}>
+                  <div key={`dietPlansInfo${i}`} className={` ${tab !== i + 1 && 'hidden'} ${inter.className} text-sm`}>
                     {data.offerDetails.map((data, i) => {
                       return (
-                        <p className=''>{data.text}</p>
+                        <p key={`dietPlansInfoText${i}`} className=''>{data.text}</p>
                       )
                     })}
-                  </div>
+                    <Link href={`/user?redirectto=${data.redirectTo}`} className='text-inherit text-decoration-none '>
+                      <Button text={'START NOW'} />
+                    </Link>
+                  </div> 
                 )
               })
             }
-            <Button text={'START NOW'}/>
           </div>
         </div>
         <Statistics />

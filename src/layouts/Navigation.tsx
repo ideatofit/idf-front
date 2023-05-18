@@ -18,10 +18,6 @@ function Header() {
 
   const router = useRouter()
 
-  useEffect(() => {
-    console.log(session)
-  }, [])
-
   return (
     <>
       <Navbar style={{ background: "linear-gradient(180deg, #252525 0%, rgba(37, 37, 37, 0) 100.56%)" }} className='fixed-top z-30' expand="lg">

@@ -68,4 +68,4 @@ const authOptions = (): NextAuthOptions => ({
 });
 
 // @ts-ignore
-export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, authOptions());
+export default NextAuth(authOptions());
