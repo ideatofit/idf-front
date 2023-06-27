@@ -140,7 +140,6 @@ function Bmr(props: {
 
     // Adjust TDEE based on body fat percentage
     TDEE = TDEE - (TDEE * (bodyFatPercentage / 100));
-    console.log({ BMR, TDEE })
     return { BMR, TDEE };
   }
 

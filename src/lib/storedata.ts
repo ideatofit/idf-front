@@ -35,54 +35,49 @@ export default async function getStoreData() {
 
   const filteredData: StoreProps = {
     banner: {
-      title: parsedProductsData["data"]["attributes"]["title"],
-      button: parsedProductsData["data"]["attributes"]["button"],
-      textonbutton: parsedProductsData["data"]["attributes"]["textonbutton"],
-      target: parsedProductsData["data"]["attributes"]["redirectTo"],
+      title: parsedProductsData?.data?.attributes?.title ?? '',
+      button: parsedProductsData?.data?.attributes?.button ?? '',
+      textonbutton: parsedProductsData?.data?.attributes?.textonbutton ?? '',
+      target: parsedProductsData?.data?.attributes?.redirectTo ?? '',
       coverimage:
-        parsedProductsData["data"]["attributes"]["coverImage"]["data"][
-          "attributes"
-        ]["url"],
+        parsedProductsData?.data?.attributes?.coverImage?.data
+          ?.attributes?.url ?? '',
       alt:
-        parsedProductsData["data"]["attributes"]["coverImage"]["data"][
-          "attributes"
-        ]["alternativeText"] ?? "",
+        parsedProductsData?.data?.attributes?.coverImage?.data
+          ?.attributes?.alternativeText ?? "",
       height:
-        parsedProductsData["data"]["attributes"]["coverImage"]["data"][
-          "attributes"
-        ]["height"],
+        parsedProductsData?.data?.attributes?.coverImage?.data
+          ?.attributes?.height ?? 0,
       width:
-        parsedProductsData["data"]["attributes"]["coverImage"]["data"][
-          "attributes"
-        ]["width"],
+        parsedProductsData?.data?.attributes?.coverImage?.data
+          ?.attributes?.width ?? 0,
     },
-    sections: parsedProductsData["data"]["attributes"]["sections"].map(
+    sections: parsedProductsData.data.attributes.sections.map(
       (data) => {
+        const minPrice = Math.min(...data.Storeproducts.flatMap((storeProduct) => storeProduct.products.data.map((product) => product.attributes.price)));
         return {
-          title: data["title"],
+          title: data.title,
           img: {
-            url: data["img"]["data"]["attributes"]["url"],
-            height: data["img"]["data"]["attributes"]["height"],
-            width: data["img"]["data"]["attributes"]["width"],
+            url: data.img.data.attributes.url,
+            height:data.img.data.attributes.height,
+            width:data.img.data.attributes.width,
           },
-          'min-price': Math.min(...data["Storeproducts"].map((data) => {
-            return data["products"]["data"][0]["attributes"]["price"]
-          })),
-          "sub-category": data["Storeproducts"].map((data) => {
+          'min-price': minPrice,
+          "sub-category": data.Storeproducts.map((data) => {
             return {
-              category: data["category"],
-              products: data["products"]["data"].map(({ attributes }) => {
+              category:data.category,
+              products:data.products.data.map(({ attributes }) => {
                 return {
-                  name: attributes["title"],
-                  price: attributes["price"],
-                  affiliate: attributes["affiliates"].map((data) => {
+                  name: attributes.title,
+                  price: attributes.price,
+                  affiliate: attributes.affiliates.map((data) => {
                     return {
-                      name: data["name"],
-                      link: data["link"],
+                      name:data.name,
+                      link:data.link,
                     };
                   }),
-                  img: attributes["img"]["data"]["attributes"]["url"],
-                  stars: attributes["stars"],
+                  img: attributes.img.data.attributes.url,
+                  stars: attributes.stars,
                 };
               }),
             };
@@ -90,10 +85,10 @@ export default async function getStoreData() {
         };
       }
     ),
-    slides: parsedProductsData["data"]["attributes"]["slides"].map((data) => {
+    slides: parsedProductsData.data.attributes.slides.map((data) => {
       return {
-        link: data["link"],
-        img: data["img"]["data"]["attributes"],
+        link:data.link,
+        img:data.img.data.attributes,
       };
     }),
   };

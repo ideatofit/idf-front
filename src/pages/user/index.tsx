@@ -106,12 +106,9 @@ function Index(props: {
         if (goalId.includes(id)) {
             // Remove id from goals
             setGoalId(goalId.filter(item => item !== id));
-            console.log(payload)
         } else {
             // Add id to goals
             setGoalId([...goalId, id]);
-            console.log(payload)
-
         }
     }
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,20 +117,13 @@ function Index(props: {
         // For example:
         if (name === 'height') {
             setHeight(parseInt(value));
-            console.log(payload)
-
         } else if (name === 'age') {
             setAge(parseInt(value));
-            console.log(payload)
-
         } else if (name === 'weight') {
             setWeight(parseInt(value));
-            console.log(payload)
 
         } else if (name === 'gender') {
             setGender(value === 'Male' ? 1 : 2);
-            console.log(payload)
-
         }
 
         else if (name === 'name') {
@@ -165,7 +155,6 @@ function Index(props: {
                 body: JSON.stringify({ countryCode, phone }),
             });
             const response = await res.json()
-            console.log(response)
             if (res.ok) {
                 setShowOtpInput(true)
             } else {

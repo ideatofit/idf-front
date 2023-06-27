@@ -28,7 +28,6 @@ function Otp({ onVerify, countryCode, phone }: OtpProps) {
       }),
     });
     const data = await response.json();
-    console.log(data);
     if (data.verified) {
       onVerify();
     } else {

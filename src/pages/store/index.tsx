@@ -41,16 +41,16 @@ function Store(props: {
         <Header />
           <Carousel pause={false} style={{ maxHeight: "100vh" }} className={`max-h-screen bg-backgroundColor`}>
             {
-              props.store.slides.map((data, i) => {
+              props.store?.slides?.map((data, i) => {
                 return (
                   <Carousel.Item key={`storeCarousel${i}`}>
-                    <Link href={data['link']}>
+                    <Link href={data?.link ?? ''}>
                     <Image
                       className="d-block w-100"
-                      src={data['img']['url']}
+                      src={data?.img?.url ?? ''}
                       alt={''}
-                      width={data['img']['width']}
-                      height={data['img']['height']}
+                      width={data?.img?.width ?? 0}
+                      height={data?.img?.height ?? 0}
                       priority={true}
                       style={{ maxHeight: '70vh', objectFit: "cover" }}
                     />
@@ -64,32 +64,32 @@ function Store(props: {
             <h1 className={`${poppins.className} text-[2rem] font-bold pt-4`}>Shop by Categories</h1>
             <div id='products' className='w-full h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 max-sm:grid-cols-2 place-items-center'>
               {
-                props['store']['sections'].map((data, i) => {
-                  return <CategoryCard key={i} img={data['img']} alt={''} title={data['title']} min-price={0} redirectToId={data['title']} />
+                props['store']?.['sections']?.map((data, i) => {
+                  return <CategoryCard key={i} img={data?.img ?? ''} alt={''} title={data?.title ?? ''} min-price={0} redirectToId={data?.title ?? ''} />
                 })
               }
             </div>
           </div>
           {
-            props['store']['sections'].map((data, i) => {
+            props?.['store']?.['sections']?.map((data, i) => {
               return (
                 <div id={`${data['title']}`} className='h-fit min-w-full text-center' key={`productsCard${i}`}>
                   <h1 className={`${poppins.className} text-[2rem] font-bold pt-4`}>{data['title']}</h1>
                   {
-                    data['sub-category'].map((data, i)=>{
+                    data['sub-category']?.map((data, i)=>{
                       return (
                         <div className='text-left' key={`sub-category${i}`}>
                           <h4 className='m-4'>{data['category']}</h4>
                         <div className='w-[100vw] h-fit grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 place-items-center'>
-                        {data['products'].map((data, i) => {
-                          return (
-                            <Link key={`products${i}`} href={data['affiliate'][0]['link']} className='text-inherit text-decoration-none'>
-                              <ProductsCard title={data['name']} price={data['price']} stars={data['stars']} img={data['img']} key={`ProductsCards${i}`} affiliate={data['affiliate']} />
-                            </Link>
-                          )
-                        })}
-                      </div>
-                      </div>
+                          {data['products']?.map((data, i) => {
+                            return (
+                              <Link key={`products${i}`} href={data['affiliate']?.[0]?.link ?? ''} className='text-inherit text-decoration-none'>
+                                <ProductsCard title={data['name']} price={data['price']} stars={data['stars']} img={data['img']} key={`ProductsCards${i}`} affiliate={data['affiliate']} />
+                              </Link>
+                            )
+                          })}
+                        </div>
+                        </div>
                       )
                     })
                   }
@@ -99,7 +99,7 @@ function Store(props: {
           }
       </div>
       <Gotaquestion />
-      <Footer footer={props['footer']} />
+      <Footer footer={props?.footer ?? {}} />
     </>
   )
 }

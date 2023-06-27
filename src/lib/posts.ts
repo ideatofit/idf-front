@@ -74,7 +74,6 @@ export async function getPostsBySlug(slug: string) {
   const url = await `https://server.ideatofit.com/api/posts?${query}`;
   const fetchData = await fetch(url);
   const parsedData: PostsData = await fetchData.json();
-  console.log(parsedData)
   const filteredData: PostBySlug = {
     id: parsedData["data"][0]["id"],
     title: parsedData["data"][0]["attributes"]["title"],

@@ -60,7 +60,6 @@ type Props = {
 }
 
 const Home = (props: Props) => {
-  console.log(props)
 
   return (
     <>

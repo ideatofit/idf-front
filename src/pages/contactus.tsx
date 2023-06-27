@@ -32,7 +32,6 @@ function Contactus(props: {
         body: JSON.stringify({ countryCode, phone }),
       });
       const response = await res.json()
-      console.log(response)
       setShowOtpInput(true);
     } catch (error) {
       console.error(error);

@@ -9,7 +9,6 @@ export default async function VerifyOtp (req: NextApiRequest, res: NextApiRespon
     const { countryCode, phone, otp } = req.body;
     try {
       const isVerified = await otpHandler.verifyOTP(countryCode, phone, otp);
-      console.log(isVerified)
       res.status(200).json({ verified: isVerified });
     } catch (error) {
       if (error instanceof Error) {

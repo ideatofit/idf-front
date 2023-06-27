@@ -35,7 +35,6 @@ function Login() {
     const emailRegister = async (e: React.FormEvent<HTMLFormElement>) => {
        e.preventDefault()
        const register = await registerUser({ email, password })
-       console.log(register)
        if(register){
         router.replace('/')
        }

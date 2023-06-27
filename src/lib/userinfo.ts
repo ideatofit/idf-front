@@ -58,7 +58,6 @@ export const submitData = async (payload: {
       },
       body: JSON.stringify(payload),
     });
-    console.log(JSON.stringify(payload))
     if (response.ok) {
       console.log(response)
     } else {

@@ -84,10 +84,8 @@ export default async function getPlans() {
     },
   });
   let url = `https://server.ideatofit.com/api/diet?${query}`;
-  console.log(query)
   let fetchData = await fetch(url);
   let response: Plans = await fetchData.json();
-  console.log(response)
   const filteredData: PlanProps = {
     title: response["data"]["attributes"]["title"],
     plans: response["data"]["attributes"]["plans"].map((data) => {

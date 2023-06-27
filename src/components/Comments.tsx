@@ -40,7 +40,6 @@ const Comment = (props: {
 
   const handleSaveEdit = async () => {
     setLoading(true)
-    console.log((await updateComment(props['postId'], session, props['commentId'], content)))
     setLoading(false)
     setNewComment(content)
     setIsEditing(false);

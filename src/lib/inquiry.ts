@@ -15,10 +15,7 @@ export const postInquiry = async (payload:{
         },
         body: JSON.stringify(payload)
     })
-    console.log(data)
-    console.log(payload)
     const parsedData = await data.json()
-    console.log(parsedData)
     if(data.ok){
         alert('done')
     } else alert('error')
