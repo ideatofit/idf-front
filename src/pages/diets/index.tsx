@@ -11,7 +11,7 @@ import Button from '@/components/Button'
 import Link from 'next/link'
 import Gotaquestion from '@/components/Gotaquestion'
 import dynamic from 'next/dynamic'
-import Statistics from '@/components/Statistics'
+// import Statistics from '@/components/Statistics'
 import animateGradient from '../../styles/animateGradient.module.css'
 
 
@@ -72,7 +72,7 @@ function Index(props: {
             }
           </div>
         </div>
-        <Statistics />
+        {/* <Statistics /> */}
         <div className='w-[80%] text-left pt-12'>
           <h3>Testimonials</h3>
         </div>
